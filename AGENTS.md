@@ -23,7 +23,8 @@ Keep this file stable and operational. Do not duplicate the full command catalog
 
 Use these repository-relative documents before changing behavior:
 
-- `README.md` — user-facing setup, command examples, global option placement, protocol, security model, exit codes.
+- `README.md` — user-facing setup, command examples, global option placement, security model.
+- `docs/reference.md` — global options, wire protocol, batching, exit codes, API limits, troubleshooting.
 - `CONTRIBUTING.md` — developer workflow, public contract boundary, quality harness, merge gates.
 - `skills/ableton-cli/SKILL.md` — agent-facing command catalog.
 - `docs/skills/skill-actions.md` — stable automation action names and CLI mappings.

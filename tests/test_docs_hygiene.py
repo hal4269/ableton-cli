@@ -17,7 +17,10 @@ ENVIRONMENT_INDEPENDENT_DOC_GLOBS = (
     ".cursor/rules/**/*.mdc",
     ".cursor/skills/**/*.md",
 )
-HOST_SPECIFIC_MARKERS = ("".join(("6uc", "lz1")), "/" + "Users/")
+UPSTREAM_ACCOUNT = "".join(("6uc", "lz1"))
+HOST_SPECIFIC_MARKERS = (UPSTREAM_ACCOUNT, "/" + "Users/")
+# The README credits the original author by account name.
+UPSTREAM_ATTRIBUTION_DOCS = ("README.md",)
 
 
 def _read(path: Path) -> str:
@@ -42,6 +45,10 @@ def test_agent_docs_do_not_reference_host_specific_paths() -> None:
         for path in _environment_independent_docs()
         for marker in HOST_SPECIFIC_MARKERS
         if marker in _read(path)
+        and not (
+            marker == UPSTREAM_ACCOUNT
+            and str(path.relative_to(REPO_ROOT)) in UPSTREAM_ATTRIBUTION_DOCS
+        )
     ]
 
     assert violations == []
