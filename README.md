@@ -27,8 +27,8 @@ uv tool install --force --editable ./ableton-cli   # puts `ableton-cli` on PATH
 ableton-cli install-remote-script --yes
 ```
 
-`install-remote-script` looks in `~/Documents` and `~/Music`. If your Documents folder is
-redirected, copy `remote_script/AbletonCliRemote` into `User Library/Remote Scripts/` yourself.
+`install-remote-script` installs into the User Library set in Live's preferences (also when it
+is moved or your Documents folder is redirected), else `~/Documents` or `~/Music`.
 
 In Live: **Preferences → Link, Tempo & MIDI → Control Surface → `AbletonCliRemote`**. Then:
 
@@ -80,13 +80,20 @@ JSON lines on stdin).
 
 | Command | Change |
 | --- | --- |
-| `clip duplicate`, `clip duplicate-many` | Exact copy (`ClipSlot.duplicate_clip_to`): keeps clip envelopes, note probability and loop settings. |
-| `arrangement clip from-session <track> <slot> --start <beats>` | New. Exact copy of a session clip into the Arrangement, without real-time recording. |
-| `clip delete <track> <slot>` | New. Deletes a session clip. |
+| `clip duplicate`, `clip duplicate-many` | Exact copy: keeps clip envelopes, note probability and loop settings. |
+| `arrangement clip from-session`, `arrangement from-session` | Exact copies of session clips in the Arrangement (envelopes, probability), without recording. |
+| `clip delete` | Delete a session clip. |
+| `clip color set`, `track color set` | Clip and track colors (0-69). |
+| `clip launch get\|set` | Launch mode, quantization, legato, velocity amount. |
+| `device delete`, `device move`, `device enabled set`, `device parameter list` | Edit any track's device chain; also devices inside racks via `--device-ref`. |
 | `device chains list` | Reports `in_note` per chain: the MIDI note of each Drum Rack pad. |
+| `tracks duplicate`, `scenes duplicate\|delete`, `return-tracks create\|delete` | Song layout. |
+| `arrangement locator list\|add\|delete` | Named locators (cue points) for sections. |
+| `transport signature set` | Time signature. |
+| `install-remote-script`, `doctor` | Find the User Library from Live's own settings. |
 
-Not possible through the Live API: automation envelopes on Arrangement clips. Put the envelope
-on a session clip and copy that clip instead.
+Not possible through the Live API: automation envelopes on Arrangement clips (put them on a
+session clip and copy it) and clip follow actions.
 
 ## Protocol
 

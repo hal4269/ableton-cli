@@ -202,6 +202,16 @@ SCENE_FIRE_SPEC = SceneCommandSpec(
     client_method="fire_scene",
 )
 
+SCENE_DUPLICATE_SPEC = SceneCommandSpec(
+    command_name="scenes duplicate",
+    client_method="scenes_duplicate",
+)
+
+SCENE_DELETE_SPEC = SceneCommandSpec(
+    command_name="scenes delete",
+    client_method="scenes_delete",
+)
+
 SCENE_MOVE_SPEC = SceneMoveCommandSpec(
     command_name="scenes move",
     client_method="scenes_move",
@@ -284,6 +294,24 @@ def scenes_move(
         from_scene=from_scene,
         to_scene=to_scene,
     )
+
+
+@scenes_app.command("duplicate")
+def scenes_duplicate(
+    ctx: typer.Context,
+    scene: Annotated[int, typer.Argument(help="Scene index (0-based)")],
+) -> None:
+    """Duplicate a scene with its clips; the copy lands right after it."""
+    run_scene_command_spec(ctx, spec=SCENE_DUPLICATE_SPEC, scene=scene)
+
+
+@scenes_app.command("delete")
+def scenes_delete(
+    ctx: typer.Context,
+    scene: Annotated[int, typer.Argument(help="Scene index (0-based)")],
+) -> None:
+    """Delete a scene and its clips."""
+    run_scene_command_spec(ctx, spec=SCENE_DELETE_SPEC, scene=scene)
 
 
 scenes_app.add_typer(name_app, name="name")

@@ -75,6 +75,16 @@ def test_clip_envelope_set_replace_mode_clears_existing_envelope_first() -> None
     assert next(iter(envelopes.values())) is not first_envelope
 
 
+def test_clip_envelope_set_replace_fails_when_live_cannot_clear() -> None:
+    backend, _envelopes = _backend_with_envelope_capable_clip()
+    del backend.context._clip_slot_at(0, 0).clip.clear_envelope
+
+    with pytest.raises(CommandError) as exc_info:
+        backend.clip_envelope_set(0, 0, 0, 0, _POINTS, "replace")
+
+    assert exc_info.value.details == {"reason": "not_supported_by_live_api"}
+
+
 def test_clip_envelope_set_rejects_out_of_range_values_with_offending_indices() -> None:
     backend, _envelopes = _backend_with_envelope_capable_clip()
     points = [

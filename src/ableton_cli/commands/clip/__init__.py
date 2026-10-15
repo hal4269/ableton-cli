@@ -12,6 +12,7 @@ from ._active_commands import register_active_commands
 from ._clip_root_commands import register_clip_root_commands
 from ._envelope_commands import register_envelope_commands
 from ._groove_commands import register_groove_commands
+from ._launch_commands import register_launch_commands
 from ._name_commands import register_name_commands
 from ._notes_commands import register_notes_commands
 from ._props_commands import register_prop_commands
@@ -32,6 +33,8 @@ warp_marker_app = typer.Typer(help="Clip warp marker commands", no_args_is_help=
 gain_app = typer.Typer(help="Clip gain commands", no_args_is_help=True)
 transpose_app = typer.Typer(help="Clip transpose commands", no_args_is_help=True)
 file_app = typer.Typer(help="Clip file commands", no_args_is_help=True)
+color_app = typer.Typer(help="Clip color commands", no_args_is_help=True)
+launch_app = typer.Typer(help="Clip launch setting commands", no_args_is_help=True)
 
 
 def get_client(ctx: typer.Context):  # noqa: ANN201
@@ -52,6 +55,7 @@ register_theory_commands(notes_app)
 register_envelope_commands(envelope_app)
 register_name_commands(name_app)
 register_active_commands(active_app)
+register_launch_commands(color_app, launch_app)
 register_groove_commands(groove_app, groove_amount_app)
 register_clip_root_commands(clip_app)
 register_prop_commands(
@@ -126,6 +130,8 @@ clip_app.add_typer(warp_marker_app, name="warp-marker")
 clip_app.add_typer(gain_app, name="gain")
 clip_app.add_typer(transpose_app, name="transpose")
 clip_app.add_typer(file_app, name="file")
+clip_app.add_typer(color_app, name="color")
+clip_app.add_typer(launch_app, name="launch")
 groove_app.add_typer(groove_amount_app, name="amount")
 clip_app.add_typer(groove_app, name="groove")
 

@@ -69,8 +69,12 @@ class LiveBackendClipEnvelopesMixin:
 
         if mode == "replace":
             clear_envelope = getattr(clip_obj, "clear_envelope", None)
-            if callable(clear_envelope):
-                clear_envelope(target_param)
+            if not callable(clear_envelope):
+                raise _not_supported_by_live_api(
+                    message="Clip.clear_envelope is not available in Live API",
+                    hint="Use a Live version exposing clip.clear_envelope (Live 12+).",
+                )
+            clear_envelope(target_param)
 
         envelope = create_automation_envelope(target_param)
         if envelope is None:

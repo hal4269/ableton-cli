@@ -349,9 +349,136 @@ def device_macro_set(
     )
 
 
+DEVICE_DELETE_SPEC = DeviceCommandSpec(command_name="device delete", client_method="device_delete")
+DEVICE_MOVE_SPEC = DeviceCommandSpec(command_name="device move", client_method="device_move")
+DEVICE_ENABLED_SET_SPEC = DeviceCommandSpec(
+    command_name="device enabled set",
+    client_method="device_enabled_set",
+)
+DEVICE_PARAMETER_LIST_SPEC = DeviceCommandSpec(
+    command_name="device parameter list",
+    client_method="device_parameters_list",
+)
+
+enabled_app = typer.Typer(help="Device on/off commands", no_args_is_help=True)
+
+
+def _run_device_target_command(
+    ctx: typer.Context,
+    *,
+    spec: DeviceCommandSpec,
+    selectors: dict[str, object],
+    extra_args: dict[str, object],
+) -> None:
+    """Run a command on one device picked by the standard track + device selectors."""
+
+    def _refs() -> dict[str, object]:
+        track_ref, device_ref = _device_target_refs(**selectors)  # type: ignore[arg-type]
+        return {"track_ref": track_ref, "device_ref": device_ref}
+
+    run_client_command_spec(
+        ctx,
+        spec=spec,
+        args={"track_ref": None, "device_ref": None, **extra_args},
+        method_kwargs=lambda: {**_refs(), **extra_args},
+        resolved_args=lambda: {**_refs(), **extra_args},
+    )
+
+
+@device_app.command("delete")
+def device_delete(
+    ctx: typer.Context,
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    selected_device: SelectedDeviceOption = False,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+) -> None:
+    """Delete a device (also inside a rack chain, via --device-ref)."""
+    selectors = dict(locals())
+    selectors.pop("ctx")
+    _run_device_target_command(ctx, spec=DEVICE_DELETE_SPEC, selectors=selectors, extra_args={})
+
+
+@device_app.command("move")
+def device_move(
+    ctx: typer.Context,
+    to_index: Annotated[int, typer.Option("--to-index", help="Destination position (0-based)")],
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    selected_device: SelectedDeviceOption = False,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+) -> None:
+    """Move a top-level device to another position on its track."""
+    selectors = dict(locals())
+    for name in ("ctx", "to_index"):
+        selectors.pop(name)
+    _run_device_target_command(
+        ctx, spec=DEVICE_MOVE_SPEC, selectors=selectors, extra_args={"to_index": to_index}
+    )
+
+
+@enabled_app.command("set")
+def device_enabled_set(
+    ctx: typer.Context,
+    value: Annotated[bool, typer.Argument(help="Device on: true|false", metavar="VALUE")],
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    selected_device: SelectedDeviceOption = False,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+) -> None:
+    """Switch a device on or off (its 'Device On' parameter)."""
+    selectors = dict(locals())
+    for name in ("ctx", "value"):
+        selectors.pop(name)
+    _run_device_target_command(
+        ctx, spec=DEVICE_ENABLED_SET_SPEC, selectors=selectors, extra_args={"value": value}
+    )
+
+
+@parameter_app.command("list")
+def device_parameter_list(
+    ctx: typer.Context,
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    selected_device: SelectedDeviceOption = False,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+) -> None:
+    """List all parameters of a device (also inside a rack chain, via --device-ref)."""
+    selectors = dict(locals())
+    selectors.pop("ctx")
+    _run_device_target_command(
+        ctx, spec=DEVICE_PARAMETER_LIST_SPEC, selectors=selectors, extra_args={}
+    )
+
+
 device_app.add_typer(parameter_app, name="parameter")
 device_app.add_typer(chains_app, name="chains")
 device_app.add_typer(macro_app, name="macro")
+device_app.add_typer(enabled_app, name="enabled")
 
 
 def register(app: typer.Typer) -> None:

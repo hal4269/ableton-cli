@@ -12,7 +12,7 @@ def _facet_names() -> set[str]:
 
 
 def test_facet_table_covers_the_documented_track_surface() -> None:
-    assert _facet_names() == {"volume", "panning", "mute", "solo", "arm", "name"}
+    assert _facet_names() == {"volume", "panning", "mute", "solo", "arm", "name", "color"}
 
 
 def test_generated_command_names_are_in_the_public_surface() -> None:

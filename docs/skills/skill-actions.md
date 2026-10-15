@@ -26,6 +26,8 @@ Stable action names and CLI mappings for automation wrappers.
 | `create_midi_track` | `uv run ableton-cli --output json tracks create midi [--index <index>]` | Insert a MIDI track at an index or append. |
 | `create_audio_track` | `uv run ableton-cli --output json tracks create audio [--index <index>]` | Insert an audio track at an index or append. |
 | `tracks_delete` | `uv run ableton-cli --output json tracks delete <track>` | Delete a track by index when supported by Live API. |
+| `tracks_duplicate` | `uv run ableton-cli --output json tracks duplicate <track>` | Duplicate a track; the copy is inserted right after it. |
+| `set_track_color` | `uv run ableton-cli --output json track color set <color_index> --track-index <track>` | Set a track color (0-69, Live's color chooser). |
 | `set_track_name` | `uv run ableton-cli --output json track name set <name> --track-index <track>` | Rename a track. |
 | `set_track_volume` | `uv run ableton-cli --output json track volume set <value> --track-index <track>` | Set track volume in range 0.0 to 1.0. |
 | `get_track_mute` | `uv run ableton-cli --output json track mute get --track-index <track>` | Read track mute state. |
@@ -61,6 +63,9 @@ Stable action names and CLI mappings for automation wrappers.
 | `arrangement_from_session` | `uv run ableton-cli --output json arrangement from-session --scenes "0:24,1:48"` | Expand session scenes into Arrangement using explicit scene durations. |
 | `arrangement_clip_from_session` | `uv run ableton-cli --output json arrangement clip from-session <track> <slot> --start <beats>` | Place an exact copy of a session clip (envelopes, probability, loop) in the Arrangement. |
 | `clip_delete` | `uv run ableton-cli --output json clip delete <track> <clip>` | Delete the session clip in a clip slot. |
+| `set_clip_color` | `uv run ableton-cli --output json clip color set <track> <clip> <color_index>` | Set a session clip color (0-69). |
+| `clip_launch_get` | `uv run ableton-cli --output json clip launch get <track> <clip>` | Read a session clip's launch mode, quantization, legato and velocity amount. |
+| `clip_launch_set` | `uv run ableton-cli --output json clip launch set <track> <clip> [--mode <mode>] [--quantization <q>] [--legato|--no-legato] [--velocity-amount <0-1>]` | Change a session clip's launch settings. |
 | `clip_duplicate` | `uv run ableton-cli --output json clip duplicate <track> <src_clip> <dst_clip>` | Duplicate a clip (exact copy, incl. envelopes) into an empty slot. |
 | `set_clip_name` | `uv run ableton-cli --output json clip name set <track> <clip> <name>` | Rename a clip. |
 | `fire_clip` | `uv run ableton-cli --output json clip fire <track> <clip>` | Launch a clip slot. |
@@ -70,6 +75,14 @@ Stable action names and CLI mappings for automation wrappers.
 | `set_scene_name` | `uv run ableton-cli --output json scenes name set <scene> <name>` | Rename a scene. |
 | `fire_scene` | `uv run ableton-cli --output json scenes fire <scene>` | Launch all clip slots on a scene row. |
 | `scenes_move` | `uv run ableton-cli --output json scenes move <from> <to>` | Move a scene from one index to another when supported by Live API. |
+| `scenes_duplicate` | `uv run ableton-cli --output json scenes duplicate <scene>` | Duplicate a scene with its clips. |
+| `scenes_delete` | `uv run ableton-cli --output json scenes delete <scene>` | Delete a scene and its clips. |
+| `return_tracks_create` | `uv run ableton-cli --output json return-tracks create` | Add a return track at the end. |
+| `return_tracks_delete` | `uv run ableton-cli --output json return-tracks delete <index>` | Delete a return track. |
+| `locators_list` | `uv run ableton-cli --output json arrangement locator list` | List Arrangement locators (cue points) sorted by time. |
+| `locator_add` | `uv run ableton-cli --output json arrangement locator add <beats> [--name <name>]` | Add a named Arrangement locator (transport stopped). |
+| `locator_delete` | `uv run ableton-cli --output json arrangement locator delete <index>` | Delete an Arrangement locator (transport stopped). |
+| `transport_signature_set` | `uv run ableton-cli --output json transport signature set <numerator> <denominator>` | Set the song time signature. |
 | `stop_all_clips` | `uv run ableton-cli --output json session stop-all-clips` | Stop all currently playing clips in Session View. |
 | `get_browser_tree` | `uv run ableton-cli --output json browser tree [category_type]` | Read browser tree by category filter. |
 | `get_browser_items_at_path` | `uv run ableton-cli --output json browser items-at-path <path>` | List browser items at a specific path. |
@@ -80,6 +93,10 @@ Stable action names and CLI mappings for automation wrappers.
 | `load_instrument_or_effect` | `uv run ableton-cli --output json browser load <track> <target>` | Load a browser item by URI or path target onto a track. |
 | `load_drum_kit` | `uv run ableton-cli --output json browser load-drum-kit <track> <rack_uri> (--kit-uri <uri> | --kit-path <path>)` | Load a drum rack and an explicitly selected kit onto a track. |
 | `set_device_parameter` | `uv run ableton-cli --output json device parameter set <value> --track-index <track> --device-index <device> --parameter-index <parameter>` | Set a device parameter value by selector. |
+| `device_parameters_list` | `uv run ableton-cli --output json device parameter list --track-index <track> --device-index <device>` | List all parameters of a device, also inside rack chains via --device-ref. |
+| `device_delete` | `uv run ableton-cli --output json device delete --track-index <track> --device-index <device>` | Delete a device, also inside rack chains via --device-ref. |
+| `device_move` | `uv run ableton-cli --output json device move --to-index <index> --track-index <track> --device-index <device>` | Move a top-level device to another position on its track. |
+| `device_enabled_set` | `uv run ableton-cli --output json device enabled set <true|false> --track-index <track> --device-index <device>` | Switch a device on or off. |
 | `find_synth_devices` | `uv run ableton-cli --output json synth find [--track <track>] [--type <wavetable|drift|meld>]` | Find supported synth devices (Wavetable, Drift, Meld). |
 | `list_synth_parameters` | `uv run ableton-cli --output json synth parameters list --track-index <track> --device-index <device>` | List synth parameters with safety metadata and stable refs. |
 | `set_synth_parameter_safe` | `uv run ableton-cli --output json synth parameter set <value> --track-index <track> --device-index <device> --parameter-index <parameter>` | Safely set a synth parameter by selector with strict range validation. |

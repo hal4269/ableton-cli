@@ -48,8 +48,7 @@ class LiveBackendScenesArrangementMixin:
     ) -> dict[str, Any]:
         """Place an exact copy of a session clip in the Arrangement at ``start_time``.
 
-        Unlike ``arrangement_from_session`` (which rebuilds notes), Live's own copy keeps
-        clip envelopes, note probability and loop settings.
+        Live's own copy keeps clip envelopes, note probability and loop settings.
         """
         target_track = self._ctx._track_at(track)
         clip_slot = self._ctx._clip_slot_at(track, slot)
@@ -772,85 +771,33 @@ class LiveBackendScenesArrangementMixin:
             return None
         return getattr(slot, "clip", None)
 
-    def _arrangement_from_session_source_midi_length(
-        self,
-        *,
-        source_clip: Any,
-        source_notes: list[dict[str, Any]],
-        duration_beats: float,
-    ) -> float:
-        source_length = self._ctx._safe_float(getattr(source_clip, "length", None))
-        if source_length is not None and source_length > 0:
-            return source_length
-        note_end = max(
-            (float(note["start_time"]) + float(note["duration"]) for note in source_notes),
-            default=duration_beats,
-        )
-        return note_end if note_end > 0 else duration_beats
-
-    @staticmethod
-    def _arrangement_from_session_repeated_notes(
-        *,
-        source_notes: list[dict[str, Any]],
-        source_length: float,
-        duration_beats: float,
-    ) -> list[dict[str, Any]]:
-        repeated_notes: list[dict[str, Any]] = []
-        loop_count = max(int(math.ceil(duration_beats / source_length)), 1)
-        for loop_index in range(loop_count):
-            loop_offset = source_length * loop_index
-            for note in source_notes:
-                note_start = float(note["start_time"]) + loop_offset
-                if note_start >= duration_beats:
-                    continue
-                note_duration = float(note["duration"])
-                if note_start + note_duration > duration_beats:
-                    note_duration = duration_beats - note_start
-                if note_duration <= 0:
-                    continue
-                repeated_notes.append(
-                    {
-                        "pitch": int(note["pitch"]),
-                        "start_time": note_start,
-                        "duration": note_duration,
-                        "velocity": int(note["velocity"]),
-                        "mute": bool(note["mute"]),
-                    }
-                )
-        return repeated_notes
-
     def _arrangement_from_session_add_midi_clip(
         self,
         *,
         track_index: int,
+        scene_index: int,
         arrangement_cursor: float,
         duration_beats: float,
         source_clip: Any,
     ) -> tuple[int, int]:
-        before_count = len(self._arrangement_clips(track_index))
-        self.arrangement_clip_create(
-            track=track_index,
-            start_time=arrangement_cursor,
-            length=duration_beats,
-            audio_path=None,
-            notes=None,
-        )
-        target_index = before_count
-        source_notes = list(self._ctx.services.clip_notes._clip_notes_extended(source_clip))
-        source_length = self._arrangement_from_session_source_midi_length(
-            source_clip=source_clip,
-            source_notes=source_notes,
-            duration_beats=duration_beats,
-        )
-        repeated_notes = self._arrangement_from_session_repeated_notes(
-            source_notes=source_notes,
-            source_length=source_length,
-            duration_beats=duration_beats,
-        )
-        if not repeated_notes:
-            return 1, 0
-        added = self.arrangement_clip_notes_add(track_index, target_index, repeated_notes)
-        return 1, int(added["note_count"])
+        """Tile exact copies of the session clip (envelopes, probability, loop) over the
+        scene duration. A copy that runs past the scene end keeps its full length."""
+        source_length = self._ctx._safe_float(getattr(source_clip, "length", None))
+        if source_length is None or source_length <= 0:
+            raise _invalid_argument(
+                message="source session MIDI clip must expose positive length",
+                hint="Use MIDI clips with positive clip length.",
+            )
+        note_count = len(list(self._ctx.services.clip_notes._clip_notes_extended(source_clip)))
+        placed = 0.0
+        created = 0
+        while placed < duration_beats:
+            self.arrangement_clip_from_session(
+                track_index, scene_index, arrangement_cursor + placed
+            )
+            created += 1
+            placed += source_length
+        return created, created * note_count
 
     def _arrangement_from_session_audio_source(self, source_clip: Any) -> tuple[str, float]:
         file_path = str(getattr(source_clip, "file_path", "")).strip()
@@ -933,6 +880,7 @@ class LiveBackendScenesArrangementMixin:
                 if bool(getattr(source_clip, "is_midi_clip", False)):
                     created, added_count = self._arrangement_from_session_add_midi_clip(
                         track_index=track_index,
+                        scene_index=scene_index,
                         arrangement_cursor=arrangement_cursor,
                         duration_beats=duration_beats,
                         source_clip=source_clip,

@@ -89,6 +89,16 @@ TRACK_FACET_SPECS: tuple[TrackFacetSpec, ...] = (
         value_kind="float",
         value_help="Panning value in [-1.0, 1.0]",
     ),
+    TrackFacetSpec(
+        name="color",
+        help="Track color commands",
+        client_get=None,
+        client_set="track_color_set",
+        value_kind="int",
+        value_help="Color index in Live's color chooser (0-69)",
+        value_metavar="COLOR_INDEX",
+        value_arg_name="color_index",
+    ),
 )
 
 

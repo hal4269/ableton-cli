@@ -18,15 +18,18 @@ from .browser_read import LiveBackendBrowserReadMixin
 from .browser_search import LiveBackendBrowserSearchMixin
 from .browser_search_index import LiveBackendBrowserSearchIndexMixin
 from .clip_envelopes import LiveBackendClipEnvelopesMixin
+from .clip_launch import LiveBackendClipLaunchMixin
 from .clip_notes import LiveBackendClipNotesMixin
 from .devices import (
     LiveBackendDeviceSharedMixin,
     LiveBackendEffectDevicesMixin,
     LiveBackendSynthDevicesMixin,
 )
+from .devices_edit import LiveBackendDeviceEditMixin
 from .devices_racks import LiveBackendDeviceRacksMixin
 from .scenes_arrangement import LiveBackendScenesArrangementMixin
 from .service import LiveBackendService
+from .song_structure import LiveBackendSongStructureMixin
 from .song_transport import LiveBackendSongSessionMixin, LiveBackendTransportMixerMixin
 from .tracks_clips import LiveBackendTracksClipsMixin
 from .tracks_clips_cut_to_drum_rack import LiveBackendTracksCutToDrumRackMixin
@@ -44,8 +47,10 @@ class TracksClipsService(
     LiveBackendService,
     LiveBackendTracksClipsMixin,
     LiveBackendTracksCutToDrumRackMixin,
+    LiveBackendClipLaunchMixin,
 ):
-    """Session clips, clip properties, warping and audio-to-drum-rack."""
+    """Session clips, clip properties, colors, launch settings, warping and
+    audio-to-drum-rack."""
 
 
 class ClipNotesService(LiveBackendService, LiveBackendClipNotesMixin):
@@ -56,8 +61,13 @@ class ClipEnvelopesService(LiveBackendService, LiveBackendClipEnvelopesMixin):
     """Clip automation envelopes."""
 
 
-class ScenesArrangementService(LiveBackendService, LiveBackendScenesArrangementMixin):
-    """Scenes plus everything on the arrangement timeline."""
+class ScenesArrangementService(
+    LiveBackendService,
+    LiveBackendScenesArrangementMixin,
+    LiveBackendSongStructureMixin,
+):
+    """Scenes, song layout (duplicate/delete, returns, locators, signature) and
+    everything on the arrangement timeline."""
 
 
 class DevicesService(
@@ -65,8 +75,9 @@ class DevicesService(
     LiveBackendDeviceSharedMixin,
     LiveBackendSynthDevicesMixin,
     LiveBackendEffectDevicesMixin,
+    LiveBackendDeviceEditMixin,
 ):
-    """Device listing/parameters and the standard synth/effect surfaces."""
+    """Device listing/parameters/editing and the standard synth/effect surfaces."""
 
 
 class DeviceRacksService(LiveBackendService, LiveBackendDeviceRacksMixin):

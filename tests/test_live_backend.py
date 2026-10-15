@@ -3763,7 +3763,9 @@ def test_live_backend_arrangement_from_session_repeats_midi_and_audio() -> None:
     source_midi_slot = surface.song().tracks[0].clip_slots[0]
     source_midi_slot.create_clip(2.0)
     assert source_midi_slot.clip is not None
-    source_midi_slot.clip.set_notes(((60, 0.0, 0.5, 100, False),))
+    source_midi_slot.clip.add_new_notes(
+        (_FakeNoteSpec(pitch=60, start_time=0.0, duration=0.5, velocity=100, probability=0.5),)
+    )
     _set_audio_source_clip(
         surface.song(),
         track=1,
@@ -3782,9 +3784,17 @@ def test_live_backend_arrangement_from_session_repeats_midi_and_audio() -> None:
         pitch=None,
     )
 
+    # MIDI: exact copies of the 2-beat session clip tiled over 6 beats (probability kept).
     assert payload["scene_count"] == 1
-    assert payload["total_created"] == 3
-    assert midi_notes["note_count"] == 3
+    assert payload["total_created"] == 5
+    assert payload["total_notes_added"] == 3
+    assert [clip.start_time for clip in surface.song().tracks[0].arrangement_clips] == [
+        0.0,
+        2.0,
+        4.0,
+    ]
+    assert midi_notes["note_count"] == 1
+    assert midi_notes["notes"][0]["probability"] == 0.5
     assert surface.song().tracks[1].arrangement_audio_clips == [
         ("/tmp/Bass Loop.wav", 0.0),
         ("/tmp/Bass Loop.wav", 4.0),

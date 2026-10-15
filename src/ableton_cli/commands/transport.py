@@ -16,6 +16,7 @@ from ._validation import require_non_negative_float
 transport_app = typer.Typer(help="Transport control commands", no_args_is_help=True)
 tempo_app = typer.Typer(help="Tempo controls", no_args_is_help=True)
 position_app = typer.Typer(help="Playhead position controls", no_args_is_help=True)
+signature_app = typer.Typer(help="Time signature controls", no_args_is_help=True)
 
 
 TransportCommandSpec = CommandSpec
@@ -188,7 +189,38 @@ def transport_rewind(ctx: typer.Context) -> None:
     )
 
 
+TRANSPORT_SIGNATURE_SET_SPEC = TransportCommandSpec(
+    command_name="transport signature set",
+    client_method="transport_signature_set",
+)
+
+
+@signature_app.command("set")
+def signature_set(
+    ctx: typer.Context,
+    numerator: Annotated[int, typer.Argument(help="Beats per bar (1-99)")],
+    denominator: Annotated[int, typer.Argument(help="Note value: 1, 2, 4, 8 or 16")],
+) -> None:
+    def _method_kwargs() -> dict[str, object]:
+        if numerator < 1 or numerator > 99 or denominator not in (1, 2, 4, 8, 16):
+            raise AppError(
+                error_code=ErrorCode.INVALID_ARGUMENT,
+                message=f"invalid time signature {numerator}/{denominator}",
+                hint="Use a numerator 1-99 and a denominator of 1, 2, 4, 8 or 16 (e.g. 4 4).",
+                exit_code=ExitCode.INVALID_ARGUMENT,
+            )
+        return {"numerator": numerator, "denominator": denominator}
+
+    run_client_command_spec(
+        ctx,
+        spec=TRANSPORT_SIGNATURE_SET_SPEC,
+        args={"numerator": numerator, "denominator": denominator},
+        method_kwargs=_method_kwargs,
+    )
+
+
 transport_app.add_typer(tempo_app, name="tempo")
+transport_app.add_typer(signature_app, name="signature")
 transport_app.add_typer(position_app, name="position")
 
 

@@ -107,6 +107,19 @@ def require_float_in_range(
     return value
 
 
+#: Live's color chooser has 70 entries.
+COLOR_INDEX_MAX = 69
+
+
+def require_color_index(value: int) -> int:
+    if value < 0 or value > COLOR_INDEX_MAX:
+        raise invalid_argument(
+            message=f"color_index must be between 0 and {COLOR_INDEX_MAX}, got {value}",
+            hint="Pick a color index from Live's color chooser (0-69, row by row).",
+        )
+    return value
+
+
 def require_track_and_value(track: int, value: TValue) -> tuple[int, TValue]:
     return require_track_index(track), value
 

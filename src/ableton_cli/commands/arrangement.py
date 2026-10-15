@@ -7,6 +7,7 @@ import typer
 from ..runtime import execute_command, get_client
 from ._arrangement_clip_commands import register_commands as register_clip_commands
 from ._arrangement_clip_props_commands import register_commands as register_clip_props_commands
+from ._arrangement_locator_commands import register_commands as register_locator_commands
 from ._arrangement_notes_commands import register_commands as register_notes_commands
 from ._arrangement_record_commands import register_commands as register_record_commands
 from ._arrangement_session_commands import register_commands as register_session_commands
@@ -24,6 +25,7 @@ warp_app = typer.Typer(help="Arrangement clip warp commands", no_args_is_help=Tr
 gain_app = typer.Typer(help="Arrangement clip gain commands", no_args_is_help=True)
 transpose_app = typer.Typer(help="Arrangement clip transpose commands", no_args_is_help=True)
 file_app = typer.Typer(help="Arrangement clip file commands", no_args_is_help=True)
+locator_app = typer.Typer(help="Arrangement locator (cue point) commands", no_args_is_help=True)
 
 
 def run_client_command_spec(
@@ -57,8 +59,10 @@ register_clip_props_commands(
 )
 register_notes_commands(notes_app, run_client_command_spec=run_client_command_spec)
 register_session_commands(arrangement_app, run_client_command_spec=run_client_command_spec)
+register_locator_commands(locator_app, run_client_command_spec=run_client_command_spec)
 
 
+arrangement_app.add_typer(locator_app, name="locator")
 arrangement_app.add_typer(record_app, name="record")
 clip_app.add_typer(notes_app, name="notes")
 clip_app.add_typer(props_app, name="props")

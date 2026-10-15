@@ -11,12 +11,12 @@ from __future__ import annotations
 #: So this constant is deliberately hard-coded rather than recomputed. Pure
 #: refactors must leave it untouched. Only edit it together with an intentional,
 #: documented change to the set of remote commands.
-EXPECTED_COMMAND_SET_HASH = "5ce0e11306144940adccc4cbbe0152fda3742ec365e37ebc4174ce02334ffca4"
+EXPECTED_COMMAND_SET_HASH = "d1d1261fdf57a29c6c70d8455298c629f3d3d4fa5855f5124d2cef0964e19455"
 
 #: Size of the remote command set the hash is computed over. Pinned separately
 #: so an accidental add+drop that happens to collide is still caught, and so a
 #: failure message tells you which direction the set moved.
-EXPECTED_REMOTE_COMMAND_COUNT = 163
+EXPECTED_REMOTE_COMMAND_COUNT = 180
 
 
 def test_command_set_hash_is_unchanged() -> None:
