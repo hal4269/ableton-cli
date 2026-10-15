@@ -46,16 +46,17 @@
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
         "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
         "\u2502 create                                                                                           \u2502",
+        "\u2502 from-session  Place an exact copy of a session clip (envelopes, probability) in the Arrangement. \u2502",
         "\u2502 list                                                                                             \u2502",
         "\u2502 delete                                                                                           \u2502",
-        "\u2502 notes      Arrangement clip note commands                                                        \u2502",
-        "\u2502 props      Arrangement clip property commands                                                    \u2502",
-        "\u2502 loop       Arrangement clip loop commands                                                        \u2502",
-        "\u2502 marker     Arrangement clip marker commands                                                      \u2502",
-        "\u2502 warp       Arrangement clip warp commands                                                        \u2502",
-        "\u2502 gain       Arrangement clip gain commands                                                        \u2502",
-        "\u2502 transpose  Arrangement clip transpose commands                                                   \u2502",
-        "\u2502 file       Arrangement clip file commands                                                        \u2502",
+        "\u2502 notes         Arrangement clip note commands                                                     \u2502",
+        "\u2502 props         Arrangement clip property commands                                                 \u2502",
+        "\u2502 loop          Arrangement clip loop commands                                                     \u2502",
+        "\u2502 marker        Arrangement clip marker commands                                                   \u2502",
+        "\u2502 warp          Arrangement clip warp commands                                                     \u2502",
+        "\u2502 gain          Arrangement clip gain commands                                                     \u2502",
+        "\u2502 transpose     Arrangement clip transpose commands                                                \u2502",
+        "\u2502 file          Arrangement clip file commands                                                     \u2502",
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
       ],
       "hidden": false,
@@ -69,6 +70,7 @@
       "short_help": null,
       "subcommands": [
         "create",
+        "from-session",
         "list",
         "delete",
         "notes",
@@ -642,6 +644,102 @@
         "clip",
         "file",
         "replace"
+      ],
+      "short_help": null
+    },
+    "arrangement clip from-session": {
+      "deprecated": false,
+      "help": "Place an exact copy of a session clip (envelopes, probability) in the Arrangement.",
+      "help_text": [
+        "",
+        " Usage: from-session [OPTIONS] TRACK SLOT",
+        "",
+        " Place an exact copy of a session clip (envelopes, probability) in the Arrangement.",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    track      INTEGER  Track index (0-based) [required]                                        \u2502",
+        "\u2502 *    slot       INTEGER  Session clip slot index (0-based) [required]                            \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *  --start        FLOAT  Arrangement start time in beats [required]                              \u2502",
+        "\u2502    --help                Show this message and exit.                                             \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Track index (0-based)",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "track",
+          "nargs": 1,
+          "opts": [
+            "track"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        },
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Session clip slot index (0-based)",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "slot",
+          "nargs": 1,
+          "opts": [
+            "slot"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Arrangement start time in beats",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "start",
+          "nargs": 1,
+          "opts": [
+            "--start"
+          ],
+          "prompt": null,
+          "required": true,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "FloatParamType",
+            "name": "float"
+          }
+        }
+      ],
+      "path": [
+        "arrangement",
+        "clip",
+        "from-session"
       ],
       "short_help": null
     },

@@ -571,10 +571,8 @@ class LiveBackendTracksClipsMixin:
         self,
         *,
         track: int,
+        source_slot: Any,
         destination_clip: int,
-        source_clip: Any,
-        source_length: float,
-        live_notes: list[tuple[int, float, float, int, bool]],
     ) -> None:
         destination_slot = self._ctx._clip_slot_at(track, destination_clip)
         if destination_slot.has_clip:
@@ -583,18 +581,21 @@ class LiveBackendTracksClipsMixin:
                 hint="Use empty destination clip slots.",
             )
 
-        destination_slot.create_clip(source_length)
+        # Live's own copy keeps everything on the clip (note probability and other
+        # extended fields, envelopes, loop/marker settings), unlike rebuilding notes.
+        duplicate_clip_to = getattr(source_slot, "duplicate_clip_to", None)
+        if not callable(duplicate_clip_to):
+            raise _not_supported_by_live_api(
+                message="ClipSlot.duplicate_clip_to is not available in Live API",
+                hint="Use a Live version exposing clip_slot.duplicate_clip_to (Live 12+).",
+            )
+        duplicate_clip_to(destination_slot)
         if not destination_slot.has_clip:
             raise CommandError(
                 code="INTERNAL_ERROR",
                 message="Clip duplication did not create destination clip",
                 hint="Retry and check Ableton logs.",
             )
-        destination_clip_obj = destination_slot.clip
-        assert destination_clip_obj is not None
-        if live_notes:
-            destination_clip_obj.set_notes(tuple(live_notes))
-        destination_clip_obj.name = str(getattr(source_clip, "name", ""))
 
     def clip_duplicate(
         self,
@@ -630,17 +631,7 @@ class LiveBackendTracksClipsMixin:
                 hint="Duplicate only clips with positive length.",
             )
 
-        source_notes = self._ctx.services.clip_notes._clip_notes_extended(source_clip)
-        live_notes = [
-            (
-                int(note["pitch"]),
-                float(note["start_time"]),
-                float(note["duration"]),
-                int(note["velocity"]),
-                bool(note["mute"]),
-            )
-            for note in source_notes
-        ]
+        note_count = len(self._ctx.services.clip_notes._clip_notes_extended(source_clip))
         destination_clips = [dst_clip] if dst_clip is not None else list(dst_clips or [])
         if not destination_clips:
             raise _invalid_argument(
@@ -662,10 +653,8 @@ class LiveBackendTracksClipsMixin:
             seen.add(destination)
             self._duplicate_clip_to_destination(
                 track=track,
+                source_slot=source_slot,
                 destination_clip=destination,
-                source_clip=source_clip,
-                source_length=source_length,
-                live_notes=live_notes,
             )
 
         if len(destination_clips) == 1:
@@ -674,7 +663,7 @@ class LiveBackendTracksClipsMixin:
                 "src_clip": src_clip,
                 "dst_clip": destination_clips[0],
                 "duplicated": True,
-                "note_count": len(live_notes),
+                "note_count": note_count,
             }
         return {
             "track": track,
@@ -682,5 +671,5 @@ class LiveBackendTracksClipsMixin:
             "dst_clips": destination_clips,
             "duplicated": True,
             "duplicated_count": len(destination_clips),
-            "note_count": len(live_notes),
+            "note_count": note_count,
         }

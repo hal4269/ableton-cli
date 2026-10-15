@@ -281,6 +281,16 @@ def _arrangement_scene_specs(value: Any) -> list[dict[str, Any]]:
     return parsed
 
 
+def _handle_arrangement_clip_from_session(
+    backend: CommandBackend,
+    args: dict[str, Any],
+) -> dict[str, Any]:
+    track = _track_index("track", args.get("track"))
+    slot = _track_index("slot", args.get("slot"))
+    start_time = _non_negative_float("start_time", args.get("start_time"))
+    return backend.arrangement_clip_from_session(track, slot, start_time)
+
+
 def _handle_arrangement_from_session(
     backend: CommandBackend,
     args: dict[str, Any],
@@ -309,4 +319,5 @@ ARRANGEMENT_HANDLERS: dict[str, Handler] = {
     "arrangement_clip_transpose_set": _handle_arrangement_clip_transpose_set,
     "arrangement_clip_file_replace": _handle_arrangement_clip_file_replace,
     "arrangement_from_session": _handle_arrangement_from_session,
+    "arrangement_clip_from_session": _handle_arrangement_clip_from_session,
 }

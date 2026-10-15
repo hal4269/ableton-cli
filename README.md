@@ -109,6 +109,7 @@ uv run ableton-cli arrangement clip create 0 --start 8 --length 4 --notes-json '
 uv run ableton-cli arrangement clip notes get 0 0 --start-time 0.0 --end-time 4.0 --pitch 60
 uv run ableton-cli arrangement clip notes import-browser 0 0 sounds/Bass\ Loop.alc --mode replace --import-length --import-groove
 uv run ableton-cli arrangement clip delete 0 --start 0 --end 16
+uv run ableton-cli arrangement clip from-session 0 2 --start 64
 uv run ableton-cli arrangement from-session --scenes "0:24,1:48"
 uv run ableton-cli clip fire 0 0
 uv run ableton-cli scenes list

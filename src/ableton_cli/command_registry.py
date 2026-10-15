@@ -78,6 +78,7 @@ COMMAND_DESCRIPTORS: tuple[CommandDescriptor, ...] = (
     _d("arrangement clip create", "arrangement_clip_create", _WRITE),
     _d("arrangement clip delete", "arrangement_clip_delete", _DESTRUCTIVE),
     _d("arrangement clip file replace", "arrangement_clip_file_replace", _WRITE),
+    _d("arrangement clip from-session", "arrangement_clip_from_session", _WRITE),
     _d("arrangement clip gain set", "arrangement_clip_gain_set", _WRITE),
     _d("arrangement clip list", "arrangement_clip_list", _READ),
     _d("arrangement clip loop set", "arrangement_clip_loop_set", _WRITE),
@@ -436,6 +437,10 @@ CLIENT_METHOD_SPECS: tuple[ClientMethodSpec, ...] = (
     _m(
         "arrangement_clip_file_replace",
         (_p("track", "int"), _p("index", "int"), _p("audio_path", "str")),
+    ),
+    _m(
+        "arrangement_clip_from_session",
+        (_p("track", "int"), _p("slot", "int"), _p("start_time", "float")),
     ),
     _m("arrangement_clip_gain_set", (_p("track", "int"), _p("index", "int"), _p("db", "float"))),
     _m(

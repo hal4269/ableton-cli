@@ -769,6 +769,9 @@ class _ClientStub:
             "scenes": scenes,
         }
 
+    def arrangement_clip_from_session(self, track: int, slot: int, start_time: float):  # noqa: ANN201
+        return {"track": track, "slot": slot, "start_time": start_time, "length": 16.0}
+
     def execute_batch(self, steps: list[dict[str, object]]):  # noqa: ANN201
         return {
             "step_count": len(steps),
@@ -2859,6 +2862,38 @@ def test_arrangement_from_session_command_outputs_json_envelope(
         {"scene": 0, "duration_beats": 24.0},
         {"scene": 1, "duration_beats": 48.0},
     ]
+
+
+def test_arrangement_clip_from_session_command_outputs_json_envelope(
+    runner, cli_app, monkeypatch
+) -> None:
+    from ableton_cli.commands import arrangement
+
+    monkeypatch.setattr(arrangement, "get_client", lambda ctx: _ClientStub())
+
+    result = runner.invoke(
+        cli_app,
+        ["--output", "json", "arrangement", "clip", "from-session", "2", "5", "--start", "64"],
+    )
+
+    assert result.exit_code == 0, result.stdout
+    payload = json.loads(result.stdout)
+    assert payload["ok"] is True
+    assert payload["result"] == {"track": 2, "slot": 5, "start_time": 64.0, "length": 16.0}
+
+
+def test_arrangement_clip_from_session_rejects_negative_start(runner, cli_app, monkeypatch) -> None:
+    from ableton_cli.commands import arrangement
+
+    monkeypatch.setattr(arrangement, "get_client", lambda ctx: _ClientStub())
+
+    result = runner.invoke(
+        cli_app,
+        ["--output", "json", "arrangement", "clip", "from-session", "2", "5", "--start", "-4"],
+    )
+
+    assert result.exit_code == 2
+    assert json.loads(result.stdout)["error"]["code"] == "INVALID_ARGUMENT"
 
 
 def test_new_commands_validate_arguments_with_exit_code_2(runner, cli_app, monkeypatch) -> None:

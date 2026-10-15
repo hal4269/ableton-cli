@@ -537,6 +537,13 @@ class _TracksClipsBackend(Protocol):
 
     def arrangement_from_session(self, scenes: list[dict[str, Any]]) -> dict[str, Any]: ...
 
+    def arrangement_clip_from_session(
+        self,
+        track: int,
+        slot: int,
+        start_time: float,
+    ) -> dict[str, Any]: ...
+
     def tracks_delete(self, track: int) -> dict[str, Any]: ...
 
 

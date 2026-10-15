@@ -323,9 +323,20 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         capability="Expand session scenes into Arrangement using explicit scene durations.",
     ),
     StableActionMapping(
+        action="arrangement_clip_from_session",
+        command=(
+            "uv run ableton-cli --output json arrangement clip from-session "
+            "<track> <slot> --start <beats>"
+        ),
+        capability=(
+            "Place an exact copy of a session clip (envelopes, probability, loop) "
+            "in the Arrangement."
+        ),
+    ),
+    StableActionMapping(
         action="clip_duplicate",
         command="uv run ableton-cli --output json clip duplicate <track> <src_clip> <dst_clip>",
-        capability="Duplicate a clip into an empty destination slot.",
+        capability="Duplicate a clip (exact copy, incl. envelopes) into an empty slot.",
     ),
     StableActionMapping(
         action="set_clip_name",

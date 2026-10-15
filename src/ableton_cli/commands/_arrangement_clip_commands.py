@@ -32,6 +32,11 @@ CLIP_DELETE_SPEC = ArrangementCommandSpec(
     client_method="arrangement_clip_delete",
 )
 
+CLIP_FROM_SESSION_SPEC = ArrangementCommandSpec(
+    command_name="arrangement clip from-session",
+    client_method="arrangement_clip_from_session",
+)
+
 
 def register_commands(
     clip_app: typer.Typer,
@@ -152,6 +157,36 @@ def register_commands(
                 "audio_path": audio_path,
                 "notes": notes_json is not None or notes_file is not None or pattern is not None,
             },
+            method_kwargs=_method_kwargs,
+        )
+
+    @clip_app.command("from-session")
+    def arrangement_clip_from_session(
+        ctx: typer.Context,
+        track: Annotated[int, typer.Argument(help="Track index (0-based)")],
+        slot: Annotated[int, typer.Argument(help="Session clip slot index (0-based)")],
+        start: Annotated[
+            float,
+            typer.Option("--start", help="Arrangement start time in beats"),
+        ],
+    ) -> None:
+        """Place an exact copy of a session clip (envelopes, probability) in the Arrangement."""
+
+        def _method_kwargs() -> dict[str, object]:
+            return {
+                "track": require_track_index(track),
+                "slot": require_track_index(slot),
+                "start_time": require_non_negative_float(
+                    "start",
+                    start,
+                    hint="Use a non-negative --start value in beats.",
+                ),
+            }
+
+        run_client_command_spec(
+            ctx,
+            spec=CLIP_FROM_SESSION_SPEC,
+            args={"track": track, "slot": slot, "start": start},
             method_kwargs=_method_kwargs,
         )
 

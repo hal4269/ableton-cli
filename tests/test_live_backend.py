@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import threading
 import time
+from copy import deepcopy
 from dataclasses import dataclass, field, replace
 from gzip import compress as gzip_compress
 from pathlib import Path
@@ -261,6 +262,15 @@ class _ClipSlot:
             raise RuntimeError("slot occupied")
         self.clip = _Clip(length=length, is_audio_clip=False, is_midi_clip=True)
 
+    def duplicate_clip_to(self, target: _ClipSlot) -> None:
+        # Live copies the whole clip: notes with all fields, name, envelopes, loop settings.
+        if self.clip is None:
+            raise RuntimeError("no clip to duplicate")
+        target.clip = deepcopy(self.clip)
+
+    def delete_clip(self) -> None:
+        self.clip = None
+
     def fire(self) -> None:
         # Real Ableton Live allows firing an empty slot on an armed,
         # record-enabled track to start recording; the fake does not model
@@ -318,6 +328,20 @@ class _Track:
                 length=normalized_length,
                 is_audio_clip=False,
                 is_midi_clip=True,
+            )
+        )
+
+    def duplicate_clip_to_arrangement(self, clip: _Clip, destination_time: float) -> None:
+        # Live places an exact copy of the session clip (all note fields, envelopes).
+        self.arrangement_clips.append(
+            _ArrangementClip(
+                name=clip.name,
+                start_time=float(destination_time),
+                length=clip.length,
+                is_audio_clip=clip.is_audio_clip,
+                is_midi_clip=clip.is_midi_clip,
+                _notes=deepcopy(clip._notes),
+                _next_note_id=clip._next_note_id,
             )
         )
 
@@ -2960,6 +2984,47 @@ def test_live_backend_clip_duplicate_many() -> None:
     duplicated_notes_2 = backend.get_clip_notes(0, 2, None, None, None)
     assert duplicated_notes_1["note_count"] == 1
     assert duplicated_notes_2["note_count"] == 1
+
+
+def test_live_backend_clip_duplicate_copies_the_whole_clip() -> None:
+    # Duplicating must keep everything Live stores on the clip (note probability,
+    # name, loop state, envelopes), not rebuild it from basic note tuples.
+    surface = _SurfaceStub()
+    backend = LiveBackend(surface)
+    backend.create_clip(0, 0, 4.0)
+    backend.add_notes_to_clip(0, 0, [{**_note(), "probability": 0.5}])
+    slots = surface.song().tracks[0].clip_slots
+    source_clip = slots[0].clip
+    source_clip.name = "hook"
+    source_clip.looping = False
+
+    backend.clip_duplicate(track=0, src_clip=0, dst_clip=1)
+
+    copied = slots[1].clip
+    assert copied is not source_clip
+    assert copied.name == "hook"
+    assert copied.looping is False
+    assert backend.get_clip_notes(0, 1, None, None, None)["notes"][0]["probability"] == 0.5
+
+
+def test_live_backend_arrangement_clip_from_session_places_exact_copy() -> None:
+    surface = _SurfaceStub()
+    backend = LiveBackend(surface)
+    backend.create_clip(0, 0, 4.0)
+    backend.add_notes_to_clip(0, 0, [{**_note(), "probability": 0.5}])
+    surface.song().tracks[0].clip_slots[0].clip.name = "hook"
+
+    placed = backend.arrangement_clip_from_session(track=0, slot=0, start_time=16.0)
+
+    assert placed == {"track": 0, "slot": 0, "start_time": 16.0, "length": 4.0, "name": "hook"}
+    listed = backend.arrangement_clip_list(0)["clips"]
+    assert [(clip["name"], clip["start_time"]) for clip in listed] == [("hook", 16.0)]
+    notes = backend.arrangement_clip_notes_get(0, 0, None, None, None)["notes"]
+    assert notes[0]["probability"] == 0.5
+
+    with pytest.raises(CommandError) as empty_slot:
+        backend.arrangement_clip_from_session(track=0, slot=1, start_time=0.0)
+    assert empty_slot.value.code == "INVALID_ARGUMENT"
 
 
 def test_live_backend_add_notes_to_clip_accepts_extended_fields_and_applies_defaults() -> None:

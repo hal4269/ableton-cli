@@ -32,6 +32,14 @@ class _AbletonClientGeneratedMixin:
             {"track": track, "index": index, "audio_path": audio_path},
         )
 
+    def arrangement_clip_from_session(
+        self, track: int, slot: int, start_time: float
+    ) -> dict[str, Any]:
+        return self._call(
+            "arrangement_clip_from_session",
+            {"track": track, "slot": slot, "start_time": start_time},
+        )
+
     def arrangement_clip_gain_set(self, track: int, index: int, db: float) -> dict[str, Any]:
         return self._call("arrangement_clip_gain_set", {"track": track, "index": index, "db": db})
 

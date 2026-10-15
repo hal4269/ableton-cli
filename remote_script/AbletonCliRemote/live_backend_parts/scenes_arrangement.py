@@ -40,6 +40,40 @@ class LiveBackendScenesArrangementMixin:
                 hint="Use a Live version exposing iterable track.arrangement_clips.",
             ) from exc
 
+    def arrangement_clip_from_session(
+        self,
+        track: int,
+        slot: int,
+        start_time: float,
+    ) -> dict[str, Any]:
+        """Place an exact copy of a session clip in the Arrangement at ``start_time``.
+
+        Unlike ``arrangement_from_session`` (which rebuilds notes), Live's own copy keeps
+        clip envelopes, note probability and loop settings.
+        """
+        target_track = self._ctx._track_at(track)
+        clip_slot = self._ctx._clip_slot_at(track, slot)
+        if not clip_slot.has_clip:
+            raise _invalid_argument(
+                message=f"No session clip at track {track} slot {slot}",
+                hint="Pass a clip slot that holds a clip.",
+            )
+        duplicate_clip_to_arrangement = getattr(target_track, "duplicate_clip_to_arrangement", None)
+        if not callable(duplicate_clip_to_arrangement):
+            raise _not_supported_by_live_api(
+                message="Track.duplicate_clip_to_arrangement is not available in Live API",
+                hint="Use a Live version exposing track.duplicate_clip_to_arrangement (Live 12+).",
+            )
+        clip = clip_slot.clip
+        duplicate_clip_to_arrangement(clip, float(start_time))
+        return {
+            "track": track,
+            "slot": slot,
+            "start_time": float(start_time),
+            "length": float(clip.length),
+            "name": str(clip.name),
+        }
+
     def _arrangement_clip_at(self, track: int, index: int) -> Any:
         clips = self._arrangement_clips(track)
         if index < 0 or index >= len(clips):

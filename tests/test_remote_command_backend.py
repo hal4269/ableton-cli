@@ -230,6 +230,14 @@ class _BackendStub:
     def clip_active_set(self, track: int, clip: int, value: bool):  # noqa: ANN201
         return {"track": track, "clip": clip, "active": value}
 
+    def arrangement_clip_from_session(  # noqa: ANN201
+        self,
+        track: int,
+        slot: int,
+        start_time: float,
+    ):
+        return {"track": track, "slot": slot, "start_time": start_time}
+
     def clip_duplicate(  # noqa: ANN201
         self,
         track: int,
@@ -1788,6 +1796,25 @@ def test_dispatch_calls_backend_for_new_todo_commands() -> None:
     assert duplicate == {"track": 1, "src_clip": 2, "dst_clip": 3, "duplicated": True}
     assert scenes_move == {"from": 3, "to": 1, "moved": True}
     assert tracks_delete == {"track": 0, "deleted": True}
+
+
+def test_dispatch_calls_backend_for_arrangement_clip_from_session() -> None:
+    backend = _BackendStub()
+
+    placed = dispatch_command(
+        backend,
+        "arrangement_clip_from_session",
+        {"track": 1, "slot": 4, "start_time": 32},
+    )
+    assert placed == {"track": 1, "slot": 4, "start_time": 32.0}
+
+    with pytest.raises(CommandError) as negative_start:
+        dispatch_command(
+            backend,
+            "arrangement_clip_from_session",
+            {"track": 1, "slot": 4, "start_time": -1},
+        )
+    assert negative_start.value.code == "INVALID_ARGUMENT"
 
 
 def test_dispatch_calls_backend_for_clip_duplicate_many() -> None:

@@ -106,8 +106,12 @@ uv run ableton-cli arrangement clip warp set 0 0 --enabled true --mode beats
 uv run ableton-cli arrangement clip gain set 0 0 --db -6
 uv run ableton-cli arrangement clip transpose set 0 0 --semitones -1
 uv run ableton-cli arrangement clip file replace 0 0 --audio-path /tmp/replacement.wav
+uv run ableton-cli arrangement clip from-session 0 2 --start 64
 uv run ableton-cli arrangement from-session --scenes "0:24,1:48"
 ```
+
+`arrangement clip from-session` places an exact copy of a session clip (clip envelopes, note
+probability, loop settings). `arrangement from-session` rebuilds notes only and drops those.
 
 ### Remix / Audio Workflow
 
@@ -543,6 +547,7 @@ uv run ableton-cli --output json ping
 - `arrangement_clip_notes_import_browser` -> `uv run ableton-cli --output json arrangement clip notes import-browser <track> <index> <target> [--mode <replace|append>] [--import-length] [--import-groove]`
 - `arrangement_clip_delete` -> `uv run ableton-cli --output json arrangement clip delete <track> [index] [--start <beat> --end <beat>] [--all]`
 - `arrangement_from_session` -> `uv run ableton-cli --output json arrangement from-session --scenes "0:24,1:48"`
+- `arrangement_clip_from_session` -> `uv run ableton-cli --output json arrangement clip from-session <track> <slot> --start <beats>`
 - `clip_duplicate` -> `uv run ableton-cli --output json clip duplicate <track> <src_clip> <dst_clip>`
 - `set_clip_name` -> `uv run ableton-cli --output json clip name set <track> <clip> <name>`
 - `fire_clip` -> `uv run ableton-cli --output json clip fire <track> <clip>`
