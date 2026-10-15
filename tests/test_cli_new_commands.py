@@ -772,6 +772,9 @@ class _ClientStub:
     def arrangement_clip_from_session(self, track: int, slot: int, start_time: float):  # noqa: ANN201
         return {"track": track, "slot": slot, "start_time": start_time, "length": 16.0}
 
+    def clip_delete(self, track: int, clip: int):  # noqa: ANN201
+        return {"track": track, "clip": clip, "deleted": True}
+
     def execute_batch(self, steps: list[dict[str, object]]):  # noqa: ANN201
         return {
             "step_count": len(steps),
@@ -2880,6 +2883,17 @@ def test_arrangement_clip_from_session_command_outputs_json_envelope(
     payload = json.loads(result.stdout)
     assert payload["ok"] is True
     assert payload["result"] == {"track": 2, "slot": 5, "start_time": 64.0, "length": 16.0}
+
+
+def test_clip_delete_command_outputs_json_envelope(runner, cli_app, monkeypatch) -> None:
+    from ableton_cli.commands import clip
+
+    monkeypatch.setattr(clip, "get_client", lambda ctx: _ClientStub())
+
+    result = runner.invoke(cli_app, ["--output", "json", "clip", "delete", "3", "8"])
+
+    assert result.exit_code == 0, result.stdout
+    assert json.loads(result.stdout)["result"] == {"track": 3, "clip": 8, "deleted": True}
 
 
 def test_arrangement_clip_from_session_rejects_negative_start(runner, cli_app, monkeypatch) -> None:

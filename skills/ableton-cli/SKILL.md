@@ -279,6 +279,7 @@ uv run ableton-cli clip name set 0 0 "Hook"
 uv run ableton-cli clip name set-many 0 --map "1:Main,2:Var,5:Peak"
 uv run ableton-cli clip fire 0 0
 uv run ableton-cli clip stop 0 0
+uv run ableton-cli clip delete 0 3
 uv run ableton-cli clip active get 0 0
 uv run ableton-cli clip active set 0 0 false
 uv run ableton-cli clip duplicate 0 0 1
@@ -358,6 +359,9 @@ uv run ableton-cli device macro list --track-index 0 --device-index 0
 uv run ableton-cli device macro set 0 64.0 --track-index 0 --device-index 0
 uv run ableton-cli device parameter set 0.5 --track-index 0 --device-ref device:12 --parameter-index 0
 ```
+
+`device chains list` reports `in_note` per chain: the MIDI note that triggers a Drum Rack pad
+(`null` for other racks). Use it to map pads; chain order is not the note order.
 
 ### Synth
 
@@ -548,6 +552,7 @@ uv run ableton-cli --output json ping
 - `arrangement_clip_delete` -> `uv run ableton-cli --output json arrangement clip delete <track> [index] [--start <beat> --end <beat>] [--all]`
 - `arrangement_from_session` -> `uv run ableton-cli --output json arrangement from-session --scenes "0:24,1:48"`
 - `arrangement_clip_from_session` -> `uv run ableton-cli --output json arrangement clip from-session <track> <slot> --start <beats>`
+- `clip_delete` -> `uv run ableton-cli --output json clip delete <track> <clip>`
 - `clip_duplicate` -> `uv run ableton-cli --output json clip duplicate <track> <src_clip> <dst_clip>`
 - `set_clip_name` -> `uv run ableton-cli --output json clip name set <track> <clip> <name>`
 - `fire_clip` -> `uv run ableton-cli --output json clip fire <track> <clip>`

@@ -49,10 +49,14 @@ class LiveBackendDeviceRacksMixin:
                         "stable_ref": stable_ref,
                     }
                 )
+            # Drum Rack chains carry the MIDI note that triggers them; chain order is
+            # not the note map. Other rack chains have no note.
+            in_note = getattr(chain, "in_note", None)
             chains_payload.append(
                 {
                     "index": chain_index,
                     "name": str(getattr(chain, "name", "")),
+                    "in_note": int(in_note) if in_note is not None else None,
                     "devices": devices_payload,
                 }
             )

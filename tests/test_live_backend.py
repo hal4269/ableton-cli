@@ -3007,6 +3007,19 @@ def test_live_backend_clip_duplicate_copies_the_whole_clip() -> None:
     assert backend.get_clip_notes(0, 1, None, None, None)["notes"][0]["probability"] == 0.5
 
 
+def test_live_backend_clip_delete_removes_the_session_clip() -> None:
+    surface = _SurfaceStub()
+    backend = LiveBackend(surface)
+    backend.create_clip(0, 1, 4.0)
+
+    assert backend.clip_delete(0, 1) == {"track": 0, "clip": 1, "deleted": True}
+    assert surface.song().tracks[0].clip_slots[1].has_clip is False
+
+    with pytest.raises(CommandError) as empty_slot:
+        backend.clip_delete(0, 1)
+    assert empty_slot.value.code == "INVALID_ARGUMENT"
+
+
 def test_live_backend_arrangement_clip_from_session_places_exact_copy() -> None:
     surface = _SurfaceStub()
     backend = LiveBackend(surface)

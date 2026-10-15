@@ -25,6 +25,7 @@ def register_clip_root_commands(clip_app: typer.Typer) -> None:
     clip_app.command("create")(clip_create)
     clip_app.command("fire")(clip_fire)
     clip_app.command("stop")(clip_stop)
+    clip_app.command("delete")(clip_delete)
     clip_app.command("duplicate")(clip_duplicate)
     clip_app.command("duplicate-many")(clip_duplicate_many)
     clip_app.command("place-pattern")(clip_place_pattern)
@@ -82,6 +83,21 @@ def clip_stop(
         args={"track": track, "clip": clip},
         track_clip=(track, clip),
         action=lambda client, valid_track, valid_clip: client.stop_clip(valid_track, valid_clip),
+    )
+
+
+def clip_delete(
+    ctx: typer.Context,
+    track: Annotated[int, typer.Argument(help="Track index (0-based)")],
+    clip: Annotated[int, typer.Argument(help="Clip slot index (0-based)")],
+) -> None:
+    """Delete the session clip in a clip slot."""
+    execute_track_clip_command(
+        ctx,
+        command="clip delete",
+        args={"track": track, "clip": clip},
+        track_clip=(track, clip),
+        action=lambda client, valid_track, valid_clip: client.clip_delete(valid_track, valid_clip),
     )
 
 

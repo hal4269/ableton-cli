@@ -126,6 +126,7 @@ COMMAND_DESCRIPTORS: tuple[CommandDescriptor, ...] = (
     _d("clip active set", "clip_active_set", _WRITE),
     _d("clip create", "create_clip", _WRITE),
     _d("clip cut-to-drum-rack", "clip_cut_to_drum_rack", _DESTRUCTIVE),
+    _d("clip delete", "clip_delete", _DESTRUCTIVE),
     _d("clip duplicate", "clip_duplicate", _WRITE),
     _d("clip duplicate-many", "clip_duplicate", _WRITE),
     _d("clip envelope clear", "clip_envelope_clear", _DESTRUCTIVE),
@@ -473,6 +474,7 @@ CLIENT_METHOD_SPECS: tuple[ClientMethodSpec, ...] = (
     _m("arrangement_record_stop", ()),
     _m("clip_active_get", (_p("track", "int"), _p("clip", "int"))),
     _m("clip_active_set", (_p("track", "int"), _p("clip", "int"), _p("value", "bool"))),
+    _m("clip_delete", (_p("track", "int"), _p("clip", "int"))),
     _m(
         "clip_envelope_set",
         (

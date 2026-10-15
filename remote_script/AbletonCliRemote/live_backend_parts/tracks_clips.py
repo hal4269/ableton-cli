@@ -255,6 +255,22 @@ class LiveBackendTracksClipsMixin:
         slot.stop()
         return {"track": track, "clip": clip, "stopped": True}
 
+    def clip_delete(self, track: int, clip: int) -> dict[str, Any]:
+        slot = self._ctx._clip_slot_at(track, clip)
+        if not slot.has_clip:
+            raise _invalid_argument(
+                message="No clip in slot",
+                hint="Pass a clip slot that holds a clip.",
+            )
+        delete_clip = getattr(slot, "delete_clip", None)
+        if not callable(delete_clip):
+            raise _not_supported_by_live_api(
+                message="ClipSlot.delete_clip is not available in Live API",
+                hint="Use a Live version exposing clip_slot.delete_clip (Live 12+).",
+            )
+        delete_clip()
+        return {"track": track, "clip": clip, "deleted": True}
+
     def clip_active_get(self, track: int, clip: int) -> dict[str, Any]:
         slot = self._ctx._clip_slot_at(track, clip)
         if not slot.has_clip:

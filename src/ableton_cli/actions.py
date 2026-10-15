@@ -334,6 +334,11 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         ),
     ),
     StableActionMapping(
+        action="clip_delete",
+        command="uv run ableton-cli --output json clip delete <track> <clip>",
+        capability="Delete the session clip in a clip slot.",
+    ),
+    StableActionMapping(
         action="clip_duplicate",
         command="uv run ableton-cli --output json clip duplicate <track> <src_clip> <dst_clip>",
         capability="Duplicate a clip (exact copy, incl. envelopes) into an empty slot.",

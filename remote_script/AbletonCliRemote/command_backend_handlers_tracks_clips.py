@@ -276,6 +276,12 @@ def _handle_stop_clip(backend: CommandBackend, args: dict[str, Any]) -> dict[str
     return backend.stop_clip(track, clip)
 
 
+def _handle_clip_delete(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
+    track = _track_index("track", args.get("track"))
+    clip = _track_index("clip", args.get("clip"))
+    return backend.clip_delete(track, clip)
+
+
 def _handle_clip_duplicate(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
     track = _track_index("track", args.get("track"))
     src_clip = _track_index("src_clip", args.get("src_clip"))
@@ -611,6 +617,7 @@ TRACKS_CLIPS_HANDLERS: dict[str, Handler] = {
     "set_clip_name": _handle_set_clip_name,
     "fire_clip": _handle_fire_clip,
     "stop_clip": _handle_stop_clip,
+    "clip_delete": _handle_clip_delete,
     "clip_active_get": _handle_clip_active_get,
     "clip_active_set": _handle_clip_active_set,
     "clip_duplicate": _handle_clip_duplicate,

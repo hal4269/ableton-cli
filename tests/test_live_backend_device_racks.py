@@ -44,6 +44,38 @@ def test_device_chains_list_returns_nested_devices_with_stable_refs() -> None:
     assert stable_ref.startswith("device:")
 
 
+class _DrumChain(_Chain):
+    """Drum Rack chain: Live exposes the triggering MIDI note as ``in_note``."""
+
+    def __init__(self, name: str, in_note: int) -> None:
+        _Chain.__init__(self, name)
+        self.in_note = in_note
+
+
+def test_device_chains_list_reports_drum_pad_notes() -> None:
+    # Chain order is not the note map (909 Core Kit lists an open hat after the toms).
+    kick = _DrumChain("Bass Drum", in_note=36)
+    open_hat = _DrumChain("Open Hi Hat", in_note=46)
+    tom = _DrumChain("Mid Tom", in_note=47)
+    rack = _rack_device(chains=[kick, tom, open_hat])
+    backend = _backend_with_rack(rack)
+
+    chains = backend.device_chains_list(0, 0)["chains"]
+
+    assert [(chain["name"], chain["in_note"]) for chain in chains] == [
+        ("Bass Drum", 36),
+        ("Mid Tom", 47),
+        ("Open Hi Hat", 46),
+    ]
+
+
+def test_device_chains_list_reports_no_note_for_non_drum_chains() -> None:
+    rack = _rack_device(chains=[_Chain("Chain 1")])
+    backend = _backend_with_rack(rack)
+
+    assert backend.device_chains_list(0, 0)["chains"][0]["in_note"] is None
+
+
 def test_device_chains_list_rejects_non_rack_device() -> None:
     plain_device = _Device("Utility", "AudioEffect", [_Parameter("Gain", 0.0)])
     backend = _backend_with_rack(plain_device)

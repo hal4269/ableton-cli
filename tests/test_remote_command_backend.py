@@ -221,6 +221,9 @@ class _BackendStub:
     def fire_clip(self, track: int, clip: int):  # noqa: ANN201
         return {"track": track, "clip": clip, "fired": True}
 
+    def clip_delete(self, track: int, clip: int):  # noqa: ANN201
+        return {"track": track, "clip": clip, "deleted": True}
+
     def stop_clip(self, track: int, clip: int):  # noqa: ANN201
         return {"track": track, "clip": clip, "stopped": True}
 
@@ -1796,6 +1799,19 @@ def test_dispatch_calls_backend_for_new_todo_commands() -> None:
     assert duplicate == {"track": 1, "src_clip": 2, "dst_clip": 3, "duplicated": True}
     assert scenes_move == {"from": 3, "to": 1, "moved": True}
     assert tracks_delete == {"track": 0, "deleted": True}
+
+
+def test_dispatch_calls_backend_for_clip_delete() -> None:
+    backend = _BackendStub()
+
+    assert dispatch_command(backend, "clip_delete", {"track": 2, "clip": 7}) == {
+        "track": 2,
+        "clip": 7,
+        "deleted": True,
+    }
+    with pytest.raises(CommandError) as negative_clip:
+        dispatch_command(backend, "clip_delete", {"track": 2, "clip": -1})
+    assert negative_clip.value.code == "INVALID_ARGUMENT"
 
 
 def test_dispatch_calls_backend_for_arrangement_clip_from_session() -> None:

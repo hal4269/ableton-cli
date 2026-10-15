@@ -60,6 +60,7 @@ Stable action names and CLI mappings for automation wrappers.
 | `arrangement_clip_delete` | `uv run ableton-cli --output json arrangement clip delete <track> [index] [--start <beat> --end <beat>] [--all]` | Delete arrangement clips by index, time range, or all mode. |
 | `arrangement_from_session` | `uv run ableton-cli --output json arrangement from-session --scenes "0:24,1:48"` | Expand session scenes into Arrangement using explicit scene durations. |
 | `arrangement_clip_from_session` | `uv run ableton-cli --output json arrangement clip from-session <track> <slot> --start <beats>` | Place an exact copy of a session clip (envelopes, probability, loop) in the Arrangement. |
+| `clip_delete` | `uv run ableton-cli --output json clip delete <track> <clip>` | Delete the session clip in a clip slot. |
 | `clip_duplicate` | `uv run ableton-cli --output json clip duplicate <track> <src_clip> <dst_clip>` | Duplicate a clip (exact copy, incl. envelopes) into an empty slot. |
 | `set_clip_name` | `uv run ableton-cli --output json clip name set <track> <clip> <name>` | Rename a clip. |
 | `fire_clip` | `uv run ableton-cli --output json clip fire <track> <clip>` | Launch a clip slot. |

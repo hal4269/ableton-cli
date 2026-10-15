@@ -93,6 +93,9 @@ class _AbletonClientGeneratedMixin:
     def clip_active_set(self, track: int, clip: int, value: bool) -> dict[str, Any]:
         return self._call("clip_active_set", {"track": track, "clip": clip, "value": value})
 
+    def clip_delete(self, track: int, clip: int) -> dict[str, Any]:
+        return self._call("clip_delete", {"track": track, "clip": clip})
+
     def clip_envelope_set(
         self,
         track: int,
