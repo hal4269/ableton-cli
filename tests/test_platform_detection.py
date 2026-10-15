@@ -12,18 +12,15 @@ from ableton_cli.platform_paths import PosixPlatformPaths, WindowsPlatformPaths
 def test_build_platform_paths_for_windows(monkeypatch) -> None:
     home = Path("/home/test-user")
 
-    class _PathStub:
-        @staticmethod
-        def home() -> Path:
-            return home
-
-    monkeypatch.setattr(platform_detection, "Path", _PathStub)
+    monkeypatch.setattr(platform_detection.Path, "home", staticmethod(lambda: home))
     monkeypatch.setattr(platform_detection.platform, "system", lambda: "Windows")
+    monkeypatch.setenv("APPDATA", "/appdata")
 
     result = platform_detection.build_platform_paths_for_current_os()
 
     assert isinstance(result, WindowsPlatformPaths)
     assert result.home == home
+    assert result.preferences_root == Path("/appdata") / "Ableton"
 
 
 def test_build_platform_paths_for_macos(monkeypatch) -> None:
@@ -45,6 +42,7 @@ def test_build_platform_paths_for_macos(monkeypatch) -> None:
         ("Music", "Ableton", "User Library", "Remote Scripts"),
         ("Documents", "Ableton", "User Library", "Remote Scripts"),
     )
+    assert result.preferences_root == home / "Library" / "Preferences" / "Ableton"
 
 
 def test_build_platform_paths_for_linux(monkeypatch) -> None:

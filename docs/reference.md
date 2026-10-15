@@ -284,8 +284,9 @@ man ableton-cli
 3. Run `ableton-cli --output json doctor` and check:
    - `remote_script_files`
    - `remote_script_entrypoint`
-4. Verify installed paths under:
-   - `~/Music/Ableton/User Library/Remote Scripts/AbletonCliRemote`
+4. Verify installed paths. `install-remote-script` and `doctor` use the User Library set in
+   Live's preferences (`Library.cfg`, newest Live version first), then the defaults:
+   - `~/Music/Ableton/User Library/Remote Scripts/AbletonCliRemote` (macOS)
    - `~/Documents/Ableton/User Library/Remote Scripts/AbletonCliRemote`
 
 ### Remote Script update not taking effect immediately
