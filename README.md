@@ -3,6 +3,38 @@
 `ableton-cli` is a Python CLI to control and inspect Ableton Live through a local Remote Script.
 It is designed for both humans and automation (Skills/agents), with stable JSON output and fixed exit codes.
 
+## About this fork
+
+This is a fork of the upstream `ableton-cli` project, extended for generating songs with an
+AI agent. Changes are kept small and upstream-friendly, on feature branches, and the fork
+tracks upstream `main` (configured as the `upstream` git remote).
+
+Added or changed compared to upstream:
+
+| Command | Change |
+| --- | --- |
+| `clip duplicate` / `clip duplicate-many` | Exact copy via Live's `ClipSlot.duplicate_clip_to`: keeps clip envelopes, note probability and loop settings (upstream rebuilds the clip from basic notes and drops them). |
+| `arrangement clip from-session <track> <slot> --start <beats>` | New. Places an exact copy of a session clip in the Arrangement (`Track.duplicate_clip_to_arrangement`). Unlike `arrangement from-session`, it keeps envelopes and probability, without real-time recording. |
+| `clip delete <track> <clip>` | New. Deletes a session clip (`ClipSlot.delete_clip`). |
+| `device chains list` | Reports `in_note` per chain: the MIDI note of each Drum Rack pad (chain order is not the note map). |
+
+Not possible through the Live API, so not added: automation envelopes on Arrangement clips
+(Live only creates clip envelopes on session clips; copy a session clip with its envelopes
+instead).
+
+### Installing the fork from a local clone
+
+```bash
+git clone <this-repo-url> ableton-cli
+uv tool install --force --editable ./ableton-cli   # CLI changes are live without reinstalling
+```
+
+Copy `remote_script/AbletonCliRemote` into Live's `User Library/Remote Scripts/` folder (use the
+real User Library path if your Documents folder is redirected; `install-remote-script` only
+checks `~/Documents` and `~/Music`), select `AbletonCliRemote` as Control Surface, and **restart
+Live** after every Remote Script change: re-selecting the control surface does not reload code.
+CLI and Remote Script must come from the same commit.
+
 ## Prerequisites
 
 - Ableton Live 12+ (the Remote Script uses dataclass `slots=True`, which requires the
