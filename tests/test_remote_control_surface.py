@@ -521,3 +521,22 @@ def test_response_cache_evicts_the_oldest_keys(monkeypatch: pytest.MonkeyPatch) 
     assert len(dispatched) == 5
     assert evicted_retry.result == {"tempo": 120.0}
     assert cached_retry.result == {"tempo": 120.0, "idempotent_replay": True}
+
+
+def test_update_display_drains_queued_requests_within_the_budget(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    # Live calls update_display on its main thread every tick (~100 ms); draining there
+    # bounds request latency to one tick instead of waiting for scheduled messages.
+    surface = _make_surface(monkeypatch)
+    monkeypatch.setattr(control_surface_module, "DRAIN_BUDGET_S", 0.005)
+    _clock, executed, _scheduled = _install_drain_harness(
+        monkeypatch, surface, seconds_per_command=0.004
+    )
+    requests = [_enqueue(surface, f"command-{index}") for index in range(3)]
+
+    surface.update_display()
+
+    assert executed == ["command-0", "command-1"]
+    assert requests[0].event.is_set() and requests[1].event.is_set()
+    assert not requests[2].event.is_set()
