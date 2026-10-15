@@ -11,7 +11,9 @@ def main() -> int:
     snapshot_path = repo_root / "tests" / "snapshots" / "public_contract_snapshot.json"
     payload = build_public_contract_snapshot()
     snapshot_path.parent.mkdir(parents=True, exist_ok=True)
-    snapshot_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    snapshot_path.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
+    )
     return 0
 
 

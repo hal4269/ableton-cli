@@ -60,6 +60,7 @@ def main() -> int:
     BASELINE_PATH.write_text(
         json.dumps(baseline, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
+        newline="\n",
     )
     summary = baseline["summary"]
     print(f"wrote {BASELINE_PATH.relative_to(REPO_ROOT)}: {summary}")

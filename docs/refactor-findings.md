@@ -10,6 +10,9 @@ own justification, and its own snapshot update.
 
 ### quality harness baseline is stale on `main`
 
+**Resolved:** `register_commands` is split into two registration functions and the
+baseline is regenerated (0 failures).
+
 `quality-harness-baseline.json` records 0 failures and 395 warnings. On `main`,
 before any refactor commit, `dev_checks_enforce` reports 1 failure and 419
 warnings and exits 1. The failure is:
@@ -46,6 +49,8 @@ core layer, the generated file is checked in, and CI regenerates it and fails
 on a diff.
 
 ### The other generator tools write with the platform's line ending
+
+**Resolved:** every generator now writes with `newline="\n"`.
 
 `tools/update_command_surface_snapshot.py` now passes `newline="\n"` to
 `write_text`, because a byte-level test caught it rewriting every line ending
