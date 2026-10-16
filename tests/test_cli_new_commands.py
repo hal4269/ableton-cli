@@ -832,6 +832,8 @@ class _ClientStub:
                     "max": 1.0,
                     "is_enabled": True,
                     "is_quantized": False,
+                    "display_value": "0.50",
+                    "value_items": [],
                 }
             ],
         }
@@ -884,6 +886,8 @@ class _ClientStub:
                     "max": 1.0,
                     "is_enabled": True,
                     "is_quantized": False,
+                    "display_value": "0.50",
+                    "value_items": [],
                 }
             ],
         }
@@ -997,6 +1001,8 @@ class _ClientStub:
                     "max": 1.0,
                     "is_enabled": True,
                     "is_quantized": False,
+                    "display_value": "0.50",
+                    "value_items": [],
                 }
             ],
         }
@@ -1049,6 +1055,8 @@ class _ClientStub:
                     "max": 1.0,
                     "is_enabled": True,
                     "is_quantized": False,
+                    "display_value": "0.50",
+                    "value_items": [],
                 }
             ],
         }

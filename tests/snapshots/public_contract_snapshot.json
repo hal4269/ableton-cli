@@ -4428,6 +4428,47 @@
         "requires_confirmation": false
       }
     },
+    "device chains get": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": true,
+        "kind": "read",
+        "requires_confirmation": false
+      }
+    },
     "device chains list": {
       "args": {
         "type": "object"
@@ -4466,6 +4507,47 @@
       "side_effect": {
         "idempotent": true,
         "kind": "read",
+        "requires_confirmation": false
+      }
+    },
+    "device chains set": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
         "requires_confirmation": false
       }
     },
@@ -4511,6 +4593,47 @@
       }
     },
     "device enabled set": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
+    "device insert": {
       "args": {
         "type": "object"
       },
@@ -5065,6 +5188,170 @@
           "parameter_stable_ref",
           "value"
         ],
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
+    "device variation delete": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "destructive",
+        "requires_confirmation": true
+      }
+    },
+    "device variation list": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": true,
+        "kind": "read",
+        "requires_confirmation": false
+      }
+    },
+    "device variation recall": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
+    "device variation store": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
         "type": "object"
       },
       "side_effect": {
@@ -8297,6 +8584,9 @@
             "items": {
               "additional_properties": false,
               "properties": {
+                "display_value": {
+                  "type": "string"
+                },
                 "index": {
                   "type": "integer"
                 },
@@ -8326,6 +8616,12 @@
                 },
                 "value": {
                   "type": "number"
+                },
+                "value_items": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
                 }
               },
               "required": [
@@ -8333,10 +8629,12 @@
                 "stable_ref",
                 "name",
                 "value",
+                "display_value",
                 "min",
                 "max",
                 "is_enabled",
-                "is_quantized"
+                "is_quantized",
+                "value_items"
               ],
               "type": "object"
             },
@@ -8992,6 +9290,9 @@
             "items": {
               "additional_properties": false,
               "properties": {
+                "display_value": {
+                  "type": "string"
+                },
                 "index": {
                   "type": "integer"
                 },
@@ -9021,6 +9322,12 @@
                 },
                 "value": {
                   "type": "number"
+                },
+                "value_items": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
                 }
               },
               "required": [
@@ -9028,10 +9335,12 @@
                 "stable_ref",
                 "name",
                 "value",
+                "display_value",
                 "min",
                 "max",
                 "is_enabled",
-                "is_quantized"
+                "is_quantized",
+                "value_items"
               ],
               "type": "object"
             },
@@ -16252,6 +16561,9 @@
             "items": {
               "additional_properties": false,
               "properties": {
+                "display_value": {
+                  "type": "string"
+                },
                 "index": {
                   "type": "integer"
                 },
@@ -16281,6 +16593,12 @@
                 },
                 "value": {
                   "type": "number"
+                },
+                "value_items": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
                 }
               },
               "required": [
@@ -16288,10 +16606,12 @@
                 "stable_ref",
                 "name",
                 "value",
+                "display_value",
                 "min",
                 "max",
                 "is_enabled",
-                "is_quantized"
+                "is_quantized",
+                "value_items"
               ],
               "type": "object"
             },
@@ -16947,6 +17267,9 @@
             "items": {
               "additional_properties": false,
               "properties": {
+                "display_value": {
+                  "type": "string"
+                },
                 "index": {
                   "type": "integer"
                 },
@@ -16976,6 +17299,12 @@
                 },
                 "value": {
                   "type": "number"
+                },
+                "value_items": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
                 }
               },
               "required": [
@@ -16983,10 +17312,12 @@
                 "stable_ref",
                 "name",
                 "value",
+                "display_value",
                 "min",
                 "max",
                 "is_enabled",
-                "is_quantized"
+                "is_quantized",
+                "value_items"
               ],
               "type": "object"
             },
@@ -18215,6 +18546,9 @@
                   "items": {
                     "additional_properties": false,
                     "properties": {
+                      "display_value": {
+                        "type": "string"
+                      },
                       "index": {
                         "type": "integer"
                       },
@@ -18232,7 +18566,8 @@
                       "index",
                       "stable_ref",
                       "name",
-                      "value"
+                      "value",
+                      "display_value"
                     ],
                     "type": "object"
                   },

@@ -97,3 +97,39 @@ class LiveBackendDeviceEditMixin:
             "parameter_count": len(parameters),
             "parameters": parameters,
         }
+
+    def device_insert(self, track: int, device_name: str, index: int | None) -> dict[str, Any]:
+        target_track = self._ctx._track_at(track)
+        insert_device = getattr(target_track, "insert_device", None)
+        if not callable(insert_device):
+            raise _not_supported_by_live_api(
+                message="Track.insert_device is not available in Live API",
+                hint="Use Live 12.1.10+ (Track.insert_device), or 'browser load' to append.",
+            )
+        device_count = len(list(target_track.devices))
+        target_index = device_count if index is None else index
+        if target_index > device_count:
+            raise _invalid_argument(
+                message=f"insert index out of range: {target_index}",
+                hint=f"Use an index in 0..{device_count} (omit it to append).",
+            )
+        try:
+            insert_device(device_name, target_index)
+        except (RuntimeError, ValueError) as error:
+            raise _invalid_argument(
+                message=f"Live could not insert device {device_name!r}: {error}",
+                hint="Use a native Live device name as shown in the browser (e.g. 'EQ Eight').",
+            ) from error
+        return {
+            "track": track,
+            "device_name": device_name,
+            "index": target_index,
+            "devices": [
+                {
+                    "index": position,
+                    "name": str(getattr(device, "name", "")),
+                    "class_name": str(getattr(device, "class_name", "")),
+                }
+                for position, device in enumerate(list(target_track.devices))
+            ],
+        }

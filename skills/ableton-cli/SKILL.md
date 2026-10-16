@@ -392,6 +392,14 @@ uv run ableton-cli device parameter list --track-index 0 --device-ref device:12
 uv run ableton-cli device delete --track-index 0 --device-index 2
 uv run ableton-cli device move --to-index 0 --track-index 0 --device-index 2
 uv run ableton-cli device enabled set false --track-index 0 --device-index 1
+uv run ableton-cli device insert "EQ Eight" --track-index 0 --index 1
+uv run ableton-cli device chains get 2 --track-index 0 --device-index 0
+uv run ableton-cli device chains set 2 --volume 0.7 --panning -0.2 --mute --track-index 0 --device-index 0
+uv run ableton-cli device chains set 5 --choke-group 1 --no-solo --track-index 0 --device-index 0
+uv run ableton-cli device variation list --track-index 0 --device-index 0
+uv run ableton-cli device variation store --track-index 0 --device-index 0
+uv run ableton-cli device variation recall 1 --track-index 0 --device-index 0
+uv run ableton-cli device variation delete 1 --track-index 0 --device-index 0
 ```
 
 Devices inside rack chains: take the `stable_ref` from `device chains list` and pass it as
@@ -400,6 +408,23 @@ Devices inside rack chains: take the `stable_ref` from `device chains list` and 
 
 `device chains list` reports `in_note` per chain: the MIDI note that triggers a Drum Rack pad
 (`null` for other racks). Use it to map pads; chain order is not the note order.
+
+`device chains list|get` also report each chain's `volume`, `panning` (with Live's display
+strings `volume_display`, `panning_display`), `mute`, `solo` and `choke_group` (Drum Rack
+chains: 0 = none, 1-16; `null` for other racks). `device chains set` changes only the given
+options; `--choke-group` needs a Drum Rack. Racks nested in a chain: pass their `stable_ref`
+as `--device-ref`.
+
+Parameter listings (`device parameter list`, `synth|effect parameters list`, `track info`)
+include `display_value`, the value as Live shows it (e.g. `-6.0 dB`, `Soft Sine`), and, for
+quantized parameters, `value_items` (the option names; the value is the item's index).
+
+`device insert` adds a native Live device by name at a position on a track (Live 12.1.10+,
+`Track.insert_device`); without `--index` it appends. Use `browser load` for presets and
+plug-ins.
+
+`device variation recall|delete <index>` select that macro variation first (Live works on the
+selected variation).
 
 ### Synth
 
@@ -631,6 +656,13 @@ uv run ableton-cli --output json ping
 - `device_delete` -> `uv run ableton-cli --output json device delete --track-index <track> --device-index <device>`
 - `device_move` -> `uv run ableton-cli --output json device move --to-index <index> --track-index <track> --device-index <device>`
 - `device_enabled_set` -> `uv run ableton-cli --output json device enabled set <true|false> --track-index <track> --device-index <device>`
+- `device_insert` -> `uv run ableton-cli --output json device insert <device_name> --track-index <track> [--index <index>]`
+- `device_chain_get` -> `uv run ableton-cli --output json device chains get <chain> --track-index <track> --device-index <device>`
+- `device_chain_set` -> `uv run ableton-cli --output json device chains set <chain> --track-index <track> --device-index <device> [--volume <0-1>] [--panning <-1..1>] [--mute|--no-mute] [--solo|--no-solo] [--choke-group <0-16>]`
+- `device_variations_list` -> `uv run ableton-cli --output json device variation list --track-index <track> --device-index <device>`
+- `device_variation_store` -> `uv run ableton-cli --output json device variation store --track-index <track> --device-index <device>`
+- `device_variation_recall` -> `uv run ableton-cli --output json device variation recall <variation> --track-index <track> --device-index <device>`
+- `device_variation_delete` -> `uv run ableton-cli --output json device variation delete <variation> --track-index <track> --device-index <device>`
 - `find_synth_devices` -> `uv run ableton-cli --output json synth find [--track <track>] [--type <wavetable|drift|meld>]`
 - `list_synth_parameters` -> `uv run ableton-cli --output json synth parameters list --track-index <track> --device-index <device>`
 - `set_synth_parameter_safe` -> `uv run ableton-cli --output json synth parameter set <value> --track-index <track> --device-index <device> --parameter-index <parameter>`

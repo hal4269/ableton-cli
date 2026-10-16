@@ -61,6 +61,78 @@ _DEVICE_SELECTORS = ["--track-index", "0", "--device-index", "1"]
             "device_parameters_list",
             {"track_ref": _TRACK0, "device_ref": _DEVICE1},
         ),
+        (
+            ["device", "chains", "get", "2", *_DEVICE_SELECTORS],
+            "device_chain_get",
+            {"track_ref": _TRACK0, "device_ref": _DEVICE1, "chain_index": 2},
+        ),
+        (
+            [
+                "device",
+                "chains",
+                "set",
+                "2",
+                "--volume",
+                "0.7",
+                "--panning",
+                "-0.5",
+                "--mute",
+                "--choke-group",
+                "1",
+                *_DEVICE_SELECTORS,
+            ],
+            "device_chain_set",
+            {
+                "track_ref": _TRACK0,
+                "device_ref": _DEVICE1,
+                "chain_index": 2,
+                "settings": {"volume": 0.7, "panning": -0.5, "mute": True, "choke_group": 1},
+            },
+        ),
+        (
+            ["device", "chains", "set", "0", "--no-solo", *_DEVICE_SELECTORS],
+            "device_chain_set",
+            {
+                "track_ref": _TRACK0,
+                "device_ref": _DEVICE1,
+                "chain_index": 0,
+                "settings": {"solo": False},
+            },
+        ),
+        (
+            ["device", "variation", "list", *_DEVICE_SELECTORS],
+            "device_variations_list",
+            {"track_ref": _TRACK0, "device_ref": _DEVICE1},
+        ),
+        (
+            ["device", "variation", "store", *_DEVICE_SELECTORS],
+            "device_variation_store",
+            {"track_ref": _TRACK0, "device_ref": _DEVICE1},
+        ),
+        (
+            ["device", "variation", "recall", "1", *_DEVICE_SELECTORS],
+            "device_variation_recall",
+            {"track_ref": _TRACK0, "device_ref": _DEVICE1, "variation_index": 1},
+        ),
+        (
+            ["device", "variation", "delete", "0", *_DEVICE_SELECTORS],
+            "device_variation_delete",
+            {"track_ref": _TRACK0, "device_ref": _DEVICE1, "variation_index": 0},
+        ),
+        (
+            ["device", "insert", "Saturator", "--track-index", "0", "--index", "1"],
+            "device_insert",
+            {"track_ref": _TRACK0, "device_name": "Saturator", "index": 1},
+        ),
+        (
+            ["device", "insert", "EQ Eight", "--track-name", "Bass"],
+            "device_insert",
+            {
+                "track_ref": {"mode": "name", "name": "Bass"},
+                "device_name": "EQ Eight",
+                "index": None,
+            },
+        ),
         (["clip", "color", "set", "0", "3", "12"], "clip_color_set", (0, 3, 12)),
         (["clip", "launch", "get", "0", "3"], "clip_launch_get", (0, 3)),
         (
@@ -130,6 +202,12 @@ def test_song_tool_commands_call_the_client(
         ["track", "color", "set", "--track-index", "0", "--", "-1"],
         ["arrangement", "locator", "add", "--", "-4"],
         ["return-tracks", "delete", "--", "-1"],
+        ["device", "chains", "set", "0", *_DEVICE_SELECTORS],
+        ["device", "chains", "set", "0", "--choke-group", "17", *_DEVICE_SELECTORS],
+        ["device", "chains", "get", *_DEVICE_SELECTORS, "--", "-1"],
+        ["device", "variation", "recall", *_DEVICE_SELECTORS, "--", "-1"],
+        ["device", "insert", "Utility", "--track-index", "0", "--index", "-1"],
+        ["device", "insert", " ", "--track-index", "0"],
     ],
 )
 def test_song_tool_commands_reject_invalid_input(

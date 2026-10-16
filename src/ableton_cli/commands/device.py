@@ -29,6 +29,7 @@ from ..runtime import execute_command, get_client
 from ._client_command_runner import CommandSpec
 from ._client_command_runner import run_client_command as run_client_command_shared
 from ._client_command_runner import run_client_command_spec as run_client_command_spec_shared
+from ._validation import invalid_argument, require_non_empty_string, require_non_negative
 
 device_app = typer.Typer(help="Device commands", no_args_is_help=True)
 parameter_app = typer.Typer(help="Device parameter commands", no_args_is_help=True)
@@ -369,18 +370,27 @@ def _run_device_target_command(
     spec: DeviceCommandSpec,
     selectors: dict[str, object],
     extra_args: dict[str, object],
+    validated_extra: Callable[[], dict[str, object]] | None = None,
 ) -> None:
-    """Run a command on one device picked by the standard track + device selectors."""
+    """Run a command on one device picked by the standard track + device selectors.
+
+    ``extra_args`` are echoed in the output envelope; ``validated_extra`` (when
+    given) validates them and returns the client kwargs, so validation errors
+    are reported through the standard envelope.
+    """
 
     def _refs() -> dict[str, object]:
         track_ref, device_ref = _device_target_refs(**selectors)  # type: ignore[arg-type]
         return {"track_ref": track_ref, "device_ref": device_ref}
 
+    def _extra() -> dict[str, object]:
+        return validated_extra() if validated_extra is not None else extra_args
+
     run_client_command_spec(
         ctx,
         spec=spec,
         args={"track_ref": None, "device_ref": None, **extra_args},
-        method_kwargs=lambda: {**_refs(), **extra_args},
+        method_kwargs=lambda: {**_refs(), **_extra()},
         resolved_args=lambda: {**_refs(), **extra_args},
     )
 
@@ -475,10 +485,306 @@ def device_parameter_list(
     )
 
 
+DEVICE_CHAIN_GET_SPEC = DeviceCommandSpec(
+    command_name="device chains get", client_method="device_chain_get"
+)
+DEVICE_CHAIN_SET_SPEC = DeviceCommandSpec(
+    command_name="device chains set", client_method="device_chain_set"
+)
+DEVICE_VARIATIONS_LIST_SPEC = DeviceCommandSpec(
+    command_name="device variation list", client_method="device_variations_list"
+)
+DEVICE_VARIATION_STORE_SPEC = DeviceCommandSpec(
+    command_name="device variation store", client_method="device_variation_store"
+)
+DEVICE_VARIATION_RECALL_SPEC = DeviceCommandSpec(
+    command_name="device variation recall", client_method="device_variation_recall"
+)
+DEVICE_VARIATION_DELETE_SPEC = DeviceCommandSpec(
+    command_name="device variation delete", client_method="device_variation_delete"
+)
+DEVICE_INSERT_SPEC = DeviceCommandSpec(command_name="device insert", client_method="device_insert")
+
+variation_app = typer.Typer(help="Rack macro variation commands", no_args_is_help=True)
+
+#: Drum Rack choke groups: 0 = none, 1-16.
+CHOKE_GROUP_MAX = 16
+
+ChainIndexArgument = Annotated[int, typer.Argument(help="Chain index (0-based)")]
+VariationIndexArgument = Annotated[int, typer.Argument(help="Variation index (0-based)")]
+
+_CHAIN_HINT = "Use a chain index from 'device chains list'."
+_VARIATION_HINT = "Use a variation index from 'device variation list'."
+
+
+def _index_kwargs(name: str, value: int, hint: str) -> Callable[[], dict[str, object]]:
+    return lambda: {name: require_non_negative(name, value, hint=hint)}
+
+
+@chains_app.command("get")
+def device_chain_get(
+    ctx: typer.Context,
+    chain_index: ChainIndexArgument,
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    selected_device: SelectedDeviceOption = False,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+) -> None:
+    """Show a rack chain's volume, panning, mute, solo and choke group."""
+    selectors = dict(locals())
+    for name in ("ctx", "chain_index"):
+        selectors.pop(name)
+    _run_device_target_command(
+        ctx,
+        spec=DEVICE_CHAIN_GET_SPEC,
+        selectors=selectors,
+        extra_args={"chain_index": chain_index},
+        validated_extra=_index_kwargs("chain_index", chain_index, _CHAIN_HINT),
+    )
+
+
+def _chain_settings(
+    *,
+    volume: float | None,
+    panning: float | None,
+    mute: bool | None,
+    solo: bool | None,
+    choke_group: int | None,
+) -> dict[str, object]:
+    candidates: dict[str, object | None] = {
+        "volume": volume,
+        "panning": panning,
+        "mute": mute,
+        "solo": solo,
+        "choke_group": choke_group,
+    }
+    settings = {key: value for key, value in candidates.items() if value is not None}
+    if not settings:
+        raise invalid_argument(
+            message="no chain setting given",
+            hint="Pass --volume, --panning, --mute/--no-mute, --solo/--no-solo or --choke-group.",
+        )
+    if choke_group is not None and not 0 <= choke_group <= CHOKE_GROUP_MAX:
+        raise invalid_argument(
+            message=f"choke group must be between 0 and {CHOKE_GROUP_MAX}, got {choke_group}",
+            hint="Use 0 for no choke group or 1-16.",
+        )
+    return settings
+
+
+@chains_app.command("set")
+def device_chain_set(
+    ctx: typer.Context,
+    chain_index: ChainIndexArgument,
+    volume: Annotated[
+        float | None, typer.Option("--volume", help="Chain volume (0-1, 0.85 = 0 dB)")
+    ] = None,
+    panning: Annotated[float | None, typer.Option("--panning", help="Chain pan (-1 to 1)")] = None,
+    mute: Annotated[bool | None, typer.Option("--mute/--no-mute", help="Chain mute")] = None,
+    solo: Annotated[bool | None, typer.Option("--solo/--no-solo", help="Chain solo")] = None,
+    choke_group: Annotated[
+        int | None,
+        typer.Option("--choke-group", help="Drum Rack choke group (0 = none, 1-16)"),
+    ] = None,
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    selected_device: SelectedDeviceOption = False,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+) -> None:
+    """Change a rack chain's mixer or choke group; only the given options change."""
+    selectors = dict(locals())
+    settings_args = {
+        "volume": volume,
+        "panning": panning,
+        "mute": mute,
+        "solo": solo,
+        "choke_group": choke_group,
+    }
+    for name in ("ctx", "chain_index", *settings_args):
+        selectors.pop(name)
+
+    def _validated() -> dict[str, object]:
+        require_non_negative("chain_index", chain_index, hint=_CHAIN_HINT)
+        return {"chain_index": chain_index, "settings": _chain_settings(**settings_args)}
+
+    _run_device_target_command(
+        ctx,
+        spec=DEVICE_CHAIN_SET_SPEC,
+        selectors=selectors,
+        extra_args={"chain_index": chain_index, **settings_args},
+        validated_extra=_validated,
+    )
+
+
+@variation_app.command("list")
+def device_variations_list(
+    ctx: typer.Context,
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    selected_device: SelectedDeviceOption = False,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+) -> None:
+    """Show how many macro variations a rack has and which one is selected."""
+    selectors = dict(locals())
+    selectors.pop("ctx")
+    _run_device_target_command(
+        ctx, spec=DEVICE_VARIATIONS_LIST_SPEC, selectors=selectors, extra_args={}
+    )
+
+
+@variation_app.command("store")
+def device_variation_store(
+    ctx: typer.Context,
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    selected_device: SelectedDeviceOption = False,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+) -> None:
+    """Store the rack's current macro values as a new variation."""
+    selectors = dict(locals())
+    selectors.pop("ctx")
+    _run_device_target_command(
+        ctx, spec=DEVICE_VARIATION_STORE_SPEC, selectors=selectors, extra_args={}
+    )
+
+
+@variation_app.command("recall")
+def device_variation_recall(
+    ctx: typer.Context,
+    variation_index: VariationIndexArgument,
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    selected_device: SelectedDeviceOption = False,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+) -> None:
+    """Select a macro variation and recall it (sets the rack's macros)."""
+    selectors = dict(locals())
+    for name in ("ctx", "variation_index"):
+        selectors.pop(name)
+    _run_device_target_command(
+        ctx,
+        spec=DEVICE_VARIATION_RECALL_SPEC,
+        selectors=selectors,
+        extra_args={"variation_index": variation_index},
+        validated_extra=_index_kwargs("variation_index", variation_index, _VARIATION_HINT),
+    )
+
+
+@variation_app.command("delete")
+def device_variation_delete(
+    ctx: typer.Context,
+    variation_index: VariationIndexArgument,
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    selected_device: SelectedDeviceOption = False,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+) -> None:
+    """Delete a stored macro variation."""
+    selectors = dict(locals())
+    for name in ("ctx", "variation_index"):
+        selectors.pop(name)
+    _run_device_target_command(
+        ctx,
+        spec=DEVICE_VARIATION_DELETE_SPEC,
+        selectors=selectors,
+        extra_args={"variation_index": variation_index},
+        validated_extra=_index_kwargs("variation_index", variation_index, _VARIATION_HINT),
+    )
+
+
+@device_app.command("insert")
+def device_insert(
+    ctx: typer.Context,
+    device_name: Annotated[
+        str,
+        typer.Argument(
+            metavar="DEVICE_NAME",
+            help="Native Live device name as shown in the browser, e.g. 'EQ Eight'",
+        ),
+    ],
+    index: Annotated[
+        int | None,
+        typer.Option("--index", help="Position in the track's device chain (default: append)"),
+    ] = None,
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+) -> None:
+    """Insert a native Live device at a position on a track (Live 12.1.10+)."""
+
+    def _track_ref() -> dict[str, object]:
+        return build_track_ref(
+            track_index=track_index,
+            track_name=track_name,
+            selected_track=selected_track,
+            track_query=track_query,
+            track_ref=track_ref,
+        )
+
+    def _method_kwargs() -> dict[str, object]:
+        name = require_non_empty_string(
+            "device_name", device_name, hint="Pass a native device name."
+        )
+        if index is not None:
+            require_non_negative("index", index, hint="Use 0 for the first position.")
+        return {"track_ref": _track_ref(), "device_name": name, "index": index}
+
+    run_client_command_spec(
+        ctx,
+        spec=DEVICE_INSERT_SPEC,
+        args={"track_ref": None, "device_name": device_name, "index": index},
+        method_kwargs=_method_kwargs,
+        resolved_args=lambda: {
+            "track_ref": _track_ref(),
+            "device_name": device_name,
+            "index": index,
+        },
+    )
+
+
 device_app.add_typer(parameter_app, name="parameter")
 device_app.add_typer(chains_app, name="chains")
 device_app.add_typer(macro_app, name="macro")
 device_app.add_typer(enabled_app, name="enabled")
+device_app.add_typer(variation_app, name="variation")
 
 
 def register(app: typer.Typer) -> None:

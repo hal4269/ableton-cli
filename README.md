@@ -89,6 +89,10 @@ JSON lines on stdin).
 | `clip crop`, `clip duplicate-loop`, `clip signature set` | Crop to the loop, double the loop (MIDI), clip time signature (also in `clip props get`). |
 | `device delete`, `device move`, `device enabled set`, `device parameter list` | Edit any track's device chain; also devices inside racks via `--device-ref`. |
 | `device chains list` | Reports `in_note` per chain: the MIDI note of each Drum Rack pad. |
+| `device chains get\|set` | Rack chain volume, panning, mute, solo and Drum Rack choke group (also listed by `device chains list`). |
+| `device variation list\|store\|recall\|delete` | Rack macro variations. |
+| `device insert` | Insert a native device by name at a position (Live 12.1.10+). |
+| `device parameter list`, `track info` | Parameters carry `display_value` (as Live shows it) and `value_items` for quantized parameters. |
 | `tracks duplicate`, `scenes duplicate\|delete`, `return-tracks create\|delete` | Song layout. |
 | `arrangement locator list\|add\|delete` | Named locators (cue points) for sections. |
 | `transport signature set` | Time signature. |
