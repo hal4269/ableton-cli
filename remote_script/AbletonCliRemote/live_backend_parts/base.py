@@ -92,8 +92,18 @@ class LiveBackendContext:
     def _unwrap_live_object(target: Any) -> Any:
         return getattr(target, "_target", target)
 
+    @classmethod
+    def _live_object_key(cls, target: Any) -> tuple[str, int]:
+        """Identity of a Live object. Live hands out a fresh Python wrapper on each access,
+        so wrappers are compared by the `_live_ptr` of the object they wrap."""
+        unwrapped = cls._unwrap_live_object(target)
+        live_ptr = getattr(unwrapped, "_live_ptr", None)
+        if live_ptr is not None:
+            return ("live_ptr", int(live_ptr))
+        return ("python_id", id(unwrapped))
+
     def _same_live_object(self, left: Any, right: Any) -> bool:
-        return self._unwrap_live_object(left) is self._unwrap_live_object(right)
+        return self._live_object_key(left) == self._live_object_key(right)
 
     @staticmethod
     def _is_callable_attribute(target: Any, name: str) -> bool:
@@ -309,12 +319,12 @@ class LiveBackendContext:
         if locator is not None:
             token = self._stable_ref_by_locator.get((kind, locator))
         else:
-            token = self._stable_ref_by_object.get((kind, id(canonical_target)))
+            token = self._stable_ref_by_object.get((kind, self._live_object_key(canonical_target)))
         if token is None:
             token = self._next_stable_ref(kind)
         if locator is not None:
             self._stable_ref_by_locator[(kind, locator)] = token
-        self._stable_ref_by_object[(kind, id(canonical_target))] = token
+        self._stable_ref_by_object[(kind, self._live_object_key(canonical_target))] = token
         self._stable_ref_entries[token] = {
             "kind": kind,
             "locator": locator,

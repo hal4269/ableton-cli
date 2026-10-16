@@ -398,3 +398,32 @@ def test_transport_signature_set_validates_denominator() -> None:
     with pytest.raises(CommandError):
         dispatch_command(backend, "transport_signature_set", {"numerator": 4, "denominator": 3})
     assert (song.signature_numerator, song.signature_denominator) == (7, 8)
+
+
+class _PointerTrack(_Track):
+    def __init__(self, *, name: str, live_ptr: int) -> None:
+        super().__init__(name=name, has_audio_input=False, has_midi_input=True)
+        self._live_ptr = live_ptr
+
+
+def test_selected_track_resolves_when_live_returns_fresh_wrappers() -> None:
+    surface = _SurfaceStub()
+    backend = LiveBackend(surface)
+    song = surface.song()
+    song.tracks[:] = [_PointerTrack(name=f"T{i}", live_ptr=1000 + i) for i in range(3)]
+    song.view.selected_track = _PointerTrack(name="T1", live_ptr=1001)
+
+    result = dispatch_command(backend, "get_track_info", {"track_ref": {"mode": "selected"}})
+
+    assert result["index"] == 1
+
+
+def test_selected_track_outside_the_song_is_still_refused() -> None:
+    surface = _SurfaceStub()
+    backend = LiveBackend(surface)
+    song = surface.song()
+    song.tracks[:] = [_PointerTrack(name=f"T{i}", live_ptr=1000 + i) for i in range(3)]
+    song.view.selected_track = _PointerTrack(name="elsewhere", live_ptr=2000)
+
+    with pytest.raises(CommandError):
+        dispatch_command(backend, "get_track_info", {"track_ref": {"mode": "selected"}})
