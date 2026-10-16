@@ -152,13 +152,6 @@ _DEVICE_SELECTORS = ["--track-index", "0", "--device-index", "1"]
         (["return-tracks", "delete", "1"], "return_tracks_delete", {"index": 1}),
         (["arrangement", "locator", "list"], "locators_list", {}),
         (
-            ["arrangement", "locator", "add", "64", "--name", "Drop"],
-            "locator_add",
-            {"time": 64.0, "name": "Drop"},
-        ),
-        (["arrangement", "locator", "add", "0"], "locator_add", {"time": 0.0, "name": None}),
-        (["arrangement", "locator", "delete", "0"], "locator_delete", {"index": 0}),
-        (
             ["transport", "signature", "set", "7", "8"],
             "transport_signature_set",
             {"numerator": 7, "denominator": 8},
@@ -218,6 +211,151 @@ def test_song_tool_commands_reject_invalid_input(
     assert result.exit_code == 2, result.output
     assert json.loads(result.stdout)["error"]["code"] == "INVALID_ARGUMENT"
     assert client.calls == []
+
+
+class _LocatorClient:
+    """Fakes Live's deferred playhead: a position set is reported after ``lag`` reads."""
+
+    def __init__(self, *, lag: int = 2, is_playing: bool = False) -> None:
+        self.calls: list[tuple[str, dict[str, Any]]] = []
+        self.lag = lag
+        self.is_playing = is_playing
+        self.position = 0.0
+        self.pending: float | None = None
+        self.reads_until_applied = 0
+
+    def song_info(self) -> dict[str, Any]:
+        self.calls.append(("song_info", {}))
+        return {"is_playing": self.is_playing, "current_time": self.position}
+
+    def transport_position_set(self, beats: float) -> dict[str, Any]:
+        self.calls.append(("transport_position_set", {"beats": beats}))
+        self.pending = beats
+        self.reads_until_applied = self.lag
+        return {"current_time": self.position, "beat_position": self.position}
+
+    def transport_position_get(self) -> dict[str, Any]:
+        self.calls.append(("transport_position_get", {}))
+        if self.pending is not None:
+            if self.reads_until_applied == 0:
+                self.position, self.pending = self.pending, None
+            else:
+                self.reads_until_applied -= 1
+        return {"current_time": self.position, "beat_position": self.position}
+
+    def locators_list(self) -> dict[str, Any]:
+        self.calls.append(("locators_list", {}))
+        locators = [
+            {"index": 0, "name": "Intro", "time": 0.0},
+            {"index": 1, "name": "Drop", "time": 64.0},
+        ]
+        return {"locator_count": 2, "locators": locators}
+
+    def locator_add(self, time: float, name: str | None) -> dict[str, Any]:
+        self.calls.append(("locator_add", {"time": time, "name": name, "at": self.position}))
+        return {"index": 0, "name": name, "time": time}
+
+    def locator_delete(self, index: int) -> dict[str, Any]:
+        self.calls.append(("locator_delete", {"index": index, "at": self.position}))
+        return {"index": index, "name": "Drop", "time": 64.0, "deleted": True}
+
+
+@pytest.fixture
+def locator_client(monkeypatch: pytest.MonkeyPatch) -> _LocatorClient:
+    from ableton_cli.commands import _arrangement_locator_commands, arrangement
+
+    fake = _LocatorClient()
+    monkeypatch.setattr(arrangement, "get_client", lambda ctx: fake)
+    monkeypatch.setattr(_arrangement_locator_commands, "_sleep", lambda seconds: None)
+    return fake
+
+
+def _names(client: _LocatorClient) -> list[str]:
+    return [name for name, _ in client.calls]
+
+
+def test_locator_add_moves_the_playhead_and_waits_until_live_applies_it(
+    runner, cli_app, locator_client: _LocatorClient
+) -> None:
+    result = runner.invoke(
+        cli_app, ["--output", "json", "arrangement", "locator", "add", "64", "--name", "Drop"]
+    )
+
+    assert result.exit_code == 0, result.output
+    assert json.loads(result.stdout)["result"] == {"index": 0, "name": "Drop", "time": 64.0}
+    assert _names(locator_client) == [
+        "song_info",
+        "transport_position_set",
+        "transport_position_get",
+        "transport_position_get",
+        "transport_position_get",
+        "locator_add",
+    ]
+    assert locator_client.calls[1] == ("transport_position_set", {"beats": 64.0})
+    assert locator_client.calls[-1] == ("locator_add", {"time": 64.0, "name": "Drop", "at": 64.0})
+
+
+def test_locator_delete_moves_the_playhead_onto_the_locator_first(
+    runner, cli_app, locator_client: _LocatorClient
+) -> None:
+    result = runner.invoke(cli_app, ["--output", "json", "arrangement", "locator", "delete", "1"])
+
+    assert result.exit_code == 0, result.output
+    assert json.loads(result.stdout)["result"] == {
+        "index": 1,
+        "name": "Drop",
+        "time": 64.0,
+        "deleted": True,
+    }
+    assert _names(locator_client)[:3] == ["song_info", "locators_list", "transport_position_set"]
+    assert locator_client.calls[2] == ("transport_position_set", {"beats": 64.0})
+    assert locator_client.calls[-1] == ("locator_delete", {"index": 1, "at": 64.0})
+
+
+def test_locator_delete_rejects_an_unknown_index_before_moving_the_playhead(
+    runner, cli_app, locator_client: _LocatorClient
+) -> None:
+    result = runner.invoke(cli_app, ["--output", "json", "arrangement", "locator", "delete", "2"])
+
+    assert result.exit_code == 2, result.output
+    assert json.loads(result.stdout)["error"]["code"] == "INVALID_ARGUMENT"
+    assert _names(locator_client) == ["song_info", "locators_list"]
+
+
+@pytest.mark.parametrize(
+    "argv",
+    [["arrangement", "locator", "add", "16"], ["arrangement", "locator", "delete", "0"]],
+)
+def test_locator_commands_refuse_to_move_a_playing_transport(
+    runner, cli_app, locator_client: _LocatorClient, argv: list[str]
+) -> None:
+    locator_client.is_playing = True
+
+    result = runner.invoke(cli_app, ["--output", "json", *argv])
+
+    assert result.exit_code == 2, result.output
+    payload = json.loads(result.stdout)
+    assert payload["error"]["code"] == "INVALID_ARGUMENT"
+    assert "transport stop" in payload["error"]["hint"]
+    assert _names(locator_client) == ["song_info"]
+
+
+def test_locator_add_times_out_when_live_never_applies_the_playhead(
+    runner, cli_app, locator_client: _LocatorClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from ableton_cli.commands import _arrangement_locator_commands
+
+    clock = iter(float(tick) for tick in range(1000))
+    monkeypatch.setattr(_arrangement_locator_commands, "_monotonic", lambda: next(clock))
+    locator_client.lag = 10_000
+
+    result = runner.invoke(cli_app, ["--output", "json", "arrangement", "locator", "add", "16"])
+
+    assert result.exit_code == 12, result.output
+    error = json.loads(result.stdout)["error"]
+    assert error["code"] == "TIMEOUT"
+    assert "16.0" in error["message"]
+    assert "locator_add" not in _names(locator_client)
 
 
 _POINTS_JSON = '[{"time": 0.0, "value": 0.2}, {"time": 4.0, "value": 0.8}]'

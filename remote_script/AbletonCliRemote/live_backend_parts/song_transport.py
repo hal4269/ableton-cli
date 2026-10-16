@@ -348,7 +348,17 @@ class LiveBackendTransportMixerMixin:
                 message="Song position API is not available in Live API",
                 hint="Use a Live version exposing song.current_song_time.",
             )
-        song.current_song_time = float(beats)
+        try:
+            song.current_song_time = float(beats)
+        except RuntimeError as exc:
+            # Live: "Cannot set the Songtime behind the Songlength".
+            raise _invalid_argument(
+                message=f"Cannot move the playhead to beat {float(beats)}: {exc}",
+                hint=(
+                    "Live refuses positions behind the song length; extend the Arrangement "
+                    "(e.g. place a clip reaching past that beat) or pick an earlier position."
+                ),
+            ) from exc
         current_time = float(song.current_song_time)
         return {"current_time": current_time, "beat_position": current_time}
 

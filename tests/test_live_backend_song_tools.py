@@ -32,13 +32,47 @@ class _CuePoint:
     time: float
 
 
+class _CuePointView:
+    """Live hands out a fresh Python wrapper per access, so ``is`` never matches."""
+
+    def __init__(self, cue: _CuePoint) -> None:
+        self._cue = cue
+
+    @property
+    def name(self) -> str:
+        return self._cue.name
+
+    @name.setter
+    def name(self, value: str) -> None:
+        self._cue.name = value
+
+    @property
+    def time(self) -> float:
+        return self._cue.time
+
+
 class _StructureSong(_Song):
     def __init__(self) -> None:
+        self.song_length = 256.0
         super().__init__()
         self.tracks = [_EditableTrack("Drums"), _EditableTrack("Bass")]
         self.view.selected_track = self.tracks[0]
-        self.cue_points: list[_CuePoint] = []
+        self.cues: list[_CuePoint] = []
         self.cue_toggle_times: list[float] = []
+
+    @property
+    def cue_points(self) -> list[_CuePointView]:
+        return [_CuePointView(cue) for cue in self.cues]
+
+    @property
+    def current_song_time(self) -> float:
+        return self._current_song_time
+
+    @current_song_time.setter
+    def current_song_time(self, value: float) -> None:
+        if value > self.song_length:
+            raise RuntimeError("Cannot set the Songtime behind the Songlength")
+        self._current_song_time = float(value)
 
     def duplicate_track(self, index: int) -> None:
         copy = _EditableTrack(self.tracks[index].name)
@@ -61,11 +95,11 @@ class _StructureSong(_Song):
     def set_or_delete_cue(self) -> None:
         time = float(self.current_song_time)
         self.cue_toggle_times.append(time)
-        for cue in self.cue_points:
+        for cue in self.cues:
             if cue.time == time:
-                self.cue_points.remove(cue)
+                self.cues.remove(cue)
                 return
-        self.cue_points.append(_CuePoint(name=str(len(self.cue_points) + 1), time=time))
+        self.cues.append(_CuePoint(name=str(len(self.cues) + 1), time=time))
 
     def move_device(self, device: Any, target: Any, position: int) -> int:
         target.devices.remove(device)
@@ -265,13 +299,19 @@ def test_return_tracks_create_and_delete() -> None:
     assert [track.name for track in song.return_tracks] == ["Delay", "C Return"]
 
 
-def test_locators_add_list_delete_restore_playback_position() -> None:
-    backend, song = _backend()
-    song.current_song_time = 4.0
+def _move_playhead(backend: LiveBackend, beats: float) -> None:
+    dispatch_command(backend, "transport_position_set", {"beats": beats})
 
+
+def test_locators_add_list_delete_at_the_playhead_without_moving_it() -> None:
+    backend, song = _backend()
+
+    _move_playhead(backend, 64.0)
     added = dispatch_command(backend, "locator_add", {"time": 64.0, "name": "Drop"})
+    _move_playhead(backend, 0.0)
     dispatch_command(backend, "locator_add", {"time": 0.0, "name": "Intro"})
     listed = dispatch_command(backend, "locators_list", {})
+    _move_playhead(backend, 64.0)
     deleted = dispatch_command(backend, "locator_delete", {"index": 1})
 
     assert added == {"index": 0, "name": "Drop", "time": 64.0}
@@ -280,20 +320,73 @@ def test_locators_add_list_delete_restore_playback_position() -> None:
         {"index": 1, "name": "Drop", "time": 64.0},
     ]
     assert deleted == {"index": 1, "name": "Drop", "time": 64.0, "deleted": True}
-    assert [cue.name for cue in song.cue_points] == ["Intro"]
-    assert song.current_song_time == 4.0
+    assert [cue.name for cue in song.cues] == ["Intro"]
+    assert song.cue_toggle_times == [64.0, 0.0, 64.0]
+    assert song.current_song_time == 64.0
+
+
+def test_locator_add_returns_the_index_of_the_new_cue_among_existing_ones() -> None:
+    backend, song = _backend()
+    song.cues = [_CuePoint("A", 0.0), _CuePoint("C", 32.0)]
+
+    _move_playhead(backend, 16.0)
+    added = dispatch_command(backend, "locator_add", {"time": 16.0, "name": "B"})
+
+    assert added == {"index": 1, "name": "B", "time": 16.0}
+
+
+def test_locator_add_requires_the_playhead_at_the_locator_position() -> None:
+    backend, song = _backend()
+    _move_playhead(backend, 0.0)
+
+    with pytest.raises(CommandError) as error:
+        dispatch_command(backend, "locator_add", {"time": 4.0, "name": "Verse"})
+
+    assert error.value.code == "INVALID_ARGUMENT"
+    assert "transport position set 4.0" in str(error.value.hint)
+    assert song.cue_toggle_times == []
+    assert song.current_song_time == 0.0
+
+
+def test_locator_delete_requires_the_playhead_on_the_cue() -> None:
+    backend, song = _backend()
+    song.cues = [_CuePoint("Intro", 0.0), _CuePoint("Drop", 64.0)]
+    _move_playhead(backend, 0.0)
+
+    with pytest.raises(CommandError) as error:
+        dispatch_command(backend, "locator_delete", {"index": 1})
+
+    assert error.value.code == "INVALID_ARGUMENT"
+    assert "transport position set 64.0" in str(error.value.hint)
+    assert song.cue_toggle_times == []
+    assert [cue.name for cue in song.cues] == ["Intro", "Drop"]
 
 
 def test_locator_add_rejects_existing_position_and_playing_transport() -> None:
     backend, song = _backend()
+    _move_playhead(backend, 16.0)
     dispatch_command(backend, "locator_add", {"time": 16.0})
 
     with pytest.raises(CommandError):
         dispatch_command(backend, "locator_add", {"time": 16.0})
+    _move_playhead(backend, 32.0)
     song.is_playing = True
     with pytest.raises(CommandError):
         dispatch_command(backend, "locator_add", {"time": 32.0})
+    with pytest.raises(CommandError):
+        dispatch_command(backend, "locator_delete", {"index": 0})
     assert song.cue_toggle_times == [16.0]
+
+
+def test_transport_position_set_reports_positions_behind_the_song_length() -> None:
+    backend, song = _backend()
+
+    with pytest.raises(CommandError) as error:
+        _move_playhead(backend, 512.0)
+
+    assert error.value.code == "INVALID_ARGUMENT"
+    assert "Songlength" in error.value.message
+    assert "song length" in str(error.value.hint)
 
 
 def test_transport_signature_set_validates_denominator() -> None:

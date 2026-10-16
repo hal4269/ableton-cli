@@ -96,8 +96,8 @@ Stable action names and CLI mappings for automation wrappers.
 | `return_tracks_create` | `uv run ableton-cli --output json return-tracks create` | Add a return track at the end. |
 | `return_tracks_delete` | `uv run ableton-cli --output json return-tracks delete <index>` | Delete a return track. |
 | `locators_list` | `uv run ableton-cli --output json arrangement locator list` | List Arrangement locators (cue points) sorted by time. |
-| `locator_add` | `uv run ableton-cli --output json arrangement locator add <beats> [--name <name>]` | Add a named Arrangement locator (transport stopped). |
-| `locator_delete` | `uv run ableton-cli --output json arrangement locator delete <index>` | Delete an Arrangement locator (transport stopped). |
+| `locator_add` | `uv run ableton-cli --output json arrangement locator add <beats> [--name <name>]` | Add a named Arrangement locator (transport stopped; moves the playhead). |
+| `locator_delete` | `uv run ableton-cli --output json arrangement locator delete <index>` | Delete an Arrangement locator (transport stopped; moves the playhead). |
 | `view_show` | `uv run ableton-cli --output json view show <session|arranger|detail|clip|device-chain>` | Show and focus one of Live's views. |
 | `view_select_track` | `uv run ableton-cli --output json view select track <track>` | Select a track. |
 | `view_select_scene` | `uv run ableton-cli --output json view select scene <scene>` | Select a scene. |

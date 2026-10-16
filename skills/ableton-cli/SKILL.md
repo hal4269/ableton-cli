@@ -149,8 +149,10 @@ clips (clip envelopes, note probability, loop settings). `arrangement from-sessi
 clip over the scene duration; a copy that runs past the end keeps its full length, so use
 durations that are a multiple of the clip lengths.
 
-Locators: Live only toggles a cue point at the playback position, so `locator add|delete`
-move the position there and back and need the transport stopped.
+Locators: Live only toggles a cue point at the playhead, and applies a playhead move on its
+next update. So `locator add|delete` need the transport stopped, move the playhead to the
+locator (`transport position set`), wait until `transport position get` reports it, then
+toggle; the playhead stays there. Live refuses positions behind the song length.
 
 ### Remix / Audio Workflow
 
