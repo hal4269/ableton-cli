@@ -6,8 +6,8 @@ exit codes, explicit errors.
 
 > **Credits.** This is a fork of [ableton-cli](https://github.com/6uclz1/ableton-cli), created
 > by **6uclz1** and contributors (MIT license). The design and nearly all of the code are
-> theirs. This fork adds a few commands for generating songs with an agent (see below) and
-> keeps its changes small so they can go back upstream.
+> theirs. This fork is developed independently: it adds commands for generating songs with an
+> agent (see below) and does not track the original project.
 
 ## How it works
 
