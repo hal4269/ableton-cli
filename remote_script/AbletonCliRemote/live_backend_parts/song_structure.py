@@ -78,22 +78,42 @@ class LiveBackendSongStructureMixin:
             )
         return sorted(cue_points, key=lambda cue: float(cue.time))
 
-    def _cue_at(self, time: float) -> Any | None:
-        for cue in self._cue_points():
-            if abs(float(cue.time) - time) < _CUE_TIME_TOLERANCE:
-                return cue
-        return None
+    def _cue_index_at(self, time: float) -> int | None:
+        """Index by time: Live returns a fresh wrapper per access, so ``is`` never matches."""
+        return next(
+            (
+                index
+                for index, cue in enumerate(self._cue_points())
+                if abs(float(cue.time) - time) < _CUE_TIME_TOLERANCE
+            ),
+            None,
+        )
 
-    def _toggle_cue_at(self, time: float) -> None:
-        """Live only toggles a cue at the playback position; restore it afterwards."""
+    def _toggle_cue_at_playhead(self, time: float, action: str) -> None:
+        """Toggle a cue at ``time``; Live only toggles at the applied playhead position.
+
+        Setting ``Song.current_song_time`` is applied on Live's next update, so the
+        playhead cannot be moved and used within one request: the caller moves it first.
+        """
         song = self._ctx._song()
         set_or_delete_cue = self._song_function("set_or_delete_cue")
-        previous_time = float(song.current_song_time)
-        song.current_song_time = time
-        try:
-            set_or_delete_cue()
-        finally:
-            song.current_song_time = previous_time
+        if bool(getattr(song, "is_playing", False)):
+            raise _invalid_argument(
+                message=f"Cannot {action} a locator while the transport is playing",
+                hint="Stop the transport first ('transport stop').",
+            )
+        playhead = float(song.current_song_time)
+        if abs(playhead - time) >= _CUE_TIME_TOLERANCE:
+            raise _invalid_argument(
+                message=(
+                    f"Cannot {action} a locator at beat {time}: the playhead is at beat {playhead}"
+                ),
+                hint=(
+                    f"Move the playhead first ('transport position set {time}'), wait until "
+                    "'transport position get' reports it, then retry."
+                ),
+            )
+        set_or_delete_cue()
 
     def locators_list(self) -> dict[str, Any]:
         locators = [
@@ -103,26 +123,21 @@ class LiveBackendSongStructureMixin:
         return {"locator_count": len(locators), "locators": locators}
 
     def locator_add(self, time: float, name: str | None) -> dict[str, Any]:
-        if self._cue_at(time) is not None:
+        if self._cue_index_at(time) is not None:
             raise _invalid_argument(
                 message=f"A locator already exists at beat {time}",
                 hint="Use 'arrangement locator list' and pick a free position.",
             )
-        if bool(getattr(self._ctx._song(), "is_playing", False)):
-            raise _invalid_argument(
-                message="Cannot add a locator while the transport is playing",
-                hint="Stop the transport first ('transport stop').",
-            )
-        self._toggle_cue_at(time)
-        cue = self._cue_at(time)
-        if cue is None:
+        self._toggle_cue_at_playhead(time, "add")
+        index = self._cue_index_at(time)
+        if index is None:
             raise _invalid_argument(
                 message=f"Live did not create a locator at beat {time}",
                 hint="Check that the position lies inside the Arrangement.",
             )
+        cue = self._cue_points()[index]
         if name is not None:
             cue.name = name
-        index = next(i for i, item in enumerate(self._cue_points()) if item is cue)
         return {"index": index, "name": str(cue.name), "time": float(cue.time)}
 
     def locator_delete(self, index: int) -> dict[str, Any]:
@@ -132,15 +147,10 @@ class LiveBackendSongStructureMixin:
                 message=f"locator out of range: {index}",
                 hint="Use an index from 'arrangement locator list'.",
             )
-        if bool(getattr(self._ctx._song(), "is_playing", False)):
-            raise _invalid_argument(
-                message="Cannot delete a locator while the transport is playing",
-                hint="Stop the transport first ('transport stop').",
-            )
         cue = cue_points[index]
         time = float(cue.time)
         name = str(cue.name)
-        self._toggle_cue_at(time)
+        self._toggle_cue_at_playhead(time, "delete")
         return {"index": index, "name": name, "time": time, "deleted": True}
 
     def transport_signature_set(self, numerator: int, denominator: int) -> dict[str, Any]:

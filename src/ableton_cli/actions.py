@@ -547,12 +547,12 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
     StableActionMapping(
         action="locator_add",
         command="uv run ableton-cli --output json arrangement locator add <beats> [--name <name>]",
-        capability="Add a named Arrangement locator (transport stopped).",
+        capability="Add a named Arrangement locator (transport stopped; moves the playhead).",
     ),
     StableActionMapping(
         action="locator_delete",
         command="uv run ableton-cli --output json arrangement locator delete <index>",
-        capability="Delete an Arrangement locator (transport stopped).",
+        capability="Delete an Arrangement locator (transport stopped; moves the playhead).",
     ),
     StableActionMapping(
         action="view_show",

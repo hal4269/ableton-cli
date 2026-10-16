@@ -12,6 +12,8 @@ from ._arrangement_notes_commands import register_commands as register_notes_com
 from ._arrangement_record_commands import register_commands as register_record_commands
 from ._arrangement_session_commands import register_commands as register_session_commands
 from ._arrangement_specs import ArrangementCommandSpec
+from ._client_command_runner import ClientAction
+from ._client_command_runner import run_client_command as run_client_command_shared
 from ._client_command_runner import run_client_command_spec as run_client_command_spec_shared
 
 arrangement_app = typer.Typer(help="Arrangement commands", no_args_is_help=True)
@@ -45,6 +47,24 @@ def run_client_command_spec(
     )
 
 
+def run_client_action(
+    ctx: typer.Context,
+    *,
+    command_name: str,
+    args: dict[str, object],
+    fn: ClientAction,
+) -> None:
+    """Run a command that needs several client calls (``fn`` gets the client)."""
+    run_client_command_shared(
+        ctx,
+        command_name=command_name,
+        args=args,
+        fn=fn,
+        get_client_fn=get_client,
+        execute_command_fn=execute_command,
+    )
+
+
 register_record_commands(record_app, run_client_command_spec=run_client_command_spec)
 register_clip_commands(clip_app, run_client_command_spec=run_client_command_spec)
 register_clip_props_commands(
@@ -59,7 +79,11 @@ register_clip_props_commands(
 )
 register_notes_commands(notes_app, run_client_command_spec=run_client_command_spec)
 register_session_commands(arrangement_app, run_client_command_spec=run_client_command_spec)
-register_locator_commands(locator_app, run_client_command_spec=run_client_command_spec)
+register_locator_commands(
+    locator_app,
+    run_client_command_spec=run_client_command_spec,
+    run_client_action=run_client_action,
+)
 
 BACK_TO_ARRANGER_SPEC = ArrangementCommandSpec(
     command_name="arrangement back-to-arranger",

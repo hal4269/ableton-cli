@@ -94,7 +94,7 @@ JSON lines on stdin).
 | `device insert` | Insert a native device by name at a position (Live 12.1.10+). |
 | `device parameter list`, `track info` | Parameters carry `display_value` (as Live shows it) and `value_items` for quantized parameters. |
 | `tracks duplicate`, `scenes duplicate\|delete`, `return-tracks create\|delete` | Song layout. |
-| `arrangement locator list\|add\|delete` | Named locators (cue points) for sections. |
+| `arrangement locator list\|add\|delete` | Named locators (cue points) for sections; add/delete need the transport stopped and move the playhead to the locator. |
 | `transport signature set` | Time signature. |
 | `arrangement back-to-arranger` | Press "Back to Arrangement"; `song info` shows `back_to_arranger`. |
 | `song loop get\|set`, `song metronome set`, `song swing set`, `song groove-amount set` | Loop region, metronome, global swing and groove amount. |
