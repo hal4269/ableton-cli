@@ -55,6 +55,14 @@ def _handle_device_move(backend: CommandBackend, args: dict[str, Any]) -> dict[s
     return backend.device_move(track, device, to_index)
 
 
+def _handle_device_insert(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
+    device_name = _non_empty_string("device_name", args.get("device_name"))
+    raw_index = args.get("index")
+    index = None if raw_index is None else _non_negative_int("index", raw_index)
+    track = backend.resolve_track_ref(_track_ref(args.get("track_ref")))
+    return backend.device_insert(track, device_name, index)
+
+
 def _handle_device_enabled_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
     value = _as_bool("value", args.get("value"))
     track, device = _resolved_device(backend, args)
@@ -182,6 +190,7 @@ def _handle_transport_signature_set(
 SONG_TOOLS_HANDLERS: dict[str, Handler] = {
     "device_delete": _handle_device_delete,
     "device_move": _handle_device_move,
+    "device_insert": _handle_device_insert,
     "device_enabled_set": _handle_device_enabled_set,
     "device_parameters_list": _handle_device_parameters_list,
     "track_color_set": _handle_track_color_set,

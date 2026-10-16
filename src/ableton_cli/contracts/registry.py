@@ -149,8 +149,9 @@ def _parameter_result_schema(*, include_bounds: bool = True) -> dict[str, Any]:
         "stable_ref": {"type": "string"},
         "name": {"type": "string"},
         "value": {"type": "number"},
+        "display_value": {"type": "string"},
     }
-    required = ["index", "stable_ref", "name", "value"]
+    required = ["index", "stable_ref", "name", "value", "display_value"]
     if include_bounds:
         properties.update(
             {
@@ -158,9 +159,10 @@ def _parameter_result_schema(*, include_bounds: bool = True) -> dict[str, Any]:
                 "max": {"type": ["number", "null"]},
                 "is_enabled": {"type": "boolean"},
                 "is_quantized": {"type": "boolean"},
+                "value_items": {"type": "array", "items": {"type": "string"}},
             }
         )
-        required.extend(["min", "max", "is_enabled", "is_quantized"])
+        required.extend(["min", "max", "is_enabled", "is_quantized", "value_items"])
     return {
         "type": "object",
         "required": required,

@@ -206,6 +206,31 @@ class _AbletonClientGeneratedMixin:
     def create_scene(self, index: int) -> dict[str, Any]:
         return self._call("create_scene", {"index": index})
 
+    def device_chain_get(
+        self, track_ref: RefPayload, device_ref: RefPayload, chain_index: int
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_chain_get",
+            {"track_ref": track_ref, "device_ref": device_ref, "chain_index": chain_index},
+        )
+
+    def device_chain_set(
+        self,
+        track_ref: RefPayload,
+        device_ref: RefPayload,
+        chain_index: int,
+        settings: dict[str, Any],
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_chain_set",
+            {
+                "track_ref": track_ref,
+                "device_ref": device_ref,
+                "chain_index": chain_index,
+                "settings": settings,
+            },
+        )
+
     def device_chains_list(self, track_ref: RefPayload, device_ref: RefPayload) -> dict[str, Any]:
         return self._call("device_chains_list", {"track_ref": track_ref, "device_ref": device_ref})
 
@@ -217,6 +242,13 @@ class _AbletonClientGeneratedMixin:
     ) -> dict[str, Any]:
         return self._call(
             "device_enabled_set", {"track_ref": track_ref, "device_ref": device_ref, "value": value}
+        )
+
+    def device_insert(
+        self, track_ref: RefPayload, device_name: str, index: int | None
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_insert", {"track_ref": track_ref, "device_name": device_name, "index": index}
         )
 
     def device_macro_list(self, track_ref: RefPayload, device_ref: RefPayload) -> dict[str, Any]:
@@ -247,6 +279,36 @@ class _AbletonClientGeneratedMixin:
     ) -> dict[str, Any]:
         return self._call(
             "device_parameters_list", {"track_ref": track_ref, "device_ref": device_ref}
+        )
+
+    def device_variation_delete(
+        self, track_ref: RefPayload, device_ref: RefPayload, variation_index: int
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_variation_delete",
+            {"track_ref": track_ref, "device_ref": device_ref, "variation_index": variation_index},
+        )
+
+    def device_variation_recall(
+        self, track_ref: RefPayload, device_ref: RefPayload, variation_index: int
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_variation_recall",
+            {"track_ref": track_ref, "device_ref": device_ref, "variation_index": variation_index},
+        )
+
+    def device_variation_store(
+        self, track_ref: RefPayload, device_ref: RefPayload
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_variation_store", {"track_ref": track_ref, "device_ref": device_ref}
+        )
+
+    def device_variations_list(
+        self, track_ref: RefPayload, device_ref: RefPayload
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_variations_list", {"track_ref": track_ref, "device_ref": device_ref}
         )
 
     def execute_batch(self, steps: list[dict[str, Any]]) -> dict[str, Any]:

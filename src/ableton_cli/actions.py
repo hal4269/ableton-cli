@@ -551,6 +551,63 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         capability="Switch a device on or off.",
     ),
     StableActionMapping(
+        action="device_insert",
+        command=(
+            "uv run ableton-cli --output json device insert <device_name> "
+            "--track-index <track> [--index <index>]"
+        ),
+        capability="Insert a native Live device at a position on a track (Live 12.1.10+).",
+    ),
+    StableActionMapping(
+        action="device_chain_get",
+        command=(
+            "uv run ableton-cli --output json device chains get <chain> "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Read a rack chain's volume, panning, mute, solo and Drum Rack choke group.",
+    ),
+    StableActionMapping(
+        action="device_chain_set",
+        command=(
+            "uv run ableton-cli --output json device chains set <chain> "
+            "--track-index <track> --device-index <device> [--volume <0-1>] "
+            "[--panning <-1..1>] [--mute|--no-mute] [--solo|--no-solo] [--choke-group <0-16>]"
+        ),
+        capability="Change a rack chain's mixer or Drum Rack choke group.",
+    ),
+    StableActionMapping(
+        action="device_variations_list",
+        command=(
+            "uv run ableton-cli --output json device variation list "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Read a rack's macro variation count and selected variation.",
+    ),
+    StableActionMapping(
+        action="device_variation_store",
+        command=(
+            "uv run ableton-cli --output json device variation store "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Store a rack's current macro values as a new variation.",
+    ),
+    StableActionMapping(
+        action="device_variation_recall",
+        command=(
+            "uv run ableton-cli --output json device variation recall <variation> "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Select and recall a rack macro variation.",
+    ),
+    StableActionMapping(
+        action="device_variation_delete",
+        command=(
+            "uv run ableton-cli --output json device variation delete <variation> "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Delete a rack macro variation.",
+    ),
+    StableActionMapping(
         action="find_synth_devices",
         command=(
             "uv run ableton-cli --output json synth find [--track <track>] [--type <wav"

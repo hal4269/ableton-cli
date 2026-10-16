@@ -97,6 +97,13 @@ Stable action names and CLI mappings for automation wrappers.
 | `device_delete` | `uv run ableton-cli --output json device delete --track-index <track> --device-index <device>` | Delete a device, also inside rack chains via --device-ref. |
 | `device_move` | `uv run ableton-cli --output json device move --to-index <index> --track-index <track> --device-index <device>` | Move a top-level device to another position on its track. |
 | `device_enabled_set` | `uv run ableton-cli --output json device enabled set <true|false> --track-index <track> --device-index <device>` | Switch a device on or off. |
+| `device_insert` | `uv run ableton-cli --output json device insert <device_name> --track-index <track> [--index <index>]` | Insert a native Live device at a position on a track (Live 12.1.10+). |
+| `device_chain_get` | `uv run ableton-cli --output json device chains get <chain> --track-index <track> --device-index <device>` | Read a rack chain's volume, panning, mute, solo and Drum Rack choke group. |
+| `device_chain_set` | `uv run ableton-cli --output json device chains set <chain> --track-index <track> --device-index <device> [--volume <0-1>] [--panning <-1..1>] [--mute|--no-mute] [--solo|--no-solo] [--choke-group <0-16>]` | Change a rack chain's mixer or Drum Rack choke group. |
+| `device_variations_list` | `uv run ableton-cli --output json device variation list --track-index <track> --device-index <device>` | Read a rack's macro variation count and selected variation. |
+| `device_variation_store` | `uv run ableton-cli --output json device variation store --track-index <track> --device-index <device>` | Store a rack's current macro values as a new variation. |
+| `device_variation_recall` | `uv run ableton-cli --output json device variation recall <variation> --track-index <track> --device-index <device>` | Select and recall a rack macro variation. |
+| `device_variation_delete` | `uv run ableton-cli --output json device variation delete <variation> --track-index <track> --device-index <device>` | Delete a rack macro variation. |
 | `find_synth_devices` | `uv run ableton-cli --output json synth find [--track <track>] [--type <wavetable|drift|meld>]` | Find supported synth devices (Wavetable, Drift, Meld). |
 | `list_synth_parameters` | `uv run ableton-cli --output json synth parameters list --track-index <track> --device-index <device>` | List synth parameters with safety metadata and stable refs. |
 | `set_synth_parameter_safe` | `uv run ableton-cli --output json synth parameter set <value> --track-index <track> --device-index <device> --parameter-index <parameter>` | Safely set a synth parameter by selector with strict range validation. |

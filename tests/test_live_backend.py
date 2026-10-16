@@ -43,6 +43,13 @@ class _Parameter:
     is_enabled: bool = True
     is_quantized: bool = False
     original_name: str = ""
+    value_items: tuple[str, ...] = ()
+
+    def str_for_value(self, value: float) -> str:
+        """Live's display string: the item name for quantized parameters."""
+        if self.value_items:
+            return self.value_items[int(value)]
+        return f"{value:.2f}"
 
 
 @dataclass(slots=True)
@@ -62,9 +69,25 @@ class _Device:
 
 
 @dataclass(slots=True)
+class _ChainMixer:
+    volume: _Parameter
+    panning: _Parameter
+
+
+def _chain_mixer() -> _ChainMixer:
+    return _ChainMixer(
+        volume=_Parameter("Chain Volume", 0.85),
+        panning=_Parameter("Chain Pan", 0.0, min=-1.0, max=1.0),
+    )
+
+
+@dataclass(slots=True)
 class _Chain:
     name: str
     devices: list[_Device] = field(default_factory=list)
+    mixer_device: _ChainMixer = field(default_factory=_chain_mixer)
+    mute: bool = False
+    solo: bool = False
 
 
 class _DrumPad:
@@ -3888,6 +3911,7 @@ def test_live_backend_master_commands() -> None:
             "stable_ref": result["devices"][0]["parameters"][0]["stable_ref"],
             "name": "Threshold",
             "value": 0.0,
+            "display_value": "0.00",
         }
     ]
     assert result["devices"][0]["parameters"][0]["stable_ref"].startswith("parameter:")

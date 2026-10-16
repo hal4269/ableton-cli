@@ -638,6 +638,7 @@ class LiveBackendContext:
     ) -> dict[str, Any]:
         minimum = self._safe_float(getattr(parameter, "min", None))
         maximum = self._safe_float(getattr(parameter, "max", None))
+        is_quantized = bool(getattr(parameter, "is_quantized", False))
         return {
             "index": index,
             "stable_ref": self._parameter_stable_ref(
@@ -650,9 +651,16 @@ class LiveBackendContext:
             "value": float(getattr(parameter, "value", 0.0)),
             "min": minimum,
             "max": maximum,
+            "display_value": self._parameter_display_value(parameter),
             "is_enabled": bool(getattr(parameter, "is_enabled", True)),
-            "is_quantized": bool(getattr(parameter, "is_quantized", False)),
+            "is_quantized": is_quantized,
+            "value_items": ([str(item) for item in parameter.value_items] if is_quantized else []),
         }
+
+    @staticmethod
+    def _parameter_display_value(parameter: Any) -> str:
+        """The value as Live displays it (e.g. "-6.0 dB", "250 Hz", "Soft Sine")."""
+        return str(parameter.str_for_value(parameter.value))
 
     def _serialize_devices(
         self,
@@ -674,6 +682,7 @@ class LiveBackendContext:
                     ),
                     "name": str(getattr(parameter, "name", f"Parameter {parameter_index}")),
                     "value": float(getattr(parameter, "value", 0.0)),
+                    "display_value": self._parameter_display_value(parameter),
                 }
                 for parameter_index, parameter in enumerate(list(getattr(device, "parameters", [])))
             ]

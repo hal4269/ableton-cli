@@ -26,6 +26,7 @@ from .devices import (
     LiveBackendSynthDevicesMixin,
 )
 from .devices_edit import LiveBackendDeviceEditMixin
+from .devices_rack_variations import LiveBackendRackVariationsMixin
 from .devices_racks import LiveBackendDeviceRacksMixin
 from .scenes_arrangement import LiveBackendScenesArrangementMixin
 from .service import LiveBackendService
@@ -80,8 +81,12 @@ class DevicesService(
     """Device listing/parameters/editing and the standard synth/effect surfaces."""
 
 
-class DeviceRacksService(LiveBackendService, LiveBackendDeviceRacksMixin):
-    """Rack chains and macros."""
+class DeviceRacksService(
+    LiveBackendService,
+    LiveBackendDeviceRacksMixin,
+    LiveBackendRackVariationsMixin,
+):
+    """Rack chains (mixer, choke groups), macros and macro variations."""
 
 
 class BrowserService(

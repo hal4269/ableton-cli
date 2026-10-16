@@ -715,6 +715,34 @@ class _DeviceRacksBackend(Protocol):
         value: float,
     ) -> dict[str, Any]: ...
 
+    def device_chain_get(
+        self, track: int, device: int | tuple[int, ...], chain_index: int
+    ) -> dict[str, Any]: ...
+
+    def device_chain_set(
+        self,
+        track: int,
+        device: int | tuple[int, ...],
+        chain_index: int,
+        settings: dict[str, Any],
+    ) -> dict[str, Any]: ...
+
+    def device_variations_list(
+        self, track: int, device: int | tuple[int, ...]
+    ) -> dict[str, Any]: ...
+
+    def device_variation_store(
+        self, track: int, device: int | tuple[int, ...]
+    ) -> dict[str, Any]: ...
+
+    def device_variation_recall(
+        self, track: int, device: int | tuple[int, ...], variation_index: int
+    ) -> dict[str, Any]: ...
+
+    def device_variation_delete(
+        self, track: int, device: int | tuple[int, ...], variation_index: int
+    ) -> dict[str, Any]: ...
+
 
 class _SongToolsBackend(Protocol):
     """Song layout, device editing, colors and clip launch settings."""
@@ -724,6 +752,8 @@ class _SongToolsBackend(Protocol):
     def device_move(
         self, track: int, device: int | tuple[int, ...], to_index: int
     ) -> dict[str, Any]: ...
+
+    def device_insert(self, track: int, device_name: str, index: int | None) -> dict[str, Any]: ...
 
     def device_enabled_set(
         self, track: int, device: int | tuple[int, ...], value: bool
