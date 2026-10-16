@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import platform
 from pathlib import Path
 
@@ -12,7 +13,11 @@ def build_platform_paths_for_current_os() -> PlatformPaths:
     home = Path.home()
 
     if detected_os == "windows":
-        return WindowsPlatformPaths(home=home)
+        appdata = os.environ.get("APPDATA")
+        return WindowsPlatformPaths(
+            home=home,
+            preferences_root=Path(appdata) / "Ableton" if appdata else None,
+        )
     if detected_os == "darwin":
         return PosixPlatformPaths(
             home=home,
@@ -20,6 +25,7 @@ def build_platform_paths_for_current_os() -> PlatformPaths:
                 ("Music", "Ableton", "User Library", "Remote Scripts"),
                 ("Documents", "Ableton", "User Library", "Remote Scripts"),
             ),
+            preferences_root=home / "Library" / "Preferences" / "Ableton",
         )
     if detected_os == "linux":
         return PosixPlatformPaths(

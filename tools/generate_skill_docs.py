@@ -81,7 +81,7 @@ def generate_documents() -> tuple[GeneratedDocument, ...]:
 
 def _write_documents(documents: tuple[GeneratedDocument, ...]) -> None:
     for item in documents:
-        item.path.write_text(item.content, encoding="utf-8")
+        item.path.write_text(item.content, encoding="utf-8", newline="\n")
 
 
 def _diff_paths(documents: tuple[GeneratedDocument, ...]) -> list[Path]:

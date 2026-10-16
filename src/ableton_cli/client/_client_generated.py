@@ -87,35 +87,28 @@ class _AbletonClientGeneratedMixin:
     def arrangement_record_stop(self) -> dict[str, Any]:
         return self._call("arrangement_record_stop")
 
+    def back_to_arranger(self) -> dict[str, Any]:
+        return self._call("back_to_arranger")
+
     def clip_active_get(self, track: int, clip: int) -> dict[str, Any]:
         return self._call("clip_active_get", {"track": track, "clip": clip})
 
     def clip_active_set(self, track: int, clip: int, value: bool) -> dict[str, Any]:
         return self._call("clip_active_set", {"track": track, "clip": clip, "value": value})
 
+    def clip_color_set(self, track: int, clip: int, color_index: int) -> dict[str, Any]:
+        return self._call(
+            "clip_color_set", {"track": track, "clip": clip, "color_index": color_index}
+        )
+
+    def clip_crop(self, track: int, clip: int) -> dict[str, Any]:
+        return self._call("clip_crop", {"track": track, "clip": clip})
+
     def clip_delete(self, track: int, clip: int) -> dict[str, Any]:
         return self._call("clip_delete", {"track": track, "clip": clip})
 
-    def clip_envelope_set(
-        self,
-        track: int,
-        clip: int,
-        device_ref: RefPayload,
-        parameter_ref: RefPayload,
-        points: list[dict[str, float]],
-        mode: str = "replace",
-    ) -> dict[str, Any]:
-        return self._call(
-            "clip_envelope_set",
-            {
-                "track": track,
-                "clip": clip,
-                "device_ref": device_ref,
-                "parameter_ref": parameter_ref,
-                "points": points,
-                "mode": mode,
-            },
-        )
+    def clip_duplicate_loop(self, track: int, clip: int) -> dict[str, Any]:
+        return self._call("clip_duplicate_loop", {"track": track, "clip": clip})
 
     def clip_file_path_get(self, track: int, clip: int) -> dict[str, Any]:
         return self._call("clip_file_path_get", {"track": track, "clip": clip})
@@ -140,6 +133,12 @@ class _AbletonClientGeneratedMixin:
     def clip_groove_set(self, track: int, clip: int, target: str) -> dict[str, Any]:
         return self._call("clip_groove_set", {"track": track, "clip": clip, "target": target})
 
+    def clip_launch_get(self, track: int, clip: int) -> dict[str, Any]:
+        return self._call("clip_launch_get", {"track": track, "clip": clip})
+
+    def clip_launch_set(self, track: int, clip: int, settings: dict[str, Any]) -> dict[str, Any]:
+        return self._call("clip_launch_set", {"track": track, "clip": clip, "settings": settings})
+
     def clip_loop_set(
         self, track: int, clip: int, start: float, end: float, enabled: bool
     ) -> dict[str, Any]:
@@ -158,6 +157,14 @@ class _AbletonClientGeneratedMixin:
 
     def clip_props_get(self, track: int, clip: int) -> dict[str, Any]:
         return self._call("clip_props_get", {"track": track, "clip": clip})
+
+    def clip_signature_set(
+        self, track: int, clip: int, numerator: int, denominator: int
+    ) -> dict[str, Any]:
+        return self._call(
+            "clip_signature_set",
+            {"track": track, "clip": clip, "numerator": numerator, "denominator": denominator},
+        )
 
     def clip_transpose_set(self, track: int, clip: int, semitones: int) -> dict[str, Any]:
         return self._call(
@@ -195,8 +202,50 @@ class _AbletonClientGeneratedMixin:
     def create_scene(self, index: int) -> dict[str, Any]:
         return self._call("create_scene", {"index": index})
 
+    def device_chain_get(
+        self, track_ref: RefPayload, device_ref: RefPayload, chain_index: int
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_chain_get",
+            {"track_ref": track_ref, "device_ref": device_ref, "chain_index": chain_index},
+        )
+
+    def device_chain_set(
+        self,
+        track_ref: RefPayload,
+        device_ref: RefPayload,
+        chain_index: int,
+        settings: dict[str, Any],
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_chain_set",
+            {
+                "track_ref": track_ref,
+                "device_ref": device_ref,
+                "chain_index": chain_index,
+                "settings": settings,
+            },
+        )
+
     def device_chains_list(self, track_ref: RefPayload, device_ref: RefPayload) -> dict[str, Any]:
         return self._call("device_chains_list", {"track_ref": track_ref, "device_ref": device_ref})
+
+    def device_delete(self, track_ref: RefPayload, device_ref: RefPayload) -> dict[str, Any]:
+        return self._call("device_delete", {"track_ref": track_ref, "device_ref": device_ref})
+
+    def device_enabled_set(
+        self, track_ref: RefPayload, device_ref: RefPayload, value: bool
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_enabled_set", {"track_ref": track_ref, "device_ref": device_ref, "value": value}
+        )
+
+    def device_insert(
+        self, track_ref: RefPayload, device_name: str, index: int | None
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_insert", {"track_ref": track_ref, "device_name": device_name, "index": index}
+        )
 
     def device_macro_list(self, track_ref: RefPayload, device_ref: RefPayload) -> dict[str, Any]:
         return self._call("device_macro_list", {"track_ref": track_ref, "device_ref": device_ref})
@@ -212,6 +261,50 @@ class _AbletonClientGeneratedMixin:
                 "macro_index": macro_index,
                 "value": value,
             },
+        )
+
+    def device_move(
+        self, track_ref: RefPayload, device_ref: RefPayload, to_index: int
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_move", {"track_ref": track_ref, "device_ref": device_ref, "to_index": to_index}
+        )
+
+    def device_parameters_list(
+        self, track_ref: RefPayload, device_ref: RefPayload
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_parameters_list", {"track_ref": track_ref, "device_ref": device_ref}
+        )
+
+    def device_variation_delete(
+        self, track_ref: RefPayload, device_ref: RefPayload, variation_index: int
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_variation_delete",
+            {"track_ref": track_ref, "device_ref": device_ref, "variation_index": variation_index},
+        )
+
+    def device_variation_recall(
+        self, track_ref: RefPayload, device_ref: RefPayload, variation_index: int
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_variation_recall",
+            {"track_ref": track_ref, "device_ref": device_ref, "variation_index": variation_index},
+        )
+
+    def device_variation_store(
+        self, track_ref: RefPayload, device_ref: RefPayload
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_variation_store", {"track_ref": track_ref, "device_ref": device_ref}
+        )
+
+    def device_variations_list(
+        self, track_ref: RefPayload, device_ref: RefPayload
+    ) -> dict[str, Any]:
+        return self._call(
+            "device_variations_list", {"track_ref": track_ref, "device_ref": device_ref}
         )
 
     def execute_batch(self, steps: list[dict[str, Any]]) -> dict[str, Any]:
@@ -265,6 +358,15 @@ class _AbletonClientGeneratedMixin:
         return self._call(
             "list_synth_parameters", {"track_ref": track_ref, "device_ref": device_ref}
         )
+
+    def locator_add(self, time: float, name: str | None) -> dict[str, Any]:
+        return self._call("locator_add", {"time": time, "name": name})
+
+    def locator_delete(self, index: int) -> dict[str, Any]:
+        return self._call("locator_delete", {"index": index})
+
+    def locators_list(self) -> dict[str, Any]:
+        return self._call("locators_list")
 
     def master_device_delete(self, device_index: int) -> dict[str, Any]:
         return self._call("master_device_delete", {"device_index": device_index})
@@ -400,8 +502,31 @@ class _AbletonClientGeneratedMixin:
     def return_track_volume_set(self, return_track: int, value: float) -> dict[str, Any]:
         return self._call("return_track_volume_set", {"return_track": return_track, "value": value})
 
+    def return_tracks_create(self) -> dict[str, Any]:
+        return self._call("return_tracks_create")
+
+    def return_tracks_delete(self, index: int) -> dict[str, Any]:
+        return self._call("return_tracks_delete", {"index": index})
+
     def return_tracks_list(self) -> dict[str, Any]:
         return self._call("return_tracks_list")
+
+    def scene_signature_set(
+        self, scene: int, numerator: int | None, denominator: int | None
+    ) -> dict[str, Any]:
+        return self._call(
+            "scene_signature_set",
+            {"scene": scene, "numerator": numerator, "denominator": denominator},
+        )
+
+    def scene_tempo_set(self, scene: int, bpm: float | None) -> dict[str, Any]:
+        return self._call("scene_tempo_set", {"scene": scene, "bpm": bpm})
+
+    def scenes_delete(self, scene: int) -> dict[str, Any]:
+        return self._call("scenes_delete", {"scene": scene})
+
+    def scenes_duplicate(self, scene: int) -> dict[str, Any]:
+        return self._call("scenes_duplicate", {"scene": scene})
 
     def scenes_list(self) -> dict[str, Any]:
         return self._call("scenes_list")
@@ -424,20 +549,38 @@ class _AbletonClientGeneratedMixin:
     def set_track_name(self, track_ref: RefPayload, name: str) -> dict[str, Any]:
         return self._call("set_track_name", {"track_ref": track_ref, "name": name})
 
-    def song_export_audio(self, path: str) -> dict[str, object]:
-        return self._call("song_export_audio", {"path": path})
+    def song_capture_midi(self, destination: str) -> dict[str, Any]:
+        return self._call("song_capture_midi", {"destination": destination})
+
+    def song_groove_amount_set(self, value: float) -> dict[str, Any]:
+        return self._call("song_groove_amount_set", {"value": value})
 
     def song_info(self) -> dict[str, object]:
         return self._call("song_info")
 
+    def song_loop_get(self) -> dict[str, Any]:
+        return self._call("song_loop_get")
+
+    def song_loop_set(self, settings: dict[str, Any]) -> dict[str, Any]:
+        return self._call("song_loop_set", {"settings": settings})
+
+    def song_metronome_set(self, value: bool) -> dict[str, Any]:
+        return self._call("song_metronome_set", {"value": value})
+
     def song_new(self) -> dict[str, object]:
         return self._call("song_new")
+
+    def song_record_quantization_set(self, value: str) -> dict[str, Any]:
+        return self._call("song_record_quantization_set", {"value": value})
 
     def song_redo(self) -> dict[str, object]:
         return self._call("song_redo")
 
-    def song_save(self, path: str) -> dict[str, object]:
-        return self._call("song_save", {"path": path})
+    def song_scale_set(self, settings: dict[str, Any]) -> dict[str, Any]:
+        return self._call("song_scale_set", {"settings": settings})
+
+    def song_swing_set(self, value: float) -> dict[str, Any]:
+        return self._call("song_swing_set", {"value": value})
 
     def song_undo(self) -> dict[str, object]:
         return self._call("song_undo")
@@ -459,6 +602,18 @@ class _AbletonClientGeneratedMixin:
 
     def track_arm_set(self, track_ref: RefPayload, value: bool) -> dict[str, Any]:
         return self._call("track_arm_set", {"track_ref": track_ref, "value": value})
+
+    def track_color_set(self, track_ref: RefPayload, color_index: int) -> dict[str, Any]:
+        return self._call("track_color_set", {"track_ref": track_ref, "color_index": color_index})
+
+    def track_fold_set(self, track_ref: RefPayload, value: bool) -> dict[str, Any]:
+        return self._call("track_fold_set", {"track_ref": track_ref, "value": value})
+
+    def track_monitoring_get(self, track_ref: RefPayload) -> dict[str, Any]:
+        return self._call("track_monitoring_get", {"track_ref": track_ref})
+
+    def track_monitoring_set(self, track_ref: RefPayload, value: str) -> dict[str, Any]:
+        return self._call("track_monitoring_set", {"track_ref": track_ref, "value": value})
 
     def track_mute_get(self, track_ref: RefPayload) -> dict[str, Any]:
         return self._call("track_mute_get", {"track_ref": track_ref})
@@ -523,6 +678,9 @@ class _AbletonClientGeneratedMixin:
     def tracks_delete(self, track: int) -> dict[str, Any]:
         return self._call("tracks_delete", {"track": track})
 
+    def tracks_duplicate(self, track: int) -> dict[str, Any]:
+        return self._call("tracks_duplicate", {"track": track})
+
     def tracks_list(self) -> dict[str, Any]:
         return self._call("tracks_list")
 
@@ -538,6 +696,11 @@ class _AbletonClientGeneratedMixin:
     def transport_rewind(self) -> dict[str, object]:
         return self._call("transport_rewind")
 
+    def transport_signature_set(self, numerator: int, denominator: int) -> dict[str, Any]:
+        return self._call(
+            "transport_signature_set", {"numerator": numerator, "denominator": denominator}
+        )
+
     def transport_stop(self) -> dict[str, object]:
         return self._call("transport_stop")
 
@@ -549,3 +712,15 @@ class _AbletonClientGeneratedMixin:
 
     def transport_toggle(self) -> dict[str, object]:
         return self._call("transport_toggle")
+
+    def view_select_clip(self, track: int, clip: int) -> dict[str, Any]:
+        return self._call("view_select_clip", {"track": track, "clip": clip})
+
+    def view_select_scene(self, scene: int) -> dict[str, Any]:
+        return self._call("view_select_scene", {"scene": scene})
+
+    def view_select_track(self, track: int) -> dict[str, Any]:
+        return self._call("view_select_track", {"track": track})
+
+    def view_show(self, view: str) -> dict[str, Any]:
+        return self._call("view_show", {"view": view})

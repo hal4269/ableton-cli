@@ -44,8 +44,14 @@ uv run ableton-cli song info
 uv run ableton-cli song new
 uv run ableton-cli song undo
 uv run ableton-cli song redo
-uv run ableton-cli song save --path /tmp/demo.als
-uv run ableton-cli song export audio --path /tmp/demo.wav
+uv run ableton-cli song loop get
+uv run ableton-cli song loop set --enabled --start 64 --length 32
+uv run ableton-cli song metronome set false
+uv run ableton-cli song swing set 0.25
+uv run ableton-cli song groove-amount set 1.0
+uv run ableton-cli song scale set --root A --name Minor --mode
+uv run ableton-cli song record-quantization set 1/16
+uv run ableton-cli song capture-midi --destination session
 uv run ableton-cli session info
 uv run ableton-cli session snapshot
 uv run ableton-cli session diff --from ./snapshot-before.json --to ./snapshot-after.json
@@ -56,6 +62,24 @@ uv run ableton-cli session capture --track-index 0 --slot 0 --bars 8 --set-routi
 uv run ableton-cli session stop-all-clips
 ```
 
+`song info` also reports `back_to_arranger`, the loop region, metronome, swing and groove
+amounts, the key/scale (`scale.root_note` 0-11, `scale.name`, `scale.mode`), MIDI record
+quantization and `can_capture_midi`. Saving the Set and exporting audio are not in Live's
+API: do them in Live (Ctrl/Cmd+S, File > Export Audio/Video).
+
+### View
+
+```bash
+uv run ableton-cli view show arranger
+uv run ableton-cli view show device-chain
+uv run ableton-cli view select track 2
+uv run ableton-cli view select scene 1
+uv run ableton-cli view select clip 2 0
+```
+
+`view show` takes `session`, `arranger`, `detail`, `clip` (Detail/Clip) or `device-chain`
+(Detail/DeviceChain).
+
 ### Tracks
 
 ```bash
@@ -65,6 +89,7 @@ uv run ableton-cli tracks create midi --index 1
 uv run ableton-cli tracks create audio
 uv run ableton-cli tracks create audio --index 1
 uv run ableton-cli tracks delete 2
+uv run ableton-cli tracks duplicate 1
 ```
 
 ### Transport
@@ -78,6 +103,7 @@ uv run ableton-cli transport tempo set 128
 uv run ableton-cli transport position get
 uv run ableton-cli transport position set 32
 uv run ableton-cli transport rewind
+uv run ableton-cli transport signature set 7 8
 ```
 
 ### Arrangement
@@ -108,10 +134,23 @@ uv run ableton-cli arrangement clip transpose set 0 0 --semitones -1
 uv run ableton-cli arrangement clip file replace 0 0 --audio-path /tmp/replacement.wav
 uv run ableton-cli arrangement clip from-session 0 2 --start 64
 uv run ableton-cli arrangement from-session --scenes "0:24,1:48"
+uv run ableton-cli arrangement locator list
+uv run ableton-cli arrangement locator add 64 --name "Drop"
+uv run ableton-cli arrangement locator delete 0
+uv run ableton-cli arrangement back-to-arranger
 ```
 
-`arrangement clip from-session` places an exact copy of a session clip (clip envelopes, note
-probability, loop settings). `arrangement from-session` rebuilds notes only and drops those.
+Launching Session clips takes tracks off the Arrangement (Live lights the "Back to
+Arrangement" button; `song info` shows `back_to_arranger: true`). `arrangement
+back-to-arranger` presses it, so every track plays the Arrangement again.
+
+`arrangement clip from-session` and `arrangement from-session` place exact copies of session
+clips (clip envelopes, note probability, loop settings). `arrangement from-session` tiles a
+clip over the scene duration; a copy that runs past the end keeps its full length, so use
+durations that are a multiple of the clip lengths.
+
+Locators: Live only toggles a cue point at the playback position, so `locator add|delete`
+move the position there and back and need the transport stopped.
 
 ### Remix / Audio Workflow
 
@@ -189,7 +228,15 @@ uv run ableton-cli track routing input get --selected-track
 uv run ableton-cli track routing input set --type Ext.\ In --channel 1/2 --track-index 0
 uv run ableton-cli track routing output get --track-index 0
 uv run ableton-cli track routing output set --type Master --channel 3/4 --track-index 0
+uv run ableton-cli track color set 12 --track-name "Bass"
+uv run ableton-cli track monitoring get --track-index 0
+uv run ableton-cli track monitoring set in --track-index 0
+uv run ableton-cli track fold set true --track-name "Drums"
 ```
+
+`tracks list` and `track info` report group state: `is_foldable` (group track),
+`fold_state` (null unless foldable), `is_grouped` and `group_track` (index of the
+containing group). Group tracks have no monitoring state; `track monitoring` fails on them.
 
 Ref-aware commands use selector flags, not positional indexes.
 Track selectors: `--track-index`, `--track-name`, `--selected-track`, `--track-query`, `--track-ref`.
@@ -201,6 +248,8 @@ Reuse `stable_ref` values emitted by `tracks list`, `track info`, synth/effect f
 
 ```bash
 uv run ableton-cli return-tracks list
+uv run ableton-cli return-tracks create
+uv run ableton-cli return-tracks delete 1
 uv run ableton-cli return-track volume get 0
 uv run ableton-cli return-track volume set 0 0.5
 uv run ableton-cli return-track mute get 0
@@ -271,6 +320,9 @@ uv run ableton-cli clip envelope set 0 0 --points-json '[{"time":0.0,"value":0.1
 uv run ableton-cli clip envelope shape 0 0 --device-index 0 --parameter-key filter_cutoff --shape ramp --from 0.1 --to 0.9 --start 0 --length 4 --resolution 16
 uv run ableton-cli clip envelope clear 0 0 --device-index 0 --parameter-key filter_cutoff
 uv run ableton-cli clip envelope clear 0 0 --all
+uv run ableton-cli clip envelope mixer set 0 0 volume --points-json '[{"time":0.0,"value":0.0},{"time":4.0,"value":0.85}]'
+uv run ableton-cli clip envelope mixer shape 0 0 send --send-index 0 --shape lfo-sine --from 0 --to 0.6 --length 16 --rate 0.25
+uv run ableton-cli clip envelope mixer clear 0 0 panning
 uv run ableton-cli clip groove get 0 0
 uv run ableton-cli clip groove set 0 0 grooves/Hip\ Hop\ Boom\ Bap\ 16ths\ 90\ bpm.agr
 uv run ableton-cli clip groove amount set 0 0 0.6
@@ -280,6 +332,12 @@ uv run ableton-cli clip name set-many 0 --map "1:Main,2:Var,5:Peak"
 uv run ableton-cli clip fire 0 0
 uv run ableton-cli clip stop 0 0
 uv run ableton-cli clip delete 0 3
+uv run ableton-cli clip color set 0 0 12
+uv run ableton-cli clip launch get 0 0
+uv run ableton-cli clip launch set 0 0 --mode trigger --quantization 1 --legato --velocity-amount 0.5
+uv run ableton-cli clip crop 0 0
+uv run ableton-cli clip duplicate-loop 0 0
+uv run ableton-cli clip signature set 0 0 7 8
 uv run ableton-cli clip active get 0 0
 uv run ableton-cli clip active set 0 0 false
 uv run ableton-cli clip duplicate 0 0 1
@@ -306,6 +364,12 @@ uv run ableton-cli clip file replace 0 0 --audio-path /tmp/replacement.wav
 uv run ableton-cli clip file path get 0 0
 ```
 
+`clip envelope set|shape|clear` target a device parameter (device + parameter selectors);
+`clip envelope mixer set|shape|clear` target the track's own mixer: `volume` (0.0-1.0,
+0.85 = 0 dB), `panning` (-1.0 to 1.0) or `send` with `--send-index` (0 = send A, 0.0-1.0).
+Values are checked against the parameter's range.
+`clip crop`, `clip duplicate-loop` and `clip signature set` return the clip properties.
+
 ### Scenes
 
 ```bash
@@ -315,7 +379,16 @@ uv run ableton-cli scenes create --index 1
 uv run ableton-cli scenes name set 1 "Build"
 uv run ableton-cli scenes fire 1
 uv run ableton-cli scenes move 1 2
+uv run ableton-cli scenes duplicate 1
+uv run ableton-cli scenes delete 2
+uv run ableton-cli scenes tempo set 1 128
+uv run ableton-cli scenes tempo set 1 --clear
+uv run ableton-cli scenes signature set 1 7 8
+uv run ableton-cli scenes signature set 1 --clear
 ```
+
+`scenes list` shows each scene's `tempo` and `signature` (null when the scene does not set
+them). Live 12+.
 
 ### Browser
 
@@ -358,10 +431,43 @@ uv run ableton-cli device chains list --track-index 0 --device-index 0
 uv run ableton-cli device macro list --track-index 0 --device-index 0
 uv run ableton-cli device macro set 0 64.0 --track-index 0 --device-index 0
 uv run ableton-cli device parameter set 0.5 --track-index 0 --device-ref device:12 --parameter-index 0
+uv run ableton-cli device parameter list --track-index 0 --device-ref device:12
+uv run ableton-cli device delete --track-index 0 --device-index 2
+uv run ableton-cli device move --to-index 0 --track-index 0 --device-index 2
+uv run ableton-cli device enabled set false --track-index 0 --device-index 1
+uv run ableton-cli device insert "EQ Eight" --track-index 0 --index 1
+uv run ableton-cli device chains get 2 --track-index 0 --device-index 0
+uv run ableton-cli device chains set 2 --volume 0.7 --panning -0.2 --mute --track-index 0 --device-index 0
+uv run ableton-cli device chains set 5 --choke-group 1 --no-solo --track-index 0 --device-index 0
+uv run ableton-cli device variation list --track-index 0 --device-index 0
+uv run ableton-cli device variation store --track-index 0 --device-index 0
+uv run ableton-cli device variation recall 1 --track-index 0 --device-index 0
+uv run ableton-cli device variation delete 1 --track-index 0 --device-index 0
 ```
+
+Devices inside rack chains: take the `stable_ref` from `device chains list` and pass it as
+`--device-ref` to `device parameter list|set`, `device delete` or `device enabled set`.
+`device move` moves top-level devices only.
 
 `device chains list` reports `in_note` per chain: the MIDI note that triggers a Drum Rack pad
 (`null` for other racks). Use it to map pads; chain order is not the note order.
+
+`device chains list|get` also report each chain's `volume`, `panning` (with Live's display
+strings `volume_display`, `panning_display`), `mute`, `solo` and `choke_group` (Drum Rack
+chains: 0 = none, 1-16; `null` for other racks). `device chains set` changes only the given
+options; `--choke-group` needs a Drum Rack. Racks nested in a chain: pass their `stable_ref`
+as `--device-ref`.
+
+Parameter listings (`device parameter list`, `synth|effect parameters list`, `track info`)
+include `display_value`, the value as Live shows it (e.g. `-6.0 dB`, `Soft Sine`), and, for
+quantized parameters, `value_items` (the option names; the value is the item's index).
+
+`device insert` adds a native Live device by name at a position on a track (Live 12.1.10+,
+`Track.insert_device`); without `--index` it appends. Use `browser load` for presets and
+plug-ins.
+
+`device variation recall|delete <index>` select that macro variation first (Live works on the
+selected variation).
 
 ### Synth
 
@@ -502,8 +608,14 @@ uv run ableton-cli --output json ping
 - `song_new` -> `uv run ableton-cli --output json song new`
 - `song_undo` -> `uv run ableton-cli --output json song undo`
 - `song_redo` -> `uv run ableton-cli --output json song redo`
-- `song_save` -> `uv run ableton-cli --output json song save --path <als>`
-- `song_export_audio` -> `uv run ableton-cli --output json song export audio --path <wav>`
+- `song_loop_get` -> `uv run ableton-cli --output json song loop get`
+- `song_loop_set` -> `uv run ableton-cli --output json song loop set [--enabled|--disabled] [--start <beats>] [--length <beats>]`
+- `song_metronome_set` -> `uv run ableton-cli --output json song metronome set <true|false>`
+- `song_swing_set` -> `uv run ableton-cli --output json song swing set <0-1>`
+- `song_groove_amount_set` -> `uv run ableton-cli --output json song groove-amount set <0-1.3>`
+- `song_scale_set` -> `uv run ableton-cli --output json song scale set [--root <note>] [--name <scale>] [--mode|--no-mode]`
+- `song_record_quantization_set` -> `uv run ableton-cli --output json song record-quantization set <none|1/4|1/8|1/8t|1/8+1/8t|1/16|1/16t|1/16+1/16t|1/32>`
+- `song_capture_midi` -> `uv run ableton-cli --output json song capture-midi [--destination auto|session|arrangement]`
 - `get_session_info` -> `uv run ableton-cli --output json session info`
 - `get_track_info` -> `uv run ableton-cli --output json track info --track-index <track>`
 - `play` -> `uv run ableton-cli --output json transport play`
@@ -514,10 +626,16 @@ uv run ableton-cli --output json ping
 - `transport_rewind` -> `uv run ableton-cli --output json transport rewind`
 - `arrangement_record_start` -> `uv run ableton-cli --output json arrangement record start`
 - `arrangement_record_stop` -> `uv run ableton-cli --output json arrangement record stop`
+- `back_to_arranger` -> `uv run ableton-cli --output json arrangement back-to-arranger`
 - `list_tracks` -> `uv run ableton-cli --output json tracks list`
 - `create_midi_track` -> `uv run ableton-cli --output json tracks create midi [--index <index>]`
 - `create_audio_track` -> `uv run ableton-cli --output json tracks create audio [--index <index>]`
 - `tracks_delete` -> `uv run ableton-cli --output json tracks delete <track>`
+- `tracks_duplicate` -> `uv run ableton-cli --output json tracks duplicate <track>`
+- `track_monitoring_get` -> `uv run ableton-cli --output json track monitoring get --track-index <track>`
+- `track_monitoring_set` -> `uv run ableton-cli --output json track monitoring set <in|auto|off> --track-index <track>`
+- `track_fold_set` -> `uv run ableton-cli --output json track fold set <true|false> --track-index <track>`
+- `set_track_color` -> `uv run ableton-cli --output json track color set <color_index> --track-index <track>`
 - `set_track_name` -> `uv run ableton-cli --output json track name set <name> --track-index <track>`
 - `set_track_volume` -> `uv run ableton-cli --output json track volume set <value> --track-index <track>`
 - `get_track_mute` -> `uv run ableton-cli --output json track mute get --track-index <track>`
@@ -553,6 +671,13 @@ uv run ableton-cli --output json ping
 - `arrangement_from_session` -> `uv run ableton-cli --output json arrangement from-session --scenes "0:24,1:48"`
 - `arrangement_clip_from_session` -> `uv run ableton-cli --output json arrangement clip from-session <track> <slot> --start <beats>`
 - `clip_delete` -> `uv run ableton-cli --output json clip delete <track> <clip>`
+- `set_clip_color` -> `uv run ableton-cli --output json clip color set <track> <clip> <color_index>`
+- `clip_launch_get` -> `uv run ableton-cli --output json clip launch get <track> <clip>`
+- `clip_launch_set` -> `uv run ableton-cli --output json clip launch set <track> <clip> [--mode <mode>] [--quantization <q>] [--legato|--no-legato] [--velocity-amount <0-1>]`
+- `clip_crop` -> `uv run ableton-cli --output json clip crop <track> <clip>`
+- `clip_duplicate_loop` -> `uv run ableton-cli --output json clip duplicate-loop <track> <clip>`
+- `set_clip_signature` -> `uv run ableton-cli --output json clip signature set <track> <clip> <numerator> <denominator>`
+- `set_clip_mixer_envelope` -> `uv run ableton-cli --output json clip envelope mixer set <track> <clip> <volume|panning|send> [--send-index <n>] --points-json <json>`
 - `clip_duplicate` -> `uv run ableton-cli --output json clip duplicate <track> <src_clip> <dst_clip>`
 - `set_clip_name` -> `uv run ableton-cli --output json clip name set <track> <clip> <name>`
 - `fire_clip` -> `uv run ableton-cli --output json clip fire <track> <clip>`
@@ -562,6 +687,20 @@ uv run ableton-cli --output json ping
 - `set_scene_name` -> `uv run ableton-cli --output json scenes name set <scene> <name>`
 - `fire_scene` -> `uv run ableton-cli --output json scenes fire <scene>`
 - `scenes_move` -> `uv run ableton-cli --output json scenes move <from> <to>`
+- `scenes_duplicate` -> `uv run ableton-cli --output json scenes duplicate <scene>`
+- `scene_tempo_set` -> `uv run ableton-cli --output json scenes tempo set <scene> <bpm>|--clear`
+- `scene_signature_set` -> `uv run ableton-cli --output json scenes signature set <scene> <numerator> <denominator>|--clear`
+- `scenes_delete` -> `uv run ableton-cli --output json scenes delete <scene>`
+- `return_tracks_create` -> `uv run ableton-cli --output json return-tracks create`
+- `return_tracks_delete` -> `uv run ableton-cli --output json return-tracks delete <index>`
+- `locators_list` -> `uv run ableton-cli --output json arrangement locator list`
+- `locator_add` -> `uv run ableton-cli --output json arrangement locator add <beats> [--name <name>]`
+- `locator_delete` -> `uv run ableton-cli --output json arrangement locator delete <index>`
+- `view_show` -> `uv run ableton-cli --output json view show <session|arranger|detail|clip|device-chain>`
+- `view_select_track` -> `uv run ableton-cli --output json view select track <track>`
+- `view_select_scene` -> `uv run ableton-cli --output json view select scene <scene>`
+- `view_select_clip` -> `uv run ableton-cli --output json view select clip <track> <clip>`
+- `transport_signature_set` -> `uv run ableton-cli --output json transport signature set <numerator> <denominator>`
 - `stop_all_clips` -> `uv run ableton-cli --output json session stop-all-clips`
 - `get_browser_tree` -> `uv run ableton-cli --output json browser tree [category_type]`
 - `get_browser_items_at_path` -> `uv run ableton-cli --output json browser items-at-path <path>`
@@ -572,6 +711,17 @@ uv run ableton-cli --output json ping
 - `load_instrument_or_effect` -> `uv run ableton-cli --output json browser load <track> <target>`
 - `load_drum_kit` -> `uv run ableton-cli --output json browser load-drum-kit <track> <rack_uri> (--kit-uri <uri> | --kit-path <path>)`
 - `set_device_parameter` -> `uv run ableton-cli --output json device parameter set <value> --track-index <track> --device-index <device> --parameter-index <parameter>`
+- `device_parameters_list` -> `uv run ableton-cli --output json device parameter list --track-index <track> --device-index <device>`
+- `device_delete` -> `uv run ableton-cli --output json device delete --track-index <track> --device-index <device>`
+- `device_move` -> `uv run ableton-cli --output json device move --to-index <index> --track-index <track> --device-index <device>`
+- `device_enabled_set` -> `uv run ableton-cli --output json device enabled set <true|false> --track-index <track> --device-index <device>`
+- `device_insert` -> `uv run ableton-cli --output json device insert <device_name> --track-index <track> [--index <index>]`
+- `device_chain_get` -> `uv run ableton-cli --output json device chains get <chain> --track-index <track> --device-index <device>`
+- `device_chain_set` -> `uv run ableton-cli --output json device chains set <chain> --track-index <track> --device-index <device> [--volume <0-1>] [--panning <-1..1>] [--mute|--no-mute] [--solo|--no-solo] [--choke-group <0-16>]`
+- `device_variations_list` -> `uv run ableton-cli --output json device variation list --track-index <track> --device-index <device>`
+- `device_variation_store` -> `uv run ableton-cli --output json device variation store --track-index <track> --device-index <device>`
+- `device_variation_recall` -> `uv run ableton-cli --output json device variation recall <variation> --track-index <track> --device-index <device>`
+- `device_variation_delete` -> `uv run ableton-cli --output json device variation delete <variation> --track-index <track> --device-index <device>`
 - `find_synth_devices` -> `uv run ableton-cli --output json synth find [--track <track>] [--type <wavetable|drift|meld>]`
 - `list_synth_parameters` -> `uv run ableton-cli --output json synth parameters list --track-index <track> --device-index <device>`
 - `set_synth_parameter_safe` -> `uv run ableton-cli --output json synth parameter set <value> --track-index <track> --device-index <device> --parameter-index <parameter>`
@@ -611,9 +761,9 @@ commands that actually do the work.
 
 ```bash
 uv run ableton-cli remix setup-sound     # use: browser search + browser load / load-drum-kit
-uv run ableton-cli remix mix-macro       # use: create buses in Live, then track/return volume + send set
+uv run ableton-cli remix mix-macro       # use: group buses in Live, then track/return volume + send set
 uv run ableton-cli remix setup-mix       # same as mix-macro
-uv run ableton-cli remix setup-returns   # use: add returns in Live, then return-tracks list
+uv run ableton-cli remix setup-returns   # use: return-tracks create, then return-track volume set
 uv run ableton-cli remix setup-sidechain # use: route in Live, then device parameter set
 uv run ableton-cli remix device-chain apply  # use: browser search + browser load + device parameter set
 uv run ableton-cli audio stems split     # use: an external separator, then audio asset add

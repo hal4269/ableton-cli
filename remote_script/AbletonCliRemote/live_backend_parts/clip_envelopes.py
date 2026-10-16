@@ -47,17 +47,30 @@ class LiveBackendClipEnvelopesMixin:
                 details={"offending_indices": offending},
             )
 
-    def clip_envelope_set(
+    def _mixer_parameter(self, track: int, mixer: str, send_index: int | None) -> Any:
+        mixer_device = self._ctx._track_at(track).mixer_device
+        if mixer == "volume":
+            return mixer_device.volume
+        if mixer == "panning":
+            return mixer_device.panning
+        sends = list(mixer_device.sends)
+        assert send_index is not None
+        if send_index >= len(sends):
+            raise _invalid_argument(
+                message=f"send_index out of range: {send_index} (track has {len(sends)} sends)",
+                hint="Use a 0-based send index below the number of return tracks.",
+            )
+        return sends[send_index]
+
+    def _write_envelope(
         self,
         track: int,
         clip: int,
-        device: int,
-        parameter: int,
+        target_param: Any,
         points: list[dict[str, float]],
         mode: str,
-    ) -> dict[str, Any]:
+    ) -> None:
         clip_obj = self._clip_for_envelope(track, clip)
-        target_param = self._ctx._parameter_at(track, device, parameter)
         self._validate_envelope_point_range(points, target_param)
 
         create_automation_envelope = getattr(clip_obj, "create_automation_envelope", None)
@@ -69,8 +82,12 @@ class LiveBackendClipEnvelopesMixin:
 
         if mode == "replace":
             clear_envelope = getattr(clip_obj, "clear_envelope", None)
-            if callable(clear_envelope):
-                clear_envelope(target_param)
+            if not callable(clear_envelope):
+                raise _not_supported_by_live_api(
+                    message="Clip.clear_envelope is not available in Live API",
+                    hint="Use a Live version exposing clip.clear_envelope (Live 12+).",
+                )
+            clear_envelope(target_param)
 
         envelope = create_automation_envelope(target_param)
         if envelope is None:
@@ -86,11 +103,54 @@ class LiveBackendClipEnvelopesMixin:
             length = max(end - start, 0.0)
             insert_step(start, length, point["value"])
 
+    def _clear_envelope(self, track: int, clip: int, target_param: Any) -> None:
+        clip_obj = self._clip_for_envelope(track, clip)
+        clear_envelope = getattr(clip_obj, "clear_envelope", None)
+        if not callable(clear_envelope):
+            raise _not_supported_by_live_api(
+                message="Clip clear_envelope API is not available in Live API",
+                hint="Use a Live version exposing clip.clear_envelope (Live 12+).",
+            )
+        clear_envelope(target_param)
+
+    def clip_envelope_set(
+        self,
+        track: int,
+        clip: int,
+        device: int,
+        parameter: int,
+        points: list[dict[str, float]],
+        mode: str,
+    ) -> dict[str, Any]:
+        self._clip_for_envelope(track, clip)
+        target_param = self._ctx._parameter_at(track, device, parameter)
+        self._write_envelope(track, clip, target_param, points, mode)
         return {
             "track": track,
             "clip": clip,
             "device": device,
             "parameter": parameter,
+            "mode": mode,
+            "point_count": len(points),
+        }
+
+    def clip_mixer_envelope_set(
+        self,
+        track: int,
+        clip: int,
+        mixer: str,
+        send_index: int | None,
+        points: list[dict[str, float]],
+        mode: str,
+    ) -> dict[str, Any]:
+        self._clip_for_envelope(track, clip)
+        target_param = self._mixer_parameter(track, mixer, send_index)
+        self._write_envelope(track, clip, target_param, points, mode)
+        return {
+            "track": track,
+            "clip": clip,
+            "mixer": mixer,
+            "send_index": send_index,
             "mode": mode,
             "point_count": len(points),
         }
@@ -117,17 +177,29 @@ class LiveBackendClipEnvelopesMixin:
 
         assert device is not None and parameter is not None
         target_param = self._ctx._parameter_at(track, device, parameter)
-        clear_envelope = getattr(clip_obj, "clear_envelope", None)
-        if not callable(clear_envelope):
-            raise _not_supported_by_live_api(
-                message="Clip clear_envelope API is not available in Live API",
-                hint="Use a Live version exposing clip.clear_envelope (Live 12+).",
-            )
-        clear_envelope(target_param)
+        self._clear_envelope(track, clip, target_param)
         return {
             "track": track,
             "clip": clip,
             "device": device,
             "parameter": parameter,
+            "cleared_all": False,
+        }
+
+    def clip_mixer_envelope_clear(
+        self,
+        track: int,
+        clip: int,
+        mixer: str,
+        send_index: int | None,
+    ) -> dict[str, Any]:
+        self._clip_for_envelope(track, clip)
+        target_param = self._mixer_parameter(track, mixer, send_index)
+        self._clear_envelope(track, clip, target_param)
+        return {
+            "track": track,
+            "clip": clip,
+            "mixer": mixer,
+            "send_index": send_index,
             "cleared_all": False,
         }

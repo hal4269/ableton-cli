@@ -24,7 +24,7 @@ from ...refs import (
 from .._validation import invalid_argument
 from ._shared import execute_clip_command, resolve_client, validate_track_and_clip
 
-_ENVELOPE_SHAPES = ("ramp", "exp", "scurve", "lfo-sine", "lfo-square")
+ENVELOPE_SHAPES = ("ramp", "exp", "scurve", "lfo-sine", "lfo-square")
 
 
 def register_envelope_commands(envelope_app: typer.Typer) -> None:
@@ -33,7 +33,7 @@ def register_envelope_commands(envelope_app: typer.Typer) -> None:
     envelope_app.command("clear")(clip_envelope_clear)
 
 
-def _parse_points_json(points_json: str) -> list[dict[str, float]]:
+def parse_points_json(points_json: str) -> list[dict[str, float]]:
     try:
         payload = json.loads(points_json)
     except json.JSONDecodeError as exc:
@@ -63,6 +63,38 @@ def _parse_points_json(points_json: str) -> list[dict[str, float]]:
                 hint="Use numeric time and value fields.",
             ) from exc
     return parsed
+
+
+def shape_points(
+    shape: str,
+    *,
+    from_value: float,
+    to_value: float,
+    start: float,
+    length: float,
+    resolution: int,
+    rate: float,
+) -> list[dict[str, Any]]:
+    if shape not in ENVELOPE_SHAPES:
+        raise invalid_argument(
+            message=f"shape must be one of {ENVELOPE_SHAPES}, got {shape!r}",
+            hint="Use --shape ramp|exp|scurve|lfo-sine|lfo-square.",
+        )
+    try:
+        return generate_shape_points(
+            shape,
+            from_value=from_value,
+            to_value=to_value,
+            start=start,
+            length=length,
+            resolution=resolution,
+            rate=rate,
+        )
+    except ValueError as exc:
+        raise invalid_argument(
+            message=str(exc),
+            hint="Use --resolution >= 1 and --length > 0.",
+        ) from exc
 
 
 def _device_ref_options(
@@ -122,7 +154,7 @@ def clip_envelope_set(
 ) -> None:
     def _run() -> dict[str, object]:
         valid_track, valid_clip = validate_track_and_clip(track=track, clip=clip)
-        points = _parse_points_json(points_json)
+        points = parse_points_json(points_json)
         resolved_device_ref = _device_ref_options(
             device_index=device_index,
             device_name=device_name,
@@ -163,7 +195,7 @@ def clip_envelope_shape(
     ctx: typer.Context,
     track: Annotated[int, typer.Argument(help="Track index (0-based)")],
     clip: Annotated[int, typer.Argument(help="Clip slot index (0-based)")],
-    shape: Annotated[str, typer.Option("--shape", help=f"One of {', '.join(_ENVELOPE_SHAPES)}")],
+    shape: Annotated[str, typer.Option("--shape", help=f"One of {', '.join(ENVELOPE_SHAPES)}")],
     from_value: Annotated[float, typer.Option("--from", help="Starting value")],
     to_value: Annotated[float, typer.Option("--to", help="Ending/target value")],
     start: Annotated[float, typer.Option("--start", help="Start time in beats")] = 0.0,
@@ -187,26 +219,15 @@ def clip_envelope_shape(
 ) -> None:
     def _run() -> dict[str, object]:
         valid_track, valid_clip = validate_track_and_clip(track=track, clip=clip)
-        if shape not in _ENVELOPE_SHAPES:
-            raise invalid_argument(
-                message=f"shape must be one of {_ENVELOPE_SHAPES}, got {shape!r}",
-                hint="Use --shape ramp|exp|scurve|lfo-sine|lfo-square.",
-            )
-        try:
-            points: list[dict[str, Any]] = generate_shape_points(
-                shape,
-                from_value=from_value,
-                to_value=to_value,
-                start=start,
-                length=length,
-                resolution=resolution,
-                rate=rate,
-            )
-        except ValueError as exc:
-            raise invalid_argument(
-                message=str(exc),
-                hint="Use --resolution >= 1 and --length > 0.",
-            ) from exc
+        points = shape_points(
+            shape,
+            from_value=from_value,
+            to_value=to_value,
+            start=start,
+            length=length,
+            resolution=resolution,
+            rate=rate,
+        )
         resolved_device_ref = _device_ref_options(
             device_index=device_index,
             device_name=device_name,

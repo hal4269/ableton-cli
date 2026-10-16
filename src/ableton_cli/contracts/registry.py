@@ -149,8 +149,9 @@ def _parameter_result_schema(*, include_bounds: bool = True) -> dict[str, Any]:
         "stable_ref": {"type": "string"},
         "name": {"type": "string"},
         "value": {"type": "number"},
+        "display_value": {"type": "string"},
     }
-    required = ["index", "stable_ref", "name", "value"]
+    required = ["index", "stable_ref", "name", "value", "display_value"]
     if include_bounds:
         properties.update(
             {
@@ -158,9 +159,10 @@ def _parameter_result_schema(*, include_bounds: bool = True) -> dict[str, Any]:
                 "max": {"type": ["number", "null"]},
                 "is_enabled": {"type": "boolean"},
                 "is_quantized": {"type": "boolean"},
+                "value_items": {"type": "array", "items": {"type": "string"}},
             }
         )
-        required.extend(["min", "max", "is_enabled", "is_quantized"])
+        required.extend(["min", "max", "is_enabled", "is_quantized", "value_items"])
     return {
         "type": "object",
         "required": required,
@@ -190,10 +192,28 @@ def _device_result_schema(*, include_track_stable_ref: bool) -> dict[str, Any]:
     }
 
 
+#: Group state reported by ``tracks list`` and ``track info``.
+_TRACK_GROUP_PROPERTIES: dict[str, Any] = {
+    "is_foldable": {"type": "boolean"},
+    "fold_state": {"type": ["boolean", "null"]},
+    "is_grouped": {"type": "boolean"},
+    "group_track": {"type": ["integer", "null"]},
+}
+
+
 def _track_summary_schema() -> dict[str, Any]:
     return {
         "type": "object",
-        "required": ["index", "stable_ref", "name", "mute", "solo", "arm", "volume"],
+        "required": [
+            "index",
+            "stable_ref",
+            "name",
+            "mute",
+            "solo",
+            "arm",
+            "volume",
+            *_TRACK_GROUP_PROPERTIES,
+        ],
         "properties": {
             "index": {"type": "integer"},
             "stable_ref": {"type": "string"},
@@ -202,6 +222,7 @@ def _track_summary_schema() -> dict[str, Any]:
             "solo": {"type": "boolean"},
             "arm": {"type": "boolean"},
             "volume": {"type": "number"},
+            **_TRACK_GROUP_PROPERTIES,
         },
         "additional_properties": False,
     }
@@ -831,6 +852,7 @@ _DETAILED_CONTRACTS.update(
                     "arm",
                     "volume",
                     "panning",
+                    *_TRACK_GROUP_PROPERTIES,
                     "clip_slots",
                     "devices",
                 ],
@@ -845,6 +867,7 @@ _DETAILED_CONTRACTS.update(
                     "arm": {"type": "boolean"},
                     "volume": {"type": "number"},
                     "panning": {"type": "number"},
+                    **_TRACK_GROUP_PROPERTIES,
                     "clip_slots": {"type": "array"},
                     "devices": {
                         "type": "array",

@@ -44,12 +44,6 @@ class _ClientStub:
     def song_redo(self):  # noqa: ANN201
         return {"redone": True}
 
-    def song_save(self, path: str):  # noqa: ANN201
-        return {"saved": True, "path": path}
-
-    def song_export_audio(self, path: str):  # noqa: ANN201
-        return {"exported": True, "path": path}
-
     def get_session_info(self):  # noqa: ANN201
         return {"tempo": 123.0}
 
@@ -832,6 +826,8 @@ class _ClientStub:
                     "max": 1.0,
                     "is_enabled": True,
                     "is_quantized": False,
+                    "display_value": "0.50",
+                    "value_items": [],
                 }
             ],
         }
@@ -884,6 +880,8 @@ class _ClientStub:
                     "max": 1.0,
                     "is_enabled": True,
                     "is_quantized": False,
+                    "display_value": "0.50",
+                    "value_items": [],
                 }
             ],
         }
@@ -997,6 +995,8 @@ class _ClientStub:
                     "max": 1.0,
                     "is_enabled": True,
                     "is_quantized": False,
+                    "display_value": "0.50",
+                    "value_items": [],
                 }
             ],
         }
@@ -1049,6 +1049,8 @@ class _ClientStub:
                     "max": 1.0,
                     "is_enabled": True,
                     "is_quantized": False,
+                    "display_value": "0.50",
+                    "value_items": [],
                 }
             ],
         }
@@ -1243,33 +1245,15 @@ def test_tracks_create_commands_accept_index_option(runner, cli_app, monkeypatch
     assert audio_payload["result"]["kind"] == "audio"
 
 
-def test_song_new_save_export_commands_output_json_envelope(runner, cli_app, monkeypatch) -> None:
+def test_song_new_command_outputs_json_envelope(runner, cli_app, monkeypatch) -> None:
     from ableton_cli.commands import song
 
     monkeypatch.setattr(song, "get_client", lambda ctx: _ClientStub())
 
     created = runner.invoke(cli_app, ["--output", "json", "song", "new"])
-    saved = runner.invoke(
-        cli_app,
-        ["--output", "json", "song", "save", "--path", "/tmp/demo.als"],
-    )
-    exported = runner.invoke(
-        cli_app,
-        ["--output", "json", "song", "export", "audio", "--path", "/tmp/demo.wav"],
-    )
 
     assert created.exit_code == 0
-    assert saved.exit_code == 0
-    assert exported.exit_code == 0
-
-    created_payload = json.loads(created.stdout)
-    saved_payload = json.loads(saved.stdout)
-    exported_payload = json.loads(exported.stdout)
-    assert created_payload["result"]["created"] is True
-    assert saved_payload["result"]["saved"] is True
-    assert saved_payload["result"]["path"] == "/tmp/demo.als"
-    assert exported_payload["result"]["exported"] is True
-    assert exported_payload["result"]["path"] == "/tmp/demo.wav"
+    assert json.loads(created.stdout)["result"]["created"] is True
 
 
 def test_song_undo_redo_commands_output_json_envelope(runner, cli_app, monkeypatch) -> None:
@@ -2918,11 +2902,6 @@ def test_new_commands_validate_arguments_with_exit_code_2(runner, cli_app, monke
     monkeypatch.setattr(scenes, "get_client", lambda ctx: _ClientStub())
     monkeypatch.setattr(tracks, "get_client", lambda ctx: _ClientStub())
 
-    song_save = runner.invoke(cli_app, ["--output", "json", "song", "save", "--path", "   "])
-    song_export = runner.invoke(
-        cli_app,
-        ["--output", "json", "song", "export", "audio", "--path", " "],
-    )
     clip_duplicate = runner.invoke(
         cli_app,
         ["--output", "json", "clip", "duplicate", "0", "1", "--", "-1"],
@@ -2930,14 +2909,10 @@ def test_new_commands_validate_arguments_with_exit_code_2(runner, cli_app, monke
     scenes_move = runner.invoke(cli_app, ["--output", "json", "scenes", "move", "--", "-1", "0"])
     tracks_delete = runner.invoke(cli_app, ["--output", "json", "tracks", "delete", "--", "-1"])
 
-    assert song_save.exit_code == 2
-    assert song_export.exit_code == 2
     assert clip_duplicate.exit_code == 2
     assert scenes_move.exit_code == 2
     assert tracks_delete.exit_code == 2
 
-    assert json.loads(song_save.stdout)["error"]["code"] == "INVALID_ARGUMENT"
-    assert json.loads(song_export.stdout)["error"]["code"] == "INVALID_ARGUMENT"
     assert json.loads(clip_duplicate.stdout)["error"]["code"] == "INVALID_ARGUMENT"
     assert json.loads(scenes_move.stdout)["error"]["code"] == "INVALID_ARGUMENT"
     assert json.loads(tracks_delete.stdout)["error"]["code"] == "INVALID_ARGUMENT"

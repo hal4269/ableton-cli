@@ -38,3 +38,24 @@ def test_install_remote_script_is_idempotent_and_backs_up(monkeypatch, tmp_path:
     assert second["action"] == "update"
     assert second["backup"] is not None
     assert (target_root / REMOTE_SCRIPT_DIR_NAME / "__init__.py").exists()
+
+
+def test_install_remote_script_keeps_backups_out_of_live_control_surface_list(
+    monkeypatch, tmp_path: Path
+) -> None:
+    source_root = tmp_path / "source" / REMOTE_SCRIPT_DIR_NAME
+    source_root.mkdir(parents=True)
+    (source_root / "__init__.py").write_text("x = 1\n", encoding="utf-8")
+    target_root = tmp_path / "ableton" / "Remote Scripts"
+    target_root.mkdir(parents=True)
+    monkeypatch.setattr("ableton_cli.installer.remote_script_source_dir", lambda: source_root)
+    platform_paths = _PlatformPathsStub(candidates=[target_root])
+
+    install_remote_script(dry_run=False, yes=True, platform_paths=platform_paths)
+    second = install_remote_script(dry_run=False, yes=True, platform_paths=platform_paths)
+
+    # Live lists every folder under Remote Scripts as a control surface.
+    assert [path.name for path in target_root.iterdir()] == [REMOTE_SCRIPT_DIR_NAME]
+    backup = Path(second["backup"])
+    assert backup.parent == tmp_path / "ableton" / "Remote Scripts Backups"
+    assert (backup / "__init__.py").exists()

@@ -355,6 +355,8 @@ class LiveBackendTracksClipsMixin:
             "warp_mode": self._safe_clip_attr(clip_obj, "warp_mode"),
             "gain_db": self._safe_clip_attr(clip_obj, "_ableton_cli_gain_db"),
             "pitch_coarse": self._safe_clip_attr(clip_obj, "pitch_coarse"),
+            "signature_numerator": self._safe_clip_attr(clip_obj, "signature_numerator"),
+            "signature_denominator": self._safe_clip_attr(clip_obj, "signature_denominator"),
         }
         if clip is not None:
             payload["clip"] = clip

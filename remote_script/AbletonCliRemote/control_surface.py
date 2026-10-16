@@ -351,6 +351,9 @@ class AbletonCliRemoteSurface(_ControlSurface):
 
     def update_display(self) -> None:
         super().update_display()
+        # Live calls this on its main thread every display tick (~100 ms). Draining here
+        # bounds request latency to one tick; schedule_message alone can take several.
+        self._drain_requests(budget_s=DRAIN_BUDGET_S)
 
     def disconnect(self) -> None:
         self._command_server.stop()

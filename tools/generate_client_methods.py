@@ -81,7 +81,7 @@ def render_module() -> str:
 
 
 def main() -> int:
-    _OUTPUT_PATH.write_text(render_module(), encoding="utf-8")
+    _OUTPUT_PATH.write_text(render_module(), encoding="utf-8", newline="\n")
     # Long signatures and payloads need wrapping; let the formatter own that
     # rather than reimplementing line-breaking here.
     subprocess.run(

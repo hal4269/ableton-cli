@@ -89,6 +89,32 @@ TRACK_FACET_SPECS: tuple[TrackFacetSpec, ...] = (
         value_kind="float",
         value_help="Panning value in [-1.0, 1.0]",
     ),
+    TrackFacetSpec(
+        name="color",
+        help="Track color commands",
+        client_get=None,
+        client_set="track_color_set",
+        value_kind="int",
+        value_help="Color index in Live's color chooser (0-69)",
+        value_metavar="COLOR_INDEX",
+        value_arg_name="color_index",
+    ),
+    TrackFacetSpec(
+        name="monitoring",
+        help="Track monitoring (In / Auto / Off); not available on group tracks",
+        client_get="track_monitoring_get",
+        client_set="track_monitoring_set",
+        value_kind="str",
+        value_help="Monitoring state: in|auto|off",
+        value_metavar="STATE",
+    ),
+    TrackFacetSpec(
+        name="fold",
+        help="Group track folding",
+        client_get=None,
+        client_set="track_fold_set",
+        value_help="Folded: true|false (group tracks only)",
+    ),
 )
 
 

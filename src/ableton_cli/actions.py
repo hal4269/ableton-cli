@@ -63,14 +63,56 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         capability="Redo the most recently undone Ableton operation when supported by Live API.",
     ),
     StableActionMapping(
-        action="song_save",
-        command="uv run ableton-cli --output json song save --path <als>",
-        capability="Save the current Ableton Set to a target path when supported.",
+        action="song_loop_get",
+        command="uv run ableton-cli --output json song loop get",
+        capability="Read the Arrangement loop region (enabled, start, length, end in beats).",
     ),
     StableActionMapping(
-        action="song_export_audio",
-        command="uv run ableton-cli --output json song export audio --path <wav>",
-        capability="Export session audio to a target path when supported.",
+        action="song_loop_set",
+        command=(
+            "uv run ableton-cli --output json song loop set [--enabled|--disabled] [--start "
+            "<beats>] [--length <beats>]"
+        ),
+        capability="Change the Arrangement loop region.",
+    ),
+    StableActionMapping(
+        action="song_metronome_set",
+        command="uv run ableton-cli --output json song metronome set <true|false>",
+        capability="Switch the metronome on or off.",
+    ),
+    StableActionMapping(
+        action="song_swing_set",
+        command="uv run ableton-cli --output json song swing set <0-1>",
+        capability="Set the global swing amount.",
+    ),
+    StableActionMapping(
+        action="song_groove_amount_set",
+        command="uv run ableton-cli --output json song groove-amount set <0-1.3>",
+        capability="Set the Groove Pool global amount.",
+    ),
+    StableActionMapping(
+        action="song_scale_set",
+        command=(
+            "uv run ableton-cli --output json song scale set [--root <note>] [--name <scale>] "
+            "[--mode|--no-mode]"
+        ),
+        capability="Set the song key, scale name and scale mode (Live 12+).",
+    ),
+    StableActionMapping(
+        action="song_record_quantization_set",
+        command=(
+            "uv run ableton-cli --output json song record-quantization set "
+            "<none|1/4|1/8|1/8t|1/8+1/8t|1/16|1/16t|1/16+1/16t|1/32>"
+        ),
+        capability="Set MIDI record quantization.",
+    ),
+    StableActionMapping(
+        action="song_capture_midi",
+        command=(
+            "uv run ableton-cli --output json song capture-midi [--destination "
+            "auto|session|arrangement]"
+        ),
+        capability="Capture recently played MIDI into a clip.",
     ),
     StableActionMapping(
         action="get_session_info",
@@ -94,6 +136,11 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         capability="Stop arrangement recording when supported by Live API.",
     ),
     StableActionMapping(
+        action="back_to_arranger",
+        command="uv run ableton-cli --output json arrangement back-to-arranger",
+        capability="Press Back to Arrangement so every track follows the Arrangement again.",
+    ),
+    StableActionMapping(
         action="list_tracks",
         command="uv run ableton-cli --output json tracks list",
         capability="List all tracks and their basic properties.",
@@ -112,6 +159,38 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         action="tracks_delete",
         command="uv run ableton-cli --output json tracks delete <track>",
         capability="Delete a track by index when supported by Live API.",
+    ),
+    StableActionMapping(
+        action="tracks_duplicate",
+        command="uv run ableton-cli --output json tracks duplicate <track>",
+        capability="Duplicate a track; the copy is inserted right after it.",
+    ),
+    StableActionMapping(
+        action="track_monitoring_get",
+        command="uv run ableton-cli --output json track monitoring get --track-index <track>",
+        capability="Read a track's monitoring state (in, auto, off).",
+    ),
+    StableActionMapping(
+        action="track_monitoring_set",
+        command=(
+            "uv run ableton-cli --output json track monitoring set <in|auto|off> "
+            "--track-index <track>"
+        ),
+        capability="Set a track's monitoring state (not on group tracks).",
+    ),
+    StableActionMapping(
+        action="track_fold_set",
+        command=(
+            "uv run ableton-cli --output json track fold set <true|false> --track-index <track>"
+        ),
+        capability="Fold or unfold a group track.",
+    ),
+    StableActionMapping(
+        action="set_track_color",
+        command=(
+            "uv run ableton-cli --output json track color set <color_index> --track-index <track>"
+        ),
+        capability="Set a track color (0-69, Live's color chooser).",
     ),
     StableActionMapping(
         action="set_track_name",
@@ -339,6 +418,50 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         capability="Delete the session clip in a clip slot.",
     ),
     StableActionMapping(
+        action="set_clip_color",
+        command="uv run ableton-cli --output json clip color set <track> <clip> <color_index>",
+        capability="Set a session clip color (0-69).",
+    ),
+    StableActionMapping(
+        action="clip_launch_get",
+        command="uv run ableton-cli --output json clip launch get <track> <clip>",
+        capability="Read a session clip's launch mode, quantization, legato and velocity amount.",
+    ),
+    StableActionMapping(
+        action="clip_launch_set",
+        command=(
+            "uv run ableton-cli --output json clip launch set <track> <clip> "
+            "[--mode <mode>] [--quantization <q>] [--legato|--no-legato] [--velocity-amount <0-1>]"
+        ),
+        capability="Change a session clip's launch settings.",
+    ),
+    StableActionMapping(
+        action="clip_crop",
+        command="uv run ableton-cli --output json clip crop <track> <clip>",
+        capability="Crop a session clip to its loop (or start/end markers when not looping).",
+    ),
+    StableActionMapping(
+        action="clip_duplicate_loop",
+        command="uv run ableton-cli --output json clip duplicate-loop <track> <clip>",
+        capability="Double a MIDI clip's loop, copying notes and envelopes into the new half.",
+    ),
+    StableActionMapping(
+        action="set_clip_signature",
+        command=(
+            "uv run ableton-cli --output json clip signature set <track> <clip> "
+            "<numerator> <denominator>"
+        ),
+        capability="Set a session clip's time signature.",
+    ),
+    StableActionMapping(
+        action="set_clip_mixer_envelope",
+        command=(
+            "uv run ableton-cli --output json clip envelope mixer set <track> <clip> "
+            "<volume|panning|send> [--send-index <n>] --points-json <json>"
+        ),
+        capability="Write a clip envelope for the track's volume, panning or a send.",
+    ),
+    StableActionMapping(
         action="clip_duplicate",
         command="uv run ableton-cli --output json clip duplicate <track> <src_clip> <dst_clip>",
         capability="Duplicate a clip (exact copy, incl. envelopes) into an empty slot.",
@@ -382,6 +505,83 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         action="scenes_move",
         command="uv run ableton-cli --output json scenes move <from> <to>",
         capability="Move a scene from one index to another when supported by Live API.",
+    ),
+    StableActionMapping(
+        action="scenes_duplicate",
+        command="uv run ableton-cli --output json scenes duplicate <scene>",
+        capability="Duplicate a scene with its clips.",
+    ),
+    StableActionMapping(
+        action="scene_tempo_set",
+        command="uv run ableton-cli --output json scenes tempo set <scene> <bpm>|--clear",
+        capability="Set or clear a scene's own tempo (Live 12+).",
+    ),
+    StableActionMapping(
+        action="scene_signature_set",
+        command=(
+            "uv run ableton-cli --output json scenes signature set <scene> <numerator> "
+            "<denominator>|--clear"
+        ),
+        capability="Set or clear a scene's own time signature (Live 12+).",
+    ),
+    StableActionMapping(
+        action="scenes_delete",
+        command="uv run ableton-cli --output json scenes delete <scene>",
+        capability="Delete a scene and its clips.",
+    ),
+    StableActionMapping(
+        action="return_tracks_create",
+        command="uv run ableton-cli --output json return-tracks create",
+        capability="Add a return track at the end.",
+    ),
+    StableActionMapping(
+        action="return_tracks_delete",
+        command="uv run ableton-cli --output json return-tracks delete <index>",
+        capability="Delete a return track.",
+    ),
+    StableActionMapping(
+        action="locators_list",
+        command="uv run ableton-cli --output json arrangement locator list",
+        capability="List Arrangement locators (cue points) sorted by time.",
+    ),
+    StableActionMapping(
+        action="locator_add",
+        command="uv run ableton-cli --output json arrangement locator add <beats> [--name <name>]",
+        capability="Add a named Arrangement locator (transport stopped).",
+    ),
+    StableActionMapping(
+        action="locator_delete",
+        command="uv run ableton-cli --output json arrangement locator delete <index>",
+        capability="Delete an Arrangement locator (transport stopped).",
+    ),
+    StableActionMapping(
+        action="view_show",
+        command=(
+            "uv run ableton-cli --output json view show <session|arranger|detail|clip|device-chain>"
+        ),
+        capability="Show and focus one of Live's views.",
+    ),
+    StableActionMapping(
+        action="view_select_track",
+        command="uv run ableton-cli --output json view select track <track>",
+        capability="Select a track.",
+    ),
+    StableActionMapping(
+        action="view_select_scene",
+        command="uv run ableton-cli --output json view select scene <scene>",
+        capability="Select a scene.",
+    ),
+    StableActionMapping(
+        action="view_select_clip",
+        command="uv run ableton-cli --output json view select clip <track> <clip>",
+        capability="Highlight a clip slot and show its clip in the Detail view.",
+    ),
+    StableActionMapping(
+        action="transport_signature_set",
+        command=(
+            "uv run ableton-cli --output json transport signature set <numerator> <denominator>"
+        ),
+        capability="Set the song time signature.",
     ),
     StableActionMapping(
         action="stop_all_clips",
@@ -445,6 +645,95 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
             "--device-index <device> --parameter-index <parameter>"
         ),
         capability="Set a device parameter value by selector.",
+    ),
+    StableActionMapping(
+        action="device_parameters_list",
+        command=(
+            "uv run ableton-cli --output json device parameter list --track-index "
+            "<track> --device-index <device>"
+        ),
+        capability="List all parameters of a device, also inside rack chains via --device-ref.",
+    ),
+    StableActionMapping(
+        action="device_delete",
+        command=(
+            "uv run ableton-cli --output json device delete --track-index <track> "
+            "--device-index <device>"
+        ),
+        capability="Delete a device, also inside rack chains via --device-ref.",
+    ),
+    StableActionMapping(
+        action="device_move",
+        command=(
+            "uv run ableton-cli --output json device move --to-index <index> "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Move a top-level device to another position on its track.",
+    ),
+    StableActionMapping(
+        action="device_enabled_set",
+        command=(
+            "uv run ableton-cli --output json device enabled set <true|false> "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Switch a device on or off.",
+    ),
+    StableActionMapping(
+        action="device_insert",
+        command=(
+            "uv run ableton-cli --output json device insert <device_name> "
+            "--track-index <track> [--index <index>]"
+        ),
+        capability="Insert a native Live device at a position on a track (Live 12.1.10+).",
+    ),
+    StableActionMapping(
+        action="device_chain_get",
+        command=(
+            "uv run ableton-cli --output json device chains get <chain> "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Read a rack chain's volume, panning, mute, solo and Drum Rack choke group.",
+    ),
+    StableActionMapping(
+        action="device_chain_set",
+        command=(
+            "uv run ableton-cli --output json device chains set <chain> "
+            "--track-index <track> --device-index <device> [--volume <0-1>] "
+            "[--panning <-1..1>] [--mute|--no-mute] [--solo|--no-solo] [--choke-group <0-16>]"
+        ),
+        capability="Change a rack chain's mixer or Drum Rack choke group.",
+    ),
+    StableActionMapping(
+        action="device_variations_list",
+        command=(
+            "uv run ableton-cli --output json device variation list "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Read a rack's macro variation count and selected variation.",
+    ),
+    StableActionMapping(
+        action="device_variation_store",
+        command=(
+            "uv run ableton-cli --output json device variation store "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Store a rack's current macro values as a new variation.",
+    ),
+    StableActionMapping(
+        action="device_variation_recall",
+        command=(
+            "uv run ableton-cli --output json device variation recall <variation> "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Select and recall a rack macro variation.",
+    ),
+    StableActionMapping(
+        action="device_variation_delete",
+        command=(
+            "uv run ableton-cli --output json device variation delete <variation> "
+            "--track-index <track> --device-index <device>"
+        ),
+        capability="Delete a rack macro variation.",
     ),
     StableActionMapping(
         action="find_synth_devices",

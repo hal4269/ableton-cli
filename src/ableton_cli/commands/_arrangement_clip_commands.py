@@ -43,6 +43,15 @@ def register_commands(
     *,
     run_client_command_spec: Callable[..., None],
 ) -> None:
+    _register_create_command(clip_app, run_client_command_spec=run_client_command_spec)
+    _register_placement_commands(clip_app, run_client_command_spec=run_client_command_spec)
+
+
+def _register_create_command(
+    clip_app: typer.Typer,
+    *,
+    run_client_command_spec: Callable[..., None],
+) -> None:
     @clip_app.command("create")
     def arrangement_clip_create(
         ctx: typer.Context,
@@ -160,6 +169,12 @@ def register_commands(
             method_kwargs=_method_kwargs,
         )
 
+
+def _register_placement_commands(
+    clip_app: typer.Typer,
+    *,
+    run_client_command_spec: Callable[..., None],
+) -> None:
     @clip_app.command("from-session")
     def arrangement_clip_from_session(
         ctx: typer.Context,

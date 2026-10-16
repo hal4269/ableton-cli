@@ -30,6 +30,11 @@ TRACKS_CREATE_AUDIO_SPEC = TracksCommandSpec(
     command_name="tracks create audio",
     client_method="create_audio_track",
 )
+TRACKS_DUPLICATE_SPEC = TracksCommandSpec(
+    command_name="tracks duplicate",
+    client_method="tracks_duplicate",
+)
+
 TRACKS_DELETE_SPEC = TracksCommandSpec(
     command_name="tracks delete",
     client_method="tracks_delete",
@@ -148,6 +153,25 @@ def delete_track(
     run_client_command_spec(
         ctx,
         spec=TRACKS_DELETE_SPEC,
+        args={"track": track},
+        method_kwargs=_method_kwargs,
+    )
+
+
+@tracks_app.command("duplicate")
+def duplicate_track(
+    ctx: typer.Context,
+    track: Annotated[int, typer.Argument(help="Track index (0-based)")],
+) -> None:
+    """Duplicate a track (devices, clips, settings); the copy lands right after it."""
+
+    def _method_kwargs() -> dict[str, object]:
+        require_non_negative("track", track, hint="Use a valid track index from 'tracks list'.")
+        return {"track": track}
+
+    run_client_command_spec(
+        ctx,
+        spec=TRACKS_DUPLICATE_SPEC,
         args={"track": track},
         method_kwargs=_method_kwargs,
     )

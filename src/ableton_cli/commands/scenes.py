@@ -7,7 +7,11 @@ from typing import Annotated, Generic, TypeVar, cast
 import typer
 
 from ..runtime import execute_command, get_client
+from ._client_command_runner import CommandSpec
+from ._client_command_runner import run_client_command_spec as run_client_command_spec_shared
 from ._validation import (
+    invalid_argument,
+    require_float_in_range,
     require_scene_and_name,
     require_scene_and_value,
     require_scene_index,
@@ -17,6 +21,8 @@ from ._validation import (
 
 scenes_app = typer.Typer(help="Scenes commands", no_args_is_help=True)
 name_app = typer.Typer(help="Scenes naming commands", no_args_is_help=True)
+tempo_app = typer.Typer(help="Scene tempo (Live 12+)", no_args_is_help=True)
+signature_app = typer.Typer(help="Scene time signature (Live 12+)", no_args_is_help=True)
 
 TValue = TypeVar("TValue")
 
@@ -202,6 +208,16 @@ SCENE_FIRE_SPEC = SceneCommandSpec(
     client_method="fire_scene",
 )
 
+SCENE_DUPLICATE_SPEC = SceneCommandSpec(
+    command_name="scenes duplicate",
+    client_method="scenes_duplicate",
+)
+
+SCENE_DELETE_SPEC = SceneCommandSpec(
+    command_name="scenes delete",
+    client_method="scenes_delete",
+)
+
 SCENE_MOVE_SPEC = SceneMoveCommandSpec(
     command_name="scenes move",
     client_method="scenes_move",
@@ -286,7 +302,127 @@ def scenes_move(
     )
 
 
+@scenes_app.command("duplicate")
+def scenes_duplicate(
+    ctx: typer.Context,
+    scene: Annotated[int, typer.Argument(help="Scene index (0-based)")],
+) -> None:
+    """Duplicate a scene with its clips; the copy lands right after it."""
+    run_scene_command_spec(ctx, spec=SCENE_DUPLICATE_SPEC, scene=scene)
+
+
+@scenes_app.command("delete")
+def scenes_delete(
+    ctx: typer.Context,
+    scene: Annotated[int, typer.Argument(help="Scene index (0-based)")],
+) -> None:
+    """Delete a scene and its clips."""
+    run_scene_command_spec(ctx, spec=SCENE_DELETE_SPEC, scene=scene)
+
+
+SCENE_TEMPO_SET_SPEC = CommandSpec(command_name="scenes tempo set", client_method="scene_tempo_set")
+SCENE_SIGNATURE_SET_SPEC = CommandSpec(
+    command_name="scenes signature set", client_method="scene_signature_set"
+)
+
+#: Live's tempo range (bpm).
+_MIN_BPM = 20.0
+_MAX_BPM = 999.0
+_SIGNATURE_DENOMINATORS = (1, 2, 4, 8, 16)
+
+
+def _run_spec(
+    ctx: typer.Context,
+    *,
+    spec: CommandSpec,
+    args: dict[str, object],
+    method_kwargs: Callable[[], dict[str, object]],
+) -> None:
+    run_client_command_spec_shared(
+        ctx,
+        spec=spec,
+        args=args,
+        method_kwargs=method_kwargs,
+        get_client_fn=get_client,
+        execute_command_fn=execute_command,
+    )
+
+
+@tempo_app.command("set")
+def scenes_tempo_set(
+    ctx: typer.Context,
+    scene: Annotated[int, typer.Argument(help="Scene index (0-based)")],
+    bpm: Annotated[float | None, typer.Argument(help="Tempo the scene sets when launched")] = None,
+    clear: Annotated[bool, typer.Option("--clear", help="Remove the scene's tempo")] = False,
+) -> None:
+    """Give a scene its own tempo, or --clear it (Scene.tempo / tempo_enabled)."""
+
+    def _method_kwargs() -> dict[str, object]:
+        require_scene_index(scene)
+        if (bpm is None) == (not clear):
+            raise invalid_argument(
+                message="pass either a tempo or --clear",
+                hint="Example: 'scenes tempo set 1 128' or 'scenes tempo set 1 --clear'.",
+            )
+        valid_bpm = None
+        if bpm is not None:
+            valid_bpm = require_float_in_range(
+                "bpm", bpm, minimum=_MIN_BPM, maximum=_MAX_BPM, hint="Use a tempo like 128."
+            )
+        return {"scene": scene, "bpm": valid_bpm}
+
+    _run_spec(
+        ctx,
+        spec=SCENE_TEMPO_SET_SPEC,
+        args={"scene": scene, "bpm": bpm, "clear": clear},
+        method_kwargs=_method_kwargs,
+    )
+
+
+@signature_app.command("set")
+def scenes_signature_set(
+    ctx: typer.Context,
+    scene: Annotated[int, typer.Argument(help="Scene index (0-based)")],
+    numerator: Annotated[int | None, typer.Argument(help="Beats per bar (1-99)")] = None,
+    denominator: Annotated[int | None, typer.Argument(help="Note value: 1, 2, 4, 8 or 16")] = None,
+    clear: Annotated[
+        bool, typer.Option("--clear", help="Remove the scene's time signature")
+    ] = False,
+) -> None:
+    """Give a scene its own time signature, or --clear it."""
+
+    def _method_kwargs() -> dict[str, object]:
+        require_scene_index(scene)
+        if clear:
+            if numerator is not None or denominator is not None:
+                raise invalid_argument(
+                    message="pass either a time signature or --clear",
+                    hint="Example: 'scenes signature set 0 7 8' or '... set 0 --clear'.",
+                )
+            return {"scene": scene, "numerator": None, "denominator": None}
+        if (
+            numerator is None
+            or denominator is None
+            or not 1 <= numerator <= 99
+            or denominator not in _SIGNATURE_DENOMINATORS
+        ):
+            raise invalid_argument(
+                message=f"invalid time signature {numerator}/{denominator}",
+                hint="Use a numerator 1-99 and a denominator of 1, 2, 4, 8 or 16 (e.g. 7 8).",
+            )
+        return {"scene": scene, "numerator": numerator, "denominator": denominator}
+
+    _run_spec(
+        ctx,
+        spec=SCENE_SIGNATURE_SET_SPEC,
+        args={"scene": scene, "numerator": numerator, "denominator": denominator, "clear": clear},
+        method_kwargs=_method_kwargs,
+    )
+
+
 scenes_app.add_typer(name_app, name="name")
+scenes_app.add_typer(tempo_app, name="tempo")
+scenes_app.add_typer(signature_app, name="signature")
 
 
 def register(app: typer.Typer) -> None:

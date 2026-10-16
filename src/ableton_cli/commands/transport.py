@@ -11,11 +11,12 @@ from ..runtime import execute_command, get_client
 from ._client_command_runner import CommandSpec
 from ._client_command_runner import run_client_command as run_client_command_shared
 from ._client_command_runner import run_client_command_spec as run_client_command_spec_shared
-from ._validation import require_non_negative_float
+from ._validation import require_non_negative_float, require_time_signature
 
 transport_app = typer.Typer(help="Transport control commands", no_args_is_help=True)
 tempo_app = typer.Typer(help="Tempo controls", no_args_is_help=True)
 position_app = typer.Typer(help="Playhead position controls", no_args_is_help=True)
+signature_app = typer.Typer(help="Time signature controls", no_args_is_help=True)
 
 
 TransportCommandSpec = CommandSpec
@@ -188,7 +189,32 @@ def transport_rewind(ctx: typer.Context) -> None:
     )
 
 
+TRANSPORT_SIGNATURE_SET_SPEC = TransportCommandSpec(
+    command_name="transport signature set",
+    client_method="transport_signature_set",
+)
+
+
+@signature_app.command("set")
+def signature_set(
+    ctx: typer.Context,
+    numerator: Annotated[int, typer.Argument(help="Beats per bar (1-99)")],
+    denominator: Annotated[int, typer.Argument(help="Note value: 1, 2, 4, 8 or 16")],
+) -> None:
+    def _method_kwargs() -> dict[str, object]:
+        valid_numerator, valid_denominator = require_time_signature(numerator, denominator)
+        return {"numerator": valid_numerator, "denominator": valid_denominator}
+
+    run_client_command_spec(
+        ctx,
+        spec=TRANSPORT_SIGNATURE_SET_SPEC,
+        args={"numerator": numerator, "denominator": denominator},
+        method_kwargs=_method_kwargs,
+    )
+
+
 transport_app.add_typer(tempo_app, name="tempo")
+transport_app.add_typer(signature_app, name="signature")
 transport_app.add_typer(position_app, name="position")
 
 

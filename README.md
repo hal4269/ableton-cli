@@ -1,591 +1,151 @@
 # ableton-cli
 
-`ableton-cli` is a Python CLI to control and inspect Ableton Live through a local Remote Script.
-It is designed for both humans and automation (Skills/agents), with stable JSON output and fixed exit codes.
+Control Ableton Live 12+ from the command line: transport, tracks, clips, MIDI notes, devices,
+the browser and the Arrangement. Built for scripts and AI agents: stable JSON output, fixed
+exit codes, explicit errors.
 
-## About this fork
+> **Credits.** This is a fork of [ableton-cli](https://github.com/6uclz1/ableton-cli), created
+> by **6uclz1** and contributors (MIT license). The design and nearly all of the code are
+> theirs. This fork adds a few commands for generating songs with an agent (see below) and
+> keeps its changes small so they can go back upstream.
 
-This is a fork of the upstream `ableton-cli` project, extended for generating songs with an
-AI agent. Changes are kept small and upstream-friendly, on feature branches, and the fork
-tracks upstream `main` (configured as the `upstream` git remote).
+## How it works
 
-Added or changed compared to upstream:
-
-| Command | Change |
-| --- | --- |
-| `clip duplicate` / `clip duplicate-many` | Exact copy via Live's `ClipSlot.duplicate_clip_to`: keeps clip envelopes, note probability and loop settings (upstream rebuilds the clip from basic notes and drops them). |
-| `arrangement clip from-session <track> <slot> --start <beats>` | New. Places an exact copy of a session clip in the Arrangement (`Track.duplicate_clip_to_arrangement`). Unlike `arrangement from-session`, it keeps envelopes and probability, without real-time recording. |
-| `clip delete <track> <clip>` | New. Deletes a session clip (`ClipSlot.delete_clip`). |
-| `device chains list` | Reports `in_note` per chain: the MIDI note of each Drum Rack pad (chain order is not the note map). |
-
-Not possible through the Live API, so not added: automation envelopes on Arrangement clips
-(Live only creates clip envelopes on session clips; copy a session clip with its envelopes
-instead).
-
-### Installing the fork from a local clone
-
-```bash
-git clone <this-repo-url> ableton-cli
-uv tool install --force --editable ./ableton-cli   # CLI changes are live without reinstalling
+```
+ableton-cli  --JSON lines over TCP 127.0.0.1:8765-->  AbletonCliRemote (Remote Script in Live)  -->  Live API
 ```
 
-Copy `remote_script/AbletonCliRemote` into Live's `User Library/Remote Scripts/` folder (use the
-real User Library path if your Documents folder is redirected; `install-remote-script` only
-checks `~/Documents` and `~/Music`), select `AbletonCliRemote` as Control Surface, and **restart
-Live** after every Remote Script change: re-selecting the control surface does not reload code.
-CLI and Remote Script must come from the same commit.
-
-## Prerequisites
-
-- Ableton Live 12+ (the Remote Script uses dataclass `slots=True`, which requires the
-  Python 3.10+ interpreter bundled with Live 12; Live 11 ships Python 3.7 and cannot
-  load this Remote Script)
-- Python 3.10+
-- [uv](https://docs.astral.sh/uv/)
+The CLI and the Remote Script must come from the same commit.
 
 ## Install
 
-Install as a standalone tool with uv (no checkout needed). Use this repository's
-URL (shown under the GitHub "Code" button) as `<repo-url>`:
+Requirements: Ableton Live 12+, Python 3.10+, [uv](https://docs.astral.sh/uv/).
 
 ```bash
-uv tool install "git+<repo-url>"
-# or pin a release tag:
-uv tool install "git+<repo-url>@vX.Y.Z"
-```
-
-Then use `ableton-cli` directly (no `uv run` prefix):
-
-```bash
+git clone <repo-url> ableton-cli
+uv tool install --force --editable ./ableton-cli   # puts `ableton-cli` on PATH
 ableton-cli install-remote-script --yes
-ableton-cli doctor
 ```
 
-Release tags and prebuilt artifacts are published on this repository's GitHub
-Releases page. To work from source instead, follow Quick Setup below.
+`install-remote-script` installs into the User Library set in Live's preferences (also when it
+is moved or your Documents folder is redirected), else `~/Documents` or `~/Music`.
 
-## Quick Setup
-
-1. Install dependencies:
+In Live: **Preferences → Link, Tempo & MIDI → Control Surface → `AbletonCliRemote`**. Then:
 
 ```bash
-uv sync
+ableton-cli doctor   # remote_ping must PASS
+ableton-cli ping     # protocol version and supported commands
 ```
 
-2. Install the Remote Script files:
+After every Remote Script update, **restart Live**. Re-selecting the control surface does not
+reload the code.
+
+## Usage
+
+Global options go **before** the subcommand: `ableton-cli --output json tracks list`.
 
 ```bash
-uv run ableton-cli install-remote-script --yes
+ableton-cli transport tempo set 128
+ableton-cli tracks create midi --index 0
+ableton-cli browser search "Operator" --item-type loadable --limit 5
+ableton-cli browser load 0 "<path-or-uri-from-search>"
+ableton-cli clip create 0 0 --length 16
+ableton-cli clip notes add 0 0 --notes-json '[{"pitch":60,"start_time":0.0,"duration":0.5,"velocity":100,"mute":false}]'
+ableton-cli arrangement clip from-session 0 0 --start 0
+ableton-cli device parameter set --track-index 0 --device-index 0 --parameter-index 1 -- 0.5
 ```
 
-3. In Ableton Live, open Preferences and set Control Surface to `AbletonCliRemote`.
-
-4. Run diagnostics:
+Browser contents differ per Live version, packs and locale, so search first and load the
+returned `path` or `uri`:
 
 ```bash
-uv run ableton-cli doctor
+ableton-cli browser search "Drum Rack" --path drums --item-type loadable --limit 10
+ableton-cli browser search "Kit" --path drums --item-type loadable --limit 10
 ```
 
-5. Verify connection:
-
-```bash
-uv run ableton-cli ping
-```
-
-## Core Commands
-
-Representative commands:
-
-```bash
-uv run ableton-cli doctor
-uv run ableton-cli install-remote-script --yes
-uv run ableton-cli install-skill --yes
-uv run ableton-cli wait-ready
-uv run ableton-cli song info
-uv run ableton-cli song undo
-uv run ableton-cli song redo
-uv run ableton-cli transport play
-uv run ableton-cli transport tempo set 128
-uv run ableton-cli transport position get
-uv run ableton-cli transport position set 32
-uv run ableton-cli transport rewind
-uv run ableton-cli tracks list
-uv run ableton-cli track volume get --track-index 0
-uv run ableton-cli track volume set 0.7 --track-index 0
-uv run ableton-cli track panning set -- -0.25 --track-index 0
-uv run ableton-cli track send set 1 0.6 --track-index 0
-uv run ableton-cli track routing input get --selected-track
-uv run ableton-cli track routing output set --type Master --channel 3/4 --track-name "Bass"
-uv run ableton-cli return-tracks list
-uv run ableton-cli return-track volume set 0 0.5
-uv run ableton-cli master info
-uv run ableton-cli master devices list
-uv run ableton-cli master device load query:Audio\ Effects#Utility --position end
-uv run ableton-cli master device parameter set --device-index 0 --parameter-key gain -- -1.5
-uv run ableton-cli audio loudness analyze --path ./renders/remix.wav --engine ffmpeg
-uv run ableton-cli audio spectrum analyze --path ./renders/remix.wav --profile anime-club
-uv run ableton-cli audio transient analyze --path ./loops/drum-break.wav --bpm 174 --max-slices 16
-uv run ableton-cli remix mastering target set --project ./proj/remix_project.json --profile anime-club-demo
-uv run ableton-cli remix mastering analyze --project ./proj/remix_project.json --render ./renders/remix.wav
-uv run ableton-cli remix mastering plan --project ./proj/remix_project.json
-uv run ableton-cli remix mastering apply --project ./proj/remix_project.json --dry-run
-uv run ableton-cli remix mastering qa --project ./proj/remix_project.json --render ./renders/remix.wav
-uv run ableton-cli mixer crossfader set -- -0.2
-uv run ableton-cli mixer cue-routing get
-uv run ableton-cli clip create 0 0 --length 4
-uv run ableton-cli clip notes add 0 0 --notes-json '[{"pitch":60,"start_time":0.0,"duration":0.5,"velocity":100,"mute":false}]'
-uv run ableton-cli clip notes update 0 0 --notes-json '[{"note_id":3,"velocity":90,"probability":0.75}]'
-uv run ableton-cli clip cut-to-drum-rack --source-file ./loops/drum-break.wav --transient --bpm 174 --max-slices 16 --create-trigger-clip --trigger-clip-slot 1
-uv run ableton-cli clip cut-to-drum-rack --source-track 1 --source-clip 0 --slice-count 8 --create-trigger-clip --trigger-clip-slot 1
-uv run ableton-cli arrangement clip create 0 --start 8 --length 4 --notes-json '[{"pitch":60,"start_time":0.0,"duration":0.5,"velocity":100,"mute":false}]'
-uv run ableton-cli arrangement clip notes get 0 0 --start-time 0.0 --end-time 4.0 --pitch 60
-uv run ableton-cli arrangement clip notes import-browser 0 0 sounds/Bass\ Loop.alc --mode replace --import-length --import-groove
-uv run ableton-cli arrangement clip delete 0 --start 0 --end 16
-uv run ableton-cli arrangement clip from-session 0 2 --start 64
-uv run ableton-cli arrangement from-session --scenes "0:24,1:48"
-uv run ableton-cli clip fire 0 0
-uv run ableton-cli scenes list
-uv run ableton-cli browser search drift --item-type loadable
-uv run ableton-cli browser search "Drum Rack" --path drums --item-type loadable --limit 10
-uv run ableton-cli browser search "Kit" --path drums --item-type loadable --limit 10
-uv run ableton-cli browser load 0 query:Synths#Operator
-uv run ableton-cli browser load-drum-kit 0 <rack-uri-from-search> --kit-uri <kit-uri-from-search>
-uv run ableton-cli batch run --steps-file ./steps.json
-uv run ableton-cli device parameter set 0.25 --track-index 0 --device-index 0 --parameter-index 0
-uv run ableton-cli synth find --type wavetable
-uv run ableton-cli synth wavetable keys
-uv run ableton-cli synth wavetable set 0.6 --selected-track --selected-device --parameter-key filter_cutoff
-uv run ableton-cli effect find --type eq8
-uv run ableton-cli effect eq8 keys
-uv run ableton-cli effect eq8 set 0.6 --track-query Bass --device-query EQ --parameter-key band1_freq
-```
-
-Offline mastering analysis with the `ffmpeg` engine requires both `ffmpeg` and
-`ffprobe` on `PATH`. Without them, `audio loudness analyze`, `audio reference
-compare`, and `remix mastering analyze` fail explicitly with `CONFIG_INVALID`.
-
-Ref-aware track, device, and parameter commands now use mutually exclusive selector flags instead of positional indexes.
-Track selectors: `--track-index`, `--track-name`, `--selected-track`, `--track-query`, `--track-ref`.
-Device selectors: `--device-index`, `--device-name`, `--selected-device`, `--device-query`, `--device-ref`.
-Parameter selectors: `--parameter-index`, `--parameter-name`, `--parameter-query`, `--parameter-key`, `--parameter-ref`.
-`tracks list`, `track info`, synth/effect device discovery, and parameter listings emit `stable_ref` fields so later commands can reuse exact session-local objects.
-
-Complete command coverage:
-
-- `skills/ableton-cli/SKILL.md`
-- `docs/skills/skill-actions.md`
-- `docs/skills/examples/*.json`
-
-## Composition Workflow
-
-For agent-driven composition, run a high-timeout preflight before mutating the set:
-
-```bash
-uv run ableton-cli --timeout-ms 15000 --output json wait-ready
-uv run ableton-cli --timeout-ms 15000 --output json doctor
-uv run ableton-cli --timeout-ms 15000 --output json tracks list
-```
-
-Discover browser targets before loading instruments or kits. Browser catalogs vary by Live version,
-packs, locale, and user library state, so do not assume a fixed Drum Rack or kit URI exists:
-
-```bash
-uv run ableton-cli --timeout-ms 15000 --output json browser categories all
-uv run ableton-cli --timeout-ms 15000 --output json browser search "Drum Rack" --path drums --item-type loadable --limit 10
-uv run ableton-cli --timeout-ms 15000 --output json browser search "Kit" --path drums --item-type loadable --limit 10
-uv run ableton-cli --timeout-ms 15000 --output json browser search "Operator" --path instruments --item-type loadable --limit 10
-```
-
-Choose exact `uri` or `path` values from those results, then pass them explicitly:
-
-```bash
-uv run ableton-cli --timeout-ms 15000 --output json browser load-drum-kit 0 <rack-uri-from-search> --kit-uri <kit-uri-from-search>
-uv run ableton-cli --timeout-ms 15000 --output json browser load 1 <synth-uri-or-path-from-search>
-```
-
-## JSON Output for Automation
-
-Use `--output json` for machine-readable output.
-
-```bash
-uv run ableton-cli --output json ping
-```
-
-Output envelope (stable):
+With `--output json` every command prints one envelope:
 
 ```json
-{
-  "ok": true,
-  "command": "ping",
-  "args": {},
-  "result": {},
-  "error": null
-}
+{"ok": true, "command": "ping", "args": {}, "result": {}, "error": null}
 ```
 
-## Global Options
+Many calls in a row? Use `batch run --steps-file steps.json` or `batch stream` (one process,
+JSON lines on stdin).
 
-- `--host`
-- `--port`
-- `--timeout-ms`
-- `--protocol-version`
-- `--auth-token`
-- `--output [human|json]`
-- `--verbose`
-- `--log-file`
-- `--config <path>`
-- `--no-color`
-- `--quiet`
-- `--record <path>`
-- `--replay <path>`
-- `--read-only`
-- `--require-confirmation`
-- `--yes`
-- `--plan`
-- `--dry-run`
-- `--compact`
-- `--version`
+- All commands: [`skills/ableton-cli/SKILL.md`](skills/ableton-cli/SKILL.md)
+- Global options, exit codes, batching, API limits, troubleshooting:
+  [`docs/reference.md`](docs/reference.md)
 
-Global options must appear before the subcommand.
+## What this fork adds
 
-```bash
-# Correct
-uv run ableton-cli --output json doctor
+| Command | Change |
+| --- | --- |
+| `clip duplicate`, `clip duplicate-many` | Exact copy: keeps clip envelopes, note probability and loop settings. |
+| `arrangement clip from-session`, `arrangement from-session` | Exact copies of session clips in the Arrangement (envelopes, probability), without recording. |
+| `clip delete` | Delete a session clip. |
+| `clip color set`, `track color set` | Clip and track colors (0-69). |
+| `clip launch get\|set` | Launch mode, quantization, legato, velocity amount. |
+| `clip envelope mixer set\|shape\|clear <track> <clip> volume\|panning\|send [--send-index N]` | Clip envelopes for the track mixer (volume, panning, sends), not only device parameters. |
+| `clip crop`, `clip duplicate-loop`, `clip signature set` | Crop to the loop, double the loop (MIDI), clip time signature (also in `clip props get`). |
+| `device delete`, `device move`, `device enabled set`, `device parameter list` | Edit any track's device chain; also devices inside racks via `--device-ref`. |
+| `device chains list` | Reports `in_note` per chain: the MIDI note of each Drum Rack pad. |
+| `device chains get\|set` | Rack chain volume, panning, mute, solo and Drum Rack choke group (also listed by `device chains list`). |
+| `device variation list\|store\|recall\|delete` | Rack macro variations. |
+| `device insert` | Insert a native device by name at a position (Live 12.1.10+). |
+| `device parameter list`, `track info` | Parameters carry `display_value` (as Live shows it) and `value_items` for quantized parameters. |
+| `tracks duplicate`, `scenes duplicate\|delete`, `return-tracks create\|delete` | Song layout. |
+| `arrangement locator list\|add\|delete` | Named locators (cue points) for sections. |
+| `transport signature set` | Time signature. |
+| `arrangement back-to-arranger` | Press "Back to Arrangement"; `song info` shows `back_to_arranger`. |
+| `song loop get\|set`, `song metronome set`, `song swing set`, `song groove-amount set` | Loop region, metronome, global swing and groove amount. |
+| `song scale set`, `song record-quantization set`, `song capture-midi` | Key and scale (Live 12+), MIDI record quantization, Capture MIDI. |
+| `scenes tempo set`, `scenes signature set` | Per-scene tempo and time signature (Live 12+), shown in `scenes list`. |
+| `track monitoring get\|set`, `track fold set` | Monitoring (in/auto/off) and group folding; `tracks list` and `track info` report group state. |
+| `view show`, `view select track\|scene\|clip` | Show Live's views and select tracks, scenes and clip slots. |
+| `install-remote-script`, `doctor` | Find the User Library from Live's own settings. |
 
-# Incorrect
-uv run ableton-cli doctor --output json
-```
-
-Installer/config commands also support command-local forms:
-
-- `--yes`
-- `--dry-run`
+Not possible through the Live API: automation envelopes on Arrangement clips (put them on a
+session clip and copy it), clip follow actions, saving the Set and exporting audio (the
+former `song save` and `song export audio` commands always failed and were removed).
 
 ## Protocol
 
-`ableton-cli` uses local TCP JSONL communication on `<host>:<port>` (`127.0.0.1:8765` by
-default; see [Security Model](#security-model) for overriding host/port/auth_token).
-
-The connection can be persistent: one line is one request, and a client may
-send multiple requests over the same connection. Responses are returned in
-request order. A malformed request line closes the connection; well-formed
-requests that fail validation or execution return a structured error and
-keep the connection open.
-
-### Event subscriptions
-
-Commands are strictly request/response, so anything a user does in Live itself can
-only be noticed by polling — that is what `session watch` does. A connection can
-instead send one `"type": "subscribe"` request and become an event stream:
-
-```json
-{"type":"subscribe","name":"events","args":{"events":["tempo","is_playing"]},"meta":{},"request_id":"...","protocol_version":3}
-```
-
-The remote answers with the usual response envelope (`result.subscribed` lists the
-accepted names, `result.stream` is `true`) and then pushes one line per event:
-
-```json
-{"type":"event","protocol_version":3,"event":"tempo","ts":1730000000.0,"data":{"tempo":174.0},"dropped":0}
-```
-
-- A subscribing connection stops accepting commands, so pushed events can never
-  delay a command; `ableton-cli session events` opens its own connection.
-- Event names are `tempo`, `is_playing`, `playing_position` and `selected_track`.
-  Which of them a given Live version can deliver depends on the listener APIs it
-  exposes; subscribing to one that is unavailable fails with `INVALID_ARGUMENT`
-  and a hint listing what is available, rather than accepting the subscription
-  and never delivering.
-- `playing_position` is throttled to at most one event per 100 ms.
-- A subscriber that cannot keep up loses the oldest events instead of growing an
-  unbounded queue; `dropped` reports how many were lost since the previous event.
-- A Remote Script that predates subscriptions rejects `"type": "subscribe"` with
-  `INVALID_ARGUMENT`, so an old install fails loudly instead of hanging.
+One JSON object per line over local TCP; request/response; a connection may stay open. Every
+request carries a `protocol_version` that must match the Remote Script exactly, and retries
+reuse an idempotency key so a write is never applied twice. A connection can instead subscribe
+to events (`tempo`, `is_playing`, `playing_position`, `selected_track`). Envelopes and details:
+[`docs/reference.md`](docs/reference.md#wire-protocol).
 
 ## Security Model
 
-- By default the Remote Script listens on 127.0.0.1 only (local loopback), port 8765, with
-  no authentication: any process on the same machine can issue commands.
-- Do not expose, forward, or bind the port to untrusted networks.
-- Host, port, and an optional `auth_token` can be overridden via
-  `remote_script/AbletonCliRemote/remote_config.json` (copied alongside the Remote Script on
-  install) or environment variables read by the Remote Script process:
-  `ABLETON_CLI_REMOTE_HOST`, `ABLETON_CLI_REMOTE_PORT`, `ABLETON_CLI_REMOTE_AUTH_TOKEN`.
-  Invalid values (empty host, out-of-range port, non-string token) fail explicitly instead of
-  falling back to defaults.
-
-  ```json
-  {
-    "host": "127.0.0.1",
-    "port": 8765,
-    "auth_token": "replace-with-a-shared-secret"
-  }
-  ```
-
-- Running multiple Ableton Live instances requires giving each Remote Script a distinct port.
-- On the CLI side, set the matching token via `--auth-token`, the `ABLETON_CLI_AUTH_TOKEN`
-  environment variable, or `ableton-cli config set auth_token <token>`. `config show` and
-  `config set` always report `auth_token` as `***` (or `null` when unset); the raw value is
-  only used on the wire and when writing the local config file.
-- `auth_token` is a plain shared-secret check, not encrypted or transport-secured
-  authentication. It is a deterrent against other local processes, not a security boundary
-  against a hostile user on the same machine.
-- `install-remote-script` copies the Remote Script directory with `copytree`; a
-  `remote_config.json` already present in the installed source tree is preserved, but
-  reinstalling/updating overwrites the installed `AbletonCliRemote` directory (a timestamped
-  backup is kept), so re-apply `remote_config.json` after updates if it lives only at the
-  install target.
-- Treat write and destructive commands as equivalent to direct user operation in Ableton Live.
-- Prefer `--read-only` for inspection and agent preflight.
-- Use `--plan` or `--dry-run` to inspect the side effect and target payload before dispatch.
-- Use `--require-confirmation --yes` when automation should fail closed around destructive commands.
-
-### Request
-
-```json
-{
-  "type": "command",
-  "name": "song_info",
-  "args": {},
-  "meta": {
-    "request_timeout_ms": 15000,
-    "idempotency_key": "0f1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e"
-  },
-  "request_id": "8c9f9b0c1a9d4dc2abdf2d53f3a19be9",
-  "protocol_version": 3
-}
-```
-
-`request_id` is fresh on every send and never identifies a retry.
-
-`meta.idempotency_key` is optional (max 128 characters) and is what makes a
-resend safe. The Remote Script keeps the response of the last 256 completed
-keys; a request repeating a key it has already completed is **not executed
-again** — the stored response is returned with `idempotent_replay: true` added
-to `result` (or to `error.details` for a stored failure). `batch run` and
-`batch stream` generate one key per step and reuse it for every retry attempt,
-so a step that times out and is retried cannot be applied twice.
-
-Protocol versions must match exactly. After upgrading the CLI, reinstall the
-Remote Script and re-select the Control Surface in Live:
-
-```bash
-uv run ableton-cli install-remote-script --yes
-```
-
-### Response (success)
-
-```json
-{
-  "ok": true,
-  "request_id": "8c9f9b0c1a9d4dc2abdf2d53f3a19be9",
-  "protocol_version": 3,
-  "result": {
-    "tempo": 120.0
-  },
-  "error": null
-}
-```
-
-### Response (failure)
-
-```json
-{
-  "ok": false,
-  "request_id": "8c9f9b0c1a9d4dc2abdf2d53f3a19be9",
-  "protocol_version": 3,
-  "result": null,
-  "error": {
-    "code": "INVALID_ARGUMENT",
-    "message": "bpm must be between 20.0 and 999.0",
-    "hint": "Fix command arguments and retry.",
-    "details": null
-  }
-}
-```
-
-## Low-latency operation
-
-For single commands, use existing subcommands as before.
-For repeated automation commands, prefer `batch stream` to keep one process alive and avoid process startup overhead.
-
-`batch stream` expects one JSON object per stdin line and emits one JSON response line per request:
-
-```bash
-cat <<'JSONL' | uv run ableton-cli batch stream
-{"id":"a1","steps":[{"name":"song_info","args":{}}]}
-{"id":"a2","steps":[{"name":"track_volume_get","args":{"track_ref":{"mode":"index","index":0}}}]}
-JSONL
-```
-
-Compatibility validation is now explicit:
-
-- `uv run ableton-cli ping` for protocol/version metadata
-- `uv run ableton-cli doctor` for supported command integrity checks
-
-### Batch step retries
-
-Batch steps run once unless the step opts in with a `retry` object:
-
-```json
-{"name": "tracks_list", "args": {}, "retry": {"max_attempts": 3, "backoff_ms": 200}}
-```
-
-`retry.on` defaults to `["REMOTE_BUSY"]`. `REMOTE_BUSY` is rejected by the
-Remote Script before the command is queued, so a retry cannot double-apply it.
-
-`TIMEOUT` is not retried by default, but adding it to `retry.on` is safe for
-any command: a retrying step carries one `meta.idempotency_key` across all of
-its attempts, so the Remote Script replays its stored response rather than
-applying the command a second time. A replayed response carries
-`idempotent_replay: true`.
-
-A step that fails with `TIMEOUT` and is not retried reports
-`error.details.may_have_executed`:
-
-- `true` — Live had already started the command; inspect the set before retrying
-- `false` — the command was cancelled before it ran and can be resent safely
-- `null` — no structured answer reached the CLI; assume it may have been applied
-
-## Exit Codes
-
-- `0` success
-- `2` invalid arguments
-- `3` invalid configuration
-- `10` Ableton not connected
-- `11` Remote Script not installed/detected
-- `12` timeout
-- `13` protocol mismatch
-- `20` execution failure
-- `99` internal error
-
-## Unsupported-by-API behavior
-
-If a command is exposed by CLI/Remote but Live API cannot perform it, the command fails explicitly with:
-
-- `error.code=INVALID_ARGUMENT`
-- `error.details.reason=not_supported_by_live_api`
-
-This currently applies to API-limited operations such as `song new/undo/redo/save/export`, `arrangement record start|stop`, `scenes move`, and `tracks delete` when the running Live API lacks the required primitive.
-
-Clip and arrangement note write/edit commands (`clip notes add`, `clip notes update`,
-`clip notes quantize|humanize|velocity-scale|transpose`, `arrangement clip notes add`, and
-`clip cut-to-drum-rack` trigger clip creation) require the Live 12+ extended note API
-(`Clip.add_new_notes` / `Clip.apply_note_modifications`, plus the `note_id`, `probability`,
-`velocity_deviation`, and `release_velocity` note fields). On older Live versions these commands
-fail with the `not_supported_by_live_api` reason above instead of falling back to the legacy
-note API.
-
-## Not-implemented commands
-
-Some commands are part of the published surface but have no working implementation behind
-them, because the Live API does not expose the primitive (creating return or group tracks,
-sidechain routing) or because the work happens outside this CLI (stem separation, browser
-target discovery). They fail explicitly rather than returning a plan nobody executes:
-
-- `error.code=NOT_IMPLEMENTED`
-- `error.details.reason=not_implemented`
-- exit code `20`
-- `error.hint` names the commands that do the job
-
-This currently applies to `remix setup-sound`, `remix mix-macro`, `remix setup-mix`,
-`remix setup-returns`, `remix setup-sidechain`, `remix device-chain apply`, and
-`audio stems split`. Argument validation still runs first, so a bad argument reports
-`INVALID_ARGUMENT` and exit code `2`.
-
-## Completion
-
-Typer built-in completion is available:
-
-```bash
-uv run ableton-cli --install-completion
-uv run ableton-cli --show-completion
-```
-
-## Man Page
-
-Generate:
-
-```bash
-scripts/generate_man.sh
-```
-
-Install locally (optional):
-
-```bash
-scripts/install_man.sh
-```
-
-Then:
-
-```bash
-man ableton-cli
-```
+- The Remote Script listens on 127.0.0.1 only, port 8765, with no authentication by default:
+  any local process can control Live. Never expose or forward this port.
+- Host, port and an optional shared `auth_token` can be set in
+  `remote_script/AbletonCliRemote/remote_config.json` or with `ABLETON_CLI_REMOTE_HOST`,
+  `ABLETON_CLI_REMOTE_PORT`, `ABLETON_CLI_REMOTE_AUTH_TOKEN`. On the CLI side use
+  `--auth-token`, `ABLETON_CLI_AUTH_TOKEN` or `ableton-cli config set auth_token <token>`.
+  The token is a deterrent, not encryption.
+- Commands act like a user in Live. Use `--read-only` for inspection, `--plan` or `--dry-run`
+  to preview a change, and `--require-confirmation --yes` to make destructive commands fail
+  unless confirmed.
 
 ## Skills Integration
 
-Use these steps to enable the `ableton-cli` skill for agent workflows:
-
-1. Complete Quick Setup and confirm connectivity with `uv run ableton-cli ping`.
-2. Install the skill:
+Install the agent skill (the command catalog) for Codex, Claude Code or Cursor:
 
 ```bash
-uv run ableton-cli install-skill --yes
+uv run ableton-cli install-skill --yes                   # Codex (needs CODEX_HOME)
 uv run ableton-cli install-skill --target claude --yes
 uv run ableton-cli install-skill --target cursor --yes
 ```
 
-3. Confirm detailed install notes in `docs/skills/install.md`.
-4. Run agent automation using `uv run ableton-cli ...` commands.
-
-Cursor users do not need any install step when working inside this repository:
-`.cursor/rules/*.mdc` and `.cursor/skills/ableton-cli/SKILL.md` are committed,
-so the agent picks up ableton-cli conventions automatically when the project is
-opened. The `install-skill --target cursor` command only mirrors the same SKILL
-file into the user-level `~/.cursor/skills/` so it is also discoverable in other
-workspaces.
-
-Skill-oriented references:
-
-- Primary skill spec: `skills/ableton-cli/SKILL.md`
-- Stable action mappings: `docs/skills/skill-actions.md`
-- JSON output examples: `docs/skills/examples/*.json`
-
-All skill command examples assume the `uv run ableton-cli ...` form.
+Details: [`docs/skills/install.md`](docs/skills/install.md). Stable action names:
+[`docs/skills/skill-actions.md`](docs/skills/skill-actions.md).
 
 ## Contributing
 
-Development workflows (local checks, quality gates, and merge criteria) are documented in
-`CONTRIBUTING.md`.
+Development workflow, tests and quality gates: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-## Troubleshooting
+## License
 
-1. Run `uv run ableton-cli doctor`.
-2. Confirm Ableton is running and `AbletonCliRemote` is selected as Control Surface.
-3. Confirm host/port (`127.0.0.1:8765` by default).
-4. Try a longer timeout: `--timeout-ms 30000`.
-5. If protocol mismatches, the installed Remote Script is from a different release:
-   run `uv run ableton-cli install-remote-script --yes`, restart Ableton Live, and re-select
-   `AbletonCliRemote` as Control Surface. Use `--protocol-version <n>` or
-   `uv run ableton-cli config set protocol_version <n>` only to talk to a deliberately pinned
-   Remote Script version.
-
-### `AbletonCliRemote` not shown in Control Surface list
-
-1. Reinstall the script files: `uv run ableton-cli install-remote-script --yes`.
-2. Restart Ableton Live completely.
-3. Run `uv run ableton-cli --output json doctor` and check:
-   - `remote_script_files`
-   - `remote_script_entrypoint`
-4. Verify installed paths under:
-   - `~/Music/Ableton/User Library/Remote Scripts/AbletonCliRemote`
-   - `~/Documents/Ableton/User Library/Remote Scripts/AbletonCliRemote`
-
-### Remote Script update not taking effect immediately
-
-If behavior still looks old after `install-remote-script --yes` (for example, unchanged command errors):
-
-1. In Ableton Live Preferences, set Control Surface to `None`.
-2. Set it back to `AbletonCliRemote`.
-3. Re-run `uv run ableton-cli --output json ping` and `uv run ableton-cli --output json doctor`.
-4. If unchanged, restart Ableton Live and retry.
+MIT, see [`LICENSE`](LICENSE).

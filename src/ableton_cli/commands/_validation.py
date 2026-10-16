@@ -107,6 +107,41 @@ def require_float_in_range(
     return value
 
 
+def require_choice(name: str, value: str, choices: tuple[str, ...]) -> str:
+    if value not in choices:
+        raise invalid_argument(
+            message=f"{name} must be one of {', '.join(choices)}, got {value!r}",
+            hint=f"Use one of: {', '.join(choices)}.",
+        )
+    return value
+
+
+#: Live's color chooser has 70 entries.
+COLOR_INDEX_MAX = 69
+
+
+def require_color_index(value: int) -> int:
+    if value < 0 or value > COLOR_INDEX_MAX:
+        raise invalid_argument(
+            message=f"color_index must be between 0 and {COLOR_INDEX_MAX}, got {value}",
+            hint="Pick a color index from Live's color chooser (0-69, row by row).",
+        )
+    return value
+
+
+#: Note values Live accepts as a time signature denominator.
+SIGNATURE_DENOMINATORS = (1, 2, 4, 8, 16)
+
+
+def require_time_signature(numerator: int, denominator: int) -> tuple[int, int]:
+    if numerator < 1 or numerator > 99 or denominator not in SIGNATURE_DENOMINATORS:
+        raise invalid_argument(
+            message=f"invalid time signature {numerator}/{denominator}",
+            hint="Use a numerator 1-99 and a denominator of 1, 2, 4, 8 or 16 (e.g. 4 4).",
+        )
+    return numerator, denominator
+
+
 def require_track_and_value(track: int, value: TValue) -> tuple[int, TValue]:
     return require_track_index(track), value
 

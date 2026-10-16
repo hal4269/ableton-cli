@@ -43,6 +43,13 @@ class _Parameter:
     is_enabled: bool = True
     is_quantized: bool = False
     original_name: str = ""
+    value_items: tuple[str, ...] = ()
+
+    def str_for_value(self, value: float) -> str:
+        """Live's display string: the item name for quantized parameters."""
+        if self.value_items:
+            return self.value_items[int(value)]
+        return f"{value:.2f}"
 
 
 @dataclass(slots=True)
@@ -62,9 +69,25 @@ class _Device:
 
 
 @dataclass(slots=True)
+class _ChainMixer:
+    volume: _Parameter
+    panning: _Parameter
+
+
+def _chain_mixer() -> _ChainMixer:
+    return _ChainMixer(
+        volume=_Parameter("Chain Volume", 0.85),
+        panning=_Parameter("Chain Pan", 0.0, min=-1.0, max=1.0),
+    )
+
+
+@dataclass(slots=True)
 class _Chain:
     name: str
     devices: list[_Device] = field(default_factory=list)
+    mixer_device: _ChainMixer = field(default_factory=_chain_mixer)
+    mute: bool = False
+    solo: bool = False
 
 
 class _DrumPad:
@@ -316,6 +339,13 @@ class _Track:
     output_routing_channel: str = "1/2"
     available_output_routing_types: list[str] = field(default_factory=lambda: ["Master"])
     available_output_routing_channels: list[str] = field(default_factory=lambda: ["1/2", "3/4"])
+    # Group state (Live: fold_state exists only on foldable/group tracks).
+    is_foldable: bool = False
+    fold_state: int = 0
+    is_grouped: bool = False
+    group_track: Any = None
+    # Track.current_monitoring_state: 0 In, 1 Auto, 2 Off.
+    current_monitoring_state: int = 1
 
     def create_midi_clip(self, start_time: float, length: float) -> None:
         normalized_start = float(start_time)
@@ -527,6 +557,7 @@ class _SongView:
     selected_track: _Track
     selected_scene: _Scene | None = None
     highlighted_clip_slot: _ClipSlot | None = None
+    detail_clip: Any = None
 
 
 class _Song:
@@ -556,6 +587,23 @@ class _Song:
         self.stop_all_clips_calls = 0
         self.cue_routing = "Master"
         self.available_cue_routings = ["Master", "Ext. Out"]
+        self.back_to_arranger = False
+        self.loop = False
+        self.loop_start = 0.0
+        self.loop_length = 16.0
+        self.metronome = False
+        self.swing_amount = 0.0
+        self.groove_amount = 1.0
+        self.root_note = 0
+        self.scale_name = "Major"
+        self.scale_mode = False
+        self.scale_intervals = [0, 2, 4, 5, 7, 9, 11]
+        self.midi_recording_quantization = 0
+        self.can_capture_midi = False
+        self.capture_midi_calls: list[int] = []
+
+    def capture_midi(self, destination: int = 0) -> None:
+        self.capture_midi_calls.append(destination)
 
     def start_playing(self) -> None:
         self.is_playing = True
@@ -826,6 +874,11 @@ class _EventuallyConsistentSong(_Song):
 class _Scene:
     name: str
     fired: bool = False
+    tempo: float = 120.0
+    tempo_enabled: bool = False
+    time_signature_numerator: int = 4
+    time_signature_denominator: int = 4
+    time_signature_enabled: bool = False
 
     def fire(self) -> None:
         self.fired = True
@@ -837,6 +890,9 @@ class _ApplicationView:
 
     def focus_view(self, view_name: str) -> None:
         self.focused_views.append(str(view_name))
+
+    def is_view_visible(self, view_name: str) -> bool:
+        return str(view_name) in self.focused_views
 
 
 class _Application:
@@ -1104,8 +1160,6 @@ def test_live_backend_ping_info_reports_api_support_matrix() -> None:
     assert "remote_script_version" in result
     assert result["api_support"] == {
         "song_new_supported": False,
-        "song_save_supported": False,
-        "song_export_audio_supported": False,
         "arrangement_record_start_supported": False,
         "arrangement_record_stop_supported": False,
         "arrangement_record_supported": False,
@@ -1117,8 +1171,6 @@ def test_live_backend_ping_info_reports_api_support_true_when_available() -> Non
     app = surface.application()
     song = surface.song()
     app.new_live_set = lambda: None
-    app.save_live_set = lambda _path: None
-    app.export_audio = lambda _path: None
     song.record_mode = False
     backend = LiveBackend(surface)
 
@@ -1126,8 +1178,6 @@ def test_live_backend_ping_info_reports_api_support_true_when_available() -> Non
 
     assert result["api_support"] == {
         "song_new_supported": True,
-        "song_save_supported": True,
-        "song_export_audio_supported": True,
         "arrangement_record_start_supported": True,
         "arrangement_record_stop_supported": True,
         "arrangement_record_supported": True,
@@ -3763,7 +3813,9 @@ def test_live_backend_arrangement_from_session_repeats_midi_and_audio() -> None:
     source_midi_slot = surface.song().tracks[0].clip_slots[0]
     source_midi_slot.create_clip(2.0)
     assert source_midi_slot.clip is not None
-    source_midi_slot.clip.set_notes(((60, 0.0, 0.5, 100, False),))
+    source_midi_slot.clip.add_new_notes(
+        (_FakeNoteSpec(pitch=60, start_time=0.0, duration=0.5, velocity=100, probability=0.5),)
+    )
     _set_audio_source_clip(
         surface.song(),
         track=1,
@@ -3782,9 +3834,17 @@ def test_live_backend_arrangement_from_session_repeats_midi_and_audio() -> None:
         pitch=None,
     )
 
+    # MIDI: exact copies of the 2-beat session clip tiled over 6 beats (probability kept).
     assert payload["scene_count"] == 1
-    assert payload["total_created"] == 3
-    assert midi_notes["note_count"] == 3
+    assert payload["total_created"] == 5
+    assert payload["total_notes_added"] == 3
+    assert [clip.start_time for clip in surface.song().tracks[0].arrangement_clips] == [
+        0.0,
+        2.0,
+        4.0,
+    ]
+    assert midi_notes["note_count"] == 1
+    assert midi_notes["notes"][0]["probability"] == 0.5
     assert surface.song().tracks[1].arrangement_audio_clips == [
         ("/tmp/Bass Loop.wav", 0.0),
         ("/tmp/Bass Loop.wav", 4.0),
@@ -3795,8 +3855,6 @@ def test_live_backend_arrangement_from_session_repeats_midi_and_audio() -> None:
     "operation",
     (
         "song_new",
-        "song_save",
-        "song_export_audio",
         "arrangement_record_start",
         "arrangement_record_stop",
     ),
@@ -3807,10 +3865,6 @@ def test_live_backend_high_difficulty_commands_raise_explicit_not_supported(oper
     with pytest.raises(CommandError) as exc_info:
         if operation == "song_new":
             backend.song_new()
-        elif operation == "song_save":
-            backend.song_save("/tmp/demo.als")
-        elif operation == "song_export_audio":
-            backend.song_export_audio("/tmp/demo.wav")
         elif operation == "arrangement_record_start":
             backend.arrangement_record_start()
         else:
@@ -3878,6 +3932,7 @@ def test_live_backend_master_commands() -> None:
             "stable_ref": result["devices"][0]["parameters"][0]["stable_ref"],
             "name": "Threshold",
             "value": 0.0,
+            "display_value": "0.00",
         }
     ]
     assert result["devices"][0]["parameters"][0]["stable_ref"].startswith("parameter:")
