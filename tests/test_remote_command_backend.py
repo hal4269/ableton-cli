@@ -49,8 +49,6 @@ class _BackendStub:
             "pong": True,
             "api_support": {
                 "song_new_supported": True,
-                "song_save_supported": True,
-                "song_export_audio_supported": True,
                 "arrangement_record_start_supported": True,
                 "arrangement_record_stop_supported": True,
                 "arrangement_record_supported": True,
@@ -79,12 +77,6 @@ class _BackendStub:
 
     def song_redo(self):  # noqa: ANN201
         return {"redone": True}
-
-    def song_save(self, path: str):  # noqa: ANN201
-        return {"saved": True, "path": path}
-
-    def song_export_audio(self, path: str):  # noqa: ANN201
-        return {"exported": True, "path": path}
 
     def resolve_track_ref(self, track_ref: dict[str, object]) -> int:
         return int(track_ref["index"])
@@ -1059,8 +1051,6 @@ def test_dispatch_ping_includes_supported_commands_and_hash() -> None:
     result = dispatch_command(backend, "ping", {})
 
     assert result["pong"] is True
-    assert result["api_support"]["song_save_supported"] is True
-    assert result["api_support"]["song_export_audio_supported"] is True
     assert result["api_support"]["arrangement_record_supported"] is True
     assert "supported_commands" in result
     assert "command_set_hash" in result
@@ -1719,8 +1709,6 @@ def test_dispatch_calls_backend_for_new_todo_commands() -> None:
     backend = _BackendStub()
 
     song_new = dispatch_command(backend, "song_new", {})
-    song_save = dispatch_command(backend, "song_save", {"path": "/tmp/song.als"})
-    song_export = dispatch_command(backend, "song_export_audio", {"path": "/tmp/song.wav"})
     record_start = dispatch_command(backend, "arrangement_record_start", {})
     record_stop = dispatch_command(backend, "arrangement_record_stop", {})
     arrangement_clip = dispatch_command(
@@ -1770,8 +1758,6 @@ def test_dispatch_calls_backend_for_new_todo_commands() -> None:
     tracks_delete = dispatch_command(backend, "tracks_delete", {"track": 0})
 
     assert song_new == {"created": True}
-    assert song_save == {"saved": True, "path": "/tmp/song.als"}
-    assert song_export == {"exported": True, "path": "/tmp/song.wav"}
     assert record_start == {"recording": True}
     assert record_stop == {"recording": False}
     assert arrangement_clip == {
@@ -2025,10 +2011,6 @@ def test_dispatch_calls_backend_for_clip_groove_commands() -> None:
 def test_dispatch_validates_new_todo_command_arguments() -> None:
     backend = _BackendStub()
 
-    with pytest.raises(CommandError) as song_save_exc:
-        dispatch_command(backend, "song_save", {"path": ""})
-    with pytest.raises(CommandError) as song_export_exc:
-        dispatch_command(backend, "song_export_audio", {"path": ""})
     with pytest.raises(CommandError) as clip_duplicate_exc:
         dispatch_command(
             backend,
@@ -2112,8 +2094,6 @@ def test_dispatch_validates_new_todo_command_arguments() -> None:
             {"scenes": [{"scene": 0, "duration_beats": 0.0}]},
         )
 
-    assert song_save_exc.value.code == "INVALID_ARGUMENT"
-    assert song_export_exc.value.code == "INVALID_ARGUMENT"
     assert clip_duplicate_exc.value.code == "INVALID_ARGUMENT"
     assert clip_duplicate_conflict_exc.value.code == "INVALID_ARGUMENT"
     assert clip_duplicate_missing_dst_exc.value.code == "INVALID_ARGUMENT"

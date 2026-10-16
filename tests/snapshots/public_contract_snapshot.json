@@ -1,5 +1,46 @@
 {
   "command_contracts": {
+    "arrangement back-to-arranger": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
     "arrangement clip create": {
       "args": {
         "type": "object"
@@ -14234,6 +14275,88 @@
         "requires_confirmation": false
       }
     },
+    "scenes signature set": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
+    "scenes tempo set": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
     "session capture": {
       "args": {
         "type": "object"
@@ -14557,7 +14680,48 @@
         "requires_confirmation": false
       }
     },
-    "song export audio": {
+    "song capture-midi": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
+    "song groove-amount set": {
       "args": {
         "type": "object"
       },
@@ -14645,6 +14809,129 @@
         "requires_confirmation": false
       }
     },
+    "song loop get": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": true,
+        "kind": "read",
+        "requires_confirmation": false
+      }
+    },
+    "song loop set": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
+    "song metronome set": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
     "song new": {
       "args": {
         "type": "object"
@@ -14684,6 +14971,47 @@
         "idempotent": false,
         "kind": "destructive",
         "requires_confirmation": true
+      }
+    },
+    "song record-quantization set": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
       }
     },
     "song redo": {
@@ -14727,7 +15055,48 @@
         "requires_confirmation": true
       }
     },
-    "song save": {
+    "song scale set": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
+    "song swing set": {
       "args": {
         "type": "object"
       },
@@ -18393,6 +18762,47 @@
         "requires_confirmation": false
       }
     },
+    "track fold set": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
     "track info": {
       "args": {
         "additional_properties": false,
@@ -18596,10 +19006,28 @@
             },
             "type": "array"
           },
+          "fold_state": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "group_track": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
           "index": {
             "type": "integer"
           },
           "is_audio_track": {
+            "type": "boolean"
+          },
+          "is_foldable": {
+            "type": "boolean"
+          },
+          "is_grouped": {
             "type": "boolean"
           },
           "is_midi_track": {
@@ -18635,6 +19063,10 @@
           "arm",
           "volume",
           "panning",
+          "is_foldable",
+          "fold_state",
+          "is_grouped",
+          "group_track",
           "clip_slots",
           "devices"
         ],
@@ -18643,6 +19075,88 @@
       "side_effect": {
         "idempotent": true,
         "kind": "read",
+        "requires_confirmation": false
+      }
+    },
+    "track monitoring get": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": true,
+        "kind": "read",
+        "requires_confirmation": false
+      }
+    },
+    "track monitoring set": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
         "requires_confirmation": false
       }
     },
@@ -21159,8 +21673,26 @@
                 "arm": {
                   "type": "boolean"
                 },
+                "fold_state": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "group_track": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
                 "index": {
                   "type": "integer"
+                },
+                "is_foldable": {
+                  "type": "boolean"
+                },
+                "is_grouped": {
+                  "type": "boolean"
                 },
                 "mute": {
                   "type": "boolean"
@@ -21185,7 +21717,11 @@
                 "mute",
                 "solo",
                 "arm",
-                "volume"
+                "volume",
+                "is_foldable",
+                "fold_state",
+                "is_grouped",
+                "group_track"
               ],
               "type": "object"
             },
@@ -21532,6 +22068,170 @@
       }
     },
     "transport toggle": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
+    "view select clip": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
+    "view select scene": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
+    "view select track": {
+      "args": {
+        "type": "object"
+      },
+      "errors": {
+        "codes": [
+          "ABLETON_NOT_REACHABLE",
+          "BATCH_ASSERT_FAILED",
+          "BATCH_PREFLIGHT_FAILED",
+          "BATCH_RETRY_EXHAUSTED",
+          "BATCH_STEP_FAILED",
+          "CONFIG_INVALID",
+          "CONFIRMATION_REQUIRED",
+          "INSTALL_TARGET_NOT_FOUND",
+          "INTERNAL_ERROR",
+          "INVALID_ARGUMENT",
+          "NOT_IMPLEMENTED",
+          "PROTOCOL_CONNECTION_CLOSED",
+          "PROTOCOL_INVALID_RESPONSE",
+          "PROTOCOL_MALFORMED_JSON",
+          "PROTOCOL_REQUEST_ID_MISMATCH",
+          "PROTOCOL_VERSION_MISMATCH",
+          "READ_ONLY_VIOLATION",
+          "REMOTE_BUSY",
+          "REMOTE_SCRIPT_INCOMPATIBLE",
+          "REMOTE_SCRIPT_NOT_INSTALLED",
+          "SKILL_SOURCE_NOT_FOUND",
+          "TIMEOUT",
+          "UNAUTHORIZED",
+          "UNSUPPORTED_OS"
+        ]
+      },
+      "result": {
+        "type": "object"
+      },
+      "side_effect": {
+        "idempotent": false,
+        "kind": "write",
+        "requires_confirmation": false
+      }
+    },
+    "view show": {
       "args": {
         "type": "object"
       },

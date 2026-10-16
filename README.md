@@ -96,10 +96,17 @@ JSON lines on stdin).
 | `tracks duplicate`, `scenes duplicate\|delete`, `return-tracks create\|delete` | Song layout. |
 | `arrangement locator list\|add\|delete` | Named locators (cue points) for sections. |
 | `transport signature set` | Time signature. |
+| `arrangement back-to-arranger` | Press "Back to Arrangement"; `song info` shows `back_to_arranger`. |
+| `song loop get\|set`, `song metronome set`, `song swing set`, `song groove-amount set` | Loop region, metronome, global swing and groove amount. |
+| `song scale set`, `song record-quantization set`, `song capture-midi` | Key and scale (Live 12+), MIDI record quantization, Capture MIDI. |
+| `scenes tempo set`, `scenes signature set` | Per-scene tempo and time signature (Live 12+), shown in `scenes list`. |
+| `track monitoring get\|set`, `track fold set` | Monitoring (in/auto/off) and group folding; `tracks list` and `track info` report group state. |
+| `view show`, `view select track\|scene\|clip` | Show Live's views and select tracks, scenes and clip slots. |
 | `install-remote-script`, `doctor` | Find the User Library from Live's own settings. |
 
 Not possible through the Live API: automation envelopes on Arrangement clips (put them on a
-session clip and copy it) and clip follow actions.
+session clip and copy it), clip follow actions, saving the Set and exporting audio (the
+former `song save` and `song export audio` commands always failed and were removed).
 
 ## Protocol
 

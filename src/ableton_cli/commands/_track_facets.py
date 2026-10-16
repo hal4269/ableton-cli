@@ -27,6 +27,7 @@ from ..refs import (
     TrackStableRefOption,
     build_track_ref,
 )
+from ..song_settings_names import MONITORING_STATES
 from ..track_facets import (
     TRACK_FACET_SPECS,
     TRACK_INFO_CLIENT_METHOD,
@@ -36,6 +37,7 @@ from ..track_facets import (
 from ._track_shared import ValueValidator
 from ._track_specs import TrackCommandSpec, TrackValueCommandSpec
 from ._validation import (
+    require_choice,
     require_color_index,
     require_non_empty_string,
     require_pan_value,
@@ -53,6 +55,7 @@ FACET_VALIDATORS: dict[str, Sequence[ValueValidator[Any]]] = {
         lambda value: require_non_empty_string("name", value, hint="Pass a non-empty track name."),
     ),
     "color": (require_color_index,),
+    "monitoring": (lambda value: require_choice("monitoring", value, MONITORING_STATES),),
 }
 
 

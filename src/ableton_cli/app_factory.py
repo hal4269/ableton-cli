@@ -28,6 +28,7 @@ from .commands import (
     track,
     tracks,
     transport,
+    view,
 )
 from .errors import AppError
 from .output import OutputMode, emit_human_error, emit_json, error_payload
@@ -54,6 +55,7 @@ _COMMAND_MODULES = (
     device,
     synth,
     effect,
+    view,
 )
 
 

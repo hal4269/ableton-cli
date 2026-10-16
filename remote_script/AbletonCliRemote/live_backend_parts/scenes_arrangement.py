@@ -5,6 +5,7 @@ from typing import Any
 
 from ..command_backend_validators import _is_absolute_filesystem_path
 from .base import _invalid_argument, _not_supported_by_live_api
+from .song_settings import scene_settings_payload
 
 
 class LiveBackendScenesArrangementMixin:
@@ -128,7 +129,13 @@ class LiveBackendScenesArrangementMixin:
     def scenes_list(self) -> dict[str, Any]:
         scenes = []
         for index, scene in enumerate(list(getattr(self._ctx._song(), "scenes", []))):
-            scenes.append({"index": index, "name": str(getattr(scene, "name", ""))})
+            scenes.append(
+                {
+                    "index": index,
+                    "name": str(getattr(scene, "name", "")),
+                    **scene_settings_payload(scene),
+                }
+            )
         return {"scenes": scenes}
 
     def create_scene(self, index: int) -> dict[str, Any]:

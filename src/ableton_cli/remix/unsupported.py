@@ -33,24 +33,24 @@ UNSUPPORTED_OPERATIONS: dict[str, UnsupportedOperation] = {
         ),
     ),
     "remix mix-macro": UnsupportedOperation(
-        reason="the Remote Script cannot create group or return tracks",
+        reason="the Live API cannot create group tracks",
         hint=(
-            "Create the buses in Live, then set levels with 'track volume set', "
-            "'track send set' and 'return-track volume set'."
+            "Group the buses in Live, add returns with 'return-tracks create', then set "
+            "levels with 'track volume set', 'track send set' and 'return-track volume set'."
         ),
     ),
     "remix setup-mix": UnsupportedOperation(
-        reason="the Remote Script cannot create group or return tracks",
+        reason="the Live API cannot create group tracks",
         hint=(
-            "Create the buses in Live, then set levels with 'track volume set', "
-            "'track send set' and 'return-track volume set'."
+            "Group the buses in Live, add returns with 'return-tracks create', then set "
+            "levels with 'track volume set', 'track send set' and 'return-track volume set'."
         ),
     ),
     "remix setup-returns": UnsupportedOperation(
-        reason="the Remote Script cannot create return tracks",
+        reason="there is no return-bus plan to apply; returns are created one at a time",
         hint=(
-            "Add the return tracks in Live, then inspect them with "
-            "'return-tracks list' and set levels with 'return-track volume set'."
+            "Add returns with 'return-tracks create', load effects with 'browser load', "
+            "and set levels with 'return-track volume set'."
         ),
     ),
     "remix setup-sidechain": UnsupportedOperation(
@@ -75,6 +75,12 @@ UNSUPPORTED_OPERATIONS: dict[str, UnsupportedOperation] = {
         ),
     ),
 }
+
+
+def unsupported_help(operation: str) -> str:
+    """Help text for a command that always fails: says so, why, and what to use."""
+    entry = UNSUPPORTED_OPERATIONS[operation]
+    return f"Not supported (always fails): {entry.reason}. {entry.hint}"
 
 
 def unsupported_error(operation: str, **details: Any) -> AppError:

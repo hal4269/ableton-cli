@@ -339,6 +339,13 @@ class _Track:
     output_routing_channel: str = "1/2"
     available_output_routing_types: list[str] = field(default_factory=lambda: ["Master"])
     available_output_routing_channels: list[str] = field(default_factory=lambda: ["1/2", "3/4"])
+    # Group state (Live: fold_state exists only on foldable/group tracks).
+    is_foldable: bool = False
+    fold_state: int = 0
+    is_grouped: bool = False
+    group_track: Any = None
+    # Track.current_monitoring_state: 0 In, 1 Auto, 2 Off.
+    current_monitoring_state: int = 1
 
     def create_midi_clip(self, start_time: float, length: float) -> None:
         normalized_start = float(start_time)
@@ -550,6 +557,7 @@ class _SongView:
     selected_track: _Track
     selected_scene: _Scene | None = None
     highlighted_clip_slot: _ClipSlot | None = None
+    detail_clip: Any = None
 
 
 class _Song:
@@ -579,6 +587,23 @@ class _Song:
         self.stop_all_clips_calls = 0
         self.cue_routing = "Master"
         self.available_cue_routings = ["Master", "Ext. Out"]
+        self.back_to_arranger = False
+        self.loop = False
+        self.loop_start = 0.0
+        self.loop_length = 16.0
+        self.metronome = False
+        self.swing_amount = 0.0
+        self.groove_amount = 1.0
+        self.root_note = 0
+        self.scale_name = "Major"
+        self.scale_mode = False
+        self.scale_intervals = [0, 2, 4, 5, 7, 9, 11]
+        self.midi_recording_quantization = 0
+        self.can_capture_midi = False
+        self.capture_midi_calls: list[int] = []
+
+    def capture_midi(self, destination: int = 0) -> None:
+        self.capture_midi_calls.append(destination)
 
     def start_playing(self) -> None:
         self.is_playing = True
@@ -849,6 +874,11 @@ class _EventuallyConsistentSong(_Song):
 class _Scene:
     name: str
     fired: bool = False
+    tempo: float = 120.0
+    tempo_enabled: bool = False
+    time_signature_numerator: int = 4
+    time_signature_denominator: int = 4
+    time_signature_enabled: bool = False
 
     def fire(self) -> None:
         self.fired = True
@@ -860,6 +890,9 @@ class _ApplicationView:
 
     def focus_view(self, view_name: str) -> None:
         self.focused_views.append(str(view_name))
+
+    def is_view_visible(self, view_name: str) -> bool:
+        return str(view_name) in self.focused_views
 
 
 class _Application:
@@ -1127,8 +1160,6 @@ def test_live_backend_ping_info_reports_api_support_matrix() -> None:
     assert "remote_script_version" in result
     assert result["api_support"] == {
         "song_new_supported": False,
-        "song_save_supported": False,
-        "song_export_audio_supported": False,
         "arrangement_record_start_supported": False,
         "arrangement_record_stop_supported": False,
         "arrangement_record_supported": False,
@@ -1140,8 +1171,6 @@ def test_live_backend_ping_info_reports_api_support_true_when_available() -> Non
     app = surface.application()
     song = surface.song()
     app.new_live_set = lambda: None
-    app.save_live_set = lambda _path: None
-    app.export_audio = lambda _path: None
     song.record_mode = False
     backend = LiveBackend(surface)
 
@@ -1149,8 +1178,6 @@ def test_live_backend_ping_info_reports_api_support_true_when_available() -> Non
 
     assert result["api_support"] == {
         "song_new_supported": True,
-        "song_save_supported": True,
-        "song_export_audio_supported": True,
         "arrangement_record_start_supported": True,
         "arrangement_record_stop_supported": True,
         "arrangement_record_supported": True,
@@ -3828,8 +3855,6 @@ def test_live_backend_arrangement_from_session_repeats_midi_and_audio() -> None:
     "operation",
     (
         "song_new",
-        "song_save",
-        "song_export_audio",
         "arrangement_record_start",
         "arrangement_record_stop",
     ),
@@ -3840,10 +3865,6 @@ def test_live_backend_high_difficulty_commands_raise_explicit_not_supported(oper
     with pytest.raises(CommandError) as exc_info:
         if operation == "song_new":
             backend.song_new()
-        elif operation == "song_save":
-            backend.song_save("/tmp/demo.als")
-        elif operation == "song_export_audio":
-            backend.song_export_audio("/tmp/demo.wav")
         elif operation == "arrangement_record_start":
             backend.arrangement_record_start()
         else:

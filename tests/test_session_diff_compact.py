@@ -104,6 +104,10 @@ def test_compact_reduces_large_json_arrays(runner, cli_app, monkeypatch) -> None
                         "solo": False,
                         "arm": False,
                         "volume": 0.75,
+                        "is_foldable": False,
+                        "fold_state": None,
+                        "is_grouped": False,
+                        "group_track": None,
                     }
                     for index in range(40)
                 ]
@@ -142,6 +146,10 @@ def test_compact_keeps_small_arrays_unmodified(runner, cli_app, monkeypatch) -> 
                         "solo": False,
                         "arm": False,
                         "volume": 0.75,
+                        "is_foldable": False,
+                        "fold_state": None,
+                        "is_grouped": False,
+                        "group_track": None,
                     }
                 ]
             }

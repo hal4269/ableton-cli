@@ -99,6 +99,22 @@ TRACK_FACET_SPECS: tuple[TrackFacetSpec, ...] = (
         value_metavar="COLOR_INDEX",
         value_arg_name="color_index",
     ),
+    TrackFacetSpec(
+        name="monitoring",
+        help="Track monitoring (In / Auto / Off); not available on group tracks",
+        client_get="track_monitoring_get",
+        client_set="track_monitoring_set",
+        value_kind="str",
+        value_help="Monitoring state: in|auto|off",
+        value_metavar="STATE",
+    ),
+    TrackFacetSpec(
+        name="fold",
+        help="Group track folding",
+        client_get=None,
+        client_set="track_fold_set",
+        value_help="Folded: true|false (group tracks only)",
+    ),
 )
 
 

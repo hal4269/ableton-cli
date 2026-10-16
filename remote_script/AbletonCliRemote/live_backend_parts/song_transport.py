@@ -5,6 +5,7 @@ from typing import Any
 
 from ..command_backend import MAX_BPM, MAX_PANNING, MAX_VOLUME, MIN_BPM, MIN_PANNING, MIN_VOLUME
 from .base import _invalid_argument, _not_supported_by_live_api
+from .song_settings import song_settings_payload, track_group_payload
 
 _TRANSPORT_STATE_TIMEOUT_SECONDS = 1.0
 _TRANSPORT_STATE_POLL_INTERVAL_SECONDS = 0.01
@@ -22,6 +23,7 @@ class LiveBackendSongSessionMixin:
                 "numerator": int(song.signature_numerator),
                 "denominator": int(song.signature_denominator),
             },
+            **song_settings_payload(song),
         }
 
     def song_new(self) -> dict[str, Any]:
@@ -36,8 +38,8 @@ class LiveBackendSongSessionMixin:
         return {"created": True}
 
     def song_undo(self) -> dict[str, Any]:
-        app = self._ctx._application()
-        undo = getattr(app, "undo", None)
+        song = self._ctx._song()
+        undo = getattr(song, "undo", None)
         if not callable(undo):
             raise _not_supported_by_live_api(
                 message="Song undo API is not available in Live API",
@@ -47,8 +49,8 @@ class LiveBackendSongSessionMixin:
         return {"undone": True}
 
     def song_redo(self) -> dict[str, Any]:
-        app = self._ctx._application()
-        redo = getattr(app, "redo", None)
+        song = self._ctx._song()
+        redo = getattr(song, "redo", None)
         if not callable(redo):
             raise _not_supported_by_live_api(
                 message="Song redo API is not available in Live API",
@@ -56,28 +58,6 @@ class LiveBackendSongSessionMixin:
             )
         redo()
         return {"redone": True}
-
-    def song_save(self, path: str) -> dict[str, Any]:
-        app = self._ctx._application()
-        save_set = getattr(app, "save_live_set", None)
-        if not callable(save_set):
-            raise _not_supported_by_live_api(
-                message="Song save API is not available in Live API",
-                hint="Save the Set manually from Ableton Live.",
-            )
-        save_set(path)
-        return {"saved": True, "path": path}
-
-    def song_export_audio(self, path: str) -> dict[str, Any]:
-        app = self._ctx._application()
-        export_audio = getattr(app, "export_audio", None)
-        if not callable(export_audio):
-            raise _not_supported_by_live_api(
-                message="Song audio export API is not available in Live API",
-                hint="Export audio manually from Ableton Live.",
-            )
-        export_audio(path)
-        return {"exported": True, "path": path}
 
     def get_session_info(self) -> dict[str, Any]:
         song = self._ctx._song()
@@ -142,6 +122,7 @@ class LiveBackendSongSessionMixin:
             "arm": bool(getattr(target, "arm", False)),
             "volume": float(target.mixer_device.volume.value),
             "panning": float(target.mixer_device.panning.value),
+            **self._track_group_payload(target),
             "clip_slots": clip_slots,
             "devices": devices,
         }
@@ -158,9 +139,13 @@ class LiveBackendSongSessionMixin:
                     "solo": bool(track.solo),
                     "arm": bool(getattr(track, "arm", False)),
                     "volume": float(track.mixer_device.volume.value),
+                    **self._track_group_payload(track),
                 }
             )
         return {"tracks": tracks}
+
+    def _track_group_payload(self, track: Any) -> dict[str, Any]:
+        return track_group_payload(self._ctx._song(), track, self._ctx._same_live_object)
 
     def create_midi_track(self, index: int) -> dict[str, Any]:
         song = self._ctx._song()

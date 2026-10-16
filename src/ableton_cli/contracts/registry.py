@@ -192,10 +192,28 @@ def _device_result_schema(*, include_track_stable_ref: bool) -> dict[str, Any]:
     }
 
 
+#: Group state reported by ``tracks list`` and ``track info``.
+_TRACK_GROUP_PROPERTIES: dict[str, Any] = {
+    "is_foldable": {"type": "boolean"},
+    "fold_state": {"type": ["boolean", "null"]},
+    "is_grouped": {"type": "boolean"},
+    "group_track": {"type": ["integer", "null"]},
+}
+
+
 def _track_summary_schema() -> dict[str, Any]:
     return {
         "type": "object",
-        "required": ["index", "stable_ref", "name", "mute", "solo", "arm", "volume"],
+        "required": [
+            "index",
+            "stable_ref",
+            "name",
+            "mute",
+            "solo",
+            "arm",
+            "volume",
+            *_TRACK_GROUP_PROPERTIES,
+        ],
         "properties": {
             "index": {"type": "integer"},
             "stable_ref": {"type": "string"},
@@ -204,6 +222,7 @@ def _track_summary_schema() -> dict[str, Any]:
             "solo": {"type": "boolean"},
             "arm": {"type": "boolean"},
             "volume": {"type": "number"},
+            **_TRACK_GROUP_PROPERTIES,
         },
         "additional_properties": False,
     }
@@ -833,6 +852,7 @@ _DETAILED_CONTRACTS.update(
                     "arm",
                     "volume",
                     "panning",
+                    *_TRACK_GROUP_PROPERTIES,
                     "clip_slots",
                     "devices",
                 ],
@@ -847,6 +867,7 @@ _DETAILED_CONTRACTS.update(
                     "arm": {"type": "boolean"},
                     "volume": {"type": "number"},
                     "panning": {"type": "number"},
+                    **_TRACK_GROUP_PROPERTIES,
                     "clip_slots": {"type": "array"},
                     "devices": {
                         "type": "array",

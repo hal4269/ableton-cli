@@ -14,9 +14,11 @@
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
         "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
         "\u2502 from-session                                                                                     \u2502",
-        "\u2502 locator       Arrangement locator (cue point) commands                                           \u2502",
-        "\u2502 record        Arrangement recording commands                                                     \u2502",
-        "\u2502 clip          Arrangement clip commands                                                          \u2502",
+        "\u2502 back-to-arranger  Click Live's \"Back to Arrangement\" button: every track plays the Arrangement   \u2502",
+        "\u2502                   again.                                                                         \u2502",
+        "\u2502 locator           Arrangement locator (cue point) commands                                       \u2502",
+        "\u2502 record            Arrangement recording commands                                                 \u2502",
+        "\u2502 clip              Arrangement clip commands                                                      \u2502",
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
       ],
       "hidden": false,
@@ -29,10 +31,37 @@
       "short_help": null,
       "subcommands": [
         "from-session",
+        "back-to-arranger",
         "locator",
         "record",
         "clip"
       ]
+    },
+    "arrangement back-to-arranger": {
+      "deprecated": false,
+      "help": "Click Live's \"Back to Arrangement\" button: every track plays the Arrangement again.\n\nLaunching Session clips takes a track off the Arrangement (Song.back_to_arranger\nbecomes true, the button lights up); this sets it back to false.",
+      "help_text": [
+        "",
+        " Usage: back-to-arranger [OPTIONS]",
+        "",
+        " Click Live's \"Back to Arrangement\" button: every track plays the Arrangement again.",
+        "",
+        " Launching Session clips takes a track off the Arrangement (Song.back_to_arranger",
+        " becomes true, the button lights up); this sets it back to false.",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [],
+      "path": [
+        "arrangement",
+        "back-to-arranger"
+      ],
+      "short_help": null
     },
     "arrangement clip": {
       "deprecated": false,
@@ -29154,11 +29183,21 @@
         "\u2502 vocal-chop                                                                                       \u2502",
         "\u2502 qa                                                                                               \u2502",
         "\u2502 export-plan                                                                                      \u2502",
-        "\u2502 setup-sound                                                                                      \u2502",
-        "\u2502 mix-macro                                                                                        \u2502",
-        "\u2502 setup-mix                                                                                        \u2502",
-        "\u2502 setup-returns                                                                                    \u2502",
-        "\u2502 setup-sidechain                                                                                  \u2502",
+        "\u2502 setup-sound      Not supported (always fails): instrument selection needs browser targets        \u2502",
+        "\u2502                  discovered at run time. Use 'browser search' to find kit/bass/lead targets,     \u2502",
+        "\u2502                  then 'browser load-drum-kit' or 'browser load' with the returned uri.           \u2502",
+        "\u2502 mix-macro        Not supported (always fails): the Live API cannot create group tracks. Group    \u2502",
+        "\u2502                  the buses in Live, add returns with 'return-tracks create', then set levels     \u2502",
+        "\u2502                  with 'track volume set', 'track send set' and 'return-track volume set'.        \u2502",
+        "\u2502 setup-mix        Not supported (always fails): the Live API cannot create group tracks. Group    \u2502",
+        "\u2502                  the buses in Live, add returns with 'return-tracks create', then set levels     \u2502",
+        "\u2502                  with 'track volume set', 'track send set' and 'return-track volume set'.        \u2502",
+        "\u2502 setup-returns    Not supported (always fails): there is no return-bus plan to apply; returns are \u2502",
+        "\u2502                  created one at a time. Add returns with 'return-tracks create', load effects    \u2502",
+        "\u2502                  with 'browser load', and set levels with 'return-track volume set'.             \u2502",
+        "\u2502 setup-sidechain  Not supported (always fails): sidechain routing is not exposed to Remote        \u2502",
+        "\u2502                  Scripts. Route the sidechain in Live's compressor, then automate it with        \u2502",
+        "\u2502                  'device parameter set' or 'clip envelope set'.                                  \u2502",
         "\u2502 generate         Pattern generation commands                                                     \u2502",
         "\u2502 device-chain     Remix device chain commands                                                     \u2502",
         "\u2502 mastering        Remix mastering workflow commands                                               \u2502",
@@ -29439,7 +29478,9 @@
         "\u2502 --help          Show this message and exit.                                                      \u2502",
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
         "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
-        "\u2502 apply                                                                                            \u2502",
+        "\u2502 apply  Not supported (always fails): device chains need browser targets discovered at run time.  \u2502",
+        "\u2502        Use 'browser search' to find each device, then 'browser load' with the returned uri, and  \u2502",
+        "\u2502        'device parameter set' to dial it in.                                                     \u2502",
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
       ],
       "hidden": false,
@@ -29457,10 +29498,14 @@
     },
     "remix device-chain apply": {
       "deprecated": false,
-      "help": null,
+      "help": "Not supported (always fails): device chains need browser targets discovered at run time. Use 'browser search' to find each device, then 'browser load' with the returned uri, and 'device parameter set' to dial it in.",
       "help_text": [
         "",
         " Usage: apply [OPTIONS]",
+        "",
+        " Not supported (always fails): device chains need browser targets discovered at run time. Use",
+        " 'browser search' to find each device, then 'browser load' with the returned uri, and 'device",
+        " parameter set' to dial it in.",
         "",
         "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
         "\u2502 *  --project        PATH  [required]                                                             \u2502",
@@ -32012,10 +32057,14 @@
     },
     "remix mix-macro": {
       "deprecated": false,
-      "help": null,
+      "help": "Not supported (always fails): the Live API cannot create group tracks. Group the buses in Live, add returns with 'return-tracks create', then set levels with 'track volume set', 'track send set' and 'return-track volume set'.",
       "help_text": [
         "",
         " Usage: mix-macro [OPTIONS]",
+        "",
+        " Not supported (always fails): the Live API cannot create group tracks. Group the buses in Live,",
+        " add returns with 'return-tracks create', then set levels with 'track volume set', 'track send set'",
+        " and 'return-track volume set'.",
         "",
         "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
         "\u2502 *  --project        PATH  Manifest path [required]                                               \u2502",
@@ -32424,10 +32473,14 @@
     },
     "remix setup-mix": {
       "deprecated": false,
-      "help": null,
+      "help": "Not supported (always fails): the Live API cannot create group tracks. Group the buses in Live, add returns with 'return-tracks create', then set levels with 'track volume set', 'track send set' and 'return-track volume set'.",
       "help_text": [
         "",
         " Usage: setup-mix [OPTIONS]",
+        "",
+        " Not supported (always fails): the Live API cannot create group tracks. Group the buses in Live,",
+        " add returns with 'return-tracks create', then set levels with 'track volume set', 'track send set'",
+        " and 'return-track volume set'.",
         "",
         "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
         "\u2502 *  --project        PATH  Manifest path [required]                                               \u2502",
@@ -32473,10 +32526,14 @@
     },
     "remix setup-returns": {
       "deprecated": false,
-      "help": null,
+      "help": "Not supported (always fails): there is no return-bus plan to apply; returns are created one at a time. Add returns with 'return-tracks create', load effects with 'browser load', and set levels with 'return-track volume set'.",
       "help_text": [
         "",
         " Usage: setup-returns [OPTIONS]",
+        "",
+        " Not supported (always fails): there is no return-bus plan to apply; returns are created one at a",
+        " time. Add returns with 'return-tracks create', load effects with 'browser load', and set levels",
+        " with 'return-track volume set'.",
         "",
         "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
         "\u2502 *  --project        PATH  Manifest path [required]                                               \u2502",
@@ -32522,10 +32579,14 @@
     },
     "remix setup-sidechain": {
       "deprecated": false,
-      "help": null,
+      "help": "Not supported (always fails): sidechain routing is not exposed to Remote Scripts. Route the sidechain in Live's compressor, then automate it with 'device parameter set' or 'clip envelope set'.",
       "help_text": [
         "",
         " Usage: setup-sidechain [OPTIONS]",
+        "",
+        " Not supported (always fails): sidechain routing is not exposed to Remote Scripts. Route the",
+        " sidechain in Live's compressor, then automate it with 'device parameter set' or 'clip envelope",
+        " set'.",
         "",
         "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
         "\u2502 *  --project        PATH  Manifest path [required]                                               \u2502",
@@ -32571,10 +32632,14 @@
     },
     "remix setup-sound": {
       "deprecated": false,
-      "help": null,
+      "help": "Not supported (always fails): instrument selection needs browser targets discovered at run time. Use 'browser search' to find kit/bass/lead targets, then 'browser load-drum-kit' or 'browser load' with the returned uri.",
       "help_text": [
         "",
         " Usage: setup-sound [OPTIONS]",
+        "",
+        " Not supported (always fails): instrument selection needs browser targets discovered at run time.",
+        " Use 'browser search' to find kit/bass/lead targets, then 'browser load-drum-kit' or 'browser load'",
+        " with the returned uri.",
         "",
         "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
         "\u2502 *  --project        PATH  Manifest path [required]                                               \u2502",
@@ -33490,6 +33555,8 @@
         "\u2502 duplicate  Duplicate a scene with its clips; the copy lands right after it.                      \u2502",
         "\u2502 delete     Delete a scene and its clips.                                                         \u2502",
         "\u2502 name       Scenes naming commands                                                                \u2502",
+        "\u2502 tempo      Scene tempo (Live 12+)                                                                \u2502",
+        "\u2502 signature  Scene time signature (Live 12+)                                                       \u2502",
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
       ],
       "hidden": false,
@@ -33507,7 +33574,9 @@
         "move",
         "duplicate",
         "delete",
-        "name"
+        "name",
+        "tempo",
+        "signature"
       ]
     },
     "scenes create": {
@@ -33877,6 +33946,277 @@
       "path": [
         "scenes",
         "name",
+        "set"
+      ],
+      "short_help": null
+    },
+    "scenes signature": {
+      "deprecated": false,
+      "help": "Scene time signature (Live 12+)",
+      "help_text": [
+        "",
+        " Usage: signature [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " Scene time signature (Live 12+)",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 set  Give a scene its own time signature, or --clear it.                                         \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "scenes",
+        "signature"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "set"
+      ]
+    },
+    "scenes signature set": {
+      "deprecated": false,
+      "help": "Give a scene its own time signature, or --clear it.",
+      "help_text": [
+        "",
+        " Usage: set [OPTIONS] SCENE [NUMERATOR] [DENOMINATOR]",
+        "",
+        " Give a scene its own time signature, or --clear it.",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    scene            INTEGER        Scene index (0-based) [required]                            \u2502",
+        "\u2502      numerator        [NUMERATOR]    Beats per bar (1-99)                                        \u2502",
+        "\u2502      denominator      [DENOMINATOR]  Note value: 1, 2, 4, 8 or 16                                \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --clear          Remove the scene's time signature                                               \u2502",
+        "\u2502 --help           Show this message and exit.                                                     \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Scene index (0-based)",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "scene",
+          "nargs": 1,
+          "opts": [
+            "scene"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        },
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Beats per bar (1-99)",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "numerator",
+          "nargs": 1,
+          "opts": [
+            "numerator"
+          ],
+          "required": false,
+          "secondary_opts": [],
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        },
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Note value: 1, 2, 4, 8 or 16",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "denominator",
+          "nargs": 1,
+          "opts": [
+            "denominator"
+          ],
+          "required": false,
+          "secondary_opts": [],
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        },
+        {
+          "count": false,
+          "default": false,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": true,
+          "help": "Remove the scene's time signature",
+          "hidden": false,
+          "is_flag": true,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "clear",
+          "nargs": 1,
+          "opts": [
+            "--clear"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "BoolParamType",
+            "name": "boolean"
+          }
+        }
+      ],
+      "path": [
+        "scenes",
+        "signature",
+        "set"
+      ],
+      "short_help": null
+    },
+    "scenes tempo": {
+      "deprecated": false,
+      "help": "Scene tempo (Live 12+)",
+      "help_text": [
+        "",
+        " Usage: tempo [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " Scene tempo (Live 12+)",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 set  Give a scene its own tempo, or --clear it (Scene.tempo / tempo_enabled).                    \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "scenes",
+        "tempo"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "set"
+      ]
+    },
+    "scenes tempo set": {
+      "deprecated": false,
+      "help": "Give a scene its own tempo, or --clear it (Scene.tempo / tempo_enabled).",
+      "help_text": [
+        "",
+        " Usage: set [OPTIONS] SCENE [BPM]",
+        "",
+        " Give a scene its own tempo, or --clear it (Scene.tempo / tempo_enabled).",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    scene      INTEGER  Scene index (0-based) [required]                                        \u2502",
+        "\u2502      bpm        [BPM]    Tempo the scene sets when launched                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --clear          Remove the scene's tempo                                                        \u2502",
+        "\u2502 --help           Show this message and exit.                                                     \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Scene index (0-based)",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "scene",
+          "nargs": 1,
+          "opts": [
+            "scene"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        },
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Tempo the scene sets when launched",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "bpm",
+          "nargs": 1,
+          "opts": [
+            "bpm"
+          ],
+          "required": false,
+          "secondary_opts": [],
+          "type": {
+            "class": "FloatParamType",
+            "name": "float"
+          }
+        },
+        {
+          "count": false,
+          "default": false,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": true,
+          "help": "Remove the scene's tempo",
+          "hidden": false,
+          "is_flag": true,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "clear",
+          "nargs": 1,
+          "opts": [
+            "--clear"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "BoolParamType",
+            "name": "boolean"
+          }
+        }
+      ],
+      "path": [
+        "scenes",
+        "tempo",
         "set"
       ],
       "short_help": null
@@ -34531,8 +34871,14 @@
         "\u2502 new                                                                                              \u2502",
         "\u2502 undo                                                                                             \u2502",
         "\u2502 redo                                                                                             \u2502",
-        "\u2502 save                                                                                             \u2502",
-        "\u2502 export  Song export commands                                                                     \u2502",
+        "\u2502 capture-midi         Capture the MIDI Live recently heard on armed/monitoring tracks into a      \u2502",
+        "\u2502                      clip.                                                                       \u2502",
+        "\u2502 loop                 Arrangement loop region                                                     \u2502",
+        "\u2502 metronome            Metronome                                                                   \u2502",
+        "\u2502 swing                Global swing amount (Song.swing_amount)                                     \u2502",
+        "\u2502 groove-amount        Groove Pool global amount (Song.groove_amount)                              \u2502",
+        "\u2502 scale                Song key and scale (Live 12+)                                               \u2502",
+        "\u2502 record-quantization  MIDI record quantization (Song.midi_recording_quantization)                 \u2502",
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
       ],
       "hidden": false,
@@ -34548,49 +34894,27 @@
         "new",
         "undo",
         "redo",
-        "save",
-        "export"
+        "capture-midi",
+        "loop",
+        "metronome",
+        "swing",
+        "groove-amount",
+        "scale",
+        "record-quantization"
       ]
     },
-    "song export": {
+    "song capture-midi": {
       "deprecated": false,
-      "help": "Song export commands",
+      "help": "Capture the MIDI Live recently heard on armed/monitoring tracks into a clip.",
       "help_text": [
         "",
-        " Usage: export [OPTIONS] COMMAND [ARGS]...",
+        " Usage: capture-midi [OPTIONS]",
         "",
-        " Song export commands",
-        "",
-        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
-        "\u2502 --help          Show this message and exit.                                                      \u2502",
-        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
-        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
-        "\u2502 audio                                                                                            \u2502",
-        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
-      ],
-      "hidden": false,
-      "kind": "group",
-      "no_args_is_help": true,
-      "params": [],
-      "path": [
-        "song",
-        "export"
-      ],
-      "short_help": null,
-      "subcommands": [
-        "audio"
-      ]
-    },
-    "song export audio": {
-      "deprecated": false,
-      "help": null,
-      "help_text": [
-        "",
-        " Usage: audio [OPTIONS]",
+        " Capture the MIDI Live recently heard on armed/monitoring tracks into a clip.",
         "",
         "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
-        "\u2502 *  --path        TEXT  Destination audio path (for example .wav) [required]                      \u2502",
-        "\u2502    --help              Show this message and exit.                                               \u2502",
+        "\u2502 --destination        TEXT  auto, session or arrangement [default: auto]                          \u2502",
+        "\u2502 --help                     Show this message and exit.                                           \u2502",
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
       ],
       "hidden": false,
@@ -34599,23 +34923,23 @@
       "params": [
         {
           "count": false,
-          "default": null,
+          "default": "auto",
           "envvar": null,
           "expose_value": true,
           "flag_value": null,
-          "help": "Destination audio path (for example .wav)",
+          "help": "auto, session or arrangement",
           "hidden": false,
           "is_flag": false,
           "kind": "option",
           "metavar": null,
           "multiple": false,
-          "name": "path",
+          "name": "destination",
           "nargs": 1,
           "opts": [
-            "--path"
+            "--destination"
           ],
           "prompt": null,
-          "required": true,
+          "required": false,
           "secondary_opts": [],
           "show_default": true,
           "type": {
@@ -34626,8 +34950,84 @@
       ],
       "path": [
         "song",
-        "export",
-        "audio"
+        "capture-midi"
+      ],
+      "short_help": null
+    },
+    "song groove-amount": {
+      "deprecated": false,
+      "help": "Groove Pool global amount (Song.groove_amount)",
+      "help_text": [
+        "",
+        " Usage: groove-amount [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " Groove Pool global amount (Song.groove_amount)",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 set  Set the Groove Pool's global amount.                                                        \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "song",
+        "groove-amount"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "set"
+      ]
+    },
+    "song groove-amount set": {
+      "deprecated": false,
+      "help": "Set the Groove Pool's global amount.",
+      "help_text": [
+        "",
+        " Usage: set [OPTIONS] VALUE",
+        "",
+        " Set the Groove Pool's global amount.",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    value      FLOAT  Global groove amount 0.0-1.3 (0-130%) [required]                          \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Global groove amount 0.0-1.3 (0-130%)",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "value",
+          "nargs": 1,
+          "opts": [
+            "value"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "FloatParamType",
+            "name": "float"
+          }
+        }
+      ],
+      "path": [
+        "song",
+        "groove-amount",
+        "set"
       ],
       "short_help": null
     },
@@ -34652,6 +35052,246 @@
       ],
       "short_help": null
     },
+    "song loop": {
+      "deprecated": false,
+      "help": "Arrangement loop region",
+      "help_text": [
+        "",
+        " Usage: loop [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " Arrangement loop region",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 get  Show the Arrangement loop: enabled, start, length and end (beats).                          \u2502",
+        "\u2502 set  Change the Arrangement loop region; options left out keep their value.                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "song",
+        "loop"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "get",
+        "set"
+      ]
+    },
+    "song loop get": {
+      "deprecated": false,
+      "help": "Show the Arrangement loop: enabled, start, length and end (beats).",
+      "help_text": [
+        "",
+        " Usage: get [OPTIONS]",
+        "",
+        " Show the Arrangement loop: enabled, start, length and end (beats).",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [],
+      "path": [
+        "song",
+        "loop",
+        "get"
+      ],
+      "short_help": null
+    },
+    "song loop set": {
+      "deprecated": false,
+      "help": "Change the Arrangement loop region; options left out keep their value.",
+      "help_text": [
+        "",
+        " Usage: set [OPTIONS]",
+        "",
+        " Change the Arrangement loop region; options left out keep their value.",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --enabled    --disabled           Switch the Arrangement loop on or off                          \u2502",
+        "\u2502 --start                    FLOAT  Loop start in beats                                            \u2502",
+        "\u2502 --length                   FLOAT  Loop length in beats                                           \u2502",
+        "\u2502 --help                            Show this message and exit.                                    \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": true,
+          "help": "Switch the Arrangement loop on or off",
+          "hidden": false,
+          "is_flag": true,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "enabled",
+          "nargs": 1,
+          "opts": [
+            "--enabled"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [
+            "--disabled"
+          ],
+          "show_default": true,
+          "type": {
+            "class": "BoolParamType",
+            "name": "boolean"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Loop start in beats",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "start",
+          "nargs": 1,
+          "opts": [
+            "--start"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "FloatParamType",
+            "name": "float"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Loop length in beats",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "length",
+          "nargs": 1,
+          "opts": [
+            "--length"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "FloatParamType",
+            "name": "float"
+          }
+        }
+      ],
+      "path": [
+        "song",
+        "loop",
+        "set"
+      ],
+      "short_help": null
+    },
+    "song metronome": {
+      "deprecated": false,
+      "help": "Metronome",
+      "help_text": [
+        "",
+        " Usage: metronome [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " Metronome",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 set  Switch the metronome on or off.                                                             \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "song",
+        "metronome"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "set"
+      ]
+    },
+    "song metronome set": {
+      "deprecated": false,
+      "help": "Switch the metronome on or off.",
+      "help_text": [
+        "",
+        " Usage: set [OPTIONS] VALUE",
+        "",
+        " Switch the metronome on or off.",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    value        Metronome on: true|false [required]                                            \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Metronome on: true|false",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "value",
+          "nargs": 1,
+          "opts": [
+            "value"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "BoolParamType",
+            "name": "boolean"
+          }
+        }
+      ],
+      "path": [
+        "song",
+        "metronome",
+        "set"
+      ],
+      "short_help": null
+    },
     "song new": {
       "deprecated": false,
       "help": null,
@@ -34670,6 +35310,84 @@
       "path": [
         "song",
         "new"
+      ],
+      "short_help": null
+    },
+    "song record-quantization": {
+      "deprecated": false,
+      "help": "MIDI record quantization (Song.midi_recording_quantization)",
+      "help_text": [
+        "",
+        " Usage: record-quantization [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " MIDI record quantization (Song.midi_recording_quantization)",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 set  Set the quantization applied while recording MIDI.                                          \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "song",
+        "record-quantization"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "set"
+      ]
+    },
+    "song record-quantization set": {
+      "deprecated": false,
+      "help": "Set the quantization applied while recording MIDI.",
+      "help_text": [
+        "",
+        " Usage: set [OPTIONS] VALUE",
+        "",
+        " Set the quantization applied while recording MIDI.",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    value      TEXT  One of: none, 1/4, 1/8, 1/8t, 1/8+1/8t, 1/16, 1/16t, 1/16+1/16t, 1/32      \u2502",
+        "\u2502                       [required]                                                                 \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "One of: none, 1/4, 1/8, 1/8t, 1/8+1/8t, 1/16, 1/16t, 1/16+1/16t, 1/32",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "value",
+          "nargs": 1,
+          "opts": [
+            "value"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        }
+      ],
+      "path": [
+        "song",
+        "record-quantization",
+        "set"
       ],
       "short_help": null
     },
@@ -34694,16 +35412,49 @@
       ],
       "short_help": null
     },
-    "song save": {
+    "song scale": {
       "deprecated": false,
-      "help": null,
+      "help": "Song key and scale (Live 12+)",
       "help_text": [
         "",
-        " Usage: save [OPTIONS]",
+        " Usage: scale [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " Song key and scale (Live 12+)",
         "",
         "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
-        "\u2502 *  --path        TEXT  Destination .als path [required]                                          \u2502",
-        "\u2502    --help              Show this message and exit.                                               \u2502",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 set  Set the song key (root note), scale name and/or scale mode (Live 12+).                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "song",
+        "scale"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "set"
+      ]
+    },
+    "song scale set": {
+      "deprecated": false,
+      "help": "Set the song key (root note), scale name and/or scale mode (Live 12+).",
+      "help_text": [
+        "",
+        " Usage: set [OPTIONS]",
+        "",
+        " Set the song key (root note), scale name and/or scale mode (Live 12+).",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --root                 TEXT  Root note: C, C#, Db ... B, or 0-11                                 \u2502",
+        "\u2502 --name                 TEXT  Scale name as shown in Live (e.g. Minor)                            \u2502",
+        "\u2502 --mode    --no-mode          Scale mode (highlight/fold to scale) on or off                      \u2502",
+        "\u2502 --help                       Show this message and exit.                                         \u2502",
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
       ],
       "hidden": false,
@@ -34716,30 +35467,162 @@
           "envvar": null,
           "expose_value": true,
           "flag_value": null,
-          "help": "Destination .als path",
+          "help": "Root note: C, C#, Db ... B, or 0-11",
           "hidden": false,
           "is_flag": false,
           "kind": "option",
           "metavar": null,
           "multiple": false,
-          "name": "path",
+          "name": "root",
           "nargs": 1,
           "opts": [
-            "--path"
+            "--root"
           ],
           "prompt": null,
-          "required": true,
+          "required": false,
           "secondary_opts": [],
           "show_default": true,
           "type": {
             "class": "StringParamType",
             "name": "text"
           }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Scale name as shown in Live (e.g. Minor)",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "name",
+          "nargs": 1,
+          "opts": [
+            "--name"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": true,
+          "help": "Scale mode (highlight/fold to scale) on or off",
+          "hidden": false,
+          "is_flag": true,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "mode",
+          "nargs": 1,
+          "opts": [
+            "--mode"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [
+            "--no-mode"
+          ],
+          "show_default": true,
+          "type": {
+            "class": "BoolParamType",
+            "name": "boolean"
+          }
         }
       ],
       "path": [
         "song",
-        "save"
+        "scale",
+        "set"
+      ],
+      "short_help": null
+    },
+    "song swing": {
+      "deprecated": false,
+      "help": "Global swing amount (Song.swing_amount)",
+      "help_text": [
+        "",
+        " Usage: swing [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " Global swing amount (Song.swing_amount)",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 set  Set the global swing amount (applies to MIDI recording quantization and quantize).          \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "song",
+        "swing"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "set"
+      ]
+    },
+    "song swing set": {
+      "deprecated": false,
+      "help": "Set the global swing amount (applies to MIDI recording quantization and quantize).",
+      "help_text": [
+        "",
+        " Usage: set [OPTIONS] VALUE",
+        "",
+        " Set the global swing amount (applies to MIDI recording quantization and quantize).",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    value      FLOAT  Swing amount 0.0-1.0 [required]                                           \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Swing amount 0.0-1.0",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "value",
+          "nargs": 1,
+          "opts": [
+            "value"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "FloatParamType",
+            "name": "float"
+          }
+        }
+      ],
+      "path": [
+        "song",
+        "swing",
+        "set"
       ],
       "short_help": null
     },
@@ -38061,15 +38944,17 @@
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
         "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
         "\u2502 info                                                                                             \u2502",
-        "\u2502 volume   Track volume commands                                                                   \u2502",
-        "\u2502 name     Track naming commands                                                                   \u2502",
-        "\u2502 mute     Track mute commands                                                                     \u2502",
-        "\u2502 solo     Track solo commands                                                                     \u2502",
-        "\u2502 arm      Track arm commands                                                                      \u2502",
-        "\u2502 panning  Track panning commands                                                                  \u2502",
-        "\u2502 color    Track color commands                                                                    \u2502",
-        "\u2502 send     Track send commands                                                                     \u2502",
-        "\u2502 routing  Track routing commands                                                                  \u2502",
+        "\u2502 volume      Track volume commands                                                                \u2502",
+        "\u2502 name        Track naming commands                                                                \u2502",
+        "\u2502 mute        Track mute commands                                                                  \u2502",
+        "\u2502 solo        Track solo commands                                                                  \u2502",
+        "\u2502 arm         Track arm commands                                                                   \u2502",
+        "\u2502 panning     Track panning commands                                                               \u2502",
+        "\u2502 color       Track color commands                                                                 \u2502",
+        "\u2502 monitoring  Track monitoring (In / Auto / Off); not available on group tracks                    \u2502",
+        "\u2502 fold        Group track folding                                                                  \u2502",
+        "\u2502 send        Track send commands                                                                  \u2502",
+        "\u2502 routing     Track routing commands                                                               \u2502",
         "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
       ],
       "hidden": false,
@@ -38089,6 +38974,8 @@
         "arm",
         "panning",
         "color",
+        "monitoring",
+        "fold",
         "send",
         "routing"
       ]
@@ -38673,6 +39560,216 @@
       ],
       "short_help": null
     },
+    "track fold": {
+      "deprecated": false,
+      "help": "Group track folding",
+      "help_text": [
+        "",
+        " Usage: fold [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " Group track folding",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 set                                                                                              \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "track",
+        "fold"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "set"
+      ]
+    },
+    "track fold set": {
+      "deprecated": false,
+      "help": null,
+      "help_text": [
+        "",
+        " Usage: set [OPTIONS] VALUE",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    value        Folded: true|false (group tracks only) [required]                              \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --track-index           INTEGER  Track index (0-based)                                           \u2502",
+        "\u2502 --track-name            TEXT     Exact track name                                                \u2502",
+        "\u2502 --selected-track                 Use the currently selected track                                \u2502",
+        "\u2502 --track-query           TEXT     Unique case-insensitive track query                             \u2502",
+        "\u2502 --track-ref             TEXT     Session-local stable track reference                            \u2502",
+        "\u2502 --help                           Show this message and exit.                                     \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Folded: true|false (group tracks only)",
+          "kind": "argument",
+          "metavar": "VALUE",
+          "multiple": false,
+          "name": "value",
+          "nargs": 1,
+          "opts": [
+            "value"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "BoolParamType",
+            "name": "boolean"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Track index (0-based)",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_index",
+          "nargs": 1,
+          "opts": [
+            "--track-index"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Exact track name",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_name",
+          "nargs": 1,
+          "opts": [
+            "--track-name"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        },
+        {
+          "count": false,
+          "default": false,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": true,
+          "help": "Use the currently selected track",
+          "hidden": false,
+          "is_flag": true,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "selected_track",
+          "nargs": 1,
+          "opts": [
+            "--selected-track"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "BoolParamType",
+            "name": "boolean"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Unique case-insensitive track query",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_query",
+          "nargs": 1,
+          "opts": [
+            "--track-query"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Session-local stable track reference",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_ref",
+          "nargs": 1,
+          "opts": [
+            "--track-ref"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        }
+      ],
+      "path": [
+        "track",
+        "fold",
+        "set"
+      ],
+      "short_help": null
+    },
     "track info": {
       "deprecated": false,
       "help": null,
@@ -38827,6 +39924,376 @@
       "path": [
         "track",
         "info"
+      ],
+      "short_help": null
+    },
+    "track monitoring": {
+      "deprecated": false,
+      "help": "Track monitoring (In / Auto / Off); not available on group tracks",
+      "help_text": [
+        "",
+        " Usage: monitoring [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " Track monitoring (In / Auto / Off); not available on group tracks",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 get                                                                                              \u2502",
+        "\u2502 set                                                                                              \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "track",
+        "monitoring"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "get",
+        "set"
+      ]
+    },
+    "track monitoring get": {
+      "deprecated": false,
+      "help": null,
+      "help_text": [
+        "",
+        " Usage: get [OPTIONS]",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --track-index           INTEGER  Track index (0-based)                                           \u2502",
+        "\u2502 --track-name            TEXT     Exact track name                                                \u2502",
+        "\u2502 --selected-track                 Use the currently selected track                                \u2502",
+        "\u2502 --track-query           TEXT     Unique case-insensitive track query                             \u2502",
+        "\u2502 --track-ref             TEXT     Session-local stable track reference                            \u2502",
+        "\u2502 --help                           Show this message and exit.                                     \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Track index (0-based)",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_index",
+          "nargs": 1,
+          "opts": [
+            "--track-index"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Exact track name",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_name",
+          "nargs": 1,
+          "opts": [
+            "--track-name"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        },
+        {
+          "count": false,
+          "default": false,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": true,
+          "help": "Use the currently selected track",
+          "hidden": false,
+          "is_flag": true,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "selected_track",
+          "nargs": 1,
+          "opts": [
+            "--selected-track"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "BoolParamType",
+            "name": "boolean"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Unique case-insensitive track query",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_query",
+          "nargs": 1,
+          "opts": [
+            "--track-query"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Session-local stable track reference",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_ref",
+          "nargs": 1,
+          "opts": [
+            "--track-ref"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        }
+      ],
+      "path": [
+        "track",
+        "monitoring",
+        "get"
+      ],
+      "short_help": null
+    },
+    "track monitoring set": {
+      "deprecated": false,
+      "help": null,
+      "help_text": [
+        "",
+        " Usage: set [OPTIONS] STATE",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    value      STATE  Monitoring state: in|auto|off [required]                                  \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --track-index           INTEGER  Track index (0-based)                                           \u2502",
+        "\u2502 --track-name            TEXT     Exact track name                                                \u2502",
+        "\u2502 --selected-track                 Use the currently selected track                                \u2502",
+        "\u2502 --track-query           TEXT     Unique case-insensitive track query                             \u2502",
+        "\u2502 --track-ref             TEXT     Session-local stable track reference                            \u2502",
+        "\u2502 --help                           Show this message and exit.                                     \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Monitoring state: in|auto|off",
+          "kind": "argument",
+          "metavar": "STATE",
+          "multiple": false,
+          "name": "value",
+          "nargs": 1,
+          "opts": [
+            "value"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Track index (0-based)",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_index",
+          "nargs": 1,
+          "opts": [
+            "--track-index"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Exact track name",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_name",
+          "nargs": 1,
+          "opts": [
+            "--track-name"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        },
+        {
+          "count": false,
+          "default": false,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": true,
+          "help": "Use the currently selected track",
+          "hidden": false,
+          "is_flag": true,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "selected_track",
+          "nargs": 1,
+          "opts": [
+            "--selected-track"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "BoolParamType",
+            "name": "boolean"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Unique case-insensitive track query",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_query",
+          "nargs": 1,
+          "opts": [
+            "--track-query"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        },
+        {
+          "count": false,
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "flag_value": null,
+          "help": "Session-local stable track reference",
+          "hidden": false,
+          "is_flag": false,
+          "kind": "option",
+          "metavar": null,
+          "multiple": false,
+          "name": "track_ref",
+          "nargs": 1,
+          "opts": [
+            "--track-ref"
+          ],
+          "prompt": null,
+          "required": false,
+          "secondary_opts": [],
+          "show_default": true,
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        }
+      ],
+      "path": [
+        "track",
+        "monitoring",
+        "set"
       ],
       "short_help": null
     },
@@ -42469,6 +43936,283 @@
       ],
       "short_help": null
     },
+    "view": {
+      "deprecated": false,
+      "help": "Live's views and selection",
+      "help_text": [
+        "",
+        " Usage: view [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " Live's views and selection",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 show    Show and focus a view: session, arranger, detail, clip (Detail/Clip) or                  \u2502",
+        "\u2502         device-chain (Detail/DeviceChain).                                                       \u2502",
+        "\u2502 select  Select a track, scene or clip slot                                                       \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "view"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "show",
+        "select"
+      ]
+    },
+    "view select": {
+      "deprecated": false,
+      "help": "Select a track, scene or clip slot",
+      "help_text": [
+        "",
+        " Usage: select [OPTIONS] COMMAND [ARGS]...",
+        "",
+        " Select a track, scene or clip slot",
+        "",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 track  Select a track (Song.View.selected_track).                                                \u2502",
+        "\u2502 scene  Select a scene (Song.View.selected_scene).                                                \u2502",
+        "\u2502 clip   Highlight a clip slot; a clip in it is also shown in the Detail view.                     \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "group",
+      "no_args_is_help": true,
+      "params": [],
+      "path": [
+        "view",
+        "select"
+      ],
+      "short_help": null,
+      "subcommands": [
+        "track",
+        "scene",
+        "clip"
+      ]
+    },
+    "view select clip": {
+      "deprecated": false,
+      "help": "Highlight a clip slot; a clip in it is also shown in the Detail view.",
+      "help_text": [
+        "",
+        " Usage: clip [OPTIONS] TRACK CLIP",
+        "",
+        " Highlight a clip slot; a clip in it is also shown in the Detail view.",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    track      INTEGER  Track index (0-based) [required]                                        \u2502",
+        "\u2502 *    clip       INTEGER  Clip slot index (0-based) [required]                                    \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Track index (0-based)",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "track",
+          "nargs": 1,
+          "opts": [
+            "track"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        },
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Clip slot index (0-based)",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "clip",
+          "nargs": 1,
+          "opts": [
+            "clip"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        }
+      ],
+      "path": [
+        "view",
+        "select",
+        "clip"
+      ],
+      "short_help": null
+    },
+    "view select scene": {
+      "deprecated": false,
+      "help": "Select a scene (Song.View.selected_scene).",
+      "help_text": [
+        "",
+        " Usage: scene [OPTIONS] SCENE",
+        "",
+        " Select a scene (Song.View.selected_scene).",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    scene      INTEGER  Scene index (0-based) [required]                                        \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Scene index (0-based)",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "scene",
+          "nargs": 1,
+          "opts": [
+            "scene"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        }
+      ],
+      "path": [
+        "view",
+        "select",
+        "scene"
+      ],
+      "short_help": null
+    },
+    "view select track": {
+      "deprecated": false,
+      "help": "Select a track (Song.View.selected_track).",
+      "help_text": [
+        "",
+        " Usage: track [OPTIONS] TRACK",
+        "",
+        " Select a track (Song.View.selected_track).",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    track      INTEGER  Track index (0-based) [required]                                        \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "Track index (0-based)",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "track",
+          "nargs": 1,
+          "opts": [
+            "track"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "IntParamType",
+            "name": "integer"
+          }
+        }
+      ],
+      "path": [
+        "view",
+        "select",
+        "track"
+      ],
+      "short_help": null
+    },
+    "view show": {
+      "deprecated": false,
+      "help": "Show and focus a view: session, arranger, detail, clip (Detail/Clip) or\ndevice-chain (Detail/DeviceChain).",
+      "help_text": [
+        "",
+        " Usage: show [OPTIONS] VIEW",
+        "",
+        " Show and focus a view: session, arranger, detail, clip (Detail/Clip) or device-chain",
+        " (Detail/DeviceChain).",
+        "",
+        "\u256d\u2500 Arguments \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 *    view      TEXT  One of: session, arranger, detail, clip, device-chain [required]            \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e",
+        "\u2502 --help          Show this message and exit.                                                      \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
+      ],
+      "hidden": false,
+      "kind": "command",
+      "no_args_is_help": false,
+      "params": [
+        {
+          "default": null,
+          "envvar": null,
+          "expose_value": true,
+          "help": "One of: session, arranger, detail, clip, device-chain",
+          "kind": "argument",
+          "metavar": null,
+          "multiple": false,
+          "name": "view",
+          "nargs": 1,
+          "opts": [
+            "view"
+          ],
+          "required": true,
+          "secondary_opts": [],
+          "type": {
+            "class": "StringParamType",
+            "name": "text"
+          }
+        }
+      ],
+      "path": [
+        "view",
+        "show"
+      ],
+      "short_help": null
+    },
     "wait-ready": {
       "deprecated": false,
       "help": null,
@@ -42611,6 +44355,7 @@
       "\u2502 device                 Device commands                                                           \u2502",
       "\u2502 synth                  Synth control commands                                                    \u2502",
       "\u2502 effect                 Effect control commands                                                   \u2502",
+      "\u2502 view                   Live's views and selection                                                \u2502",
       "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f"
     ],
     "hidden": false,
@@ -43222,7 +44967,8 @@
       "browser",
       "device",
       "synth",
-      "effect"
+      "effect",
+      "view"
     ]
   },
   "version": 1
