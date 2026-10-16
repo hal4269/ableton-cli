@@ -15,3 +15,17 @@ def midi_note_specification_class() -> Any:
             "inject a note specification factory for tests."
         )
     return Live.Clip.MidiNoteSpecification
+
+
+def recording_quantization_value(index: int) -> Any:
+    """Live.Song.RecordingQuantization member for ``index`` (0 none ... 8 1/32).
+
+    Song.midi_recording_quantization is typed with this Boost.Python enum, which
+    does not accept a plain int on assignment.
+    """
+    if Live is None:
+        raise RuntimeError(
+            "Live API is not available outside Ableton; "
+            "patch recording_quantization_value for tests."
+        )
+    return Live.Song.RecordingQuantization.values[index]

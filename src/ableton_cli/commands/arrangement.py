@@ -61,6 +61,21 @@ register_notes_commands(notes_app, run_client_command_spec=run_client_command_sp
 register_session_commands(arrangement_app, run_client_command_spec=run_client_command_spec)
 register_locator_commands(locator_app, run_client_command_spec=run_client_command_spec)
 
+BACK_TO_ARRANGER_SPEC = ArrangementCommandSpec(
+    command_name="arrangement back-to-arranger",
+    client_method="back_to_arranger",
+)
+
+
+@arrangement_app.command("back-to-arranger")
+def arrangement_back_to_arranger(ctx: typer.Context) -> None:
+    """Click Live's "Back to Arrangement" button: every track plays the Arrangement again.
+
+    Launching Session clips takes a track off the Arrangement (Song.back_to_arranger
+    becomes true, the button lights up); this sets it back to false.
+    """
+    run_client_command_spec(ctx, spec=BACK_TO_ARRANGER_SPEC, args={})
+
 
 arrangement_app.add_typer(locator_app, name="locator")
 arrangement_app.add_typer(record_app, name="record")

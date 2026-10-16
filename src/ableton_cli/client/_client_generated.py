@@ -87,6 +87,9 @@ class _AbletonClientGeneratedMixin:
     def arrangement_record_stop(self) -> dict[str, Any]:
         return self._call("arrangement_record_stop")
 
+    def back_to_arranger(self) -> dict[str, Any]:
+        return self._call("back_to_arranger")
+
     def clip_active_get(self, track: int, clip: int) -> dict[str, Any]:
         return self._call("clip_active_get", {"track": track, "clip": clip})
 
@@ -453,6 +456,17 @@ class _AbletonClientGeneratedMixin:
     def return_tracks_list(self) -> dict[str, Any]:
         return self._call("return_tracks_list")
 
+    def scene_signature_set(
+        self, scene: int, numerator: int | None, denominator: int | None
+    ) -> dict[str, Any]:
+        return self._call(
+            "scene_signature_set",
+            {"scene": scene, "numerator": numerator, "denominator": denominator},
+        )
+
+    def scene_tempo_set(self, scene: int, bpm: float | None) -> dict[str, Any]:
+        return self._call("scene_tempo_set", {"scene": scene, "bpm": bpm})
+
     def scenes_delete(self, scene: int) -> dict[str, Any]:
         return self._call("scenes_delete", {"scene": scene})
 
@@ -480,20 +494,38 @@ class _AbletonClientGeneratedMixin:
     def set_track_name(self, track_ref: RefPayload, name: str) -> dict[str, Any]:
         return self._call("set_track_name", {"track_ref": track_ref, "name": name})
 
-    def song_export_audio(self, path: str) -> dict[str, object]:
-        return self._call("song_export_audio", {"path": path})
+    def song_capture_midi(self, destination: str) -> dict[str, Any]:
+        return self._call("song_capture_midi", {"destination": destination})
+
+    def song_groove_amount_set(self, value: float) -> dict[str, Any]:
+        return self._call("song_groove_amount_set", {"value": value})
 
     def song_info(self) -> dict[str, object]:
         return self._call("song_info")
 
+    def song_loop_get(self) -> dict[str, Any]:
+        return self._call("song_loop_get")
+
+    def song_loop_set(self, settings: dict[str, Any]) -> dict[str, Any]:
+        return self._call("song_loop_set", {"settings": settings})
+
+    def song_metronome_set(self, value: bool) -> dict[str, Any]:
+        return self._call("song_metronome_set", {"value": value})
+
     def song_new(self) -> dict[str, object]:
         return self._call("song_new")
+
+    def song_record_quantization_set(self, value: str) -> dict[str, Any]:
+        return self._call("song_record_quantization_set", {"value": value})
 
     def song_redo(self) -> dict[str, object]:
         return self._call("song_redo")
 
-    def song_save(self, path: str) -> dict[str, object]:
-        return self._call("song_save", {"path": path})
+    def song_scale_set(self, settings: dict[str, Any]) -> dict[str, Any]:
+        return self._call("song_scale_set", {"settings": settings})
+
+    def song_swing_set(self, value: float) -> dict[str, Any]:
+        return self._call("song_swing_set", {"value": value})
 
     def song_undo(self) -> dict[str, object]:
         return self._call("song_undo")
@@ -518,6 +550,15 @@ class _AbletonClientGeneratedMixin:
 
     def track_color_set(self, track_ref: RefPayload, color_index: int) -> dict[str, Any]:
         return self._call("track_color_set", {"track_ref": track_ref, "color_index": color_index})
+
+    def track_fold_set(self, track_ref: RefPayload, value: bool) -> dict[str, Any]:
+        return self._call("track_fold_set", {"track_ref": track_ref, "value": value})
+
+    def track_monitoring_get(self, track_ref: RefPayload) -> dict[str, Any]:
+        return self._call("track_monitoring_get", {"track_ref": track_ref})
+
+    def track_monitoring_set(self, track_ref: RefPayload, value: str) -> dict[str, Any]:
+        return self._call("track_monitoring_set", {"track_ref": track_ref, "value": value})
 
     def track_mute_get(self, track_ref: RefPayload) -> dict[str, Any]:
         return self._call("track_mute_get", {"track_ref": track_ref})
@@ -616,3 +657,15 @@ class _AbletonClientGeneratedMixin:
 
     def transport_toggle(self) -> dict[str, object]:
         return self._call("transport_toggle")
+
+    def view_select_clip(self, track: int, clip: int) -> dict[str, Any]:
+        return self._call("view_select_clip", {"track": track, "clip": clip})
+
+    def view_select_scene(self, scene: int) -> dict[str, Any]:
+        return self._call("view_select_scene", {"scene": scene})
+
+    def view_select_track(self, track: int) -> dict[str, Any]:
+        return self._call("view_select_track", {"track": track})
+
+    def view_show(self, view: str) -> dict[str, Any]:
+        return self._call("view_show", {"view": view})

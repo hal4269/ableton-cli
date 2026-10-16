@@ -63,14 +63,56 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         capability="Redo the most recently undone Ableton operation when supported by Live API.",
     ),
     StableActionMapping(
-        action="song_save",
-        command="uv run ableton-cli --output json song save --path <als>",
-        capability="Save the current Ableton Set to a target path when supported.",
+        action="song_loop_get",
+        command="uv run ableton-cli --output json song loop get",
+        capability="Read the Arrangement loop region (enabled, start, length, end in beats).",
     ),
     StableActionMapping(
-        action="song_export_audio",
-        command="uv run ableton-cli --output json song export audio --path <wav>",
-        capability="Export session audio to a target path when supported.",
+        action="song_loop_set",
+        command=(
+            "uv run ableton-cli --output json song loop set [--enabled|--disabled] [--start "
+            "<beats>] [--length <beats>]"
+        ),
+        capability="Change the Arrangement loop region.",
+    ),
+    StableActionMapping(
+        action="song_metronome_set",
+        command="uv run ableton-cli --output json song metronome set <true|false>",
+        capability="Switch the metronome on or off.",
+    ),
+    StableActionMapping(
+        action="song_swing_set",
+        command="uv run ableton-cli --output json song swing set <0-1>",
+        capability="Set the global swing amount.",
+    ),
+    StableActionMapping(
+        action="song_groove_amount_set",
+        command="uv run ableton-cli --output json song groove-amount set <0-1.3>",
+        capability="Set the Groove Pool global amount.",
+    ),
+    StableActionMapping(
+        action="song_scale_set",
+        command=(
+            "uv run ableton-cli --output json song scale set [--root <note>] [--name <scale>] "
+            "[--mode|--no-mode]"
+        ),
+        capability="Set the song key, scale name and scale mode (Live 12+).",
+    ),
+    StableActionMapping(
+        action="song_record_quantization_set",
+        command=(
+            "uv run ableton-cli --output json song record-quantization set "
+            "<none|1/4|1/8|1/8t|1/8+1/8t|1/16|1/16t|1/16+1/16t|1/32>"
+        ),
+        capability="Set MIDI record quantization.",
+    ),
+    StableActionMapping(
+        action="song_capture_midi",
+        command=(
+            "uv run ableton-cli --output json song capture-midi [--destination "
+            "auto|session|arrangement]"
+        ),
+        capability="Capture recently played MIDI into a clip.",
     ),
     StableActionMapping(
         action="get_session_info",
@@ -92,6 +134,11 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         action="arrangement_record_stop",
         command="uv run ableton-cli --output json arrangement record stop",
         capability="Stop arrangement recording when supported by Live API.",
+    ),
+    StableActionMapping(
+        action="back_to_arranger",
+        command="uv run ableton-cli --output json arrangement back-to-arranger",
+        capability="Press Back to Arrangement so every track follows the Arrangement again.",
     ),
     StableActionMapping(
         action="list_tracks",
@@ -117,6 +164,26 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         action="tracks_duplicate",
         command="uv run ableton-cli --output json tracks duplicate <track>",
         capability="Duplicate a track; the copy is inserted right after it.",
+    ),
+    StableActionMapping(
+        action="track_monitoring_get",
+        command="uv run ableton-cli --output json track monitoring get --track-index <track>",
+        capability="Read a track's monitoring state (in, auto, off).",
+    ),
+    StableActionMapping(
+        action="track_monitoring_set",
+        command=(
+            "uv run ableton-cli --output json track monitoring set <in|auto|off> "
+            "--track-index <track>"
+        ),
+        capability="Set a track's monitoring state (not on group tracks).",
+    ),
+    StableActionMapping(
+        action="track_fold_set",
+        command=(
+            "uv run ableton-cli --output json track fold set <true|false> --track-index <track>"
+        ),
+        capability="Fold or unfold a group track.",
     ),
     StableActionMapping(
         action="set_track_color",
@@ -419,6 +486,19 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         capability="Duplicate a scene with its clips.",
     ),
     StableActionMapping(
+        action="scene_tempo_set",
+        command="uv run ableton-cli --output json scenes tempo set <scene> <bpm>|--clear",
+        capability="Set or clear a scene's own tempo (Live 12+).",
+    ),
+    StableActionMapping(
+        action="scene_signature_set",
+        command=(
+            "uv run ableton-cli --output json scenes signature set <scene> <numerator> "
+            "<denominator>|--clear"
+        ),
+        capability="Set or clear a scene's own time signature (Live 12+).",
+    ),
+    StableActionMapping(
         action="scenes_delete",
         command="uv run ableton-cli --output json scenes delete <scene>",
         capability="Delete a scene and its clips.",
@@ -447,6 +527,28 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         action="locator_delete",
         command="uv run ableton-cli --output json arrangement locator delete <index>",
         capability="Delete an Arrangement locator (transport stopped).",
+    ),
+    StableActionMapping(
+        action="view_show",
+        command=(
+            "uv run ableton-cli --output json view show <session|arranger|detail|clip|device-chain>"
+        ),
+        capability="Show and focus one of Live's views.",
+    ),
+    StableActionMapping(
+        action="view_select_track",
+        command="uv run ableton-cli --output json view select track <track>",
+        capability="Select a track.",
+    ),
+    StableActionMapping(
+        action="view_select_scene",
+        command="uv run ableton-cli --output json view select scene <scene>",
+        capability="Select a scene.",
+    ),
+    StableActionMapping(
+        action="view_select_clip",
+        command="uv run ableton-cli --output json view select clip <track> <clip>",
+        capability="Highlight a clip slot and show its clip in the Detail view.",
     ),
     StableActionMapping(
         action="transport_signature_set",

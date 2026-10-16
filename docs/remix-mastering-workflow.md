@@ -14,7 +14,7 @@ uv run ableton-cli --output json remix mastering analyze --project ./proj/remix_
 uv run ableton-cli --output json remix mastering plan --project ./proj/remix_project.json --target anime-club-demo --chain utility,eq8,compressor,limiter
 uv run ableton-cli --output json remix mastering apply --project ./proj/remix_project.json --dry-run
 uv run ableton-cli --output json remix mastering apply --project ./proj/remix_project.json --yes
-uv run ableton-cli --output json song export audio --path ./renders/remix_mastered.wav
+# Export ./renders/remix_mastered.wav from Live (File > Export Audio/Video); the Live API cannot render audio.
 uv run ableton-cli --output json remix mastering qa --project ./proj/remix_project.json --render ./renders/remix_mastered.wav --strict
 uv run ableton-cli --output json remix qa --project ./proj/remix_project.json --include-mastering --render ./renders/remix_mastered.wav
 ```

@@ -10,8 +10,14 @@ Stable action names and CLI mappings for automation wrappers.
 | `song_new` | `uv run ableton-cli --output json song new` | Create a new Ableton Set when supported by Live API. |
 | `song_undo` | `uv run ableton-cli --output json song undo` | Undo the most recent Ableton operation when supported by Live API. |
 | `song_redo` | `uv run ableton-cli --output json song redo` | Redo the most recently undone Ableton operation when supported by Live API. |
-| `song_save` | `uv run ableton-cli --output json song save --path <als>` | Save the current Ableton Set to a target path when supported. |
-| `song_export_audio` | `uv run ableton-cli --output json song export audio --path <wav>` | Export session audio to a target path when supported. |
+| `song_loop_get` | `uv run ableton-cli --output json song loop get` | Read the Arrangement loop region (enabled, start, length, end in beats). |
+| `song_loop_set` | `uv run ableton-cli --output json song loop set [--enabled|--disabled] [--start <beats>] [--length <beats>]` | Change the Arrangement loop region. |
+| `song_metronome_set` | `uv run ableton-cli --output json song metronome set <true|false>` | Switch the metronome on or off. |
+| `song_swing_set` | `uv run ableton-cli --output json song swing set <0-1>` | Set the global swing amount. |
+| `song_groove_amount_set` | `uv run ableton-cli --output json song groove-amount set <0-1.3>` | Set the Groove Pool global amount. |
+| `song_scale_set` | `uv run ableton-cli --output json song scale set [--root <note>] [--name <scale>] [--mode|--no-mode]` | Set the song key, scale name and scale mode (Live 12+). |
+| `song_record_quantization_set` | `uv run ableton-cli --output json song record-quantization set <none|1/4|1/8|1/8t|1/8+1/8t|1/16|1/16t|1/16+1/16t|1/32>` | Set MIDI record quantization. |
+| `song_capture_midi` | `uv run ableton-cli --output json song capture-midi [--destination auto|session|arrangement]` | Capture recently played MIDI into a clip. |
 | `get_session_info` | `uv run ableton-cli --output json session info` | Read session view state and structure information. |
 | `get_track_info` | `uv run ableton-cli --output json track info --track-index <track>` | Read one track details by selector. |
 | `play` | `uv run ableton-cli --output json transport play` | Start transport playback. |
@@ -22,11 +28,15 @@ Stable action names and CLI mappings for automation wrappers.
 | `transport_rewind` | `uv run ableton-cli --output json transport rewind` | Rewind transport playhead to beat 0. |
 | `arrangement_record_start` | `uv run ableton-cli --output json arrangement record start` | Start arrangement recording when supported by Live API. |
 | `arrangement_record_stop` | `uv run ableton-cli --output json arrangement record stop` | Stop arrangement recording when supported by Live API. |
+| `back_to_arranger` | `uv run ableton-cli --output json arrangement back-to-arranger` | Press Back to Arrangement so every track follows the Arrangement again. |
 | `list_tracks` | `uv run ableton-cli --output json tracks list` | List all tracks and their basic properties. |
 | `create_midi_track` | `uv run ableton-cli --output json tracks create midi [--index <index>]` | Insert a MIDI track at an index or append. |
 | `create_audio_track` | `uv run ableton-cli --output json tracks create audio [--index <index>]` | Insert an audio track at an index or append. |
 | `tracks_delete` | `uv run ableton-cli --output json tracks delete <track>` | Delete a track by index when supported by Live API. |
 | `tracks_duplicate` | `uv run ableton-cli --output json tracks duplicate <track>` | Duplicate a track; the copy is inserted right after it. |
+| `track_monitoring_get` | `uv run ableton-cli --output json track monitoring get --track-index <track>` | Read a track's monitoring state (in, auto, off). |
+| `track_monitoring_set` | `uv run ableton-cli --output json track monitoring set <in|auto|off> --track-index <track>` | Set a track's monitoring state (not on group tracks). |
+| `track_fold_set` | `uv run ableton-cli --output json track fold set <true|false> --track-index <track>` | Fold or unfold a group track. |
 | `set_track_color` | `uv run ableton-cli --output json track color set <color_index> --track-index <track>` | Set a track color (0-69, Live's color chooser). |
 | `set_track_name` | `uv run ableton-cli --output json track name set <name> --track-index <track>` | Rename a track. |
 | `set_track_volume` | `uv run ableton-cli --output json track volume set <value> --track-index <track>` | Set track volume in range 0.0 to 1.0. |
@@ -76,12 +86,18 @@ Stable action names and CLI mappings for automation wrappers.
 | `fire_scene` | `uv run ableton-cli --output json scenes fire <scene>` | Launch all clip slots on a scene row. |
 | `scenes_move` | `uv run ableton-cli --output json scenes move <from> <to>` | Move a scene from one index to another when supported by Live API. |
 | `scenes_duplicate` | `uv run ableton-cli --output json scenes duplicate <scene>` | Duplicate a scene with its clips. |
+| `scene_tempo_set` | `uv run ableton-cli --output json scenes tempo set <scene> <bpm>|--clear` | Set or clear a scene's own tempo (Live 12+). |
+| `scene_signature_set` | `uv run ableton-cli --output json scenes signature set <scene> <numerator> <denominator>|--clear` | Set or clear a scene's own time signature (Live 12+). |
 | `scenes_delete` | `uv run ableton-cli --output json scenes delete <scene>` | Delete a scene and its clips. |
 | `return_tracks_create` | `uv run ableton-cli --output json return-tracks create` | Add a return track at the end. |
 | `return_tracks_delete` | `uv run ableton-cli --output json return-tracks delete <index>` | Delete a return track. |
 | `locators_list` | `uv run ableton-cli --output json arrangement locator list` | List Arrangement locators (cue points) sorted by time. |
 | `locator_add` | `uv run ableton-cli --output json arrangement locator add <beats> [--name <name>]` | Add a named Arrangement locator (transport stopped). |
 | `locator_delete` | `uv run ableton-cli --output json arrangement locator delete <index>` | Delete an Arrangement locator (transport stopped). |
+| `view_show` | `uv run ableton-cli --output json view show <session|arranger|detail|clip|device-chain>` | Show and focus one of Live's views. |
+| `view_select_track` | `uv run ableton-cli --output json view select track <track>` | Select a track. |
+| `view_select_scene` | `uv run ableton-cli --output json view select scene <scene>` | Select a scene. |
+| `view_select_clip` | `uv run ableton-cli --output json view select clip <track> <clip>` | Highlight a clip slot and show its clip in the Detail view. |
 | `transport_signature_set` | `uv run ableton-cli --output json transport signature set <numerator> <denominator>` | Set the song time signature. |
 | `stop_all_clips` | `uv run ableton-cli --output json session stop-all-clips` | Stop all currently playing clips in Session View. |
 | `get_browser_tree` | `uv run ableton-cli --output json browser tree [category_type]` | Read browser tree by category filter. |

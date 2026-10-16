@@ -104,8 +104,6 @@ class LiveBackendContext:
         song = self._control_surface.song()
 
         song_new_supported = self._is_callable_attribute(app, "new_live_set")
-        song_save_supported = self._is_callable_attribute(app, "save_live_set")
-        song_export_audio_supported = self._is_callable_attribute(app, "export_audio")
         has_record_mode = hasattr(song, "record_mode")
         arrangement_record_start_supported = has_record_mode or self._is_callable_attribute(
             song,
@@ -118,8 +116,6 @@ class LiveBackendContext:
 
         return {
             "song_new_supported": song_new_supported,
-            "song_save_supported": song_save_supported,
-            "song_export_audio_supported": song_export_audio_supported,
             "arrangement_record_start_supported": arrangement_record_start_supported,
             "arrangement_record_stop_supported": arrangement_record_stop_supported,
             "arrangement_record_supported": (

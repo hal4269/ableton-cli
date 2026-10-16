@@ -29,6 +29,12 @@ from .devices_edit import LiveBackendDeviceEditMixin
 from .devices_racks import LiveBackendDeviceRacksMixin
 from .scenes_arrangement import LiveBackendScenesArrangementMixin
 from .service import LiveBackendService
+from .song_settings import (
+    LiveBackendSceneSettingsMixin,
+    LiveBackendSongSettingsMixin,
+    LiveBackendTrackStateMixin,
+    LiveBackendViewMixin,
+)
 from .song_structure import LiveBackendSongStructureMixin
 from .song_transport import LiveBackendSongSessionMixin, LiveBackendTransportMixerMixin
 from .tracks_clips import LiveBackendTracksClipsMixin
@@ -39,8 +45,12 @@ class SongTransportService(
     LiveBackendService,
     LiveBackendSongSessionMixin,
     LiveBackendTransportMixerMixin,
+    LiveBackendSongSettingsMixin,
+    LiveBackendTrackStateMixin,
+    LiveBackendViewMixin,
 ):
-    """Song/session state, transport, mixer, tracks, returns and master."""
+    """Song/session state and settings, transport, mixer, tracks (monitoring,
+    folding), returns, master and view selection."""
 
 
 class TracksClipsService(
@@ -65,9 +75,10 @@ class ScenesArrangementService(
     LiveBackendService,
     LiveBackendScenesArrangementMixin,
     LiveBackendSongStructureMixin,
+    LiveBackendSceneSettingsMixin,
 ):
-    """Scenes, song layout (duplicate/delete, returns, locators, signature) and
-    everything on the arrangement timeline."""
+    """Scenes (with tempo/signature), song layout (duplicate/delete, returns,
+    locators, signature) and everything on the arrangement timeline."""
 
 
 class DevicesService(

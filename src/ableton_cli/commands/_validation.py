@@ -107,6 +107,15 @@ def require_float_in_range(
     return value
 
 
+def require_choice(name: str, value: str, choices: tuple[str, ...]) -> str:
+    if value not in choices:
+        raise invalid_argument(
+            message=f"{name} must be one of {', '.join(choices)}, got {value!r}",
+            hint=f"Use one of: {', '.join(choices)}.",
+        )
+    return value
+
+
 #: Live's color chooser has 70 entries.
 COLOR_INDEX_MAX = 69
 

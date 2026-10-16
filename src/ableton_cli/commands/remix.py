@@ -26,7 +26,7 @@ from ..remix.mastering import (
     set_targets,
 )
 from ..remix.qa import run_qa
-from ..remix.unsupported import fail_unsupported
+from ..remix.unsupported import fail_unsupported, unsupported_help
 from ..remix.vocal_chop import build_vocal_chop
 from ..runtime import execute_command
 from ..runtime import get_client as _runtime_get_client
@@ -272,7 +272,7 @@ def remix_export_plan(
     )
 
 
-@remix_app.command("setup-sound")
+@remix_app.command("setup-sound", help=unsupported_help("remix setup-sound"))
 def remix_setup_sound(
     ctx: typer.Context,
     project: Annotated[Path, typer.Option("--project", help="Manifest path")],
@@ -288,7 +288,7 @@ def remix_setup_sound(
     )
 
 
-@remix_app.command("mix-macro")
+@remix_app.command("mix-macro", help=unsupported_help("remix mix-macro"))
 def remix_mix_macro(
     ctx: typer.Context,
     project: Annotated[Path, typer.Option("--project", help="Manifest path")],
@@ -302,7 +302,7 @@ def remix_mix_macro(
     )
 
 
-@remix_app.command("setup-mix")
+@remix_app.command("setup-mix", help=unsupported_help("remix setup-mix"))
 def remix_setup_mix(
     ctx: typer.Context,
     project: Annotated[Path, typer.Option("--project", help="Manifest path")],
@@ -315,7 +315,7 @@ def remix_setup_mix(
     )
 
 
-@remix_app.command("setup-returns")
+@remix_app.command("setup-returns", help=unsupported_help("remix setup-returns"))
 def remix_setup_returns(
     ctx: typer.Context,
     project: Annotated[Path, typer.Option("--project", help="Manifest path")],
@@ -328,7 +328,7 @@ def remix_setup_returns(
     )
 
 
-@remix_app.command("setup-sidechain")
+@remix_app.command("setup-sidechain", help=unsupported_help("remix setup-sidechain"))
 def remix_setup_sidechain(
     ctx: typer.Context,
     project: Annotated[Path, typer.Option("--project", help="Manifest path")],
@@ -344,7 +344,7 @@ def remix_setup_sidechain(
 register_generate_commands(generate_app)
 
 
-@device_chain_app.command("apply")
+@device_chain_app.command("apply", help=unsupported_help("remix device-chain apply"))
 def remix_device_chain_apply(
     ctx: typer.Context,
     project: Annotated[Path, typer.Option("--project")],

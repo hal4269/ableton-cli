@@ -209,7 +209,10 @@ If a command is exposed by CLI/Remote but Live API cannot perform it, the comman
 - `error.code=INVALID_ARGUMENT`
 - `error.details.reason=not_supported_by_live_api`
 
-This currently applies to API-limited operations such as `song new/undo/redo/save/export`, `arrangement record start|stop`, `scenes move`, and `tracks delete` when the running Live API lacks the required primitive.
+This currently applies to API-limited operations such as `song new/undo/redo`, `arrangement record start|stop`, `scenes move`, and `tracks delete` when the running Live API lacks the required primitive.
+
+Saving the Set and exporting audio are not part of the Live API at all, so there are no
+`song save` or `song export audio` commands; do them in Live.
 
 Clip and arrangement note write/edit commands (`clip notes add`, `clip notes update`,
 `clip notes quantize|humanize|velocity-scale|transpose`, `arrangement clip notes add`, and
@@ -222,7 +225,7 @@ note API.
 ## Not-implemented commands
 
 Some commands are part of the published surface but have no working implementation behind
-them, because the Live API does not expose the primitive (creating return or group tracks,
+them, because the Live API does not expose the primitive (creating group tracks,
 sidechain routing) or because the work happens outside this CLI (stem separation, browser
 target discovery). They fail explicitly rather than returning a plan nobody executes:
 

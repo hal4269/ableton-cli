@@ -35,16 +35,6 @@ def _handle_song_redo(backend: CommandBackend, _args: dict[str, Any]) -> dict[st
     return backend.song_redo()
 
 
-def _handle_song_save(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    path = _non_empty_string("path", args.get("path"))
-    return backend.song_save(path)
-
-
-def _handle_song_export_audio(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    path = _non_empty_string("path", args.get("path"))
-    return backend.song_export_audio(path)
-
-
 def _handle_get_session_info(backend: CommandBackend, _args: dict[str, Any]) -> dict[str, Any]:
     return backend.get_session_info()
 
@@ -335,8 +325,6 @@ SONG_TRANSPORT_HANDLERS: dict[str, Handler] = {
     "song_new": _handle_song_new,
     "song_undo": _handle_song_undo,
     "song_redo": _handle_song_redo,
-    "song_save": _handle_song_save,
-    "song_export_audio": _handle_song_export_audio,
     "get_session_info": _handle_get_session_info,
     "session_snapshot": _handle_session_snapshot,
     "get_track_info": _handle_get_track_info,
