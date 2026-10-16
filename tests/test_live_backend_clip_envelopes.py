@@ -249,3 +249,140 @@ def test_dispatch_clip_envelope_clear_rejects_mixing_clear_all_and_refs() -> Non
         )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
+
+
+def _backend_with_mixer_parameters() -> tuple[LiveBackend, dict[int, _FakeEnvelope], object]:
+    """Live's mixer_device holds DeviceParameters with their own min/max."""
+    backend, envelopes = _backend_with_envelope_capable_clip()
+    mixer = backend.context._track_at(0).mixer_device
+    mixer.volume = _Parameter("Track Volume", 0.85, min=0.0, max=1.0)
+    mixer.panning = _Parameter("Track Panning", 0.0, min=-1.0, max=1.0)
+    mixer.sends = [
+        _Parameter("A-Reverb", 0.0, min=0.0, max=1.0),
+        _Parameter("B-Delay", 0.0, min=0.0, max=1.0),
+    ]
+    return backend, envelopes, mixer
+
+
+@pytest.mark.parametrize(
+    ("mixer_name", "send_index", "attribute"),
+    [("volume", None, "volume"), ("panning", None, "panning"), ("send", 1, "sends")],
+)
+def test_clip_mixer_envelope_set_targets_the_track_mixer(
+    mixer_name: str, send_index: int | None, attribute: str
+) -> None:
+    backend, envelopes, mixer = _backend_with_mixer_parameters()
+    target = getattr(mixer, attribute)
+    if send_index is not None:
+        target = target[send_index]
+
+    result = backend.clip_mixer_envelope_set(0, 0, mixer_name, send_index, _POINTS, "replace")
+
+    assert result == {
+        "track": 0,
+        "clip": 0,
+        "mixer": mixer_name,
+        "send_index": send_index,
+        "mode": "replace",
+        "point_count": 3,
+    }
+    assert envelopes[id(target)].steps == [(0.0, 1.0, 0.1), (1.0, 1.0, 0.5), (2.0, 0.0, 0.9)]
+
+
+def test_clip_mixer_envelope_set_validates_against_the_mixer_parameter_range() -> None:
+    backend, envelopes, _mixer = _backend_with_mixer_parameters()
+    pan_points = [{"time": 0.0, "value": -1.0}, {"time": 1.0, "value": 1.0}]
+
+    backend.clip_mixer_envelope_set(0, 0, "panning", None, pan_points, "replace")
+    assert len(envelopes) == 1
+
+    with pytest.raises(CommandError) as exc_info:
+        backend.clip_mixer_envelope_set(0, 0, "volume", None, pan_points, "replace")
+
+    assert exc_info.value.code == "INVALID_ARGUMENT"
+    assert exc_info.value.details == {"offending_indices": [0]}
+
+
+def test_clip_mixer_envelope_set_rejects_missing_send() -> None:
+    backend, _envelopes, _mixer = _backend_with_mixer_parameters()
+
+    with pytest.raises(CommandError) as exc_info:
+        backend.clip_mixer_envelope_set(0, 0, "send", 2, _POINTS, "replace")
+
+    assert exc_info.value.code == "INVALID_ARGUMENT"
+    assert "send_index out of range" in exc_info.value.message
+
+
+def test_clip_mixer_envelope_clear_clears_only_that_parameter() -> None:
+    backend, envelopes, mixer = _backend_with_mixer_parameters()
+    backend.clip_mixer_envelope_set(0, 0, "volume", None, _POINTS, "replace")
+    backend.clip_mixer_envelope_set(0, 0, "send", 0, _POINTS, "replace")
+
+    result = backend.clip_mixer_envelope_clear(0, 0, "send", 0)
+
+    assert result == {"track": 0, "clip": 0, "mixer": "send", "send_index": 0, "cleared_all": False}
+    assert list(envelopes) == [id(mixer.volume)]
+
+
+def test_dispatch_clip_envelope_set_routes_mixer_targets() -> None:
+    backend, envelopes, mixer = _backend_with_mixer_parameters()
+
+    result = dispatch_command(
+        backend,
+        "clip_envelope_set",
+        {"track": 0, "clip": 0, "mixer": "send", "send_index": 1, "points": _POINTS},
+    )
+
+    assert result["mixer"] == "send"
+    assert list(envelopes) == [id(mixer.sends[1])]
+
+
+def test_dispatch_clip_envelope_clear_routes_mixer_targets() -> None:
+    backend, envelopes, _mixer = _backend_with_mixer_parameters()
+    backend.clip_mixer_envelope_set(0, 0, "panning", None, _POINTS, "replace")
+
+    result = dispatch_command(
+        backend, "clip_envelope_clear", {"track": 0, "clip": 0, "mixer": "panning"}
+    )
+
+    assert result["mixer"] == "panning"
+    assert envelopes == {}
+
+
+@pytest.mark.parametrize(
+    "target",
+    [
+        {"mixer": "volume", "device_ref": {"mode": "index", "index": 0}},
+        {"mixer": "volume", "parameter_ref": {"mode": "index", "index": 0}},
+        {"mixer": "volume", "send_index": 0},
+        {"mixer": "send"},
+        {"mixer": "crossfader"},
+        {"send_index": 0, "device_ref": {"mode": "index", "index": 0}},
+    ],
+)
+def test_dispatch_clip_envelope_set_rejects_invalid_mixer_targets(
+    target: dict[str, object],
+) -> None:
+    backend, _envelopes, _mixer = _backend_with_mixer_parameters()
+    args: dict[str, object] = {"track": 0, "clip": 0, "points": _POINTS}
+    args.update(target)
+    if "device_ref" in target and "parameter_ref" not in target:
+        args["parameter_ref"] = {"mode": "index", "index": 0}
+
+    with pytest.raises(CommandError) as exc_info:
+        dispatch_command(backend, "clip_envelope_set", args)
+
+    assert exc_info.value.code == "INVALID_ARGUMENT"
+
+
+def test_dispatch_clip_envelope_clear_rejects_mixer_with_clear_all() -> None:
+    backend, _envelopes, _mixer = _backend_with_mixer_parameters()
+
+    with pytest.raises(CommandError) as exc_info:
+        dispatch_command(
+            backend,
+            "clip_envelope_clear",
+            {"track": 0, "clip": 0, "clear_all": True, "mixer": "volume"},
+        )
+
+    assert exc_info.value.code == "INVALID_ARGUMENT"

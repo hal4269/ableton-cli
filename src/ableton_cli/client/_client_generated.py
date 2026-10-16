@@ -98,29 +98,14 @@ class _AbletonClientGeneratedMixin:
             "clip_color_set", {"track": track, "clip": clip, "color_index": color_index}
         )
 
+    def clip_crop(self, track: int, clip: int) -> dict[str, Any]:
+        return self._call("clip_crop", {"track": track, "clip": clip})
+
     def clip_delete(self, track: int, clip: int) -> dict[str, Any]:
         return self._call("clip_delete", {"track": track, "clip": clip})
 
-    def clip_envelope_set(
-        self,
-        track: int,
-        clip: int,
-        device_ref: RefPayload,
-        parameter_ref: RefPayload,
-        points: list[dict[str, float]],
-        mode: str = "replace",
-    ) -> dict[str, Any]:
-        return self._call(
-            "clip_envelope_set",
-            {
-                "track": track,
-                "clip": clip,
-                "device_ref": device_ref,
-                "parameter_ref": parameter_ref,
-                "points": points,
-                "mode": mode,
-            },
-        )
+    def clip_duplicate_loop(self, track: int, clip: int) -> dict[str, Any]:
+        return self._call("clip_duplicate_loop", {"track": track, "clip": clip})
 
     def clip_file_path_get(self, track: int, clip: int) -> dict[str, Any]:
         return self._call("clip_file_path_get", {"track": track, "clip": clip})
@@ -169,6 +154,14 @@ class _AbletonClientGeneratedMixin:
 
     def clip_props_get(self, track: int, clip: int) -> dict[str, Any]:
         return self._call("clip_props_get", {"track": track, "clip": clip})
+
+    def clip_signature_set(
+        self, track: int, clip: int, numerator: int, denominator: int
+    ) -> dict[str, Any]:
+        return self._call(
+            "clip_signature_set",
+            {"track": track, "clip": clip, "numerator": numerator, "denominator": denominator},
+        )
 
     def clip_transpose_set(self, track: int, clip: int, semitones: int) -> dict[str, Any]:
         return self._call(

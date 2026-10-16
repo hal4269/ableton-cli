@@ -120,6 +120,19 @@ def require_color_index(value: int) -> int:
     return value
 
 
+#: Note values Live accepts as a time signature denominator.
+SIGNATURE_DENOMINATORS = (1, 2, 4, 8, 16)
+
+
+def require_time_signature(numerator: int, denominator: int) -> tuple[int, int]:
+    if numerator < 1 or numerator > 99 or denominator not in SIGNATURE_DENOMINATORS:
+        raise invalid_argument(
+            message=f"invalid time signature {numerator}/{denominator}",
+            hint="Use a numerator 1-99 and a denominator of 1, 2, 4, 8 or 16 (e.g. 4 4).",
+        )
+    return numerator, denominator
+
+
 def require_track_and_value(track: int, value: TValue) -> tuple[int, TValue]:
     return require_track_index(track), value
 

@@ -66,6 +66,10 @@ Stable action names and CLI mappings for automation wrappers.
 | `set_clip_color` | `uv run ableton-cli --output json clip color set <track> <clip> <color_index>` | Set a session clip color (0-69). |
 | `clip_launch_get` | `uv run ableton-cli --output json clip launch get <track> <clip>` | Read a session clip's launch mode, quantization, legato and velocity amount. |
 | `clip_launch_set` | `uv run ableton-cli --output json clip launch set <track> <clip> [--mode <mode>] [--quantization <q>] [--legato|--no-legato] [--velocity-amount <0-1>]` | Change a session clip's launch settings. |
+| `clip_crop` | `uv run ableton-cli --output json clip crop <track> <clip>` | Crop a session clip to its loop (or start/end markers when not looping). |
+| `clip_duplicate_loop` | `uv run ableton-cli --output json clip duplicate-loop <track> <clip>` | Double a MIDI clip's loop, copying notes and envelopes into the new half. |
+| `set_clip_signature` | `uv run ableton-cli --output json clip signature set <track> <clip> <numerator> <denominator>` | Set a session clip's time signature. |
+| `set_clip_mixer_envelope` | `uv run ableton-cli --output json clip envelope mixer set <track> <clip> <volume|panning|send> [--send-index <n>] --points-json <json>` | Write a clip envelope for the track's volume, panning or a send. |
 | `clip_duplicate` | `uv run ableton-cli --output json clip duplicate <track> <src_clip> <dst_clip>` | Duplicate a clip (exact copy, incl. envelopes) into an empty slot. |
 | `set_clip_name` | `uv run ableton-cli --output json clip name set <track> <clip> <name>` | Rename a clip. |
 | `fire_clip` | `uv run ableton-cli --output json clip fire <track> <clip>` | Launch a clip slot. |

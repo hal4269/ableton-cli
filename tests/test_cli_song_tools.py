@@ -96,6 +96,9 @@ _DEVICE_SELECTORS = ["--track-index", "0", "--device-index", "1"]
             "track_color_set",
             ({"mode": "name", "name": "Bass"}, 5),
         ),
+        (["clip", "crop", "0", "3"], "clip_crop", (0, 3)),
+        (["clip", "duplicate-loop", "0", "3"], "clip_duplicate_loop", (0, 3)),
+        (["clip", "signature", "set", "0", "3", "7", "8"], "clip_signature_set", (0, 3, 7, 8)),
     ],
 )
 def test_song_tool_commands_call_the_client(
@@ -121,6 +124,9 @@ def test_song_tool_commands_call_the_client(
         ["clip", "launch", "set", "0", "3", "--mode", "loop"],
         ["clip", "launch", "set", "0", "3", "--velocity-amount", "2"],
         ["transport", "signature", "set", "4", "3"],
+        ["clip", "signature", "set", "0", "3", "0", "4"],
+        ["clip", "signature", "set", "0", "3", "4", "32"],
+        ["clip", "crop", "--", "-1", "0"],
         ["track", "color", "set", "--track-index", "0", "--", "-1"],
         ["arrangement", "locator", "add", "--", "-4"],
         ["return-tracks", "delete", "--", "-1"],
@@ -129,6 +135,94 @@ def test_song_tool_commands_call_the_client(
 def test_song_tool_commands_reject_invalid_input(
     runner, cli_app, client: _RecordingClient, argv: list[str]
 ) -> None:
+    result = runner.invoke(cli_app, ["--output", "json", *argv])
+
+    assert result.exit_code == 2, result.output
+    assert json.loads(result.stdout)["error"]["code"] == "INVALID_ARGUMENT"
+    assert client.calls == []
+
+
+_POINTS_JSON = '[{"time": 0.0, "value": 0.2}, {"time": 4.0, "value": 0.8}]'
+_POINTS = [{"time": 0.0, "value": 0.2}, {"time": 4.0, "value": 0.8}]
+
+
+@pytest.mark.parametrize(
+    ("target", "mixer", "send_index"),
+    [
+        (["volume"], "volume", None),
+        (["Panning"], "panning", None),
+        (["send", "--send-index", "1"], "send", 1),
+    ],
+)
+def test_clip_envelope_mixer_set_targets_the_mixer(
+    runner,
+    cli_app,
+    client: _RecordingClient,
+    target: list[str],
+    mixer: str,
+    send_index: int | None,
+) -> None:
+    argv = ["clip", "envelope", "mixer", "set", "0", "3", *target, "--points-json", _POINTS_JSON]
+
+    result = runner.invoke(cli_app, ["--output", "json", *argv])
+
+    assert result.exit_code == 0, result.output
+    [(name, args, kwargs)] = client.calls
+    assert name == "clip_envelope_set"
+    assert args == (0, 3, None, None, _POINTS, "replace")
+    assert kwargs == {"mixer": mixer, "send_index": send_index}
+
+
+def test_clip_envelope_mixer_shape_writes_generated_points(
+    runner, cli_app, client: _RecordingClient
+) -> None:
+    argv = [
+        "clip", "envelope", "mixer", "shape", "0", "3", "volume", "--shape", "ramp",
+        "--from", "0", "--to", "0.85", "--length", "4", "--resolution", "2",
+    ]  # fmt: skip
+
+    result = runner.invoke(cli_app, ["--output", "json", *argv])
+
+    assert result.exit_code == 0, result.output
+    [(name, args, kwargs)] = client.calls
+    assert name == "clip_envelope_set"
+    assert args[:4] == (0, 3, None, None)
+    assert args[4][0]["value"] == 0.0
+    assert args[4][-1]["value"] == 0.85
+    assert kwargs == {"mixer": "volume", "send_index": None}
+
+
+def test_clip_envelope_mixer_clear_targets_one_mixer_parameter(
+    runner, cli_app, client: _RecordingClient
+) -> None:
+    argv = ["clip", "envelope", "mixer", "clear", "0", "3", "send", "--send-index", "0"]
+
+    result = runner.invoke(cli_app, ["--output", "json", *argv])
+
+    assert result.exit_code == 0, result.output
+    assert client.calls == [
+        ("clip_envelope_clear", (0, 3), {"clear_all": False, "mixer": "send", "send_index": 0})
+    ]
+
+
+@pytest.mark.parametrize(
+    "argv",
+    [
+        ["clip", "envelope", "mixer", "set", "0", "3", "volume", "--send-index", "0"],
+        ["clip", "envelope", "mixer", "set", "0", "3", "send"],
+        ["clip", "envelope", "mixer", "set", "0", "3", "send", "--send-index", "-1"],
+        ["clip", "envelope", "mixer", "set", "0", "3", "crossfader"],
+        ["clip", "envelope", "mixer", "clear", "0", "3", "send"],
+        ["clip", "envelope", "mixer", "shape", "0", "3", "volume", "--shape", "saw",
+         "--from", "0", "--to", "1"],
+    ],
+)  # fmt: skip
+def test_clip_envelope_mixer_rejects_invalid_targets(
+    runner, cli_app, client: _RecordingClient, argv: list[str]
+) -> None:
+    if argv[3] == "set":
+        argv = [*argv, "--points-json", _POINTS_JSON]
+
     result = runner.invoke(cli_app, ["--output", "json", *argv])
 
     assert result.exit_code == 2, result.output

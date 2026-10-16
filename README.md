@@ -85,6 +85,8 @@ JSON lines on stdin).
 | `clip delete` | Delete a session clip. |
 | `clip color set`, `track color set` | Clip and track colors (0-69). |
 | `clip launch get\|set` | Launch mode, quantization, legato, velocity amount. |
+| `clip envelope mixer set\|shape\|clear <track> <clip> volume\|panning\|send [--send-index N]` | Clip envelopes for the track mixer (volume, panning, sends), not only device parameters. |
+| `clip crop`, `clip duplicate-loop`, `clip signature set` | Crop to the loop, double the loop (MIDI), clip time signature (also in `clip props get`). |
 | `device delete`, `device move`, `device enabled set`, `device parameter list` | Edit any track's device chain; also devices inside racks via `--device-ref`. |
 | `device chains list` | Reports `in_note` per chain: the MIDI note of each Drum Rack pad. |
 | `tracks duplicate`, `scenes duplicate\|delete`, `return-tracks create\|delete` | Song layout. |

@@ -166,9 +166,7 @@ def _handle_locator_delete(backend: CommandBackend, args: dict[str, Any]) -> dic
     return backend.locator_delete(_track_index("index", args.get("index")))
 
 
-def _handle_transport_signature_set(
-    backend: CommandBackend, args: dict[str, Any]
-) -> dict[str, Any]:
+def _time_signature(args: dict[str, Any]) -> tuple[int, int]:
     numerator = _int_in_range("numerator", args.get("numerator"), 99, minimum=1)
     denominator = _as_int("denominator", args.get("denominator"))
     if denominator not in _SIGNATURE_DENOMINATORS:
@@ -176,7 +174,30 @@ def _handle_transport_signature_set(
             message=f"denominator must be one of {_SIGNATURE_DENOMINATORS}, got {denominator}",
             hint="Use 1, 2, 4, 8 or 16.",
         )
-    return backend.transport_signature_set(numerator, denominator)
+    return numerator, denominator
+
+
+def _handle_transport_signature_set(
+    backend: CommandBackend, args: dict[str, Any]
+) -> dict[str, Any]:
+    return backend.transport_signature_set(*_time_signature(args))
+
+
+def _track_and_clip(args: dict[str, Any]) -> tuple[int, int]:
+    return _track_index("track", args.get("track")), _track_index("clip", args.get("clip"))
+
+
+def _handle_clip_crop(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
+    return backend.clip_crop(*_track_and_clip(args))
+
+
+def _handle_clip_duplicate_loop(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
+    return backend.clip_duplicate_loop(*_track_and_clip(args))
+
+
+def _handle_clip_signature_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
+    track, clip = _track_and_clip(args)
+    return backend.clip_signature_set(track, clip, *_time_signature(args))
 
 
 SONG_TOOLS_HANDLERS: dict[str, Handler] = {
@@ -197,4 +218,7 @@ SONG_TOOLS_HANDLERS: dict[str, Handler] = {
     "locator_add": _handle_locator_add,
     "locator_delete": _handle_locator_delete,
     "transport_signature_set": _handle_transport_signature_set,
+    "clip_crop": _handle_clip_crop,
+    "clip_duplicate_loop": _handle_clip_duplicate_loop,
+    "clip_signature_set": _handle_clip_signature_set,
 }

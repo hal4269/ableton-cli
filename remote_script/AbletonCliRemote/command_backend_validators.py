@@ -668,34 +668,101 @@ def _envelope_mode(value: Any) -> str:
     return mode
 
 
+#: Track mixer parameters a clip envelope can target besides device parameters.
+MIXER_ENVELOPE_TARGETS = ("volume", "panning", "send")
+
+
+def _mixer_envelope_target(args: dict[str, Any]) -> tuple[str, int | None] | None:
+    """Parse ``mixer``/``send_index``; ``None`` when the target is a device parameter."""
+    raw_mixer = args.get("mixer")
+    raw_send_index = args.get("send_index")
+    if raw_mixer is None:
+        if raw_send_index is not None:
+            raise _invalid_argument(
+                message="send_index requires mixer='send'",
+                hint="Pass mixer='send' together with send_index.",
+            )
+        return None
+    mixer = _non_empty_string("mixer", raw_mixer)
+    if mixer not in MIXER_ENVELOPE_TARGETS:
+        raise _invalid_argument(
+            message=f"mixer must be one of {', '.join(MIXER_ENVELOPE_TARGETS)}, got {mixer!r}",
+            hint="Use mixer='volume', 'panning' or 'send' (with send_index).",
+        )
+    if args.get("device_ref") is not None or args.get("parameter_ref") is not None:
+        raise _invalid_argument(
+            message="mixer must not be combined with device_ref/parameter_ref",
+            hint="Target either a mixer parameter or a device parameter, not both.",
+        )
+    if mixer != "send":
+        if raw_send_index is not None:
+            raise _invalid_argument(
+                message=f"send_index is only valid with mixer='send', got mixer={mixer!r}",
+                hint="Drop send_index, or use mixer='send'.",
+            )
+        return mixer, None
+    if raw_send_index is None:
+        raise _invalid_argument(
+            message="mixer='send' requires send_index",
+            hint="Pass the 0-based send index (0 = send A).",
+        )
+    return mixer, _non_negative_int("send_index", raw_send_index)
+
+
 def _clip_envelope_set_args(
     args: dict[str, Any],
-) -> tuple[int, int, dict[str, Any], dict[str, Any], list[dict[str, float]], str]:
+) -> tuple[
+    int,
+    int,
+    tuple[dict[str, Any], dict[str, Any]] | None,
+    tuple[str, int | None] | None,
+    list[dict[str, float]],
+    str,
+]:
+    """Return track, clip, (device_ref, parameter_ref) or None, mixer target or None,
+    points and mode. Exactly one of the two targets is set."""
     track = _track_index("track", args.get("track"))
     clip = _track_index("clip", args.get("clip"))
-    device = _device_ref(args.get("device_ref"))
-    parameter = _parameter_ref(args.get("parameter_ref"))
+    mixer_target = _mixer_envelope_target(args)
+    device_target = None
+    if mixer_target is None:
+        device_target = (
+            _device_ref(args.get("device_ref")),
+            _parameter_ref(args.get("parameter_ref")),
+        )
     points = _envelope_points(args.get("points"))
     mode = _envelope_mode(args.get("mode"))
-    return track, clip, device, parameter, points, mode
+    return track, clip, device_target, mixer_target, points, mode
 
 
 def _clip_envelope_clear_args(
     args: dict[str, Any],
-) -> tuple[int, int, dict[str, Any] | None, dict[str, Any] | None, bool]:
+) -> tuple[
+    int,
+    int,
+    tuple[dict[str, Any], dict[str, Any]] | None,
+    tuple[str, int | None] | None,
+    bool,
+]:
+    """Return track, clip, device target, mixer target and clear_all; at most one is set."""
     track = _track_index("track", args.get("track"))
     clip = _track_index("clip", args.get("clip"))
     clear_all = _as_bool("clear_all", args.get("clear_all", False))
     if clear_all:
-        if args.get("device_ref") is not None or args.get("parameter_ref") is not None:
+        if any(
+            args.get(key) is not None
+            for key in ("device_ref", "parameter_ref", "mixer", "send_index")
+        ):
             raise _invalid_argument(
-                message="device_ref/parameter_ref must not be set when clear_all is true",
-                hint="Pass either clear_all=true or device_ref+parameter_ref, not both.",
+                message="device_ref/parameter_ref/mixer must not be set when clear_all is true",
+                hint="Pass either clear_all=true or one envelope target, not both.",
             )
         return track, clip, None, None, True
-    device = _device_ref(args.get("device_ref"))
-    parameter = _parameter_ref(args.get("parameter_ref"))
-    return track, clip, device, parameter, False
+    mixer_target = _mixer_envelope_target(args)
+    if mixer_target is not None:
+        return track, clip, None, mixer_target, False
+    device_target = (_device_ref(args.get("device_ref")), _parameter_ref(args.get("parameter_ref")))
+    return track, clip, device_target, None, False
 
 
 def _device_ref_args(args: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:

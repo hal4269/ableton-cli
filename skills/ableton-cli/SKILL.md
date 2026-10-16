@@ -284,6 +284,9 @@ uv run ableton-cli clip envelope set 0 0 --points-json '[{"time":0.0,"value":0.1
 uv run ableton-cli clip envelope shape 0 0 --device-index 0 --parameter-key filter_cutoff --shape ramp --from 0.1 --to 0.9 --start 0 --length 4 --resolution 16
 uv run ableton-cli clip envelope clear 0 0 --device-index 0 --parameter-key filter_cutoff
 uv run ableton-cli clip envelope clear 0 0 --all
+uv run ableton-cli clip envelope mixer set 0 0 volume --points-json '[{"time":0.0,"value":0.0},{"time":4.0,"value":0.85}]'
+uv run ableton-cli clip envelope mixer shape 0 0 send --send-index 0 --shape lfo-sine --from 0 --to 0.6 --length 16 --rate 0.25
+uv run ableton-cli clip envelope mixer clear 0 0 panning
 uv run ableton-cli clip groove get 0 0
 uv run ableton-cli clip groove set 0 0 grooves/Hip\ Hop\ Boom\ Bap\ 16ths\ 90\ bpm.agr
 uv run ableton-cli clip groove amount set 0 0 0.6
@@ -296,6 +299,9 @@ uv run ableton-cli clip delete 0 3
 uv run ableton-cli clip color set 0 0 12
 uv run ableton-cli clip launch get 0 0
 uv run ableton-cli clip launch set 0 0 --mode trigger --quantization 1 --legato --velocity-amount 0.5
+uv run ableton-cli clip crop 0 0
+uv run ableton-cli clip duplicate-loop 0 0
+uv run ableton-cli clip signature set 0 0 7 8
 uv run ableton-cli clip active get 0 0
 uv run ableton-cli clip active set 0 0 false
 uv run ableton-cli clip duplicate 0 0 1
@@ -321,6 +327,12 @@ uv run ableton-cli clip transpose set 0 0 --semitones 2
 uv run ableton-cli clip file replace 0 0 --audio-path /tmp/replacement.wav
 uv run ableton-cli clip file path get 0 0
 ```
+
+`clip envelope set|shape|clear` target a device parameter (device + parameter selectors);
+`clip envelope mixer set|shape|clear` target the track's own mixer: `volume` (0.0-1.0,
+0.85 = 0 dB), `panning` (-1.0 to 1.0) or `send` with `--send-index` (0 = send A, 0.0-1.0).
+Values are checked against the parameter's range.
+`clip crop`, `clip duplicate-loop` and `clip signature set` return the clip properties.
 
 ### Scenes
 
@@ -584,6 +596,10 @@ uv run ableton-cli --output json ping
 - `set_clip_color` -> `uv run ableton-cli --output json clip color set <track> <clip> <color_index>`
 - `clip_launch_get` -> `uv run ableton-cli --output json clip launch get <track> <clip>`
 - `clip_launch_set` -> `uv run ableton-cli --output json clip launch set <track> <clip> [--mode <mode>] [--quantization <q>] [--legato|--no-legato] [--velocity-amount <0-1>]`
+- `clip_crop` -> `uv run ableton-cli --output json clip crop <track> <clip>`
+- `clip_duplicate_loop` -> `uv run ableton-cli --output json clip duplicate-loop <track> <clip>`
+- `set_clip_signature` -> `uv run ableton-cli --output json clip signature set <track> <clip> <numerator> <denominator>`
+- `set_clip_mixer_envelope` -> `uv run ableton-cli --output json clip envelope mixer set <track> <clip> <volume|panning|send> [--send-index <n>] --points-json <json>`
 - `clip_duplicate` -> `uv run ableton-cli --output json clip duplicate <track> <src_clip> <dst_clip>`
 - `set_clip_name` -> `uv run ableton-cli --output json clip name set <track> <clip> <name>`
 - `fire_clip` -> `uv run ableton-cli --output json clip fire <track> <clip>`

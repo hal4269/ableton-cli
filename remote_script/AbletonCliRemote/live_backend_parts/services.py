@@ -17,6 +17,7 @@ from .browser_path_lookup import LiveBackendBrowserPathLookupMixin
 from .browser_read import LiveBackendBrowserReadMixin
 from .browser_search import LiveBackendBrowserSearchMixin
 from .browser_search_index import LiveBackendBrowserSearchIndexMixin
+from .clip_edit import LiveBackendClipEditMixin
 from .clip_envelopes import LiveBackendClipEnvelopesMixin
 from .clip_launch import LiveBackendClipLaunchMixin
 from .clip_notes import LiveBackendClipNotesMixin
@@ -48,9 +49,10 @@ class TracksClipsService(
     LiveBackendTracksClipsMixin,
     LiveBackendTracksCutToDrumRackMixin,
     LiveBackendClipLaunchMixin,
+    LiveBackendClipEditMixin,
 ):
-    """Session clips, clip properties, colors, launch settings, warping and
-    audio-to-drum-rack."""
+    """Session clips, clip properties, colors, launch settings, crop/duplicate
+    loop/signature, warping and audio-to-drum-rack."""
 
 
 class ClipNotesService(LiveBackendService, LiveBackendClipNotesMixin):

@@ -369,6 +369,32 @@ STABLE_ACTION_MAPPINGS: tuple[StableActionMapping, ...] = (
         capability="Change a session clip's launch settings.",
     ),
     StableActionMapping(
+        action="clip_crop",
+        command="uv run ableton-cli --output json clip crop <track> <clip>",
+        capability="Crop a session clip to its loop (or start/end markers when not looping).",
+    ),
+    StableActionMapping(
+        action="clip_duplicate_loop",
+        command="uv run ableton-cli --output json clip duplicate-loop <track> <clip>",
+        capability="Double a MIDI clip's loop, copying notes and envelopes into the new half.",
+    ),
+    StableActionMapping(
+        action="set_clip_signature",
+        command=(
+            "uv run ableton-cli --output json clip signature set <track> <clip> "
+            "<numerator> <denominator>"
+        ),
+        capability="Set a session clip's time signature.",
+    ),
+    StableActionMapping(
+        action="set_clip_mixer_envelope",
+        command=(
+            "uv run ableton-cli --output json clip envelope mixer set <track> <clip> "
+            "<volume|panning|send> [--send-index <n>] --points-json <json>"
+        ),
+        capability="Write a clip envelope for the track's volume, panning or a send.",
+    ),
+    StableActionMapping(
         action="clip_duplicate",
         command="uv run ableton-cli --output json clip duplicate <track> <src_clip> <dst_clip>",
         capability="Duplicate a clip (exact copy, incl. envelopes) into an empty slot.",

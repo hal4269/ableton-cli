@@ -569,6 +569,24 @@ class _ClipEnvelopesBackend(Protocol):
         clear_all: bool,
     ) -> dict[str, Any]: ...
 
+    def clip_mixer_envelope_set(
+        self,
+        track: int,
+        clip: int,
+        mixer: str,
+        send_index: int | None,
+        points: list[dict[str, float]],
+        mode: str,
+    ) -> dict[str, Any]: ...
+
+    def clip_mixer_envelope_clear(
+        self,
+        track: int,
+        clip: int,
+        mixer: str,
+        send_index: int | None,
+    ) -> dict[str, Any]: ...
+
 
 class _BrowserBackend(Protocol):
     def load_instrument_or_effect(
@@ -738,6 +756,14 @@ class _SongToolsBackend(Protocol):
     def clip_color_set(self, track: int, clip: int, color_index: int) -> dict[str, Any]: ...
 
     def clip_launch_get(self, track: int, clip: int) -> dict[str, Any]: ...
+
+    def clip_crop(self, track: int, clip: int) -> dict[str, Any]: ...
+
+    def clip_duplicate_loop(self, track: int, clip: int) -> dict[str, Any]: ...
+
+    def clip_signature_set(
+        self, track: int, clip: int, numerator: int, denominator: int
+    ) -> dict[str, Any]: ...
 
     def clip_launch_set(
         self, track: int, clip: int, settings: dict[str, Any]

@@ -11,7 +11,7 @@ from ..runtime import execute_command, get_client
 from ._client_command_runner import CommandSpec
 from ._client_command_runner import run_client_command as run_client_command_shared
 from ._client_command_runner import run_client_command_spec as run_client_command_spec_shared
-from ._validation import require_non_negative_float
+from ._validation import require_non_negative_float, require_time_signature
 
 transport_app = typer.Typer(help="Transport control commands", no_args_is_help=True)
 tempo_app = typer.Typer(help="Tempo controls", no_args_is_help=True)
@@ -202,14 +202,8 @@ def signature_set(
     denominator: Annotated[int, typer.Argument(help="Note value: 1, 2, 4, 8 or 16")],
 ) -> None:
     def _method_kwargs() -> dict[str, object]:
-        if numerator < 1 or numerator > 99 or denominator not in (1, 2, 4, 8, 16):
-            raise AppError(
-                error_code=ErrorCode.INVALID_ARGUMENT,
-                message=f"invalid time signature {numerator}/{denominator}",
-                hint="Use a numerator 1-99 and a denominator of 1, 2, 4, 8 or 16 (e.g. 4 4).",
-                exit_code=ExitCode.INVALID_ARGUMENT,
-            )
-        return {"numerator": numerator, "denominator": denominator}
+        valid_numerator, valid_denominator = require_time_signature(numerator, denominator)
+        return {"numerator": valid_numerator, "denominator": valid_denominator}
 
     run_client_command_spec(
         ctx,
