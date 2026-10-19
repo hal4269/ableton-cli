@@ -39,10 +39,6 @@ def _handle_get_session_info(backend: CommandBackend, _args: dict[str, Any]) -> 
     return backend.get_session_info()
 
 
-def _handle_session_snapshot(backend: CommandBackend, _args: dict[str, Any]) -> dict[str, Any]:
-    return backend.session_snapshot()
-
-
 def _handle_get_track_info(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
     track = backend.resolve_track_ref(_track_ref(args.get("track_ref")))
     return backend.get_track_info(track)
@@ -326,7 +322,6 @@ SONG_TRANSPORT_HANDLERS: dict[str, Handler] = {
     "song_undo": _handle_song_undo,
     "song_redo": _handle_song_redo,
     "get_session_info": _handle_get_session_info,
-    "session_snapshot": _handle_session_snapshot,
     "get_track_info": _handle_get_track_info,
     "tracks_list": _handle_tracks_list,
     "create_midi_track": _handle_create_midi_track,

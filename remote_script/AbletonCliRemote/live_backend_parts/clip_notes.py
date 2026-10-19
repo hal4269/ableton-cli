@@ -28,9 +28,8 @@ class LiveBackendClipNotesMixin:
     (get/add/update/clear/replace plus quantize/humanize/velocity-scale/
     transpose), split out of ``LiveBackendTracksClipsMixin`` by domain from
     general clip-slot/track-mixer concerns. Note-related helpers used by
-    arrangement clips (``scenes_arrangement.py``) and by drum-rack cutting
-    (``tracks_clips_cut_to_drum_rack.py``) also live here and are shared via
-    the ``LiveBackend`` mixin composition.
+    arrangement clips (``scenes_arrangement.py``) also live here and are
+    shared via the ``LiveBackend`` mixin composition.
     """
 
     def _clip_note_matches_filter(

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 import shutil
 from datetime import UTC, datetime
 from pathlib import Path
@@ -14,7 +13,6 @@ REMOTE_SCRIPT_DIR_NAME = "AbletonCliRemote"
 BACKUP_DIR_NAME = "Remote Scripts Backups"
 SKILL_DIR_NAME = "ableton-cli"
 SKILL_FILE_NAME = "SKILL.md"
-CODEX_HOME_ENV_VAR = "CODEX_HOME"
 
 _PACKAGE_DIR = Path(__file__).resolve().parent
 _BUNDLED_DIR = _PACKAGE_DIR / "_bundled"
@@ -120,64 +118,12 @@ def skill_source_file() -> Path:
     )
 
 
-def _resolve_codex_home(codex_home: Path | None) -> Path:
-    if codex_home is not None:
-        return codex_home
-
-    raw_value = os.environ.get(CODEX_HOME_ENV_VAR)
-    if raw_value is None or not raw_value.strip():
-        raise AppError(
-            error_code=ErrorCode.CONFIG_INVALID,
-            message=f"{CODEX_HOME_ENV_VAR} is not set",
-            hint=f"Set {CODEX_HOME_ENV_VAR} before running install-skill.",
-            exit_code=ExitCode.CONFIG_INVALID,
-        )
-    return Path(raw_value)
-
-
-def _resolve_claude_home(*, claude_home: Path | None, platform_paths: PlatformPaths) -> Path:
-    if claude_home is not None:
-        return claude_home
-    return platform_paths.claude_home_dir()
-
-
-def _resolve_cursor_home(*, cursor_home: Path | None, platform_paths: PlatformPaths) -> Path:
-    if cursor_home is not None:
-        return cursor_home
-    return platform_paths.cursor_home_dir()
-
-
-def _resolve_skill_home(
-    *,
-    platform_paths: PlatformPaths,
-    target: str,
-    codex_home: Path | None,
-    claude_home: Path | None,
-    cursor_home: Path | None,
-) -> Path:
-    if target == "codex":
-        return _resolve_codex_home(codex_home)
-    if target == "claude":
-        return _resolve_claude_home(claude_home=claude_home, platform_paths=platform_paths)
-    if target == "cursor":
-        return _resolve_cursor_home(cursor_home=cursor_home, platform_paths=platform_paths)
-    raise AppError(
-        error_code=ErrorCode.INVALID_ARGUMENT,
-        message=f"target must be one of: codex, claude, cursor (got {target!r})",
-        hint="Use --target codex, --target claude, or --target cursor.",
-        exit_code=ExitCode.INVALID_ARGUMENT,
-    )
-
-
 def install_skill(
     *,
     dry_run: bool,
     yes: bool,
     platform_paths: PlatformPaths,
-    target: str = "codex",
-    codex_home: Path | None = None,
     claude_home: Path | None = None,
-    cursor_home: Path | None = None,
 ) -> dict[str, Any]:
     del yes  # reserved for explicit confirmation flows; command stays non-interactive.
 
@@ -190,13 +136,7 @@ def install_skill(
             exit_code=ExitCode.EXECUTION_FAILED,
         )
 
-    resolved_home = _resolve_skill_home(
-        platform_paths=platform_paths,
-        target=target,
-        codex_home=codex_home,
-        claude_home=claude_home,
-        cursor_home=cursor_home,
-    )
+    resolved_home = claude_home if claude_home is not None else platform_paths.claude_home_dir()
     target_path = resolved_home / "skills" / SKILL_DIR_NAME / SKILL_FILE_NAME
     action = "update" if target_path.exists() else "install"
 
@@ -207,7 +147,6 @@ def install_skill(
     return {
         "action": action,
         "dry_run": dry_run,
-        "target_type": target,
         "source": str(source),
         "target": str(target_path),
         "home": str(resolved_home),

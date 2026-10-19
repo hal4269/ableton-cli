@@ -20,13 +20,11 @@ from .devices_racks import LiveBackendDeviceRacksMixin
 from .scenes_arrangement import LiveBackendScenesArrangementMixin
 from .song_transport import LiveBackendSongSessionMixin, LiveBackendTransportMixerMixin
 from .tracks_clips import LiveBackendTracksClipsMixin
-from .tracks_clips_cut_to_drum_rack import LiveBackendTracksCutToDrumRackMixin
 
 __all__ = [
     "LiveBackendContext",
     "LiveBackendSongSessionMixin",
     "LiveBackendTransportMixerMixin",
-    "LiveBackendTracksCutToDrumRackMixin",
     "LiveBackendClipNotesMixin",
     "LiveBackendClipEnvelopesMixin",
     "LiveBackendTracksClipsMixin",

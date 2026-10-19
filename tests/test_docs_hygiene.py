@@ -4,18 +4,12 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 README_DOC = REPO_ROOT / "README.md"
-PROTOCOL_DOC = REPO_ROOT / "docs" / "protocol.md"
-QUALITY_HARNESS_TODO_DOC = REPO_ROOT / "docs" / "quality-harness-todo.md"
-GENERATED_MAN_DOC = REPO_ROOT / "docs" / "man" / "generated" / "ableton-cli.1"
 SKILL_DOC = REPO_ROOT / "skills" / "ableton-cli" / "SKILL.md"
 ENVIRONMENT_INDEPENDENT_DOC_GLOBS = (
     "AGENTS.md",
     "README.md",
-    "CONTRIBUTING.md",
     "skills/ableton-cli/SKILL.md",
     "docs/skills/**/*.md",
-    ".cursor/rules/**/*.mdc",
-    ".cursor/skills/**/*.md",
 )
 UPSTREAM_ACCOUNT = "".join(("6uc", "lz1"))
 HOST_SPECIFIC_MARKERS = (UPSTREAM_ACCOUNT, "/" + "Users/")
@@ -32,11 +26,6 @@ def _environment_independent_docs() -> tuple[Path, ...]:
     for pattern in ENVIRONMENT_INDEPENDENT_DOC_GLOBS:
         paths.update(path for path in REPO_ROOT.glob(pattern) if path.is_file())
     return tuple(sorted(paths))
-
-
-def test_removed_docs_do_not_exist() -> None:
-    assert not PROTOCOL_DOC.exists()
-    assert not QUALITY_HARNESS_TODO_DOC.exists()
 
 
 def test_agent_docs_do_not_reference_host_specific_paths() -> None:
@@ -67,13 +56,6 @@ def test_readme_documents_security_model() -> None:
     assert "--read-only" in markdown
 
 
-def test_generated_man_uses_stable_command_name() -> None:
-    man_page = _read(GENERATED_MAN_DOC)
-    assert "tmp." not in man_page
-    assert "TMP." not in man_page
-    assert "ableton-cli" in man_page
-
-
 def test_no_outdated_live_11_version_floor_references() -> None:
     outdated_marker = "Live 11+"
     scan_globs = (
@@ -99,7 +81,6 @@ def test_composition_docs_use_browser_discovery_before_drum_kit_loading() -> Non
         [
             _read(README_DOC),
             _read(SKILL_DOC),
-            _read(GENERATED_MAN_DOC),
         ]
     )
 

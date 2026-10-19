@@ -40,7 +40,6 @@ from .song_settings import (
 from .song_structure import LiveBackendSongStructureMixin
 from .song_transport import LiveBackendSongSessionMixin, LiveBackendTransportMixerMixin
 from .tracks_clips import LiveBackendTracksClipsMixin
-from .tracks_clips_cut_to_drum_rack import LiveBackendTracksCutToDrumRackMixin
 
 
 class SongTransportService(
@@ -58,7 +57,6 @@ class SongTransportService(
 class TracksClipsService(
     LiveBackendService,
     LiveBackendTracksClipsMixin,
-    LiveBackendTracksCutToDrumRackMixin,
     LiveBackendClipLaunchMixin,
     LiveBackendClipEditMixin,
 ):

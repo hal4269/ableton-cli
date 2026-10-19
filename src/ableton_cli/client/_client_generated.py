@@ -534,9 +534,6 @@ class _AbletonClientGeneratedMixin:
     def scenes_move(self, from_index: int, to_index: int) -> dict[str, Any]:
         return self._call("scenes_move", {"from": from_index, "to": to_index})
 
-    def session_snapshot(self) -> dict[str, object]:
-        return self._call("session_snapshot")
-
     def set_clip_name(self, track: int, clip: int, name: str) -> dict[str, Any]:
         return self._call("set_clip_name", {"track": track, "clip": clip, "name": name})
 

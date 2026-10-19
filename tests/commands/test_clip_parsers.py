@@ -116,50 +116,6 @@ def test_parse_clip_name_assignments_rejects_empty_name() -> None:
     _assert_invalid_argument(exc)
 
 
-def test_parse_cut_to_drum_rack_source_rejects_ambiguous_inputs() -> None:
-    from ableton_cli.commands.clip._parsers import parse_cut_to_drum_rack_source
-
-    with pytest.raises(AppError) as exc:
-        parse_cut_to_drum_rack_source(
-            source_track=0,
-            source_clip=1,
-            source="sounds/Bass Loop.wav",
-        )
-
-    _assert_invalid_argument(exc)
-
-
-def test_parse_cut_to_drum_rack_source_rejects_missing_clip_pair() -> None:
-    from ableton_cli.commands.clip._parsers import parse_cut_to_drum_rack_source
-
-    with pytest.raises(AppError) as exc:
-        parse_cut_to_drum_rack_source(
-            source_track=0,
-            source_clip=None,
-            source=None,
-        )
-
-    _assert_invalid_argument(exc)
-
-
-def test_parse_cut_to_drum_rack_slice_spec_rejects_mutually_exclusive_modes() -> None:
-    from ableton_cli.commands.clip._parsers import parse_cut_to_drum_rack_slice_spec
-
-    with pytest.raises(AppError) as exc:
-        parse_cut_to_drum_rack_slice_spec(grid="1/16", slice_count=8)
-
-    _assert_invalid_argument(exc)
-
-
-def test_parse_cut_to_drum_rack_slice_spec_requires_mode() -> None:
-    from ableton_cli.commands.clip._parsers import parse_cut_to_drum_rack_slice_spec
-
-    with pytest.raises(AppError) as exc:
-        parse_cut_to_drum_rack_slice_spec(grid=None, slice_count=None)
-
-    _assert_invalid_argument(exc)
-
-
 def test_parse_arrangement_scene_durations_parses_scene_duration_pairs() -> None:
     from ableton_cli.commands.clip._parsers import parse_arrangement_scene_durations
 

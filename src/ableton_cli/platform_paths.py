@@ -9,7 +9,6 @@ from typing import Protocol
 from .errors import AppError, ErrorCode, ExitCode
 
 CLAUDE_HOME_DIR_NAME = ".claude"
-CURSOR_HOME_DIR_NAME = ".cursor"
 REMOTE_SCRIPTS_DIR_NAME = "Remote Scripts"
 
 #: Live keeps one preferences folder per version ("Live 12.3.6"); Library.cfg sits in its
@@ -21,8 +20,6 @@ class PlatformPaths(Protocol):
     def remote_script_candidate_dirs(self) -> list[Path]: ...
 
     def claude_home_dir(self) -> Path: ...
-
-    def cursor_home_dir(self) -> Path: ...
 
 
 def _live_version_key(library_cfg: Path) -> tuple[int, ...]:
@@ -90,9 +87,6 @@ class WindowsPlatformPaths:
     def claude_home_dir(self) -> Path:
         return self.home / CLAUDE_HOME_DIR_NAME
 
-    def cursor_home_dir(self) -> Path:
-        return self.home / CURSOR_HOME_DIR_NAME
-
 
 @dataclass(slots=True, frozen=True)
 class PosixPlatformPaths:
@@ -108,6 +102,3 @@ class PosixPlatformPaths:
 
     def claude_home_dir(self) -> Path:
         return self.home / CLAUDE_HOME_DIR_NAME
-
-    def cursor_home_dir(self) -> Path:
-        return self.home / CURSOR_HOME_DIR_NAME

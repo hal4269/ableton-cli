@@ -1,8 +1,6 @@
 """Client side of the event subscription protocol.
 
-``session watch`` polls ``session_snapshot`` on a timer, which can only
-notice a change after the fact and burns a round trip per interval. A
-subscription instead opens its own connection, sends one
+A subscription opens its own connection, sends one
 ``type: "subscribe"`` request, and reads pushed event lines until the
 caller stops.
 

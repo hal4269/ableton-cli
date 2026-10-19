@@ -802,27 +802,6 @@ _DETAILED_CONTRACTS: dict[str, dict[str, dict[str, Any]]] = {
             "additional_properties": False,
         },
     },
-    "session diff": {
-        "args": {
-            "type": "object",
-            "required": ["from", "to"],
-            "properties": {
-                "from": {"type": "string"},
-                "to": {"type": "string"},
-            },
-        },
-        "result": {
-            "type": "object",
-            "required": ["from_path", "to_path", "added", "removed", "changed"],
-            "properties": {
-                "from_path": {"type": "string"},
-                "to_path": {"type": "string"},
-                "added": {"type": "object"},
-                "removed": {"type": "object"},
-                "changed": {"type": "object"},
-            },
-        },
-    },
 }
 
 _DETAILED_CONTRACTS.update(
