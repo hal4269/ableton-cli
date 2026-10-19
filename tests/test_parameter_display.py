@@ -150,3 +150,16 @@ def test_value_for_display_rejects_parameters_without_numeric_display() -> None:
 
     with pytest.raises(ParameterDisplayError, match="not numeric"):
         value_for_display(parameter, "60")
+
+
+def test_value_for_display_rejects_a_unit_the_parameter_does_not_display() -> None:
+    parameter = _Param("Drive", lambda v: f"{v * 100:.1f} %")
+
+    with pytest.raises(ParameterDisplayError, match="'db'.*'%'"):
+        value_for_display(parameter, "6 dB")
+
+
+def test_value_for_display_accepts_a_bare_number_in_the_displayed_unit() -> None:
+    parameter = _Param("Drive", lambda v: f"{v * 100:.1f} %")
+
+    assert value_for_display(parameter, "35") == pytest.approx(0.35, abs=0.01)
