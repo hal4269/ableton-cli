@@ -7,7 +7,8 @@ exit codes, explicit errors.
 > **Credits.** This is a fork of [ableton-cli](https://github.com/6uclz1/ableton-cli), created
 > by **6uclz1** and contributors (MIT license). The design and nearly all of the code are
 > theirs. This fork is developed independently: it adds commands for generating songs with an
-> agent (see below) and does not track the original project.
+> agent (see below), drops the remix/audio-analysis workflow, and does not track the original
+> project.
 
 ## How it works
 
@@ -129,22 +130,19 @@ to events (`tempo`, `is_playing`, `playing_position`, `selected_track`). Envelop
   to preview a change, and `--require-confirmation --yes` to make destructive commands fail
   unless confirmed.
 
-## Skills Integration
+## Agent skill
 
-Install the agent skill (the command catalog) for Codex, Claude Code or Cursor:
+Install the command catalog as a Claude Code skill (`~/.claude/skills/ableton-cli/SKILL.md`):
 
 ```bash
-uv run ableton-cli install-skill --yes                   # Codex (needs CODEX_HOME)
-uv run ableton-cli install-skill --target claude --yes
-uv run ableton-cli install-skill --target cursor --yes
+ableton-cli install-skill --yes
 ```
 
-Details: [`docs/skills/install.md`](docs/skills/install.md). Stable action names:
-[`docs/skills/skill-actions.md`](docs/skills/skill-actions.md).
+Stable action names for automation: [`docs/skills/skill-actions.md`](docs/skills/skill-actions.md).
 
-## Contributing
+## Development
 
-Development workflow, tests and quality gates: [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Rules, contract changes and checks: [`AGENTS.md`](AGENTS.md).
 
 ## License
 

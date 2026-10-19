@@ -7,7 +7,6 @@ from pathlib import Path
 from ableton_cli.actions import STABLE_ACTION_MAPPINGS
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SKILL_DOC = REPO_ROOT / "skills" / "ableton-cli" / "SKILL.md"
 ACTIONS_DOC = REPO_ROOT / "docs" / "skills" / "skill-actions.md"
 
 _SKILL_SECTION_START = "## Stable action names and mappings\n"
@@ -38,14 +37,6 @@ def _replace_between(
     return text[:start_index] + replacement + text[end_index:]
 
 
-def _render_skill_mapping_section() -> str:
-    lines = ["## Stable action names and mappings", ""]
-    for mapping in STABLE_ACTION_MAPPINGS:
-        lines.append(f"- `{mapping.action}` -> `{mapping.command}`")
-    lines.append("")
-    return "\n".join(lines)
-
-
 def _render_action_table() -> str:
     lines = [
         "| Action | CLI command | Capability |",
@@ -58,25 +49,15 @@ def _render_action_table() -> str:
 
 
 def generate_documents() -> tuple[GeneratedDocument, ...]:
-    skill_text = SKILL_DOC.read_text(encoding="utf-8")
     actions_text = ACTIONS_DOC.read_text(encoding="utf-8")
 
-    generated_skill = _replace_between(
-        text=skill_text,
-        start_marker=_SKILL_SECTION_START,
-        end_marker=_SKILL_SECTION_END,
-        replacement=_render_skill_mapping_section(),
-    )
     generated_actions = _replace_between(
         text=actions_text,
         start_marker=_ACTION_TABLE_START,
         end_marker=_ACTION_TABLE_END,
         replacement=_render_action_table(),
     )
-    return (
-        GeneratedDocument(path=SKILL_DOC, content=generated_skill),
-        GeneratedDocument(path=ACTIONS_DOC, content=generated_actions),
-    )
+    return (GeneratedDocument(path=ACTIONS_DOC, content=generated_actions),)
 
 
 def _write_documents(documents: tuple[GeneratedDocument, ...]) -> None:

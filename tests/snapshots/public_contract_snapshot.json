@@ -16,7 +16,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -57,7 +56,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -98,7 +96,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -139,7 +136,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -180,7 +176,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -221,7 +216,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -262,7 +256,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -303,7 +296,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -344,7 +336,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -385,7 +376,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -426,7 +416,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -467,7 +456,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -508,7 +496,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -549,7 +536,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -590,7 +576,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -631,7 +616,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -672,7 +656,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -713,7 +696,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -754,7 +736,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -795,7 +776,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -836,7 +816,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -877,7 +856,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -918,7 +896,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -959,540 +936,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "audio analyze": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "audio asset add": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "audio asset list": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": true,
-        "kind": "read",
-        "requires_confirmation": false
-      }
-    },
-    "audio asset remove": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "audio beatgrid import": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "audio groove extract": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "audio loudness analyze": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "audio reference compare": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "audio sections import": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "audio spectrum analyze": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "audio stems list": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": true,
-        "kind": "read",
-        "requires_confirmation": false
-      }
-    },
-    "audio stems split": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "audio transient analyze": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1533,7 +976,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1574,7 +1016,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1615,7 +1056,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1656,7 +1096,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1697,7 +1136,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1738,7 +1176,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1779,7 +1216,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1820,7 +1256,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1861,7 +1296,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1902,7 +1336,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1943,7 +1376,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -1984,7 +1416,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2025,7 +1456,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2066,7 +1496,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2107,48 +1536,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "destructive",
-        "requires_confirmation": true
-      }
-    },
-    "clip cut-to-drum-rack": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2189,7 +1576,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2230,7 +1616,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2271,7 +1656,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2312,7 +1696,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2353,7 +1736,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2394,7 +1776,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2435,7 +1816,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2476,7 +1856,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2517,7 +1896,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2558,7 +1936,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2599,7 +1976,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2640,7 +2016,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2681,7 +2056,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2722,7 +2096,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2763,7 +2136,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2804,7 +2176,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2845,7 +2216,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2886,7 +2256,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2927,7 +2296,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -2968,7 +2336,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3009,7 +2376,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3050,7 +2416,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3091,7 +2456,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3132,7 +2496,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3173,48 +2536,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "clip notes apply-groove": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3255,7 +2576,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3296,7 +2616,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3337,7 +2656,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3378,7 +2696,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3419,7 +2736,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3460,7 +2776,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3501,7 +2816,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3542,7 +2856,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3583,7 +2896,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3624,7 +2936,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3665,7 +2976,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3706,7 +3016,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3747,7 +3056,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3788,7 +3096,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3829,7 +3136,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3870,7 +3176,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3911,7 +3216,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3952,7 +3256,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -3993,48 +3296,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "clip warp conform": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4075,7 +3336,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4116,7 +3376,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4157,7 +3416,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4198,7 +3456,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4239,7 +3496,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4280,7 +3536,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4321,7 +3576,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4362,7 +3616,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4403,7 +3656,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4444,7 +3696,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4485,7 +3736,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4526,7 +3776,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4567,7 +3816,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4608,7 +3856,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4649,7 +3896,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4690,7 +3936,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4731,7 +3976,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4772,7 +4016,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4813,7 +4056,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -4854,7 +4096,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -5179,7 +4420,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -5253,7 +4493,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -5294,7 +4533,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -5335,7 +4573,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -5376,7 +4613,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -5418,7 +4654,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -5487,7 +4722,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -5713,7 +4947,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -6078,7 +5311,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -6188,7 +5420,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -6414,7 +5645,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -6779,7 +6009,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -6889,7 +6118,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -7115,7 +6343,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -7480,7 +6707,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -7590,7 +6816,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -7698,7 +6923,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -7924,7 +7148,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -8289,7 +7512,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -8584,7 +7806,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -9007,7 +8228,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -9290,7 +8510,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -9429,7 +8648,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -9655,7 +8873,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -10020,7 +9237,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -10130,7 +9346,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -10356,7 +9571,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -10721,7 +9935,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -10831,7 +10044,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -10872,7 +10084,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -10913,7 +10124,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -10954,7 +10164,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -10995,7 +10204,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11036,7 +10244,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11077,7 +10284,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11119,7 +10325,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11169,7 +10374,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11210,7 +10414,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11251,7 +10454,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11292,7 +10494,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11333,7 +10534,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11374,7 +10574,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11415,7 +10614,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11456,7 +10654,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11497,7 +10694,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11538,7 +10734,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11579,7 +10774,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11620,7 +10814,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11662,7 +10855,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11721,7 +10913,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11771,7 +10962,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11813,7 +11003,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11863,7 +11052,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11905,7 +11093,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -11964,7 +11151,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -12015,7 +11201,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -12078,7 +11263,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -12133,7 +11317,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -12192,7 +11375,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -12243,7 +11425,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -12317,1154 +11498,6 @@
         "requires_confirmation": false
       }
     },
-    "remix apply": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix arrange": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix device-chain apply": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix export-plan": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix generate bass": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix generate chords": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix generate drums": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix import-assets": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix init": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix inspect": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix mastering analyze": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix mastering apply": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix mastering plan": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix mastering profile list": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": true,
-        "kind": "read",
-        "requires_confirmation": false
-      }
-    },
-    "remix mastering qa": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix mastering reference add": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix mastering reference list": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": true,
-        "kind": "read",
-        "requires_confirmation": false
-      }
-    },
-    "remix mastering reference remove": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix mastering target set": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix mix-macro": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix plan": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix qa": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix set-target": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix setup-mix": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix setup-returns": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix setup-sidechain": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix setup-sound": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "remix vocal-chop": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
     "return-track mute get": {
       "args": {
         "additional_properties": false,
@@ -13490,7 +11523,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -13557,7 +11589,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -13620,7 +11651,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -13687,7 +11717,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -13750,7 +11779,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -13817,7 +11845,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -13871,7 +11898,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -13912,7 +11938,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -13954,7 +11979,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14004,7 +12028,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14045,7 +12068,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14086,7 +12108,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14127,7 +12148,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14168,7 +12188,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14209,7 +12228,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14250,7 +12268,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14291,7 +12308,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14332,7 +12348,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14354,124 +12369,6 @@
       "side_effect": {
         "idempotent": false,
         "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "session capture": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": false,
-        "kind": "write",
-        "requires_confirmation": false
-      }
-    },
-    "session diff": {
-      "args": {
-        "properties": {
-          "from": {
-            "type": "string"
-          },
-          "to": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "from",
-          "to"
-        ],
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "properties": {
-          "added": {
-            "type": "object"
-          },
-          "changed": {
-            "type": "object"
-          },
-          "from_path": {
-            "type": "string"
-          },
-          "removed": {
-            "type": "object"
-          },
-          "to_path": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "from_path",
-          "to_path",
-          "added",
-          "removed",
-          "changed"
-        ],
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": true,
-        "kind": "read",
         "requires_confirmation": false
       }
     },
@@ -14491,7 +12388,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14532,48 +12428,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": true,
-        "kind": "read",
-        "requires_confirmation": false
-      }
-    },
-    "session snapshot": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14614,7 +12468,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14639,47 +12492,6 @@
         "requires_confirmation": false
       }
     },
-    "session watch": {
-      "args": {
-        "type": "object"
-      },
-      "errors": {
-        "codes": [
-          "ABLETON_NOT_REACHABLE",
-          "BATCH_ASSERT_FAILED",
-          "BATCH_PREFLIGHT_FAILED",
-          "BATCH_RETRY_EXHAUSTED",
-          "BATCH_STEP_FAILED",
-          "CONFIG_INVALID",
-          "CONFIRMATION_REQUIRED",
-          "INSTALL_TARGET_NOT_FOUND",
-          "INTERNAL_ERROR",
-          "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
-          "PROTOCOL_CONNECTION_CLOSED",
-          "PROTOCOL_INVALID_RESPONSE",
-          "PROTOCOL_MALFORMED_JSON",
-          "PROTOCOL_REQUEST_ID_MISMATCH",
-          "PROTOCOL_VERSION_MISMATCH",
-          "READ_ONLY_VIOLATION",
-          "REMOTE_BUSY",
-          "REMOTE_SCRIPT_INCOMPATIBLE",
-          "REMOTE_SCRIPT_NOT_INSTALLED",
-          "SKILL_SOURCE_NOT_FOUND",
-          "TIMEOUT",
-          "UNAUTHORIZED",
-          "UNSUPPORTED_OS"
-        ]
-      },
-      "result": {
-        "type": "object"
-      },
-      "side_effect": {
-        "idempotent": true,
-        "kind": "read",
-        "requires_confirmation": false
-      }
-    },
     "song capture-midi": {
       "args": {
         "type": "object"
@@ -14696,7 +12508,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14737,7 +12548,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14779,7 +12589,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14825,7 +12634,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14866,7 +12674,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14907,7 +12714,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14948,7 +12754,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -14989,7 +12794,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -15030,7 +12834,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -15071,7 +12874,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -15112,7 +12914,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -15153,7 +12954,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -15194,7 +12994,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -15420,7 +13219,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -15785,7 +13583,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -15895,7 +13692,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -16003,7 +13799,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -16229,7 +14024,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -16594,7 +14388,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -16889,7 +14682,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -17312,7 +15104,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -17595,7 +15386,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -17734,7 +15524,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -17960,7 +15749,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -18325,7 +16113,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -18530,7 +16317,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -18683,7 +16469,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -18737,7 +16522,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -18778,7 +16562,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -18914,7 +16697,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -19094,7 +16876,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -19135,7 +16916,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -19271,7 +17051,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -19424,7 +17203,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -19577,7 +17355,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -19726,7 +17503,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -19879,7 +17655,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -20028,7 +17803,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -20189,7 +17963,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -20342,7 +18115,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -20503,7 +18275,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -20660,7 +18431,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -20821,7 +18591,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -20974,7 +18743,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21127,7 +18895,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21276,7 +19043,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21429,7 +19195,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21483,7 +19248,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21524,7 +19288,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21565,7 +19328,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21606,7 +19368,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21647,7 +19408,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21755,7 +19515,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21796,7 +19555,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21837,7 +19595,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21878,7 +19635,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21919,7 +19675,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -21960,7 +19715,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -22001,7 +19755,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -22042,7 +19795,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -22083,7 +19835,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -22124,7 +19875,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -22165,7 +19915,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -22206,7 +19955,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -22247,7 +19995,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -22288,7 +20035,6 @@
           "INSTALL_TARGET_NOT_FOUND",
           "INTERNAL_ERROR",
           "INVALID_ARGUMENT",
-          "NOT_IMPLEMENTED",
           "PROTOCOL_CONNECTION_CLOSED",
           "PROTOCOL_INVALID_RESPONSE",
           "PROTOCOL_MALFORMED_JSON",
@@ -22326,7 +20072,6 @@
       "INSTALL_TARGET_NOT_FOUND",
       "INTERNAL_ERROR",
       "INVALID_ARGUMENT",
-      "NOT_IMPLEMENTED",
       "PROTOCOL_CONNECTION_CLOSED",
       "PROTOCOL_INVALID_RESPONSE",
       "PROTOCOL_MALFORMED_JSON",
@@ -22343,7 +20088,6 @@
     ],
     "detail_reasons": [
       "contract_validation_failed",
-      "not_implemented",
       "not_supported_by_live_api"
     ]
   },

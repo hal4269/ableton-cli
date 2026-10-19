@@ -208,16 +208,7 @@ def _register_install_skill_command(app: typer.Typer) -> None:
                 help="Print the installation plan without modifying files.",
             ),
         ] = False,
-        target: Annotated[
-            str,
-            typer.Option(
-                "--target",
-                help="Skill installation target (codex, claude, or cursor).",
-                case_sensitive=False,
-            ),
-        ] = "codex",
     ) -> None:
-        normalized_target = target.strip().lower()
 
         def _run() -> dict[str, object]:
             runtime = get_runtime(ctx)
@@ -225,13 +216,12 @@ def _register_install_skill_command(app: typer.Typer) -> None:
                 yes=yes,
                 dry_run=dry_run,
                 platform_paths=runtime.platform_paths,
-                target=normalized_target,
             )
 
         execute_command(
             ctx,
             command="install-skill",
-            args={"yes": yes, "dry_run": dry_run, "target": normalized_target},
+            args={"yes": yes, "dry_run": dry_run},
             action=_run,
         )
 

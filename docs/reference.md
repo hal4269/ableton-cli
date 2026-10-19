@@ -56,8 +56,7 @@ keep the connection open.
 ### Event subscriptions
 
 Commands are strictly request/response, so anything a user does in Live itself can
-only be noticed by polling — that is what `session watch` does. A connection can
-instead send one `"type": "subscribe"` request and become an event stream:
+only be noticed by polling. A connection can instead send one `"type": "subscribe"` request and become an event stream:
 
 ```json
 {"type":"subscribe","name":"events","args":{"events":["tempo","is_playing"]},"meta":{},"request_id":"...","protocol_version":3}
@@ -149,7 +148,6 @@ ableton-cli install-remote-script --yes
 
 ## Batching and low latency
 
-For single commands, use existing subcommands as before.
 For repeated automation commands, prefer `batch stream` to keep one process alive and avoid process startup overhead.
 
 `batch stream` expects one JSON object per stdin line and emits one JSON response line per request:
@@ -161,7 +159,7 @@ cat <<'JSONL' | ableton-cli batch stream
 JSONL
 ```
 
-Compatibility validation is now explicit:
+Compatibility checks:
 
 - `ableton-cli ping` for protocol/version metadata
 - `ableton-cli doctor` for supported command integrity checks
@@ -215,29 +213,11 @@ Saving the Set and exporting audio are not part of the Live API at all, so there
 `song save` or `song export audio` commands; do them in Live.
 
 Clip and arrangement note write/edit commands (`clip notes add`, `clip notes update`,
-`clip notes quantize|humanize|velocity-scale|transpose`, `arrangement clip notes add`, and
-`clip cut-to-drum-rack` trigger clip creation) require the Live 12+ extended note API
+`clip notes quantize|humanize|velocity-scale|transpose`, `arrangement clip notes add`) require the Live 12+ extended note API
 (`Clip.add_new_notes` / `Clip.apply_note_modifications`, plus the `note_id`, `probability`,
 `velocity_deviation`, and `release_velocity` note fields). On older Live versions these commands
 fail with the `not_supported_by_live_api` reason above instead of falling back to the legacy
 note API.
-
-## Not-implemented commands
-
-Some commands are part of the published surface but have no working implementation behind
-them, because the Live API does not expose the primitive (creating group tracks,
-sidechain routing) or because the work happens outside this CLI (stem separation, browser
-target discovery). They fail explicitly rather than returning a plan nobody executes:
-
-- `error.code=NOT_IMPLEMENTED`
-- `error.details.reason=not_implemented`
-- exit code `20`
-- `error.hint` names the commands that do the job
-
-This currently applies to `remix setup-sound`, `remix mix-macro`, `remix setup-mix`,
-`remix setup-returns`, `remix setup-sidechain`, `remix device-chain apply`, and
-`audio stems split`. Argument validation still runs first, so a bad argument reports
-`INVALID_ARGUMENT` and exit code `2`.
 
 ## Completion
 
@@ -246,26 +226,6 @@ Typer built-in completion is available:
 ```bash
 ableton-cli --install-completion
 ableton-cli --show-completion
-```
-
-## Man Page
-
-Generate:
-
-```bash
-scripts/generate_man.sh
-```
-
-Install locally (optional):
-
-```bash
-scripts/install_man.sh
-```
-
-Then:
-
-```bash
-man ableton-cli
 ```
 
 ## Troubleshooting

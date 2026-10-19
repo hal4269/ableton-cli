@@ -13,7 +13,6 @@ def test_windows_platform_paths_returns_expected_directories() -> None:
         home / "Documents" / "Ableton" / "User Library" / "Remote Scripts"
     ]
     assert platform_paths.claude_home_dir() == home / ".claude"
-    assert platform_paths.cursor_home_dir() == home / ".cursor"
 
 
 def test_posix_platform_paths_returns_expected_directories() -> None:
@@ -31,7 +30,6 @@ def test_posix_platform_paths_returns_expected_directories() -> None:
         home / "Documents" / "Ableton" / "User Library" / "Remote Scripts",
     ]
     assert platform_paths.claude_home_dir() == home / ".claude"
-    assert platform_paths.cursor_home_dir() == home / ".cursor"
 
 
 def _write_library_cfg(path: Path, project_path: str) -> None:

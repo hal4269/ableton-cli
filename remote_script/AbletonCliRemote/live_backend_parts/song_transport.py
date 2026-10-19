@@ -75,14 +75,6 @@ class LiveBackendSongSessionMixin:
             },
         }
 
-    def session_snapshot(self) -> dict[str, Any]:
-        return {
-            "song_info": self.song_info(),
-            "session_info": self.get_session_info(),
-            "tracks_list": self.tracks_list(),
-            "scenes_list": self._ctx.services.scenes_arrangement.scenes_list(),
-        }
-
     def get_track_info(self, track: int) -> dict[str, Any]:
         target = self._ctx._track_at(track)
         clip_slots = []

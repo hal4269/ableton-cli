@@ -1460,82 +1460,6 @@ def test_dispatch_calls_backend_for_clip_active_get_set() -> None:
     assert inactive == {"track": 0, "clip": 1, "active": False}
 
 
-def test_dispatch_calls_backend_for_clip_cut_to_drum_rack() -> None:
-    backend = _BackendStub()
-
-    result = dispatch_command(
-        backend,
-        "clip_cut_to_drum_rack",
-        {
-            "source_track": 0,
-            "source_clip": 1,
-            "target_track": 2,
-            "grid": "1/16",
-            "start_pad": 4,
-            "create_trigger_clip": True,
-            "trigger_clip_slot": 3,
-        },
-    )
-
-    assert result == {
-        "source_track": 0,
-        "source_clip": 1,
-        "source_uri": None,
-        "source_path": None,
-        "source_file": None,
-        "source_file_duration_beats": None,
-        "target_track": 2,
-        "grid": 0.25,
-        "slice_count": None,
-        "slice_ranges": None,
-        "start_pad": 4,
-        "create_trigger_clip": True,
-        "trigger_clip_slot": 3,
-        "loaded": True,
-    }
-
-
-def test_dispatch_calls_backend_for_clip_cut_to_drum_rack_file_slice_ranges() -> None:
-    backend = _BackendStub()
-
-    result = dispatch_command(
-        backend,
-        "clip_cut_to_drum_rack",
-        {
-            "source_file": "/tmp/source.wav",
-            "source_file_duration_beats": 8.0,
-            "target_track": 2,
-            "slice_ranges": [
-                {"slice_start": 0.0, "slice_end": 1.5},
-                {"slice_start": 2.0, "slice_end": 4.0},
-            ],
-            "start_pad": 4,
-            "create_trigger_clip": True,
-            "trigger_clip_slot": 3,
-        },
-    )
-
-    assert result == {
-        "source_track": None,
-        "source_clip": None,
-        "source_uri": None,
-        "source_path": None,
-        "source_file": "/tmp/source.wav",
-        "source_file_duration_beats": 8.0,
-        "target_track": 2,
-        "grid": None,
-        "slice_count": None,
-        "slice_ranges": [
-            {"slice_start": 0.0, "slice_end": 1.5},
-            {"slice_start": 2.0, "slice_end": 4.0},
-        ],
-        "start_pad": 4,
-        "create_trigger_clip": True,
-        "trigger_clip_slot": 3,
-        "loaded": True,
-    }
-
-
 def test_dispatch_calls_backend_for_load_drum_kit_with_explicit_selection() -> None:
     backend = _BackendStub()
     by_uri = dispatch_command(
@@ -1579,13 +1503,6 @@ def test_dispatch_calls_backend_for_scene_commands() -> None:
     assert created == {"index": 1, "name": "Scene"}
     assert renamed == {"scene": 1, "name": "Build"}
     assert fired == {"scene": 1, "fired": True}
-
-
-def test_dispatch_calls_backend_for_session_snapshot() -> None:
-    backend = _BackendStub()
-    result = dispatch_command(backend, "session_snapshot", {})
-    assert result["song_info"]["tempo"] == 120.0
-    assert result["scenes_list"]["scenes"][0]["name"] == "Intro"
 
 
 def test_dispatch_calls_backend_for_stop_all_clips() -> None:

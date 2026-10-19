@@ -6,7 +6,6 @@ from .._validation import (
     invalid_argument,
     require_non_empty_string,
     require_non_negative,
-    resolve_uri_or_path_target,
 )
 
 
@@ -112,91 +111,6 @@ def parse_clip_name_assignments(mapping: str) -> list[tuple[int, str]]:
             hint="Use clip:name pairs like 1:Main,2:Var.",
         )
     return assignments
-
-
-def parse_cut_to_drum_rack_source(
-    *,
-    source_track: int | None,
-    source_clip: int | None,
-    source: str | None,
-) -> tuple[int | None, int | None, str | None, str | None]:
-    has_session_source = source_track is not None or source_clip is not None
-    has_browser_source = source is not None
-
-    if has_session_source and has_browser_source:
-        raise invalid_argument(
-            message="--source-track/--source-clip and --source are mutually exclusive",
-            hint="Use either session clip source or browser source.",
-        )
-
-    if has_browser_source:
-        assert source is not None
-        parsed_source = require_non_empty_string(
-            "source",
-            source,
-            hint="Pass a browser URI/path like sounds/Loop.wav or clip:loop.",
-        )
-        source_uri, source_path = resolve_uri_or_path_target(
-            target=parsed_source,
-            name="source",
-            hint="Use a browser URI/path like sounds/Loop.wav or clip:loop.",
-        )
-        return None, None, source_uri, source_path
-
-    if not has_session_source:
-        raise invalid_argument(
-            message="Either --source-track/--source-clip or --source must be provided",
-            hint="Use session clip source or browser source.",
-        )
-    if source_track is None or source_clip is None:
-        raise invalid_argument(
-            message="--source-track and --source-clip must be provided together",
-            hint="Provide both --source-track and --source-clip for session clip source.",
-        )
-
-    valid_source_track = require_non_negative(
-        "source_track",
-        source_track,
-        hint="Use a valid source track index from 'ableton-cli tracks list'.",
-    )
-    valid_source_clip = require_non_negative(
-        "source_clip",
-        source_clip,
-        hint="Use a valid source clip slot index.",
-    )
-    return valid_source_track, valid_source_clip, None, None
-
-
-def parse_cut_to_drum_rack_slice_spec(
-    *,
-    grid: str | None,
-    slice_count: int | None,
-) -> tuple[str | None, int | None]:
-    if grid is None and slice_count is None:
-        raise invalid_argument(
-            message="Either --grid or --slice-count must be provided",
-            hint="Choose one slicing mode with --grid or --slice-count.",
-        )
-    if grid is not None and slice_count is not None:
-        raise invalid_argument(
-            message="--grid and --slice-count are mutually exclusive",
-            hint="Use either --grid or --slice-count.",
-        )
-    if grid is not None:
-        valid_grid = require_non_empty_string(
-            "grid",
-            grid,
-            hint="Use a grid like 1/16 or 0.25.",
-        )
-        return valid_grid, None
-
-    assert slice_count is not None
-    if slice_count <= 0:
-        raise invalid_argument(
-            message=f"slice_count must be > 0, got {slice_count}",
-            hint="Use a positive --slice-count.",
-        )
-    return None, slice_count
 
 
 def parse_arrangement_scene_durations(scenes: str) -> list[dict[str, float]]:

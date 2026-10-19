@@ -65,8 +65,6 @@ class _SongTransportBackend(Protocol):
 
     def get_session_info(self) -> dict[str, Any]: ...
 
-    def session_snapshot(self) -> dict[str, Any]: ...
-
     def get_track_info(self, track: int) -> dict[str, Any]: ...
 
     def tracks_list(self) -> dict[str, Any]: ...
@@ -387,23 +385,6 @@ class _TracksClipsBackend(Protocol):
         src_clip: int,
         dst_clip: int | None,
         dst_clips: list[int] | None,
-    ) -> dict[str, Any]: ...
-
-    def clip_cut_to_drum_rack(
-        self,
-        source_track: int | None,
-        source_clip: int | None,
-        source_uri: str | None,
-        source_path: str | None,
-        source_file: str | None,
-        source_file_duration_beats: float | None,
-        target_track: int | None,
-        grid: float | None,
-        slice_count: int | None,
-        slice_ranges: list[dict[str, float]] | None,
-        start_pad: int,
-        create_trigger_clip: bool,
-        trigger_clip_slot: int | None,
     ) -> dict[str, Any]: ...
 
     def scenes_list(self) -> dict[str, Any]: ...
