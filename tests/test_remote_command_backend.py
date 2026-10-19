@@ -799,6 +799,14 @@ class _BackendStub:
     def tracks_delete(self, track: int):  # noqa: ANN201
         return {"track": track, "deleted": True}
 
+    def set_device_parameter_display(  # noqa: ANN201
+        self, track: int, device: int, parameter: int, display: str
+    ):
+        return {"track": track, "device": device, "parameter": parameter, "display": display}
+
+    def master_device_parameter_set_display(self, device_ref, parameter_ref, display: str):  # noqa: ANN001, ANN201
+        return {"device_ref": device_ref, "parameter_ref": parameter_ref, "display": display}
+
     def set_device_parameter(  # noqa: ANN201
         self, track: int, device: int, parameter: int, value: float
     ):
@@ -2524,3 +2532,40 @@ def test_dispatch_rejects_track_panning_out_of_range() -> None:
         )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
+
+
+def test_dispatch_calls_backend_for_device_parameter_set_display() -> None:
+    backend = _BackendStub()
+    result = dispatch_command(
+        backend,
+        "set_device_parameter_display",
+        {**_parameter_selector(1, 0, 3), "display": " 800 Hz "},
+    )
+    assert result == {"track": 1, "device": 0, "parameter": 3, "display": "800 Hz"}
+
+
+def test_dispatch_rejects_empty_device_parameter_display() -> None:
+    with pytest.raises(CommandError) as exc_info:
+        dispatch_command(
+            _BackendStub(),
+            "set_device_parameter_display",
+            {**_parameter_selector(1, 0, 3), "display": "  "},
+        )
+    assert exc_info.value.code == "INVALID_ARGUMENT"
+
+
+def test_dispatch_calls_backend_for_master_device_parameter_set_display() -> None:
+    result = dispatch_command(
+        _BackendStub(),
+        "master_device_parameter_set_display",
+        {
+            "device_ref": {"mode": "index", "index": 0},
+            "parameter_ref": {"mode": "name", "name": "Gain"},
+            "display": "-3 dB",
+        },
+    )
+    assert result == {
+        "device_ref": {"mode": "index", "index": 0},
+        "parameter_ref": {"mode": "name", "name": "Gain"},
+        "display": "-3 dB",
+    }

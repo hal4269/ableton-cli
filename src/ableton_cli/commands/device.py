@@ -44,6 +44,10 @@ DEVICE_PARAMETER_SET_SPEC = DeviceCommandSpec(
     command_name="device parameter set",
     client_method="set_device_parameter",
 )
+DEVICE_PARAMETER_SET_DISPLAY_SPEC = DeviceCommandSpec(
+    command_name="device parameter set-display",
+    client_method="set_device_parameter_display",
+)
 
 
 def run_client_command(
@@ -81,6 +85,68 @@ def run_client_command_spec(
         get_client_fn=get_client,
         execute_command_fn=execute_command,
         resolved_args=resolved_args,
+    )
+
+
+@parameter_app.command("set-display")
+def set_device_parameter_display(
+    ctx: typer.Context,
+    display: Annotated[
+        str,
+        typer.Argument(help="Value as Live displays it, e.g. '800 Hz', '120 ms', 'Saw 8'"),
+    ],
+    track_index: TrackIndexOption = None,
+    track_name: TrackNameOption = None,
+    selected_track: SelectedTrackOption = False,
+    track_query: TrackQueryOption = None,
+    track_ref: TrackStableRefOption = None,
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    selected_device: SelectedDeviceOption = False,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+    parameter_index: ParameterIndexOption = None,
+    parameter_name: ParameterNameOption = None,
+    parameter_query: ParameterQueryOption = None,
+    parameter_key: ParameterKeyOption = None,
+    parameter_ref: ParameterStableRefOption = None,
+) -> None:
+    """Set a parameter by its display value; the Remote Script finds the raw value."""
+
+    def _method_kwargs() -> dict[str, object]:
+        return {
+            "track_ref": build_track_ref(
+                track_index=track_index,
+                track_name=track_name,
+                selected_track=selected_track,
+                track_query=track_query,
+                track_ref=track_ref,
+            ),
+            "device_ref": build_device_ref(
+                device_index=device_index,
+                device_name=device_name,
+                selected_device=selected_device,
+                device_query=device_query,
+                device_ref=device_ref,
+            ),
+            "parameter_ref": build_parameter_ref(
+                parameter_index=parameter_index,
+                parameter_name=parameter_name,
+                parameter_query=parameter_query,
+                parameter_key=parameter_key,
+                parameter_ref=parameter_ref,
+            ),
+            "display": require_non_empty_string(
+                "display", display, hint="Pass a display value such as '800 Hz'."
+            ),
+        }
+
+    run_client_command_spec(
+        ctx,
+        spec=DEVICE_PARAMETER_SET_DISPLAY_SPEC,
+        args={"display": display},
+        method_kwargs=_method_kwargs,
+        resolved_args=_method_kwargs,
     )
 
 

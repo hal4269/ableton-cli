@@ -21,6 +21,7 @@ from ..refs import (
 from ..runtime import execute_command, get_client
 from ._client_command_runner import CommandSpec
 from ._client_command_runner import run_client_command_spec as run_client_command_spec_shared
+from ._validation import require_non_empty_string
 
 master_app = typer.Typer(help="Master track commands", no_args_is_help=True)
 volume_app = typer.Typer(help="Master volume commands", no_args_is_help=True)
@@ -219,6 +220,49 @@ def master_device_parameter_set(
             ),
             value,
         ),
+    )
+
+
+@device_parameter_app.command("set-display")
+def master_device_parameter_set_display(
+    ctx: typer.Context,
+    display: Annotated[
+        str,
+        typer.Argument(help="Value as Live displays it, e.g. '-3 dB', '800 Hz'"),
+    ],
+    device_index: DeviceIndexOption = None,
+    device_name: DeviceNameOption = None,
+    device_query: DeviceQueryOption = None,
+    device_ref: DeviceStableRefOption = None,
+    parameter_index: ParameterIndexOption = None,
+    parameter_name: ParameterNameOption = None,
+    parameter_query: ParameterQueryOption = None,
+    parameter_key: ParameterKeyOption = None,
+    parameter_ref: ParameterStableRefOption = None,
+) -> None:
+    """Set a master device parameter by its display value."""
+
+    def _resolved() -> dict[str, object]:
+        return {
+            "device_ref": _device_ref(device_index, device_name, device_query, device_ref),
+            "parameter_ref": _parameter_ref(
+                parameter_index,
+                parameter_name,
+                parameter_query,
+                parameter_key,
+                parameter_ref,
+            ),
+            "display": require_non_empty_string(
+                "display", display, hint="Pass a display value such as '-3 dB'."
+            ),
+        }
+
+    execute_command(
+        ctx,
+        command="master device parameter set-display",
+        args={"device_ref": None, "parameter_ref": None, "display": display},
+        resolved_args=_resolved,
+        action=lambda: get_client(ctx).master_device_parameter_set_display(**_resolved()),
     )
 
 
