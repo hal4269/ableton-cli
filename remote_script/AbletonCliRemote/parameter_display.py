@@ -14,6 +14,8 @@ from typing import Any
 
 #: Units normalised before comparing: frequencies to Hz, times to ms.
 _UNIT_SCALE = {"khz": 1000.0, "hz": 1.0, "s": 1000.0, "ms": 1.0}
+#: Units that compare as one: a target in kHz may meet a display in Hz.
+_UNIT_FAMILY = {"khz": "hz", "s": "ms"}
 _NUMBER = re.compile(r"([+-]?(?:\d+(?:\.\d+)?|\.\d+))\s*([a-z%]*)")
 _MAX_STEPS = 60
 _RELATIVE_TOLERANCE = 0.005
@@ -36,6 +38,16 @@ def display_number(display: str) -> float | None:
     return float(match.group(1)) * _UNIT_SCALE.get(match.group(2), 1.0)
 
 
+def _raw_unit(display: str) -> str:
+    match = _NUMBER.match(display.strip().lower())
+    return match.group(2) if match else ""
+
+
+def _unit(display: str) -> str:
+    unit = _raw_unit(display)
+    return _UNIT_FAMILY.get(unit, unit)
+
+
 def value_for_display(parameter: Any, display: str) -> float:
     if bool(getattr(parameter, "is_quantized", False)):
         return _quantized_value(parameter, display)
@@ -44,6 +56,13 @@ def value_for_display(parameter: Any, display: str) -> float:
         raise ParameterDisplayError(f"{display!r} is not a number with an optional unit")
     low = float(parameter.min)
     high = float(parameter.max)
+    wanted_unit = _unit(display)
+    shown = str(parameter.str_for_value(high))
+    if wanted_unit and wanted_unit != _unit(shown):
+        raise ParameterDisplayError(
+            f"{parameter.name!r} is not shown in {_raw_unit(display)!r} "
+            f"(Live shows {shown!r}); use {_raw_unit(shown) or 'no unit'!r}"
+        )
     if want == -math.inf:
         return low
     at_low = _rendered(parameter, low)
