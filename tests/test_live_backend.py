@@ -3850,3 +3850,67 @@ def test_live_backend_track_routing_set_with_none_channel_keeps_live_default() -
     assert updated["current"]["type"] == "Resampling"
     assert updated["current"]["channel"] == ""
     assert updated["available"]["channels"] == [""]
+
+
+def _frequency_display(value: float) -> str:
+    return f"{20.0 * 1000.0**value:.1f} Hz"
+
+
+class _FrequencyParameter(_Parameter):
+    def str_for_value(self, value: float) -> str:
+        return _frequency_display(value)
+
+
+def test_live_backend_set_device_parameter_display_bisects_and_writes_once() -> None:
+    surface = _SurfaceStub()
+    backend = LiveBackend(surface)
+    device = surface.song().tracks[0].devices[0]
+    device.parameters[0] = _FrequencyParameter("Filter Freq", 0.0)
+
+    result = backend.set_device_parameter_display(track=0, device=0, parameter=0, display="800 Hz")
+
+    assert result["track"] == 0
+    assert result["parameter"] == 0
+    assert result["value"] == device.parameters[0].value
+    assert float(result["display_value"].split()[0]) == pytest.approx(800.0, rel=0.01)
+    assert result["parameter_stable_ref"].startswith("parameter:")
+
+
+def test_live_backend_set_device_parameter_display_rejects_unreachable_value() -> None:
+    surface = _SurfaceStub()
+    backend = LiveBackend(surface)
+    surface.song().tracks[0].devices[0].parameters[0] = _FrequencyParameter("Filter Freq", 0.3)
+
+    with pytest.raises(CommandError) as exc_info:
+        backend.set_device_parameter_display(track=0, device=0, parameter=0, display="40 kHz")
+
+    assert exc_info.value.code == "INVALID_ARGUMENT"
+    assert surface.song().tracks[0].devices[0].parameters[0].value == 0.3
+
+
+def test_live_backend_master_device_parameter_set_display() -> None:
+    surface = _SurfaceStub()
+    backend = LiveBackend(surface)
+    surface.song().master_track.devices[0].parameters[0] = _FrequencyParameter("Freq", 0.0)
+
+    result = backend.master_device_parameter_set_display(
+        {"mode": "index", "index": 0}, {"mode": "index", "index": 0}, "2000 Hz"
+    )
+
+    assert result["device"] == 0
+    assert float(result["display_value"].split()[0]) == pytest.approx(2000.0, rel=0.01)
+
+
+def test_live_backend_master_device_parameters_list_reports_display_values() -> None:
+    surface = _SurfaceStub()
+    backend = LiveBackend(surface)
+    surface.song().master_track.devices[0].parameters.append(
+        _Parameter("Mode", 1.0, max=2.0, is_quantized=True, value_items=("A", "B", "C"))
+    )
+
+    parameters = backend.master_device_parameters_list({"mode": "index", "index": 0})["parameters"]
+
+    assert parameters[0]["display_value"] == "0.00"
+    assert parameters[0]["value_items"] == []
+    assert parameters[1]["display_value"] == "B"
+    assert parameters[1]["value_items"] == ["A", "B", "C"]

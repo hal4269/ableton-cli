@@ -9,8 +9,22 @@ from ..effect_specs import (
     resolve_standard_effect_key_indexes,
     standard_effect_keys,
 )
+from ..parameter_display import ParameterDisplayError, value_for_display
 from ..synth_specs import SUPPORTED_SYNTH_TYPES, canonicalize_synth_type, standard_synth_keys
 from .base import DeviceLocator, _invalid_argument, _not_supported_by_live_api
+
+
+def _value_for_display(parameter: Any, display: str) -> float:
+    try:
+        return value_for_display(parameter, display)
+    except ParameterDisplayError as exc:
+        raise _invalid_argument(
+            message=str(exc),
+            hint=(
+                "Use a value Live can display for this parameter, e.g. '800 Hz', '120 ms', "
+                "'-6 dB' or an item name; check 'device parameter list'."
+            ),
+        ) from exc
 
 
 class LiveBackendDeviceSharedMixin:
@@ -304,6 +318,18 @@ class LiveBackendDeviceSharedMixin:
             "value": float(target_param.value),
         }
 
+    def set_device_parameter_display(
+        self,
+        track: int,
+        device: DeviceLocator,
+        parameter: int,
+        display: str,
+    ) -> dict[str, Any]:
+        target_param = self._ctx._parameter_at(track, device, parameter)
+        value = _value_for_display(target_param, display)
+        result = self.set_device_parameter(track, device, parameter, value)
+        return {**result, "display_value": self._ctx._parameter_display_value(target_param)}
+
     def master_device_load(self, target: str, position: str) -> dict[str, Any]:
         uri, path = self._master_load_target(target)
         if uri is not None:
@@ -431,6 +457,19 @@ class LiveBackendDeviceSharedMixin:
             "value": float(target_parameter.value),
         }
 
+    def master_device_parameter_set_display(
+        self,
+        device_ref: dict[str, Any],
+        parameter_ref: dict[str, Any],
+        display: str,
+    ) -> dict[str, Any]:
+        device = self._resolve_master_device_ref(device_ref)
+        parameter = self._resolve_master_parameter_ref(device, parameter_ref)
+        target_parameter = self._master_parameter_at(device, parameter)
+        value = _value_for_display(target_parameter, display)
+        result = self.master_device_parameter_set(device_ref, parameter_ref, value)
+        return {**result, "display_value": self._ctx._parameter_display_value(target_parameter)}
+
     def master_effect_keys(self, effect_type: str) -> dict[str, Any]:
         parsed_type = canonicalize_effect_type(effect_type)
         keys = standard_effect_keys(parsed_type)
@@ -515,6 +554,7 @@ class LiveBackendDeviceSharedMixin:
         device_index: int,
         parameter_index: int,
     ) -> dict[str, Any]:
+        is_quantized = bool(getattr(parameter, "is_quantized", False))
         return {
             "index": parameter_index,
             "stable_ref": self._master_parameter_stable_ref(
@@ -526,8 +566,10 @@ class LiveBackendDeviceSharedMixin:
             "value": float(getattr(parameter, "value", 0.0)),
             "min": self._ctx._safe_float(getattr(parameter, "min", None)),
             "max": self._ctx._safe_float(getattr(parameter, "max", None)),
+            "display_value": self._ctx._parameter_display_value(parameter),
             "is_enabled": bool(getattr(parameter, "is_enabled", True)),
-            "is_quantized": bool(getattr(parameter, "is_quantized", False)),
+            "is_quantized": is_quantized,
+            "value_items": ([str(item) for item in parameter.value_items] if is_quantized else []),
         }
 
     def _master_effect_key_index(self, effect_type: str, device: int, key: str) -> int:

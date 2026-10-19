@@ -387,6 +387,14 @@ class _AbletonClientGeneratedMixin:
             {"device_ref": device_ref, "parameter_ref": parameter_ref, "value": value},
         )
 
+    def master_device_parameter_set_display(
+        self, device_ref: dict[str, Any], parameter_ref: dict[str, Any], display: str
+    ) -> dict[str, Any]:
+        return self._call(
+            "master_device_parameter_set_display",
+            {"device_ref": device_ref, "parameter_ref": parameter_ref, "display": display},
+        )
+
     def master_device_parameters_list(self, device_ref: dict[str, Any]) -> dict[str, Any]:
         return self._call("master_device_parameters_list", {"device_ref": device_ref})
 
@@ -536,6 +544,19 @@ class _AbletonClientGeneratedMixin:
 
     def set_clip_name(self, track: int, clip: int, name: str) -> dict[str, Any]:
         return self._call("set_clip_name", {"track": track, "clip": clip, "name": name})
+
+    def set_device_parameter_display(
+        self, track_ref: RefPayload, device_ref: RefPayload, parameter_ref: RefPayload, display: str
+    ) -> dict[str, Any]:
+        return self._call(
+            "set_device_parameter_display",
+            {
+                "track_ref": track_ref,
+                "device_ref": device_ref,
+                "parameter_ref": parameter_ref,
+                "display": display,
+            },
+        )
 
     def set_scene_name(self, scene: int, name: str) -> dict[str, Any]:
         return self._call("set_scene_name", {"scene": scene, "name": name})

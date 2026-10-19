@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 import json
-import struct
-import wave
 from pathlib import Path
 
 from ableton_cli.errors import AppError, ExitCode
@@ -16,22 +14,6 @@ def _ref_index(ref: object) -> int:
 
 def _stable_ref(kind: str, index: int) -> str:
     return f"{kind}:{index}"
-
-
-def _write_impulse_wav(path: Path, *, bpm: float = 120.0) -> None:
-    sample_rate = 44100
-    beats = 2.0
-    frame_count = int(sample_rate * beats * 60.0 / bpm)
-    impulse_index = int(round(1.0 * 60.0 / bpm * sample_rate))
-    with wave.open(str(path), "wb") as wav:
-        wav.setnchannels(2)
-        wav.setsampwidth(2)
-        wav.setframerate(sample_rate)
-        frames = bytearray()
-        for index in range(frame_count):
-            value = int(0.8 * 32767) if index == impulse_index else 0
-            frames.extend(struct.pack("<hh", value, value))
-        wav.writeframes(bytes(frames))
 
 
 class _ClientStub:

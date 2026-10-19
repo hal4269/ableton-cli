@@ -28,6 +28,18 @@ def _handle_set_device_parameter(backend: CommandBackend, args: dict[str, Any]) 
     return backend.set_device_parameter(track, device, parameter, value)
 
 
+def _handle_set_device_parameter_display(
+    backend: CommandBackend, args: dict[str, Any]
+) -> dict[str, Any]:
+    track = backend.resolve_track_ref(_track_ref(args.get("track_ref")))
+    device = backend.resolve_device_ref(track, _device_ref(args.get("device_ref")))
+    parameter = backend.resolve_parameter_ref(
+        track, device, _parameter_ref(args.get("parameter_ref"))
+    )
+    display = _non_empty_string("display", args.get("display"))
+    return backend.set_device_parameter_display(track, device, parameter, display)
+
+
 def _handle_find_synth_devices(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
     track = _optional_track_index("track", args.get("track"))
     synth_type_raw = args.get("synth_type")
@@ -218,6 +230,16 @@ def _handle_master_device_parameter_set(
     return backend.master_device_parameter_set(device_ref, parameter_ref, value)
 
 
+def _handle_master_device_parameter_set_display(
+    backend: CommandBackend,
+    args: dict[str, Any],
+) -> dict[str, Any]:
+    device_ref = _device_ref(args.get("device_ref"))
+    parameter_ref = _parameter_ref(args.get("parameter_ref"))
+    display = _non_empty_string("display", args.get("display"))
+    return backend.master_device_parameter_set_display(device_ref, parameter_ref, display)
+
+
 def _handle_master_effect_keys(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
     effect_type = _effect_type(args.get("effect_type"))
     return backend.master_effect_keys(effect_type)
@@ -254,6 +276,7 @@ def _handle_named_master_effect_set(
 
 DEVICE_HANDLERS: dict[str, Handler] = {
     "set_device_parameter": _handle_set_device_parameter,
+    "set_device_parameter_display": _handle_set_device_parameter_display,
     "find_synth_devices": _handle_find_synth_devices,
     "list_synth_parameters": _handle_list_synth_parameters,
     "set_synth_parameter_safe": _handle_set_synth_parameter_safe,
@@ -273,6 +296,7 @@ DEVICE_HANDLERS: dict[str, Handler] = {
     "master_device_delete": _handle_master_device_delete,
     "master_device_parameters_list": _handle_master_device_parameters_list,
     "master_device_parameter_set": _handle_master_device_parameter_set,
+    "master_device_parameter_set_display": _handle_master_device_parameter_set_display,
     "master_effect_keys": _handle_master_effect_keys,
     "master_effect_set": _handle_master_effect_set,
     "master_effect_observe": _handle_master_effect_observe,

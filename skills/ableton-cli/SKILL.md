@@ -130,6 +130,7 @@ ableton-cli arrangement clip from-session 0 2 --start 64
 ableton-cli arrangement from-session --scenes "0:24,1:48"
 ableton-cli arrangement locator list
 ableton-cli arrangement locator add 64 --name "Drop"
+ableton-cli arrangement locator add-many --locators-json '[{"time":0,"name":"Intro"},{"time":64,"name":"Drop"}]' --skip-existing
 ableton-cli arrangement locator delete 0
 ableton-cli arrangement back-to-arranger
 ```
@@ -146,7 +147,8 @@ durations that are a multiple of the clip lengths.
 Locators: Live only toggles a cue point at the playhead, and applies a playhead move on its
 next update. So `locator add|delete` need the transport stopped, move the playhead to the
 locator (`transport position set`), wait until `transport position get` reports it, then
-toggle; the playhead stays there. Live refuses positions behind the song length.
+toggle; the playhead stays there. `locator add-many` adds a list that way in one call and
+then returns the playhead to where it was. Live refuses positions behind the song length.
 
 ### Track
 
@@ -213,6 +215,7 @@ ableton-cli master device move --device-index 2 --to-index 0
 ableton-cli master device delete --device-index 3 --yes
 ableton-cli master device parameters list --device-index 0
 ableton-cli master device parameter set --device-index 0 --parameter-key gain -- -1.5
+ableton-cli master device parameter set-display --device-index 0 --parameter-name Gain -- "-1.5 dB"
 ableton-cli master effect eq8 keys
 ableton-cli master effect eq8 set 0.42 --device-query "EQ Eight" --parameter-key band1_gain
 ableton-cli master effect eq8 observe --device-query "EQ Eight"
@@ -362,6 +365,7 @@ echo '{"id":"req-1","steps":[{"name":"song_info","args":{}}]}' | ableton-cli bat
 
 ```bash
 ableton-cli device parameter set 0.25 --track-index 0 --device-index 0 --parameter-index 0
+ableton-cli device parameter set-display "800 Hz" --track-index 0 --device-index 0 --parameter-name "Filter Freq"
 ableton-cli device chains list --track-index 0 --device-index 0
 ableton-cli device macro list --track-index 0 --device-index 0
 ableton-cli device macro set 0 64.0 --track-index 0 --device-index 0
@@ -393,9 +397,13 @@ chains: 0 = none, 1-16; `null` for other racks). `device chains set` changes onl
 options; `--choke-group` needs a Drum Rack. Racks nested in a chain: pass their `stable_ref`
 as `--device-ref`.
 
-Parameter listings (`device parameter list`, `synth|effect parameters list`, `track info`)
-include `display_value`, the value as Live shows it (e.g. `-6.0 dB`, `Soft Sine`), and, for
-quantized parameters, `value_items` (the option names; the value is the item's index).
+Parameter listings (`device parameter list`, `master device parameters list`,
+`synth|effect parameters list`, `track info`) include `display_value`, the value as Live shows
+it (e.g. `-6.0 dB`, `Soft Sine`), and, for quantized parameters, `value_items` (the option
+names; the value is the item's index). `device parameter set-display` and
+`master device parameter set-display` take such a value (`800 Hz`, `1.2 kHz`, `120 ms`,
+`-6 dB`, `-inf dB`, `35 %`, or an item name): the Remote Script finds the raw value by
+bisection on Live's own display, in one call. Values out of range fail with the range.
 
 `device insert` adds a native Live device by name at a position on a track (Live 12.1.10+,
 `Track.insert_device`); without `--index` it appends. Use `browser load` for presets and

@@ -5,7 +5,16 @@ from typing import Any
 
 import pytest
 
-_MODULES = ("arrangement", "device", "clip", "tracks", "scenes", "return_tracks", "transport")
+_MODULES = (
+    "arrangement",
+    "device",
+    "clip",
+    "tracks",
+    "scenes",
+    "return_tracks",
+    "transport",
+    "master",
+)
 
 
 class _RecordingClient:
@@ -162,6 +171,44 @@ _DEVICE_SELECTORS = ["--track-index", "0", "--device-index", "1"]
             ({"mode": "name", "name": "Bass"}, 5),
         ),
         (["clip", "crop", "0", "3"], "clip_crop", (0, 3)),
+        (
+            [
+                "device",
+                "parameter",
+                "set-display",
+                "800 Hz",
+                *_DEVICE_SELECTORS,
+                "--parameter-name",
+                "Filter Freq",
+            ],
+            "set_device_parameter_display",
+            {
+                "track_ref": _TRACK0,
+                "device_ref": _DEVICE1,
+                "parameter_ref": {"mode": "name", "name": "Filter Freq"},
+                "display": "800 Hz",
+            },
+        ),
+        (
+            [
+                "master",
+                "device",
+                "parameter",
+                "set-display",
+                "--device-index",
+                "0",
+                "--parameter-index",
+                "2",
+                "--",
+                "-3 dB",
+            ],
+            "master_device_parameter_set_display",
+            {
+                "device_ref": {"mode": "index", "index": 0},
+                "parameter_ref": {"mode": "index", "index": 2},
+                "display": "-3 dB",
+            },
+        ),
         (["clip", "duplicate-loop", "0", "3"], "clip_duplicate_loop", (0, 3)),
         (["clip", "signature", "set", "0", "3", "7", "8"], "clip_signature_set", (0, 3, 7, 8)),
     ],
@@ -194,6 +241,7 @@ def test_song_tool_commands_call_the_client(
         ["clip", "crop", "--", "-1", "0"],
         ["track", "color", "set", "--track-index", "0", "--", "-1"],
         ["arrangement", "locator", "add", "--", "-4"],
+        ["device", "parameter", "set-display", " ", *_DEVICE_SELECTORS, "--parameter-index", "0"],
         ["return-tracks", "delete", "--", "-1"],
         ["device", "chains", "set", "0", *_DEVICE_SELECTORS],
         ["device", "chains", "set", "0", "--choke-group", "17", *_DEVICE_SELECTORS],
@@ -444,3 +492,107 @@ def test_clip_envelope_mixer_rejects_invalid_targets(
     assert result.exit_code == 2, result.output
     assert json.loads(result.stdout)["error"]["code"] == "INVALID_ARGUMENT"
     assert client.calls == []
+
+
+def _add_many(runner, cli_app, locators: list[dict[str, Any]], *extra: str):  # noqa: ANN202
+    return runner.invoke(
+        cli_app,
+        [
+            "--output",
+            "json",
+            "arrangement",
+            "locator",
+            "add-many",
+            "--locators-json",
+            json.dumps(locators),
+            *extra,
+        ],
+    )
+
+
+def test_locator_add_many_adds_each_locator_and_restores_the_playhead(
+    runner, cli_app, locator_client: _LocatorClient
+) -> None:
+    locator_client.position = 8.0
+
+    result = _add_many(
+        runner, cli_app, [{"time": 16, "name": "Build"}, {"time": 32.0, "name": "Break"}]
+    )
+
+    assert result.exit_code == 0, result.output
+    assert json.loads(result.stdout)["result"] == {
+        "added": [
+            {"index": 0, "name": "Build", "time": 16.0},
+            {"index": 0, "name": "Break", "time": 32.0},
+        ],
+        "skipped": [],
+    }
+    adds = [args for name, args in locator_client.calls if name == "locator_add"]
+    assert adds == [
+        {"time": 16.0, "name": "Build", "at": 16.0},
+        {"time": 32.0, "name": "Break", "at": 32.0},
+    ]
+    assert _names(locator_client)[:2] == ["song_info", "locators_list"]
+    assert locator_client.calls[-1][0] == "transport_position_get"
+    assert locator_client.position == 8.0
+
+
+def test_locator_add_many_rejects_an_existing_position_before_moving_the_playhead(
+    runner, cli_app, locator_client: _LocatorClient
+) -> None:
+    result = _add_many(runner, cli_app, [{"time": 16, "name": "Build"}, {"time": 64, "name": "X"}])
+
+    assert result.exit_code == 2, result.output
+    error = json.loads(result.stdout)["error"]
+    assert error["code"] == "INVALID_ARGUMENT"
+    assert "64.0" in error["message"]
+    assert _names(locator_client) == ["song_info", "locators_list"]
+
+
+def test_locator_add_many_skip_existing_leaves_existing_locators_alone(
+    runner, cli_app, locator_client: _LocatorClient
+) -> None:
+    result = _add_many(
+        runner,
+        cli_app,
+        [{"time": 0, "name": "Intro"}, {"time": 32, "name": "Break"}],
+        "--skip-existing",
+    )
+
+    assert result.exit_code == 0, result.output
+    payload = json.loads(result.stdout)["result"]
+    assert payload["skipped"] == [{"time": 0.0, "name": "Intro"}]
+    assert [item["time"] for item in payload["added"]] == [32.0]
+
+
+@pytest.mark.parametrize(
+    "locators_json",
+    [
+        "not json",
+        "{}",
+        "[]",
+        '[{"time": -1, "name": "A"}]',
+        '[{"time": 4}]',
+        '[{"time": 4, "name": " "}]',
+        '[{"time": 4, "name": "A"}, {"time": 4, "name": "B"}]',
+    ],
+)
+def test_locator_add_many_rejects_invalid_locators(
+    runner, cli_app, locator_client: _LocatorClient, locators_json: str
+) -> None:
+    result = runner.invoke(
+        cli_app,
+        [
+            "--output",
+            "json",
+            "arrangement",
+            "locator",
+            "add-many",
+            "--locators-json",
+            locators_json,
+        ],
+    )
+
+    assert result.exit_code == 2, result.output
+    assert json.loads(result.stdout)["error"]["code"] == "INVALID_ARGUMENT"
+    assert locator_client.calls == []

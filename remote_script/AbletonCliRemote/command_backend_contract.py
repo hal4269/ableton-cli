@@ -162,6 +162,13 @@ class _SongTransportBackend(Protocol):
         value: float,
     ) -> dict[str, Any]: ...
 
+    def master_device_parameter_set_display(
+        self,
+        device_ref: dict[str, Any],
+        parameter_ref: dict[str, Any],
+        display: str,
+    ) -> dict[str, Any]: ...
+
     def master_effect_keys(self, effect_type: str) -> dict[str, Any]: ...
 
     def master_effect_set(
@@ -622,6 +629,14 @@ class _DevicesBackend(Protocol):
         device: int | tuple[int, ...],
         parameter: int,
         value: float,
+    ) -> dict[str, Any]: ...
+
+    def set_device_parameter_display(
+        self,
+        track: int,
+        device: int | tuple[int, ...],
+        parameter: int,
+        display: str,
     ) -> dict[str, Any]: ...
 
     def find_synth_devices(
