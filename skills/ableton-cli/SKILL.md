@@ -307,6 +307,9 @@ ableton-cli clip file path get 0 0
 0.85 = 0 dB), `panning` (-1.0 to 1.0) or `send` with `--send-index` (0 = send A, 0.0-1.0).
 Values are checked against the parameter's range.
 `clip crop`, `clip duplicate-loop` and `clip signature set` return the clip properties.
+`clip groove set` assigns a groove from Live's groove pool, loading the `.agr` there first
+when it is not in the pool yet; `clip groove get` reports the groove's pool name (uri/path
+only in the result of the `set` call).
 
 ### Scenes
 

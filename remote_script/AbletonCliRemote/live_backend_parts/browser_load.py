@@ -372,19 +372,6 @@ class LiveBackendBrowserLoadMixin:
                     continue
                 imported = True
             break
-
-        for attribute in (
-            "_ableton_cli_groove_uri",
-            "_ableton_cli_groove_path",
-            "_ableton_cli_groove_name",
-        ):
-            if not hasattr(source_clip, attribute):
-                continue
-            try:
-                setattr(target_clip, attribute, getattr(source_clip, attribute))
-            except Exception:
-                continue
-            imported = True
         return imported
 
     @staticmethod
