@@ -89,7 +89,42 @@ class LiveBackendTracksClipsMixin:
             "uri": item_uri,
             "path": item_path,
             "name": item_name,
+            "item": item,
         }
+
+    @staticmethod
+    def _pool_groove(pool: Any, name: str) -> Any:
+        for groove in list(getattr(pool, "grooves", [])):
+            if str(getattr(groove, "name", "")) == name:
+                return groove
+        return None
+
+    def _groove_from_pool(self, *, slot: Any, target_info: dict[str, Any]) -> Any:
+        """The groove pool's Groove for a browser .agr item, loading it into the pool if needed.
+
+        Live assigns Groove objects (not paths) to clips, and only grooves from the pool.
+        The target slot is highlighted first, so the load lands on the clip being changed.
+        """
+        song = self._ctx._song()
+        pool = getattr(song, "groove_pool", None)
+        if pool is None:
+            raise _not_supported_by_live_api(
+                message="Groove pool API is not available in Live API",
+                hint="Use Live 12+, which exposes Song.groove_pool.",
+            )
+        name = str(target_info["name"])[: -len(".agr")]
+        groove = self._pool_groove(pool, name)
+        if groove is None:
+            song.view.highlighted_clip_slot = slot
+            self._ctx.services.browser._browser().load_item(target_info["item"])
+            groove = self._pool_groove(pool, name)
+        if groove is None:
+            raise CommandError(
+                code="INTERNAL_ERROR",
+                message=f"Groove '{name}' did not appear in the groove pool after loading it",
+                hint="Drag the groove into Live's groove pool, then retry.",
+            )
+        return groove
 
     def _clip_groove_payload(
         self,
@@ -98,29 +133,13 @@ class LiveBackendTracksClipsMixin:
         clip: int,
         clip_obj: Any,
         groove_attr: str,
+        target_info: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
+        """Groove state read from Live; uri/path are only known in the call that set the groove."""
         current_groove = getattr(clip_obj, groove_attr, None)
-        stored_uri = getattr(clip_obj, "_ableton_cli_groove_uri", None)
-        stored_path = getattr(clip_obj, "_ableton_cli_groove_path", None)
-        stored_name = getattr(clip_obj, "_ableton_cli_groove_name", None)
-        groove_uri = (
-            str(stored_uri).strip()
-            if isinstance(stored_uri, str) and str(stored_uri).strip()
-            else None
-        )
-        if groove_uri is None and isinstance(current_groove, str):
-            normalized_current = current_groove.strip()
-            groove_uri = normalized_current or None
-        groove_path = (
-            str(stored_path).strip()
-            if isinstance(stored_path, str) and str(stored_path).strip()
-            else None
-        )
-        groove_name = (
-            str(stored_name).strip()
-            if isinstance(stored_name, str) and str(stored_name).strip()
-            else None
-        )
+        groove_name = None
+        if current_groove is not None:
+            groove_name = str(getattr(current_groove, "name", "")).strip() or None
 
         amount_attr = self._clip_groove_amount_attr_name(clip_obj)
         amount: float | None = None
@@ -132,9 +151,9 @@ class LiveBackendTracksClipsMixin:
         return {
             "track": track,
             "clip": clip,
-            "has_groove": bool(groove_uri or groove_path or current_groove),
-            "groove_uri": groove_uri,
-            "groove_path": groove_path,
+            "has_groove": current_groove is not None,
+            "groove_uri": target_info["uri"] if target_info else None,
+            "groove_path": target_info["path"] if target_info else None,
             "groove_name": groove_name,
             "amount": amount,
         }
@@ -173,16 +192,16 @@ class LiveBackendTracksClipsMixin:
     def clip_groove_set(self, track: int, clip: int, target: str) -> dict[str, Any]:
         clip_obj, groove_attr = self._require_clip_with_groove_support(track=track, clip=clip)
         target_info = self._resolve_groove_target(target)
-        groove_value = target_info["uri"] or target_info["path"]
-        setattr(clip_obj, groove_attr, groove_value)
-        clip_obj._ableton_cli_groove_uri = target_info["uri"]  # noqa: SLF001
-        clip_obj._ableton_cli_groove_path = target_info["path"]  # noqa: SLF001
-        clip_obj._ableton_cli_groove_name = target_info["name"]  # noqa: SLF001
+        groove = self._groove_from_pool(
+            slot=self._ctx._clip_slot_at(track, clip), target_info=target_info
+        )
+        setattr(clip_obj, groove_attr, groove)
         return self._clip_groove_payload(
             track=track,
             clip=clip,
             clip_obj=clip_obj,
             groove_attr=groove_attr,
+            target_info=target_info,
         )
 
     def clip_groove_amount_set(self, track: int, clip: int, value: float) -> dict[str, Any]:
@@ -215,9 +234,6 @@ class LiveBackendTracksClipsMixin:
     def clip_groove_clear(self, track: int, clip: int) -> dict[str, Any]:
         clip_obj, groove_attr = self._require_clip_with_groove_support(track=track, clip=clip)
         setattr(clip_obj, groove_attr, None)
-        clip_obj._ableton_cli_groove_uri = None  # noqa: SLF001
-        clip_obj._ableton_cli_groove_path = None  # noqa: SLF001
-        clip_obj._ableton_cli_groove_name = None  # noqa: SLF001
         return self._clip_groove_payload(
             track=track,
             clip=clip,
