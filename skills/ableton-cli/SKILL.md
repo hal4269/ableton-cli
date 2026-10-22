@@ -199,6 +199,11 @@ ableton-cli return-track mute get 0
 ableton-cli return-track mute set 0 true
 ableton-cli return-track solo get 0
 ableton-cli return-track solo set 0 false
+ableton-cli return-track name set 2 "C Freeze"
+ableton-cli return-track device list 2
+ableton-cli return-track device insert 2 "Spectral Time" --index 0
+ableton-cli return-track device parameters 2 0
+ableton-cli return-track device parameter set-display 2 0 "Dry Wet" "60 %"
 ```
 
 ### Master / Mixer

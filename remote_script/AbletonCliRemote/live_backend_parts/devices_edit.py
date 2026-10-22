@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from .base import DeviceLocator, _invalid_argument, _not_supported_by_live_api
+from .devices import _value_for_display
 
 _DEVICE_ON_PARAMETER = "Device On"
 
@@ -100,6 +101,16 @@ class LiveBackendDeviceEditMixin:
 
     def device_insert(self, track: int, device_name: str, index: int | None) -> dict[str, Any]:
         target_track = self._ctx._track_at(track)
+        target_index = self._insert_native_device(target_track, device_name, index)
+        return {
+            "track": track,
+            "device_name": device_name,
+            "index": target_index,
+            "devices": self._device_summaries(target_track),
+        }
+
+    @staticmethod
+    def _insert_native_device(target_track: Any, device_name: str, index: int | None) -> int:
         insert_device = getattr(target_track, "insert_device", None)
         if not callable(insert_device):
             raise _not_supported_by_live_api(
@@ -120,16 +131,91 @@ class LiveBackendDeviceEditMixin:
                 message=f"Live could not insert device {device_name!r}: {error}",
                 hint="Use a native Live device name as shown in the browser (e.g. 'EQ Eight').",
             ) from error
+        return target_index
+
+    @staticmethod
+    def _device_summaries(target_track: Any) -> list[dict[str, Any]]:
+        return [
+            {
+                "index": position,
+                "name": str(getattr(device, "name", "")),
+                "class_name": str(getattr(device, "class_name", "")),
+            }
+            for position, device in enumerate(list(target_track.devices))
+        ]
+
+    def _return_track_device_at(self, return_track: int, device: int) -> Any:
+        devices = list(self._ctx._return_track_at(return_track).devices)
+        if device >= len(devices):
+            raise _invalid_argument(
+                message=f"device out of range: {device}",
+                hint="Use a valid device index from 'return-track device list'.",
+            )
+        return devices[device]
+
+    def return_track_name_set(self, return_track: int, name: str) -> dict[str, Any]:
+        target = self._ctx._return_track_at(return_track)
+        target.name = name
+        return {"return_track": return_track, "name": str(target.name)}
+
+    def return_track_devices_list(self, return_track: int) -> dict[str, Any]:
+        target = self._ctx._return_track_at(return_track)
+        return {"return_track": return_track, "devices": self._device_summaries(target)}
+
+    def return_track_device_insert(
+        self, return_track: int, device_name: str, index: int | None
+    ) -> dict[str, Any]:
+        target = self._ctx._return_track_at(return_track)
+        target_index = self._insert_native_device(target, device_name, index)
         return {
-            "track": track,
+            "return_track": return_track,
             "device_name": device_name,
             "index": target_index,
-            "devices": [
+            "devices": self._device_summaries(target),
+        }
+
+    def return_track_device_parameters_list(self, return_track: int, device: int) -> dict[str, Any]:
+        target_device = self._return_track_device_at(return_track, device)
+        parameters = []
+        for position, parameter in enumerate(list(target_device.parameters)):
+            quantized = bool(getattr(parameter, "is_quantized", False))
+            parameters.append(
                 {
                     "index": position,
-                    "name": str(getattr(device, "name", "")),
-                    "class_name": str(getattr(device, "class_name", "")),
+                    "name": str(getattr(parameter, "name", "")),
+                    "value": float(parameter.value),
+                    "min": self._ctx._safe_float(getattr(parameter, "min", None)),
+                    "max": self._ctx._safe_float(getattr(parameter, "max", None)),
+                    "is_quantized": quantized,
+                    "value_items": list(getattr(parameter, "value_items", ())) if quantized else [],
+                    "display_value": self._ctx._parameter_display_value(parameter),
                 }
-                for position, device in enumerate(list(target_track.devices))
-            ],
+            )
+        return {
+            "return_track": return_track,
+            "device": device,
+            "device_name": str(getattr(target_device, "name", "")),
+            "class_name": str(getattr(target_device, "class_name", "")),
+            "parameters": parameters,
+        }
+
+    def return_track_device_parameter_set_display(
+        self, return_track: int, device: int, parameter: str, display: str
+    ) -> dict[str, Any]:
+        target_device = self._return_track_device_at(return_track, device)
+        parameters = list(target_device.parameters)
+        matches = [i for i, p in enumerate(parameters) if str(getattr(p, "name", "")) == parameter]
+        if not matches:
+            raise _invalid_argument(
+                message=f"parameter not found: {parameter}",
+                hint="Use an exact parameter name from 'return-track device parameters'.",
+            )
+        target_parameter = parameters[matches[0]]
+        target_parameter.value = _value_for_display(target_parameter, display)
+        return {
+            "return_track": return_track,
+            "device": device,
+            "parameter": matches[0],
+            "value": float(target_parameter.value),
+            "display_value": self._ctx._parameter_display_value(target_parameter),
         }

@@ -492,11 +492,43 @@ class _AbletonClientGeneratedMixin:
     def ping(self) -> dict[str, object]:
         return self._call("ping")
 
+    def return_track_device_insert(
+        self, return_track: int, device_name: str, index: int | None
+    ) -> dict[str, Any]:
+        return self._call(
+            "return_track_device_insert",
+            {"return_track": return_track, "device_name": device_name, "index": index},
+        )
+
+    def return_track_device_parameter_set_display(
+        self, return_track: int, device: int, parameter: str, display: str
+    ) -> dict[str, Any]:
+        return self._call(
+            "return_track_device_parameter_set_display",
+            {
+                "return_track": return_track,
+                "device": device,
+                "parameter": parameter,
+                "display": display,
+            },
+        )
+
+    def return_track_device_parameters_list(self, return_track: int, device: int) -> dict[str, Any]:
+        return self._call(
+            "return_track_device_parameters_list", {"return_track": return_track, "device": device}
+        )
+
+    def return_track_devices_list(self, return_track: int) -> dict[str, Any]:
+        return self._call("return_track_devices_list", {"return_track": return_track})
+
     def return_track_mute_get(self, return_track: int) -> dict[str, Any]:
         return self._call("return_track_mute_get", {"return_track": return_track})
 
     def return_track_mute_set(self, return_track: int, value: bool) -> dict[str, Any]:
         return self._call("return_track_mute_set", {"return_track": return_track, "value": value})
+
+    def return_track_name_set(self, return_track: int, name: str) -> dict[str, Any]:
+        return self._call("return_track_name_set", {"return_track": return_track, "name": name})
 
     def return_track_solo_get(self, return_track: int) -> dict[str, Any]:
         return self._call("return_track_solo_get", {"return_track": return_track})

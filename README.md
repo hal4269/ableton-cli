@@ -96,6 +96,7 @@ JSON lines on stdin).
 | `device parameter list`, `master device parameters list`, `track info` | Parameters carry `display_value` (as Live shows it) and `value_items` for quantized parameters. |
 | `device parameter set-display`, `master device parameter set-display` | Set a parameter by display value (`800 Hz`, `-6 dB`, `Saw 8`); the Remote Script finds the raw value. |
 | `tracks duplicate`, `scenes duplicate\|delete`, `return-tracks create\|delete` | Song layout. |
+| `return-track name set`, `return-track device list|insert|parameters`, `return-track device parameter set-display` | Return-track effect chains (native devices, display values). |
 | `arrangement locator list\|add\|add-many\|delete` | Named locators (cue points) for sections; add/delete need the transport stopped and move the playhead to the locator. |
 | `transport signature set` | Time signature. |
 | `arrangement back-to-arranger` | Press "Back to Arrangement"; `song info` shows `back_to_arranger`. |

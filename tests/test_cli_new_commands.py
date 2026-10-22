@@ -465,6 +465,17 @@ class _ClientStub:
     def return_track_solo_set(self, return_track: int, value: bool):  # noqa: ANN201
         return {"return_track": return_track, "solo": value}
 
+    def return_track_name_set(self, return_track: int, name: str):  # noqa: ANN201
+        return {"return_track": return_track, "name": name}
+
+    def return_track_device_insert(self, return_track: int, device_name: str, index):  # noqa: ANN001, ANN201
+        return {"return_track": return_track, "device_name": device_name, "index": index}
+
+    def return_track_device_parameter_set_display(  # noqa: ANN201
+        self, return_track: int, device: int, parameter: str, display: str
+    ):
+        return {"return_track": return_track, "device": device, "display_value": display}
+
     def master_info(self):  # noqa: ANN201
         return {"name": "Master", "volume": 0.9, "panning": 0.0}
 
@@ -3383,3 +3394,38 @@ def test_batch_stream_continues_after_assert_failure(runner, cli_app, monkeypatc
     assert responses[0]["error"]["code"] == "BATCH_ASSERT_FAILED"
     assert responses[1]["id"] == "ok"
     assert responses[1]["ok"] is True
+
+
+def test_return_track_device_commands_output_json_envelope(runner, cli_app, monkeypatch) -> None:
+    from ableton_cli.commands import return_track
+
+    monkeypatch.setattr(return_track, "get_client", lambda ctx: _ClientStub())
+
+    named = runner.invoke(cli_app, ["--output", "json", "return-track", "name", "set", "2", "Dub"])
+    inserted = runner.invoke(
+        cli_app,
+        ["--output", "json", "return-track", "device", "insert", "2", "Echo", "--index", "0"],
+    )
+    displayed = runner.invoke(
+        cli_app,
+        [
+            "--output",
+            "json",
+            "return-track",
+            "device",
+            "parameter",
+            "set-display",
+            "2",
+            "0",
+            "Dry Wet",
+            "60 %",
+        ],
+    )
+
+    assert json.loads(named.stdout)["result"] == {"return_track": 2, "name": "Dub"}
+    assert json.loads(inserted.stdout)["result"] == {
+        "return_track": 2,
+        "device_name": "Echo",
+        "index": 0,
+    }
+    assert json.loads(displayed.stdout)["result"]["display_value"] == "60 %"
