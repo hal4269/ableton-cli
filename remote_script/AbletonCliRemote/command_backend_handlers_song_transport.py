@@ -9,6 +9,7 @@ from .command_backend_validators import (
     _insert_index,
     _non_empty_string,
     _non_negative_float,
+    _non_negative_int,
     _panning,
     _tempo,
     _track_index,
@@ -213,6 +214,49 @@ def _handle_return_track_mute_set(backend: CommandBackend, args: dict[str, Any])
     return backend.return_track_mute_set(return_track, value)
 
 
+def _handle_return_track_name_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
+    return_track = _track_index("return_track", args.get("return_track"))
+    name = _non_empty_string("name", args.get("name"))
+    return backend.return_track_name_set(return_track, name)
+
+
+def _handle_return_track_devices_list(
+    backend: CommandBackend, args: dict[str, Any]
+) -> dict[str, Any]:
+    return_track = _track_index("return_track", args.get("return_track"))
+    return backend.return_track_devices_list(return_track)
+
+
+def _handle_return_track_device_insert(
+    backend: CommandBackend, args: dict[str, Any]
+) -> dict[str, Any]:
+    return_track = _track_index("return_track", args.get("return_track"))
+    device_name = _non_empty_string("device_name", args.get("device_name"))
+    raw_index = args.get("index")
+    index = None if raw_index is None else _non_negative_int("index", raw_index)
+    return backend.return_track_device_insert(return_track, device_name, index)
+
+
+def _handle_return_track_device_parameters_list(
+    backend: CommandBackend, args: dict[str, Any]
+) -> dict[str, Any]:
+    return_track = _track_index("return_track", args.get("return_track"))
+    device = _track_index("device", args.get("device"))
+    return backend.return_track_device_parameters_list(return_track, device)
+
+
+def _handle_return_track_device_parameter_set_display(
+    backend: CommandBackend, args: dict[str, Any]
+) -> dict[str, Any]:
+    return_track = _track_index("return_track", args.get("return_track"))
+    device = _track_index("device", args.get("device"))
+    parameter = _non_empty_string("parameter", args.get("parameter"))
+    display = _non_empty_string("display", args.get("display"))
+    return backend.return_track_device_parameter_set_display(
+        return_track, device, parameter, display
+    )
+
+
 def _handle_return_track_solo_get(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
     return_track = _track_index("return_track", args.get("return_track"))
     return backend.return_track_solo_get(return_track)
@@ -357,6 +401,13 @@ SONG_TRANSPORT_HANDLERS: dict[str, Handler] = {
     "return_track_mute_set": _handle_return_track_mute_set,
     "return_track_solo_get": _handle_return_track_solo_get,
     "return_track_solo_set": _handle_return_track_solo_set,
+    "return_track_name_set": _handle_return_track_name_set,
+    "return_track_devices_list": _handle_return_track_devices_list,
+    "return_track_device_insert": _handle_return_track_device_insert,
+    "return_track_device_parameters_list": _handle_return_track_device_parameters_list,
+    "return_track_device_parameter_set_display": (
+        _handle_return_track_device_parameter_set_display
+    ),
     "master_info": _handle_master_info,
     "master_volume_get": _handle_master_volume_get,
     "master_volume_set": _handle_master_volume_set,
