@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from ..refs import RefPayload
+from ..refs import RefPayload, track_index_ref
 
 
 class _AbletonClientDevicesMixin:
@@ -27,7 +27,8 @@ class _AbletonClientDevicesMixin:
         synth_type: str | None = None,
     ) -> dict[str, Any]:
         args: dict[str, Any] = {}
-        self._add_if_not_none(args, "track", track)
+        if track is not None:
+            args["track_ref"] = track_index_ref(track)
         self._add_if_not_none(args, "synth_type", synth_type)
         return self._call("find_synth_devices", args)
 
@@ -75,7 +76,8 @@ class _AbletonClientDevicesMixin:
         effect_type: str | None = None,
     ) -> dict[str, Any]:
         args: dict[str, Any] = {}
-        self._add_if_not_none(args, "track", track)
+        if track is not None:
+            args["track_ref"] = track_index_ref(track)
         self._add_if_not_none(args, "effect_type", effect_type)
         return self._call("find_effect_devices", args)
 

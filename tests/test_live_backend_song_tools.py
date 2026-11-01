@@ -226,7 +226,9 @@ def test_track_and_clip_color_set() -> None:
         "color_index": 12,
     }
     clip_result = dispatch_command(
-        backend, "clip_color_set", {"track": 1, "clip": 0, "color_index": 69}
+        backend,
+        "clip_color_set",
+        {"track_ref": {"mode": "index", "index": 1}, "clip": 0, "color_index": 69},
     )
 
     assert song.tracks[1].color_index == 12
@@ -247,7 +249,11 @@ def test_clip_launch_set_changes_only_given_settings() -> None:
     result = dispatch_command(
         backend,
         "clip_launch_set",
-        {"track": 0, "clip": 0, "settings": {"launch_quantization": 5, "legato": True}},
+        {
+            "track_ref": {"mode": "index", "index": 0},
+            "clip": 0,
+            "settings": {"launch_quantization": 5, "legato": True},
+        },
     )
 
     assert result == {
@@ -258,7 +264,12 @@ def test_clip_launch_set_changes_only_given_settings() -> None:
         "legato": True,
         "velocity_amount": 0.0,
     }
-    assert dispatch_command(backend, "clip_launch_get", {"track": 0, "clip": 0}) == result
+    assert (
+        dispatch_command(
+            backend, "clip_launch_get", {"track_ref": {"mode": "index", "index": 0}, "clip": 0}
+        )
+        == result
+    )
 
 
 @pytest.mark.parametrize(
@@ -270,7 +281,11 @@ def test_clip_launch_set_rejects_invalid_settings(settings: dict[str, Any]) -> N
     song.tracks[0].clip_slots[0].create_clip(4.0)
 
     with pytest.raises(CommandError) as exc_info:
-        dispatch_command(backend, "clip_launch_set", {"track": 0, "clip": 0, "settings": settings})
+        dispatch_command(
+            backend,
+            "clip_launch_set",
+            {"track_ref": {"mode": "index", "index": 0}, "clip": 0, "settings": settings},
+        )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
 
@@ -278,7 +293,9 @@ def test_clip_launch_set_rejects_invalid_settings(settings: dict[str, Any]) -> N
 def test_tracks_duplicate_and_scene_duplicate_delete() -> None:
     backend, song = _backend()
 
-    duplicated = dispatch_command(backend, "tracks_duplicate", {"track": 1})
+    duplicated = dispatch_command(
+        backend, "tracks_duplicate", {"track_ref": {"mode": "index", "index": 1}}
+    )
     scene_copy = dispatch_command(backend, "scenes_duplicate", {"scene": 0})
     scene_deleted = dispatch_command(backend, "scenes_delete", {"scene": 2})
 
@@ -291,7 +308,11 @@ def test_tracks_duplicate_and_scene_duplicate_delete() -> None:
 def test_tracks_duplicate_renames_the_copy() -> None:
     backend, song = _backend()
 
-    duplicated = dispatch_command(backend, "tracks_duplicate", {"track": 1, "name": "Bass Copy"})
+    duplicated = dispatch_command(
+        backend,
+        "tracks_duplicate",
+        {"track_ref": {"mode": "index", "index": 1}, "name": "Bass Copy"},
+    )
 
     assert duplicated == {"track": 1, "new_track": 2, "name": "Bass Copy", "track_count": 3}
     assert [track.name for track in song.tracks][1:] == ["Bass", "Bass Copy"]
@@ -301,7 +322,9 @@ def test_tracks_duplicate_rejects_an_empty_name_before_duplicating() -> None:
     backend, song = _backend()
 
     with pytest.raises(CommandError) as exc_info:
-        dispatch_command(backend, "tracks_duplicate", {"track": 1, "name": "  "})
+        dispatch_command(
+            backend, "tracks_duplicate", {"track_ref": {"mode": "index", "index": 1}, "name": "  "}
+        )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
     assert len(song.tracks) == 2

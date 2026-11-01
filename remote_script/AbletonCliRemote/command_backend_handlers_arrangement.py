@@ -14,8 +14,10 @@ from .command_backend_validators import (
     _non_empty_string,
     _non_negative_float,
     _notes,
+    _optional_resolved_track,
     _optional_track_index,
     _parse_exclusive_string_args,
+    _resolved_track,
     _track_index,
 )
 
@@ -40,7 +42,7 @@ def _handle_arrangement_clip_create(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     start_time = _non_negative_float("start_time", args.get("start_time"))
     length = _clip_length(args.get("length"))
     audio_path = _absolute_path_or_none("audio_path", args.get("audio_path"))
@@ -53,7 +55,7 @@ def _handle_arrangement_clip_list(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _optional_track_index("track", args.get("track"))
+    track = _optional_resolved_track(backend, args)
     return backend.arrangement_clip_list(track)
 
 
@@ -61,7 +63,7 @@ def _handle_arrangement_clip_notes_add(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     notes = _notes(args.get("notes"))
     return backend.arrangement_clip_notes_add(track, index, notes)
@@ -71,7 +73,7 @@ def _handle_arrangement_clip_notes_get(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     start_time, end_time, pitch = _clip_notes_filter(args)
     return backend.arrangement_clip_notes_get(track, index, start_time, end_time, pitch)
@@ -81,7 +83,7 @@ def _handle_arrangement_clip_notes_clear(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     start_time, end_time, pitch = _clip_notes_filter(args)
     return backend.arrangement_clip_notes_clear(track, index, start_time, end_time, pitch)
@@ -91,7 +93,7 @@ def _handle_arrangement_clip_notes_replace(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     notes = _notes(args.get("notes"))
     start_time, end_time, pitch = _clip_notes_filter(args)
@@ -102,7 +104,7 @@ def _handle_arrangement_clip_notes_import_browser(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     target_uri, target_path = _parse_exclusive_string_args(
         args,
@@ -133,7 +135,7 @@ def _handle_arrangement_clip_delete(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _optional_track_index("index", args.get("index"))
     start_raw = args.get("start")
     end_raw = args.get("end")
@@ -166,7 +168,7 @@ def _handle_arrangement_clip_props_get(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     return backend.arrangement_clip_props_get(track, index)
 
@@ -175,7 +177,7 @@ def _handle_arrangement_clip_loop_set(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     start = _non_negative_float("start", args.get("start"))
     end = _non_negative_float("end", args.get("end"))
@@ -192,7 +194,7 @@ def _handle_arrangement_clip_marker_set(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     start_marker = _non_negative_float("start_marker", args.get("start_marker"))
     end_marker = _non_negative_float("end_marker", args.get("end_marker"))
@@ -203,7 +205,7 @@ def _handle_arrangement_clip_warp_get(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     return backend.arrangement_clip_warp_get(track, index)
 
@@ -212,7 +214,7 @@ def _handle_arrangement_clip_warp_set(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     enabled = _as_bool("enabled", args.get("enabled"))
     mode = args.get("mode")
@@ -224,7 +226,7 @@ def _handle_arrangement_clip_gain_set(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     db = float(args.get("db"))
     return backend.arrangement_clip_gain_set(track, index, db)
@@ -234,7 +236,7 @@ def _handle_arrangement_clip_transpose_set(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     semitones = _as_int("semitones", args.get("semitones"))
     return backend.arrangement_clip_transpose_set(track, index, semitones)
@@ -244,7 +246,7 @@ def _handle_arrangement_clip_file_replace(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     index = _track_index("index", args.get("index"))
     audio_path = _absolute_path_or_none("audio_path", args.get("audio_path"))
     if audio_path is None:
@@ -285,7 +287,7 @@ def _handle_arrangement_clip_from_session(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     slot = _track_index("slot", args.get("slot"))
     start_time = _non_negative_float("start_time", args.get("start_time"))
     return backend.arrangement_clip_from_session(track, slot, start_time)

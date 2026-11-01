@@ -474,7 +474,7 @@ ableton-cli effect utility observe 0 0
 ableton-cli config init
 ableton-cli config init --dry-run
 ableton-cli config show
-ableton-cli config set protocol_version 3
+ableton-cli config set protocol_version 4
 ableton-cli completion
 ableton-cli --install-completion
 ableton-cli --show-completion
@@ -531,8 +531,8 @@ ableton-cli --output json ping
     "result": {
       "host": "127.0.0.1",
       "port": 8765,
-      "protocol_version": 3,
-      "remote_script_version": "0.5.0",
+      "protocol_version": 4,
+      "remote_script_version": "0.6.0",
       "rtt_ms": 2.31
     },
   "error": null

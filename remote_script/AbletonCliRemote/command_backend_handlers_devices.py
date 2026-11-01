@@ -11,7 +11,7 @@ from .command_backend_validators import (
     _effect_type,
     _non_empty_string,
     _non_negative_int,
-    _optional_track_index,
+    _optional_resolved_track,
     _parameter_ref,
     _synth_type,
     _track_ref,
@@ -41,7 +41,7 @@ def _handle_set_device_parameter_display(
 
 
 def _handle_find_synth_devices(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _optional_track_index("track", args.get("track"))
+    track = _optional_resolved_track(backend, args)
     synth_type_raw = args.get("synth_type")
     synth_type = _synth_type(synth_type_raw) if synth_type_raw is not None else None
     return backend.find_synth_devices(track, synth_type)
@@ -116,7 +116,7 @@ def _handle_observe_standard_synth_state(
 
 
 def _handle_find_effect_devices(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _optional_track_index("track", args.get("track"))
+    track = _optional_resolved_track(backend, args)
     effect_type_raw = args.get("effect_type")
     effect_type = _effect_type(effect_type_raw) if effect_type_raw is not None else None
     return backend.find_effect_devices(track, effect_type)

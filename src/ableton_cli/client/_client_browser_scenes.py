@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from ..refs import track_index_ref
+
 
 class _AbletonClientBrowserScenesMixin:
     def _build_arrangement_clip_note_args(
@@ -14,7 +16,7 @@ class _AbletonClientBrowserScenesMixin:
         end_time: float | None,
         pitch: int | None,
     ) -> dict[str, Any]:
-        args: dict[str, Any] = {"track": track, "index": index}
+        args: dict[str, Any] = {"track_ref": track_index_ref(track), "index": index}
         self._add_if_not_none(args, "notes", notes)
         self._add_if_not_none(args, "start_time", start_time)
         self._add_if_not_none(args, "end_time", end_time)
@@ -34,7 +36,7 @@ class _AbletonClientBrowserScenesMixin:
         import_groove: bool | None = None,
     ) -> dict[str, Any]:
         args: dict[str, Any] = {
-            "track": track,
+            "track_ref": track_index_ref(track),
             "target_track_mode": target_track_mode,
             "preserve_track_name": preserve_track_name,
         }
@@ -80,7 +82,7 @@ class _AbletonClientBrowserScenesMixin:
         kit_uri: str | None,
         kit_path: str | None,
     ) -> dict[str, Any]:
-        args: dict[str, Any] = {"track": track, "rack_uri": rack_uri}
+        args: dict[str, Any] = {"track_ref": track_index_ref(track), "rack_uri": rack_uri}
         self._add_if_not_none(args, "kit_uri", kit_uri)
         self._add_if_not_none(args, "kit_path", kit_path)
         return self._call("load_drum_kit", args)
@@ -94,7 +96,7 @@ class _AbletonClientBrowserScenesMixin:
         notes: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         args: dict[str, Any] = {
-            "track": track,
+            "track_ref": track_index_ref(track),
             "start_time": start_time,
             "length": length,
         }
@@ -104,7 +106,8 @@ class _AbletonClientBrowserScenesMixin:
 
     def arrangement_clip_list(self, track: int | None) -> dict[str, Any]:
         args: dict[str, Any] = {}
-        self._add_if_not_none(args, "track", track)
+        if track is not None:
+            args["track_ref"] = track_index_ref(track)
         return self._call("arrangement_clip_list", args)
 
     def arrangement_clip_notes_add(
@@ -189,7 +192,7 @@ class _AbletonClientBrowserScenesMixin:
         import_groove: bool,
     ) -> dict[str, Any]:
         args: dict[str, Any] = {
-            "track": track,
+            "track_ref": track_index_ref(track),
             "index": index,
             "mode": mode,
             "import_length": import_length,
@@ -207,7 +210,7 @@ class _AbletonClientBrowserScenesMixin:
         end: float | None,
         delete_all: bool,
     ) -> dict[str, Any]:
-        args: dict[str, Any] = {"track": track, "all": delete_all}
+        args: dict[str, Any] = {"track_ref": track_index_ref(track), "all": delete_all}
         self._add_if_not_none(args, "index", index)
         self._add_if_not_none(args, "start", start)
         self._add_if_not_none(args, "end", end)
@@ -220,6 +223,10 @@ class _AbletonClientBrowserScenesMixin:
         enabled: bool,
         mode: str | None,
     ) -> dict[str, Any]:
-        args: dict[str, Any] = {"track": track, "index": index, "enabled": enabled}
+        args: dict[str, Any] = {
+            "track_ref": track_index_ref(track),
+            "index": index,
+            "enabled": enabled,
+        }
         self._add_if_not_none(args, "mode", mode)
         return self._call("arrangement_clip_warp_set", args)

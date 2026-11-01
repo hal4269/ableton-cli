@@ -232,7 +232,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
                 pitch=None,
             ),
             "get_clip_notes",
-            {"track": 1, "clip": 2, "end_time": 4.0},
+            {"track_ref": {"mode": "index", "index": 1}, "clip": 2, "end_time": 4.0},
         ),
         (
             lambda client: client.replace_clip_notes(
@@ -253,7 +253,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "replace_clip_notes",
             {
-                "track": 3,
+                "track_ref": {"mode": "index", "index": 3},
                 "clip": 4,
                 "notes": [
                     {
@@ -276,7 +276,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "update_clip_notes",
             {
-                "track": 5,
+                "track_ref": {"mode": "index", "index": 5},
                 "clip": 6,
                 "notes": [{"note_id": 3, "velocity": 90, "probability": 0.5}],
             },
@@ -333,7 +333,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "load_instrument_or_effect",
             {
-                "track": 2,
+                "track_ref": {"mode": "index", "index": 2},
                 "path": "sounds/Bass Loop.alc",
                 "target_track_mode": "existing",
                 "clip_slot": 4,
@@ -353,7 +353,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "load_instrument_or_effect",
             {
-                "track": 1,
+                "track_ref": {"mode": "index", "index": 1},
                 "path": "sounds/Bass Loop.alc",
                 "target_track_mode": "existing",
                 "clip_slot": 3,
@@ -375,7 +375,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "clip_notes_quantize",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "clip": 1,
                 "grid": "1/16",
                 "strength": 0.75,
@@ -395,7 +395,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "clip_notes_transpose",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "clip": 1,
                 "semitones": -12,
             },
@@ -408,7 +408,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "clip_groove_set",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "clip": 2,
                 "target": "grooves/Hip Hop Boom Bap 16ths 90 bpm.agr",
             },
@@ -437,7 +437,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "arrangement_clip_create",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "start_time": 8.0,
                 "length": 4.0,
             },
@@ -451,7 +451,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "arrangement_clip_create",
             {
-                "track": 1,
+                "track_ref": {"mode": "index", "index": 1},
                 "start_time": 16.0,
                 "length": 8.0,
                 "audio_path": "/tmp/loop.wav",
@@ -475,7 +475,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "arrangement_clip_create",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "start_time": 0.0,
                 "length": 4.0,
                 "notes": [
@@ -497,7 +497,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
         (
             lambda client: client.arrangement_clip_list(track=1),
             "arrangement_clip_list",
-            {"track": 1},
+            {"track_ref": {"mode": "index", "index": 1}},
         ),
         (
             lambda client: client.arrangement_clip_notes_add(
@@ -515,7 +515,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "arrangement_clip_notes_add",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "index": 1,
                 "notes": [
                     {
@@ -538,7 +538,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "arrangement_clip_notes_get",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "index": 1,
                 "start_time": 0.0,
                 "end_time": 4.0,
@@ -555,7 +555,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "arrangement_clip_notes_clear",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "index": 1,
             },
         ),
@@ -578,7 +578,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "arrangement_clip_notes_replace",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "index": 1,
                 "notes": [
                     {
@@ -605,7 +605,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
             ),
             "arrangement_clip_notes_import_browser",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "index": 1,
                 "target_path": "sounds/Bass Loop.alc",
                 "mode": "append",
@@ -622,7 +622,7 @@ def test_client_sends_request_timeout_meta(monkeypatch) -> None:
                 delete_all=False,
             ),
             "arrangement_clip_delete",
-            {"track": 0, "start": 8.0, "end": 16.0, "all": False},
+            {"track_ref": {"mode": "index", "index": 0}, "start": 8.0, "end": 16.0, "all": False},
         ),
         (
             lambda client: client.arrangement_from_session(

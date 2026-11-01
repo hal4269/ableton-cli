@@ -21,7 +21,7 @@ class Settings:
     timeout_ms: int = 15000
     log_level: str = "INFO"
     log_file: str | None = None
-    protocol_version: int = 3
+    protocol_version: int = 4
     config_path: str | None = None
     auth_token: str | None = None
 

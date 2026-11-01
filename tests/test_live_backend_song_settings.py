@@ -290,7 +290,9 @@ def test_view_select_track_scene_and_clip() -> None:
     backend, song, _ = _backend()
     song.tracks[1].clip_slots[1].create_clip(4.0)
 
-    assert dispatch_command(backend, "view_select_track", {"track": 1}) == {
+    assert dispatch_command(
+        backend, "view_select_track", {"track_ref": {"mode": "index", "index": 1}}
+    ) == {
         "track": 1,
         "name": "Track 2",
     }
@@ -301,7 +303,9 @@ def test_view_select_track_scene_and_clip() -> None:
     }
     assert song.view.selected_scene is song.scenes[1]
 
-    result = dispatch_command(backend, "view_select_clip", {"track": 1, "clip": 1})
+    result = dispatch_command(
+        backend, "view_select_clip", {"track_ref": {"mode": "index", "index": 1}, "clip": 1}
+    )
 
     assert result == {"track": 1, "clip": 1, "has_clip": True}
     assert song.view.highlighted_clip_slot is song.tracks[1].clip_slots[1]

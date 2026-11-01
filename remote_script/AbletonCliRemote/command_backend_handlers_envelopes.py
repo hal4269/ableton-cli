@@ -20,7 +20,8 @@ def _resolved_parameter(
 
 
 def _handle_clip_envelope_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track, clip, device_target, mixer_target, points, mode = _clip_envelope_set_args(args)
+    track_ref, clip, device_target, mixer_target, points, mode = _clip_envelope_set_args(args)
+    track = backend.resolve_track_ref(track_ref)
     if mixer_target is not None:
         mixer, send_index = mixer_target
         return backend.clip_mixer_envelope_set(track, clip, mixer, send_index, points, mode)
@@ -30,7 +31,8 @@ def _handle_clip_envelope_set(backend: CommandBackend, args: dict[str, Any]) -> 
 
 
 def _handle_clip_envelope_clear(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track, clip, device_target, mixer_target, clear_all = _clip_envelope_clear_args(args)
+    track_ref, clip, device_target, mixer_target, clear_all = _clip_envelope_clear_args(args)
+    track = backend.resolve_track_ref(track_ref)
     if clear_all:
         return backend.clip_envelope_clear(track, clip, None, None, True)
     if mixer_target is not None:

@@ -109,6 +109,11 @@ def _select_one(kind: str, selectors: list[RefPayload]) -> RefPayload:
     return selectors[0]
 
 
+def track_index_ref(track: int) -> RefPayload:
+    """The wire ``track_ref`` of a track the CLI addresses by index."""
+    return {"mode": "index", "index": track}
+
+
 def build_track_ref(
     *,
     track_index: int | None,

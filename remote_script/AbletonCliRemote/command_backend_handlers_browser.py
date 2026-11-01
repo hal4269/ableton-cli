@@ -11,7 +11,7 @@ from .command_backend_validators import (
     _non_negative_int,
     _parse_exclusive_string_args,
     _positive_int,
-    _track_index,
+    _resolved_track,
 )
 
 Handler = Callable[[CommandBackend, dict[str, Any]], dict[str, Any]]
@@ -54,7 +54,7 @@ def _handle_load_instrument_or_effect(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     uri, path = _parse_exclusive_string_args(
         args,
         first_key="uri",
@@ -158,7 +158,7 @@ def _handle_search_browser_items(backend: CommandBackend, args: dict[str, Any]) 
 
 
 def _handle_load_drum_kit(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     rack_uri = _non_empty_string("rack_uri", args.get("rack_uri"))
     kit_uri, kit_path = _parse_exclusive_string_args(
         args,

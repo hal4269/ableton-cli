@@ -12,9 +12,9 @@ from .command_backend_validators import (
     _invalid_argument,
     _non_empty_string,
     _non_negative_float,
+    _resolved_track,
     _tempo,
     _track_index,
-    _track_ref,
 )
 from .song_settings_specs import (
     CAPTURE_DESTINATIONS,
@@ -182,10 +182,6 @@ def _handle_scene_signature_set(backend: CommandBackend, args: dict[str, Any]) -
     return backend.scene_signature_set(scene, numerator, denominator)
 
 
-def _resolved_track(backend: CommandBackend, args: dict[str, Any]) -> int:
-    return backend.resolve_track_ref(_track_ref(args.get("track_ref")))
-
-
 def _handle_track_monitoring_get(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
     return backend.track_monitoring_get(_resolved_track(backend, args))
 
@@ -205,7 +201,7 @@ def _handle_view_show(backend: CommandBackend, args: dict[str, Any]) -> dict[str
 
 
 def _handle_view_select_track(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    return backend.view_select_track(_track_index("track", args.get("track")))
+    return backend.view_select_track(_resolved_track(backend, args))
 
 
 def _handle_view_select_scene(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
@@ -213,7 +209,7 @@ def _handle_view_select_scene(backend: CommandBackend, args: dict[str, Any]) -> 
 
 
 def _handle_view_select_clip(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.view_select_clip(track, clip)
 

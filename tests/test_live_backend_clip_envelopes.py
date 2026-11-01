@@ -168,7 +168,7 @@ def test_dispatch_clip_envelope_set_resolves_refs_end_to_end() -> None:
         backend,
         "clip_envelope_set",
         {
-            "track": 0,
+            "track_ref": {"mode": "index", "index": 0},
             "clip": 0,
             "device_ref": {"mode": "index", "index": 0},
             "parameter_ref": {"mode": "index", "index": 0},
@@ -187,7 +187,7 @@ def test_dispatch_clip_envelope_clear_all_end_to_end() -> None:
     result = dispatch_command(
         backend,
         "clip_envelope_clear",
-        {"track": 0, "clip": 0, "clear_all": True},
+        {"track_ref": {"mode": "index", "index": 0}, "clip": 0, "clear_all": True},
     )
 
     assert result["cleared_all"] is True
@@ -202,7 +202,7 @@ def test_dispatch_clip_envelope_set_rejects_non_increasing_times() -> None:
             backend,
             "clip_envelope_set",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "clip": 0,
                 "device_ref": {"mode": "index", "index": 0},
                 "parameter_ref": {"mode": "index", "index": 0},
@@ -221,7 +221,7 @@ def test_dispatch_clip_envelope_set_rejects_empty_points() -> None:
             backend,
             "clip_envelope_set",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "clip": 0,
                 "device_ref": {"mode": "index", "index": 0},
                 "parameter_ref": {"mode": "index", "index": 0},
@@ -240,7 +240,7 @@ def test_dispatch_clip_envelope_clear_rejects_mixing_clear_all_and_refs() -> Non
             backend,
             "clip_envelope_clear",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "clip": 0,
                 "clear_all": True,
                 "device_ref": {"mode": "index", "index": 0},
@@ -330,7 +330,13 @@ def test_dispatch_clip_envelope_set_routes_mixer_targets() -> None:
     result = dispatch_command(
         backend,
         "clip_envelope_set",
-        {"track": 0, "clip": 0, "mixer": "send", "send_index": 1, "points": _POINTS},
+        {
+            "track_ref": {"mode": "index", "index": 0},
+            "clip": 0,
+            "mixer": "send",
+            "send_index": 1,
+            "points": _POINTS,
+        },
     )
 
     assert result["mixer"] == "send"
@@ -342,7 +348,9 @@ def test_dispatch_clip_envelope_clear_routes_mixer_targets() -> None:
     backend.clip_mixer_envelope_set(0, 0, "panning", None, _POINTS, "replace")
 
     result = dispatch_command(
-        backend, "clip_envelope_clear", {"track": 0, "clip": 0, "mixer": "panning"}
+        backend,
+        "clip_envelope_clear",
+        {"track_ref": {"mode": "index", "index": 0}, "clip": 0, "mixer": "panning"},
     )
 
     assert result["mixer"] == "panning"
@@ -382,7 +390,12 @@ def test_dispatch_clip_envelope_clear_rejects_mixer_with_clear_all() -> None:
         dispatch_command(
             backend,
             "clip_envelope_clear",
-            {"track": 0, "clip": 0, "clear_all": True, "mixer": "volume"},
+            {
+                "track_ref": {"mode": "index", "index": 0},
+                "clip": 0,
+                "clear_all": True,
+                "mixer": "volume",
+            },
         )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
