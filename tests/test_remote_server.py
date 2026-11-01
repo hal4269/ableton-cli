@@ -23,7 +23,7 @@ def test_parse_command_request_accepts_strict_protocol_shape() -> None:
             "args": {},
             "meta": {"request_timeout_ms": 15000},
             "request_id": "request-1",
-            "protocol_version": 3,
+            "protocol_version": 4,
         }
     )
 
@@ -40,7 +40,7 @@ def test_parse_command_request_accepts_strict_protocol_shape() -> None:
             "args": {},
             "meta": {},
             "request_id": "request-1",
-            "protocol_version": 3,
+            "protocol_version": 4,
             "extra": "not allowed",
         },
         {
@@ -49,7 +49,7 @@ def test_parse_command_request_accepts_strict_protocol_shape() -> None:
             "args": {},
             "meta": {},
             "request_id": "request-1",
-            "protocol_version": 3,
+            "protocol_version": 4,
         },
         {
             "type": "command",
@@ -57,7 +57,7 @@ def test_parse_command_request_accepts_strict_protocol_shape() -> None:
             "args": [],
             "meta": {},
             "request_id": "request-1",
-            "protocol_version": 3,
+            "protocol_version": 4,
         },
         {
             "type": "command",
@@ -180,7 +180,7 @@ def _command_payload(meta: dict[str, object]) -> dict[str, object]:
         "args": {},
         "meta": meta,
         "request_id": "request-1",
-        "protocol_version": 3,
+        "protocol_version": 4,
     }
 
 

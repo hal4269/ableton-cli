@@ -5,7 +5,7 @@ from typing import Any
 from ..capabilities import read_only_remote_commands
 from ..config import Settings
 from ..errors import AppError, ErrorCode, ExitCode
-from ..refs import RefPayload
+from ..refs import RefPayload, track_index_ref
 from .backends import ClientBackend, LiveBackendClient, RecordingClient, ReplayClient
 
 
@@ -96,7 +96,7 @@ class _AbletonClientCore:
         end_time: float | None,
         pitch: int | None,
     ) -> dict[str, Any]:
-        args: dict[str, Any] = {"track": track, "clip": clip}
+        args: dict[str, Any] = {"track_ref": track_index_ref(track), "clip": clip}
         self._add_if_not_none(args, "notes", notes)
         self._add_if_not_none(args, "start_time", start_time)
         self._add_if_not_none(args, "end_time", end_time)

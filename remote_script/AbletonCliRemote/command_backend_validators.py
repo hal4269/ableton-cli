@@ -119,6 +119,18 @@ def _optional_track_index(name: str, value: Any) -> int | None:
     return _track_index(name, value)
 
 
+def _resolved_track(backend: Any, args: dict[str, Any]) -> int:
+    """Validate args["track_ref"] and resolve it to a track index (every track command)."""
+    return int(backend.resolve_track_ref(_track_ref(args.get("track_ref"))))
+
+
+def _optional_resolved_track(backend: Any, args: dict[str, Any]) -> int | None:
+    """Like _resolved_track, but a missing track_ref means "all tracks" (None)."""
+    if args.get("track_ref") is None:
+        return None
+    return _resolved_track(backend, args)
+
+
 def _insert_index(name: str, value: Any) -> int:
     parsed = _as_int(name, value)
     if parsed < -1:
@@ -719,9 +731,9 @@ def _clip_envelope_set_args(
     list[dict[str, float]],
     str,
 ]:
-    """Return track, clip, (device_ref, parameter_ref) or None, mixer target or None,
+    """Return track_ref, clip, (device_ref, parameter_ref) or None, mixer target or None,
     points and mode. Exactly one of the two targets is set."""
-    track = _track_index("track", args.get("track"))
+    track_ref = _track_ref(args.get("track_ref"))
     clip = _track_index("clip", args.get("clip"))
     mixer_target = _mixer_envelope_target(args)
     device_target = None
@@ -732,7 +744,7 @@ def _clip_envelope_set_args(
         )
     points = _envelope_points(args.get("points"))
     mode = _envelope_mode(args.get("mode"))
-    return track, clip, device_target, mixer_target, points, mode
+    return track_ref, clip, device_target, mixer_target, points, mode
 
 
 def _clip_envelope_clear_args(
@@ -744,8 +756,8 @@ def _clip_envelope_clear_args(
     tuple[str, int | None] | None,
     bool,
 ]:
-    """Return track, clip, device target, mixer target and clear_all; at most one is set."""
-    track = _track_index("track", args.get("track"))
+    """Return track_ref, clip, device target, mixer target and clear_all; at most one is set."""
+    track_ref = _track_ref(args.get("track_ref"))
     clip = _track_index("clip", args.get("clip"))
     clear_all = _as_bool("clear_all", args.get("clear_all", False))
     if clear_all:
@@ -757,12 +769,12 @@ def _clip_envelope_clear_args(
                 message="device_ref/parameter_ref/mixer must not be set when clear_all is true",
                 hint="Pass either clear_all=true or one envelope target, not both.",
             )
-        return track, clip, None, None, True
+        return track_ref, clip, None, None, True
     mixer_target = _mixer_envelope_target(args)
     if mixer_target is not None:
-        return track, clip, None, mixer_target, False
+        return track_ref, clip, None, mixer_target, False
     device_target = (_device_ref(args.get("device_ref")), _parameter_ref(args.get("parameter_ref")))
-    return track, clip, device_target, None, False
+    return track_ref, clip, device_target, None, False
 
 
 def _device_ref_args(args: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:

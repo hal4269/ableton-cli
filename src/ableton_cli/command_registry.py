@@ -406,10 +406,19 @@ class ClientParamSpec:
     #: the Python parameter name (``scenes_move`` sends ``from``/``to``, which
     #: are not usable as Python identifiers).
     key: str | None = None
+    #: Send the (int) value as an index ref, ``{"mode": "index", "index": value}``:
+    #: the CLI addresses these tracks by index, the wire takes a ``track_ref``.
+    as_index_ref: bool = False
 
     @property
     def payload_key(self) -> str:
         return self.key if self.key is not None else self.name
+
+    @property
+    def payload_value(self) -> str:
+        if self.as_index_ref:
+            return f'{{"mode": "index", "index": {self.name}}}'
+        return self.name
 
 
 @dataclass(frozen=True, slots=True)
@@ -437,6 +446,10 @@ def _p(
     return ClientParamSpec(name=name, annotation=annotation, default=default, key=key)
 
 
+#: The track of a command that the CLI addresses by index; sent as ``track_ref``.
+_TRACK = ClientParamSpec(name="track", annotation="int", key="track_ref", as_index_ref=True)
+
+
 def _m(
     remote_command: str,
     params: tuple[ClientParamSpec, ...] = (),
@@ -451,17 +464,17 @@ def _m(
 CLIENT_METHOD_SPECS: tuple[ClientMethodSpec, ...] = (
     _m(
         "arrangement_clip_file_replace",
-        (_p("track", "int"), _p("index", "int"), _p("audio_path", "str")),
+        (_TRACK, _p("index", "int"), _p("audio_path", "str")),
     ),
     _m(
         "arrangement_clip_from_session",
-        (_p("track", "int"), _p("slot", "int"), _p("start_time", "float")),
+        (_TRACK, _p("slot", "int"), _p("start_time", "float")),
     ),
-    _m("arrangement_clip_gain_set", (_p("track", "int"), _p("index", "int"), _p("db", "float"))),
+    _m("arrangement_clip_gain_set", (_TRACK, _p("index", "int"), _p("db", "float"))),
     _m(
         "arrangement_clip_loop_set",
         (
-            _p("track", "int"),
+            _TRACK,
             _p("index", "int"),
             _p("start", "float"),
             _p("end", "float"),
@@ -471,39 +484,39 @@ CLIENT_METHOD_SPECS: tuple[ClientMethodSpec, ...] = (
     _m(
         "arrangement_clip_marker_set",
         (
-            _p("track", "int"),
+            _TRACK,
             _p("index", "int"),
             _p("start_marker", "float"),
             _p("end_marker", "float"),
         ),
     ),
-    _m("arrangement_clip_props_get", (_p("track", "int"), _p("index", "int"))),
+    _m("arrangement_clip_props_get", (_TRACK, _p("index", "int"))),
     _m(
         "arrangement_clip_transpose_set",
-        (_p("track", "int"), _p("index", "int"), _p("semitones", "int")),
+        (_TRACK, _p("index", "int"), _p("semitones", "int")),
     ),
-    _m("arrangement_clip_warp_get", (_p("track", "int"), _p("index", "int"))),
+    _m("arrangement_clip_warp_get", (_TRACK, _p("index", "int"))),
     _m("arrangement_from_session", (_p("scenes", "list[dict[str, float]]"),)),
     _m("arrangement_record_start", ()),
     _m("arrangement_record_stop", ()),
     _m("back_to_arranger", ()),
-    _m("clip_active_get", (_p("track", "int"), _p("clip", "int"))),
-    _m("clip_active_set", (_p("track", "int"), _p("clip", "int"), _p("value", "bool"))),
-    _m("clip_color_set", (_p("track", "int"), _p("clip", "int"), _p("color_index", "int"))),
-    _m("clip_delete", (_p("track", "int"), _p("clip", "int"))),
-    _m("clip_crop", (_p("track", "int"), _p("clip", "int"))),
-    _m("clip_duplicate_loop", (_p("track", "int"), _p("clip", "int"))),
-    _m("clip_file_path_get", (_p("track", "int"), _p("clip", "int"))),
-    _m("clip_file_replace", (_p("track", "int"), _p("clip", "int"), _p("audio_path", "str"))),
-    _m("clip_gain_set", (_p("track", "int"), _p("clip", "int"), _p("db", "float"))),
-    _m("clip_groove_amount_set", (_p("track", "int"), _p("clip", "int"), _p("value", "float"))),
-    _m("clip_groove_clear", (_p("track", "int"), _p("clip", "int"))),
-    _m("clip_groove_get", (_p("track", "int"), _p("clip", "int"))),
-    _m("clip_groove_set", (_p("track", "int"), _p("clip", "int"), _p("target", "str"))),
+    _m("clip_active_get", (_TRACK, _p("clip", "int"))),
+    _m("clip_active_set", (_TRACK, _p("clip", "int"), _p("value", "bool"))),
+    _m("clip_color_set", (_TRACK, _p("clip", "int"), _p("color_index", "int"))),
+    _m("clip_delete", (_TRACK, _p("clip", "int"))),
+    _m("clip_crop", (_TRACK, _p("clip", "int"))),
+    _m("clip_duplicate_loop", (_TRACK, _p("clip", "int"))),
+    _m("clip_file_path_get", (_TRACK, _p("clip", "int"))),
+    _m("clip_file_replace", (_TRACK, _p("clip", "int"), _p("audio_path", "str"))),
+    _m("clip_gain_set", (_TRACK, _p("clip", "int"), _p("db", "float"))),
+    _m("clip_groove_amount_set", (_TRACK, _p("clip", "int"), _p("value", "float"))),
+    _m("clip_groove_clear", (_TRACK, _p("clip", "int"))),
+    _m("clip_groove_get", (_TRACK, _p("clip", "int"))),
+    _m("clip_groove_set", (_TRACK, _p("clip", "int"), _p("target", "str"))),
     _m(
         "clip_loop_set",
         (
-            _p("track", "int"),
+            _TRACK,
             _p("clip", "int"),
             _p("start", "float"),
             _p("end", "float"),
@@ -513,33 +526,29 @@ CLIENT_METHOD_SPECS: tuple[ClientMethodSpec, ...] = (
     _m(
         "clip_marker_set",
         (
-            _p("track", "int"),
+            _TRACK,
             _p("clip", "int"),
             _p("start_marker", "float"),
             _p("end_marker", "float"),
         ),
     ),
-    _m("clip_launch_get", (_p("track", "int"), _p("clip", "int"))),
-    _m(
-        "clip_launch_set", (_p("track", "int"), _p("clip", "int"), _p("settings", "dict[str, Any]"))
-    ),
-    _m("clip_props_get", (_p("track", "int"), _p("clip", "int"))),
+    _m("clip_launch_get", (_TRACK, _p("clip", "int"))),
+    _m("clip_launch_set", (_TRACK, _p("clip", "int"), _p("settings", "dict[str, Any]"))),
+    _m("clip_props_get", (_TRACK, _p("clip", "int"))),
     _m(
         "clip_signature_set",
-        (_p("track", "int"), _p("clip", "int"), _p("numerator", "int"), _p("denominator", "int")),
+        (_TRACK, _p("clip", "int"), _p("numerator", "int"), _p("denominator", "int")),
     ),
-    _m("clip_transpose_set", (_p("track", "int"), _p("clip", "int"), _p("semitones", "int"))),
-    _m("clip_warp_get", (_p("track", "int"), _p("clip", "int"))),
-    _m("clip_warp_marker_list", (_p("track", "int"), _p("clip", "int"))),
+    _m("clip_transpose_set", (_TRACK, _p("clip", "int"), _p("semitones", "int"))),
+    _m("clip_warp_get", (_TRACK, _p("clip", "int"))),
+    _m("clip_warp_marker_list", (_TRACK, _p("clip", "int"))),
     _m(
         "clip_warp_marker_move",
-        (_p("track", "int"), _p("clip", "int"), _p("beat_time", "float"), _p("distance", "float")),
+        (_TRACK, _p("clip", "int"), _p("beat_time", "float"), _p("distance", "float")),
     ),
-    _m(
-        "clip_warp_marker_remove", (_p("track", "int"), _p("clip", "int"), _p("beat_time", "float"))
-    ),
+    _m("clip_warp_marker_remove", (_TRACK, _p("clip", "int"), _p("beat_time", "float"))),
     _m("create_audio_track", (_p("index", "int", default="-1"),)),
-    _m("create_clip", (_p("track", "int"), _p("clip", "int"), _p("length", "float"))),
+    _m("create_clip", (_TRACK, _p("clip", "int"), _p("length", "float"))),
     _m("create_midi_track", (_p("index", "int", default="-1"),)),
     _m("create_scene", (_p("index", "int"),)),
     _m(
@@ -599,7 +608,7 @@ CLIENT_METHOD_SPECS: tuple[ClientMethodSpec, ...] = (
     _m("device_variation_store", (_p("track_ref", "RefPayload"), _p("device_ref", "RefPayload"))),
     _m("device_variations_list", (_p("track_ref", "RefPayload"), _p("device_ref", "RefPayload"))),
     _m("execute_batch", (_p("steps", "list[dict[str, Any]]"),)),
-    _m("fire_clip", (_p("track", "int"), _p("clip", "int"))),
+    _m("fire_clip", (_TRACK, _p("clip", "int"))),
     _m("fire_scene", (_p("scene", "int"),)),
     _m("get_browser_categories", (_p("category_type", "str", default="'all'"),)),
     _m(
@@ -712,7 +721,7 @@ CLIENT_METHOD_SPECS: tuple[ClientMethodSpec, ...] = (
     _m("scenes_duplicate", (_p("scene", "int"),)),
     _m("scenes_list", ()),
     _m("scenes_move", (_p("from_index", "int", key="from"), _p("to_index", "int", key="to"))),
-    _m("set_clip_name", (_p("track", "int"), _p("clip", "int"), _p("name", "str"))),
+    _m("set_clip_name", (_TRACK, _p("clip", "int"), _p("name", "str"))),
     _m("set_scene_name", (_p("scene", "int"), _p("name", "str"))),
     _m(
         "set_device_parameter_display",
@@ -739,7 +748,7 @@ CLIENT_METHOD_SPECS: tuple[ClientMethodSpec, ...] = (
     _m("song_undo", (), returns="dict[str, object]"),
     _m("start_playback", (), returns="dict[str, object]"),
     _m("stop_all_clips", ()),
-    _m("stop_clip", (_p("track", "int"), _p("clip", "int"))),
+    _m("stop_clip", (_TRACK, _p("clip", "int"))),
     _m("stop_playback", (), returns="dict[str, object]"),
     _m("track_arm_get", (_p("track_ref", "RefPayload"),)),
     _m("track_arm_set", (_p("track_ref", "RefPayload"), _p("value", "bool"))),
@@ -771,8 +780,8 @@ CLIENT_METHOD_SPECS: tuple[ClientMethodSpec, ...] = (
     _m("track_solo_set", (_p("track_ref", "RefPayload"), _p("value", "bool"))),
     _m("track_volume_get", (_p("track_ref", "RefPayload"),)),
     _m("track_volume_set", (_p("track_ref", "RefPayload"), _p("value", "float"))),
-    _m("tracks_delete", (_p("track", "int"),)),
-    _m("tracks_duplicate", (_p("track", "int"), _p("name", "str | None"))),
+    _m("tracks_delete", (_TRACK,)),
+    _m("tracks_duplicate", (_TRACK, _p("name", "str | None"))),
     _m("tracks_list", ()),
     _m("transport_play", (), returns="dict[str, object]"),
     _m("transport_position_get", (), returns="dict[str, object]"),
@@ -783,9 +792,9 @@ CLIENT_METHOD_SPECS: tuple[ClientMethodSpec, ...] = (
     _m("transport_tempo_get", (), returns="dict[str, object]"),
     _m("transport_tempo_set", (_p("bpm", "float"),), returns="dict[str, object]"),
     _m("transport_toggle", (), returns="dict[str, object]"),
-    _m("view_select_clip", (_p("track", "int"), _p("clip", "int"))),
+    _m("view_select_clip", (_TRACK, _p("clip", "int"))),
     _m("view_select_scene", (_p("scene", "int"),)),
-    _m("view_select_track", (_p("track", "int"),)),
+    _m("view_select_track", (_TRACK,)),
     _m("view_show", (_p("view", "str"),)),
 )
 

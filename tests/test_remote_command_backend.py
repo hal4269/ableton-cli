@@ -1103,7 +1103,7 @@ def test_dispatch_calls_backend_for_synth_foundation_commands() -> None:
     found = dispatch_command(
         backend,
         "find_synth_devices",
-        {"track": 0, "synth_type": "wavetable"},
+        {"track_ref": {"mode": "index", "index": 0}, "synth_type": "wavetable"},
     )
     listed = dispatch_command(
         backend,
@@ -1168,7 +1168,7 @@ def test_dispatch_calls_backend_for_effect_foundation_commands() -> None:
     found = dispatch_command(
         backend,
         "find_effect_devices",
-        {"track": 0, "effect_type": "eq8"},
+        {"track_ref": {"mode": "index", "index": 0}, "effect_type": "eq8"},
     )
     listed = dispatch_command(
         backend,
@@ -1258,7 +1258,7 @@ def test_dispatch_calls_backend_for_browser_load_with_path() -> None:
     result = dispatch_command(
         backend,
         "load_instrument_or_effect",
-        {"track": 2, "path": "instruments/Drift"},
+        {"track_ref": {"mode": "index", "index": 2}, "path": "instruments/Drift"},
     )
     assert result == {
         "track": 2,
@@ -1280,7 +1280,7 @@ def test_dispatch_calls_backend_for_browser_load_with_existing_mode_and_clip_slo
         backend,
         "load_instrument_or_effect",
         {
-            "track": 1,
+            "track_ref": {"mode": "index", "index": 1},
             "path": "sounds/Bass Loop.alc",
             "target_track_mode": "existing",
             "clip_slot": 3,
@@ -1307,7 +1307,7 @@ def test_dispatch_calls_backend_for_browser_load_with_notes_mode() -> None:
         backend,
         "load_instrument_or_effect",
         {
-            "track": 1,
+            "track_ref": {"mode": "index", "index": 1},
             "path": "sounds/Bass Loop.alc",
             "target_track_mode": "existing",
             "clip_slot": 2,
@@ -1334,7 +1334,7 @@ def test_dispatch_calls_backend_for_browser_load_with_notes_import_flags() -> No
         backend,
         "load_instrument_or_effect",
         {
-            "track": 1,
+            "track_ref": {"mode": "index", "index": 1},
             "path": "sounds/Bass Loop.alc",
             "target_track_mode": "existing",
             "clip_slot": 2,
@@ -1369,7 +1369,7 @@ def test_dispatch_calls_backend_for_add_notes_to_clip() -> None:
     result = dispatch_command(
         backend,
         "add_notes_to_clip",
-        {"track": 0, "clip": 1, "notes": [note, note]},
+        {"track_ref": {"mode": "index", "index": 0}, "clip": 1, "notes": [note, note]},
     )
     assert result == {"track": 0, "clip": 1, "note_count": 2}
 
@@ -1387,18 +1387,30 @@ def test_dispatch_calls_backend_for_clip_notes_get_clear_replace() -> None:
     got = dispatch_command(
         backend,
         "get_clip_notes",
-        {"track": 0, "clip": 1, "start_time": 0.0, "end_time": 4.0, "pitch": 60},
+        {
+            "track_ref": {"mode": "index", "index": 0},
+            "clip": 1,
+            "start_time": 0.0,
+            "end_time": 4.0,
+            "pitch": 60,
+        },
     )
     cleared = dispatch_command(
         backend,
         "clear_clip_notes",
-        {"track": 0, "clip": 1, "start_time": 0.0, "end_time": 4.0, "pitch": 60},
+        {
+            "track_ref": {"mode": "index", "index": 0},
+            "clip": 1,
+            "start_time": 0.0,
+            "end_time": 4.0,
+            "pitch": 60,
+        },
     )
     replaced = dispatch_command(
         backend,
         "replace_clip_notes",
         {
-            "track": 0,
+            "track_ref": {"mode": "index", "index": 0},
             "clip": 1,
             "notes": [note],
             "start_time": 0.0,
@@ -1418,7 +1430,11 @@ def test_dispatch_calls_backend_for_update_clip_notes() -> None:
     result = dispatch_command(
         backend,
         "update_clip_notes",
-        {"track": 0, "clip": 1, "notes": [{"note_id": 3, "velocity": 90}]},
+        {
+            "track_ref": {"mode": "index", "index": 0},
+            "clip": 1,
+            "notes": [{"note_id": 3, "velocity": 90}],
+        },
     )
 
     assert result == {"track": 0, "clip": 1, "updated_count": 1}
@@ -1431,7 +1447,7 @@ def test_dispatch_rejects_update_clip_notes_without_note_id() -> None:
         dispatch_command(
             backend,
             "update_clip_notes",
-            {"track": 0, "clip": 1, "notes": [{"velocity": 90}]},
+            {"track_ref": {"mode": "index", "index": 0}, "clip": 1, "notes": [{"velocity": 90}]},
         )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
@@ -1444,7 +1460,7 @@ def test_dispatch_rejects_update_clip_notes_with_only_note_id() -> None:
         dispatch_command(
             backend,
             "update_clip_notes",
-            {"track": 0, "clip": 1, "notes": [{"note_id": 3}]},
+            {"track_ref": {"mode": "index", "index": 0}, "clip": 1, "notes": [{"note_id": 3}]},
         )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
@@ -1456,12 +1472,12 @@ def test_dispatch_calls_backend_for_clip_active_get_set() -> None:
     active = dispatch_command(
         backend,
         "clip_active_get",
-        {"track": 0, "clip": 1},
+        {"track_ref": {"mode": "index", "index": 0}, "clip": 1},
     )
     inactive = dispatch_command(
         backend,
         "clip_active_set",
-        {"track": 0, "clip": 1, "value": False},
+        {"track_ref": {"mode": "index", "index": 0}, "clip": 1, "value": False},
     )
 
     assert active == {"track": 0, "clip": 1, "active": True}
@@ -1473,13 +1489,17 @@ def test_dispatch_calls_backend_for_load_drum_kit_with_explicit_selection() -> N
     by_uri = dispatch_command(
         backend,
         "load_drum_kit",
-        {"track": 0, "rack_uri": "rack:drums", "kit_uri": "kit:acoustic"},
+        {
+            "track_ref": {"mode": "index", "index": 0},
+            "rack_uri": "rack:drums",
+            "kit_uri": "kit:acoustic",
+        },
     )
     by_path = dispatch_command(
         backend,
         "load_drum_kit",
         {
-            "track": 0,
+            "track_ref": {"mode": "index", "index": 0},
             "rack_uri": "rack:drums",
             "kit_path": "drums/Kits/Acoustic Kit",
         },
@@ -1639,18 +1659,23 @@ def test_dispatch_calls_backend_for_new_todo_commands() -> None:
     arrangement_clip = dispatch_command(
         backend,
         "arrangement_clip_create",
-        {"track": 0, "start_time": 8.0, "length": 4.0},
+        {"track_ref": {"mode": "index", "index": 0}, "start_time": 8.0, "length": 4.0},
     )
     arrangement_clip_audio = dispatch_command(
         backend,
         "arrangement_clip_create",
-        {"track": 1, "start_time": 16.0, "length": 8.0, "audio_path": "C:/tmp/loop.wav"},
+        {
+            "track_ref": {"mode": "index", "index": 1},
+            "start_time": 16.0,
+            "length": 8.0,
+            "audio_path": "C:/tmp/loop.wav",
+        },
     )
     arrangement_clip_with_notes = dispatch_command(
         backend,
         "arrangement_clip_create",
         {
-            "track": 0,
+            "track_ref": {"mode": "index", "index": 0},
             "start_time": 24.0,
             "length": 4.0,
             "notes": [
@@ -1672,15 +1697,17 @@ def test_dispatch_calls_backend_for_new_todo_commands() -> None:
     arrangement_clip_list_track = dispatch_command(
         backend,
         "arrangement_clip_list",
-        {"track": 1},
+        {"track_ref": {"mode": "index", "index": 1}},
     )
     duplicate = dispatch_command(
         backend,
         "clip_duplicate",
-        {"track": 1, "src_clip": 2, "dst_clip": 3},
+        {"track_ref": {"mode": "index", "index": 1}, "src_clip": 2, "dst_clip": 3},
     )
     scenes_move = dispatch_command(backend, "scenes_move", {"from": 3, "to": 1})
-    tracks_delete = dispatch_command(backend, "tracks_delete", {"track": 0})
+    tracks_delete = dispatch_command(
+        backend, "tracks_delete", {"track_ref": {"mode": "index", "index": 0}}
+    )
 
     assert song_new == {"created": True}
     assert record_start == {"recording": True}
@@ -1715,13 +1742,17 @@ def test_dispatch_calls_backend_for_new_todo_commands() -> None:
 def test_dispatch_calls_backend_for_clip_delete() -> None:
     backend = _BackendStub()
 
-    assert dispatch_command(backend, "clip_delete", {"track": 2, "clip": 7}) == {
+    assert dispatch_command(
+        backend, "clip_delete", {"track_ref": {"mode": "index", "index": 2}, "clip": 7}
+    ) == {
         "track": 2,
         "clip": 7,
         "deleted": True,
     }
     with pytest.raises(CommandError) as negative_clip:
-        dispatch_command(backend, "clip_delete", {"track": 2, "clip": -1})
+        dispatch_command(
+            backend, "clip_delete", {"track_ref": {"mode": "index", "index": 2}, "clip": -1}
+        )
     assert negative_clip.value.code == "INVALID_ARGUMENT"
 
 
@@ -1731,7 +1762,7 @@ def test_dispatch_calls_backend_for_arrangement_clip_from_session() -> None:
     placed = dispatch_command(
         backend,
         "arrangement_clip_from_session",
-        {"track": 1, "slot": 4, "start_time": 32},
+        {"track_ref": {"mode": "index", "index": 1}, "slot": 4, "start_time": 32},
     )
     assert placed == {"track": 1, "slot": 4, "start_time": 32.0}
 
@@ -1739,7 +1770,7 @@ def test_dispatch_calls_backend_for_arrangement_clip_from_session() -> None:
         dispatch_command(
             backend,
             "arrangement_clip_from_session",
-            {"track": 1, "slot": 4, "start_time": -1},
+            {"track_ref": {"mode": "index", "index": 1}, "slot": 4, "start_time": -1},
         )
     assert negative_start.value.code == "INVALID_ARGUMENT"
 
@@ -1750,7 +1781,7 @@ def test_dispatch_calls_backend_for_clip_duplicate_many() -> None:
     duplicate_many = dispatch_command(
         backend,
         "clip_duplicate",
-        {"track": 1, "src_clip": 2, "dst_clips": [3, 4, 5]},
+        {"track_ref": {"mode": "index", "index": 1}, "src_clip": 2, "dst_clips": [3, 4, 5]},
     )
 
     assert duplicate_many == {
@@ -1768,7 +1799,7 @@ def test_dispatch_calls_backend_for_arrangement_notes_delete_and_from_session() 
         backend,
         "arrangement_clip_notes_add",
         {
-            "track": 0,
+            "track_ref": {"mode": "index", "index": 0},
             "index": 1,
             "notes": [
                 {
@@ -1784,18 +1815,24 @@ def test_dispatch_calls_backend_for_arrangement_notes_delete_and_from_session() 
     gotten = dispatch_command(
         backend,
         "arrangement_clip_notes_get",
-        {"track": 0, "index": 1, "start_time": 0.0, "end_time": 4.0, "pitch": 60},
+        {
+            "track_ref": {"mode": "index", "index": 0},
+            "index": 1,
+            "start_time": 0.0,
+            "end_time": 4.0,
+            "pitch": 60,
+        },
     )
     cleared = dispatch_command(
         backend,
         "arrangement_clip_notes_clear",
-        {"track": 0, "index": 1, "pitch": 60},
+        {"track_ref": {"mode": "index", "index": 0}, "index": 1, "pitch": 60},
     )
     replaced = dispatch_command(
         backend,
         "arrangement_clip_notes_replace",
         {
-            "track": 0,
+            "track_ref": {"mode": "index", "index": 0},
             "index": 1,
             "notes": [
                 {
@@ -1814,7 +1851,7 @@ def test_dispatch_calls_backend_for_arrangement_notes_delete_and_from_session() 
         backend,
         "arrangement_clip_notes_import_browser",
         {
-            "track": 0,
+            "track_ref": {"mode": "index", "index": 0},
             "index": 1,
             "target_path": "sounds/Bass Loop.alc",
             "mode": "append",
@@ -1825,17 +1862,17 @@ def test_dispatch_calls_backend_for_arrangement_notes_delete_and_from_session() 
     deleted_index = dispatch_command(
         backend,
         "arrangement_clip_delete",
-        {"track": 0, "index": 1},
+        {"track_ref": {"mode": "index", "index": 0}, "index": 1},
     )
     deleted_range = dispatch_command(
         backend,
         "arrangement_clip_delete",
-        {"track": 0, "start": 8.0, "end": 16.0},
+        {"track_ref": {"mode": "index", "index": 0}, "start": 8.0, "end": 16.0},
     )
     deleted_all = dispatch_command(
         backend,
         "arrangement_clip_delete",
-        {"track": 0, "all": True},
+        {"track_ref": {"mode": "index", "index": 0}, "all": True},
     )
     from_session = dispatch_command(
         backend,
@@ -1861,7 +1898,7 @@ def test_dispatch_calls_backend_for_clip_note_transform_commands() -> None:
         backend,
         "clip_notes_quantize",
         {
-            "track": 0,
+            "track_ref": {"mode": "index", "index": 0},
             "clip": 1,
             "grid": "1/16",
             "strength": 0.75,
@@ -1874,7 +1911,7 @@ def test_dispatch_calls_backend_for_clip_note_transform_commands() -> None:
         backend,
         "clip_notes_humanize",
         {
-            "track": 0,
+            "track_ref": {"mode": "index", "index": 0},
             "clip": 1,
             "timing": 0.1,
             "velocity": 5,
@@ -1884,7 +1921,7 @@ def test_dispatch_calls_backend_for_clip_note_transform_commands() -> None:
         backend,
         "clip_notes_velocity_scale",
         {
-            "track": 0,
+            "track_ref": {"mode": "index", "index": 0},
             "clip": 1,
             "scale": 1.2,
             "offset": -3,
@@ -1894,7 +1931,7 @@ def test_dispatch_calls_backend_for_clip_note_transform_commands() -> None:
         backend,
         "clip_notes_transpose",
         {
-            "track": 0,
+            "track_ref": {"mode": "index", "index": 0},
             "clip": 1,
             "semitones": 7,
         },
@@ -1913,18 +1950,26 @@ def test_dispatch_calls_backend_for_clip_note_transform_commands() -> None:
 def test_dispatch_calls_backend_for_clip_groove_commands() -> None:
     backend = _BackendStub()
 
-    gotten = dispatch_command(backend, "clip_groove_get", {"track": 0, "clip": 1})
+    gotten = dispatch_command(
+        backend, "clip_groove_get", {"track_ref": {"mode": "index", "index": 0}, "clip": 1}
+    )
     set_result = dispatch_command(
         backend,
         "clip_groove_set",
-        {"track": 0, "clip": 1, "target": "grooves/Hip Hop Boom Bap 16ths 90 bpm.agr"},
+        {
+            "track_ref": {"mode": "index", "index": 0},
+            "clip": 1,
+            "target": "grooves/Hip Hop Boom Bap 16ths 90 bpm.agr",
+        },
     )
     amount_result = dispatch_command(
         backend,
         "clip_groove_amount_set",
-        {"track": 0, "clip": 1, "value": 0.7},
+        {"track_ref": {"mode": "index", "index": 0}, "clip": 1, "value": 0.7},
     )
-    cleared = dispatch_command(backend, "clip_groove_clear", {"track": 0, "clip": 1})
+    cleared = dispatch_command(
+        backend, "clip_groove_clear", {"track_ref": {"mode": "index", "index": 0}, "clip": 1}
+    )
 
     assert gotten["has_groove"] is True
     assert set_result["has_groove"] is True
@@ -1940,47 +1985,57 @@ def test_dispatch_validates_new_todo_command_arguments() -> None:
         dispatch_command(
             backend,
             "clip_duplicate",
-            {"track": 0, "src_clip": 1, "dst_clip": -1},
+            {"track_ref": {"mode": "index", "index": 0}, "src_clip": 1, "dst_clip": -1},
         )
     with pytest.raises(CommandError) as clip_duplicate_conflict_exc:
         dispatch_command(
             backend,
             "clip_duplicate",
-            {"track": 0, "src_clip": 1, "dst_clip": 2, "dst_clips": [3]},
+            {
+                "track_ref": {"mode": "index", "index": 0},
+                "src_clip": 1,
+                "dst_clip": 2,
+                "dst_clips": [3],
+            },
         )
     with pytest.raises(CommandError) as clip_duplicate_missing_dst_exc:
         dispatch_command(
             backend,
             "clip_duplicate",
-            {"track": 0, "src_clip": 1},
+            {"track_ref": {"mode": "index", "index": 0}, "src_clip": 1},
         )
     with pytest.raises(CommandError) as clip_active_set_exc:
         dispatch_command(
             backend,
             "clip_active_set",
-            {"track": 0, "clip": 1, "value": "false"},
+            {"track_ref": {"mode": "index", "index": 0}, "clip": 1, "value": "false"},
         )
     with pytest.raises(CommandError) as scenes_move_exc:
         dispatch_command(backend, "scenes_move", {"from": -1, "to": 0})
     with pytest.raises(CommandError) as tracks_delete_exc:
-        dispatch_command(backend, "tracks_delete", {"track": -1})
+        dispatch_command(backend, "tracks_delete", {"track_ref": {"mode": "index", "index": -1}})
     with pytest.raises(CommandError) as arrangement_clip_start_exc:
         dispatch_command(
             backend,
             "arrangement_clip_create",
-            {"track": 0, "start_time": -1, "length": 4.0},
+            {"track_ref": {"mode": "index", "index": 0}, "start_time": -1, "length": 4.0},
         )
     with pytest.raises(CommandError) as arrangement_clip_audio_path_exc:
         dispatch_command(
             backend,
             "arrangement_clip_create",
-            {"track": 1, "start_time": 0, "length": 4.0, "audio_path": "loops/amen.wav"},
+            {
+                "track_ref": {"mode": "index", "index": 1},
+                "start_time": 0,
+                "length": 4.0,
+                "audio_path": "loops/amen.wav",
+            },
         )
     with pytest.raises(CommandError) as arrangement_clip_list_track_exc:
         dispatch_command(
             backend,
             "arrangement_clip_list",
-            {"track": -1},
+            {"track_ref": {"mode": "index", "index": -1}},
         )
     with pytest.raises(CommandError) as transport_position_set_exc:
         dispatch_command(
@@ -1992,25 +2047,25 @@ def test_dispatch_validates_new_todo_command_arguments() -> None:
         dispatch_command(
             backend,
             "arrangement_clip_notes_get",
-            {"track": 0, "index": 0, "pitch": 200},
+            {"track_ref": {"mode": "index", "index": 0}, "index": 0, "pitch": 200},
         )
     with pytest.raises(CommandError) as arrangement_clip_delete_missing_mode_exc:
         dispatch_command(
             backend,
             "arrangement_clip_delete",
-            {"track": 0},
+            {"track_ref": {"mode": "index", "index": 0}},
         )
     with pytest.raises(CommandError) as arrangement_clip_delete_multiple_modes_exc:
         dispatch_command(
             backend,
             "arrangement_clip_delete",
-            {"track": 0, "index": 0, "all": True},
+            {"track_ref": {"mode": "index", "index": 0}, "index": 0, "all": True},
         )
     with pytest.raises(CommandError) as arrangement_clip_delete_bad_range_exc:
         dispatch_command(
             backend,
             "arrangement_clip_delete",
-            {"track": 0, "start": 8.0},
+            {"track_ref": {"mode": "index", "index": 0}, "start": 8.0},
         )
     with pytest.raises(CommandError) as arrangement_from_session_invalid_exc:
         dispatch_command(
@@ -2043,25 +2098,35 @@ def test_dispatch_rejects_invalid_clip_note_transform_arguments() -> None:
         dispatch_command(
             backend,
             "clip_notes_quantize",
-            {"track": 0, "clip": 0, "grid": "0/16", "strength": 1.0},
+            {
+                "track_ref": {"mode": "index", "index": 0},
+                "clip": 0,
+                "grid": "0/16",
+                "strength": 1.0,
+            },
         )
     with pytest.raises(CommandError) as invalid_strength:
         dispatch_command(
             backend,
             "clip_notes_quantize",
-            {"track": 0, "clip": 0, "grid": "1/16", "strength": 2.0},
+            {
+                "track_ref": {"mode": "index", "index": 0},
+                "clip": 0,
+                "grid": "1/16",
+                "strength": 2.0,
+            },
         )
     with pytest.raises(CommandError) as invalid_humanize_velocity:
         dispatch_command(
             backend,
             "clip_notes_humanize",
-            {"track": 0, "clip": 0, "timing": 0.1, "velocity": 128},
+            {"track_ref": {"mode": "index", "index": 0}, "clip": 0, "timing": 0.1, "velocity": 128},
         )
     with pytest.raises(CommandError) as invalid_scale:
         dispatch_command(
             backend,
             "clip_notes_velocity_scale",
-            {"track": 0, "clip": 0, "scale": -0.1, "offset": 0},
+            {"track_ref": {"mode": "index", "index": 0}, "clip": 0, "scale": -0.1, "offset": 0},
         )
 
     assert invalid_grid.value.code == "INVALID_ARGUMENT"
@@ -2074,9 +2139,17 @@ def test_dispatch_rejects_invalid_clip_groove_arguments() -> None:
     backend = _BackendStub()
 
     with pytest.raises(CommandError) as invalid_target:
-        dispatch_command(backend, "clip_groove_set", {"track": 0, "clip": 0, "target": "hiphop"})
+        dispatch_command(
+            backend,
+            "clip_groove_set",
+            {"track_ref": {"mode": "index", "index": 0}, "clip": 0, "target": "hiphop"},
+        )
     with pytest.raises(CommandError) as invalid_amount:
-        dispatch_command(backend, "clip_groove_amount_set", {"track": 0, "clip": 0, "value": 1.5})
+        dispatch_command(
+            backend,
+            "clip_groove_amount_set",
+            {"track_ref": {"mode": "index", "index": 0}, "clip": 0, "value": 1.5},
+        )
 
     assert invalid_target.value.code == "INVALID_ARGUMENT"
     assert invalid_amount.value.code == "INVALID_ARGUMENT"
@@ -2194,7 +2267,7 @@ def test_dispatch_rejects_invalid_note_velocity() -> None:
         dispatch_command(
             backend,
             "add_notes_to_clip",
-            {"track": 0, "clip": 0, "notes": [note]},
+            {"track_ref": {"mode": "index", "index": 0}, "clip": 0, "notes": [note]},
         )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
@@ -2203,7 +2276,9 @@ def test_dispatch_rejects_invalid_note_velocity() -> None:
 def test_dispatch_rejects_browser_load_without_uri_or_path() -> None:
     backend = _BackendStub()
     with pytest.raises(CommandError) as exc_info:
-        dispatch_command(backend, "load_instrument_or_effect", {"track": 0})
+        dispatch_command(
+            backend, "load_instrument_or_effect", {"track_ref": {"mode": "index", "index": 0}}
+        )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
 
@@ -2214,7 +2289,11 @@ def test_dispatch_rejects_browser_load_with_uri_and_path() -> None:
         dispatch_command(
             backend,
             "load_instrument_or_effect",
-            {"track": 0, "uri": "query:Synths#Drift", "path": "instruments/Drift"},
+            {
+                "track_ref": {"mode": "index", "index": 0},
+                "uri": "query:Synths#Drift",
+                "path": "instruments/Drift",
+            },
         )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
@@ -2227,7 +2306,7 @@ def test_dispatch_rejects_browser_load_with_invalid_target_track_mode() -> None:
             backend,
             "load_instrument_or_effect",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "path": "instruments/Drift",
                 "target_track_mode": "legacy",
             },
@@ -2243,7 +2322,7 @@ def test_dispatch_rejects_browser_load_with_negative_clip_slot() -> None:
             backend,
             "load_instrument_or_effect",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "path": "instruments/Drift",
                 "clip_slot": -1,
             },
@@ -2259,7 +2338,7 @@ def test_dispatch_rejects_browser_load_with_invalid_notes_mode() -> None:
             backend,
             "load_instrument_or_effect",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "path": "sounds/Bass Loop.alc",
                 "target_track_mode": "existing",
                 "clip_slot": 1,
@@ -2277,7 +2356,7 @@ def test_dispatch_rejects_browser_load_with_non_boolean_import_flags() -> None:
             backend,
             "load_instrument_or_effect",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "path": "sounds/Bass Loop.alc",
                 "target_track_mode": "existing",
                 "clip_slot": 1,
@@ -2323,7 +2402,12 @@ def test_dispatch_rejects_clip_note_filter_invalid_range() -> None:
         dispatch_command(
             backend,
             "get_clip_notes",
-            {"track": 0, "clip": 0, "start_time": 2.0, "end_time": 2.0},
+            {
+                "track_ref": {"mode": "index", "index": 0},
+                "clip": 0,
+                "start_time": 2.0,
+                "end_time": 2.0,
+            },
         )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
@@ -2335,7 +2419,7 @@ def test_dispatch_rejects_clip_note_filter_invalid_pitch() -> None:
         dispatch_command(
             backend,
             "clear_clip_notes",
-            {"track": 0, "clip": 0, "pitch": 200},
+            {"track_ref": {"mode": "index", "index": 0}, "clip": 0, "pitch": 200},
         )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
@@ -2347,14 +2431,14 @@ def test_dispatch_rejects_load_drum_kit_ambiguous_selection() -> None:
         dispatch_command(
             backend,
             "load_drum_kit",
-            {"track": 0, "rack_uri": "rack:drums"},
+            {"track_ref": {"mode": "index", "index": 0}, "rack_uri": "rack:drums"},
         )
     with pytest.raises(CommandError) as exc_info_both:
         dispatch_command(
             backend,
             "load_drum_kit",
             {
-                "track": 0,
+                "track_ref": {"mode": "index", "index": 0},
                 "rack_uri": "rack:drums",
                 "kit_uri": "kit:acoustic",
                 "kit_path": "drums/Kits/Acoustic Kit",

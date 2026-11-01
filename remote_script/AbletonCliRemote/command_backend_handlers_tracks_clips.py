@@ -19,6 +19,7 @@ from .command_backend_validators import (
     _non_negative_float,
     _notes,
     _partial_notes,
+    _resolved_track,
     _track_index,
     _unit_interval,
     _uri_or_path_target,
@@ -30,42 +31,42 @@ _TRIGGER_PITCH_BASE = 36
 
 
 def _handle_create_clip(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     length = _clip_length(args.get("length"))
     return backend.create_clip(track, clip, length)
 
 
 def _handle_add_notes_to_clip(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     notes = _notes(args.get("notes"))
     return backend.add_notes_to_clip(track, clip, notes)
 
 
 def _handle_update_clip_notes(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     notes = _partial_notes(args.get("notes"))
     return backend.update_clip_notes(track, clip, notes)
 
 
 def _handle_get_clip_notes(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     start_time, end_time, pitch = _clip_notes_filter(args)
     return backend.get_clip_notes(track, clip, start_time, end_time, pitch)
 
 
 def _handle_clear_clip_notes(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     start_time, end_time, pitch = _clip_notes_filter(args)
     return backend.clear_clip_notes(track, clip, start_time, end_time, pitch)
 
 
 def _handle_replace_clip_notes(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     notes = _notes(args.get("notes"))
     start_time, end_time, pitch = _clip_notes_filter(args)
@@ -73,7 +74,7 @@ def _handle_replace_clip_notes(backend: CommandBackend, args: dict[str, Any]) ->
 
 
 def _handle_clip_notes_quantize(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     grid = _clip_quantize_grid(args.get("grid"))
     strength = _unit_interval("strength", args.get("strength", 1.0))
@@ -82,7 +83,7 @@ def _handle_clip_notes_quantize(backend: CommandBackend, args: dict[str, Any]) -
 
 
 def _handle_clip_notes_humanize(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     timing = _non_negative_float("timing", args.get("timing"))
     velocity = _humanize_velocity_amount(args.get("velocity"))
@@ -94,7 +95,7 @@ def _handle_clip_notes_velocity_scale(
     backend: CommandBackend,
     args: dict[str, Any],
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     scale = _non_negative_float("scale", args.get("scale"))
     offset = _as_int("offset", args.get("offset"))
@@ -111,7 +112,7 @@ def _handle_clip_notes_velocity_scale(
 
 
 def _handle_clip_notes_transpose(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     semitones = _as_int("semitones", args.get("semitones"))
     start_time, end_time, pitch = _clip_notes_filter(args)
@@ -119,45 +120,45 @@ def _handle_clip_notes_transpose(backend: CommandBackend, args: dict[str, Any]) 
 
 
 def _handle_clip_groove_get(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.clip_groove_get(track, clip)
 
 
 def _handle_clip_groove_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     target = _uri_or_path_target("target", args.get("target"))
     return backend.clip_groove_set(track, clip, target)
 
 
 def _handle_clip_groove_amount_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     value = _unit_interval("value", args.get("value"))
     return backend.clip_groove_amount_set(track, clip, value)
 
 
 def _handle_clip_groove_clear(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.clip_groove_clear(track, clip)
 
 
 def _handle_clip_props_get(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.clip_props_get(track, clip)
 
 
 def _handle_clip_file_path_get(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.clip_file_path_get(track, clip)
 
 
 def _handle_clip_loop_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     start = _non_negative_float("start", args.get("start"))
     end = _non_negative_float("end", args.get("end"))
@@ -171,7 +172,7 @@ def _handle_clip_loop_set(backend: CommandBackend, args: dict[str, Any]) -> dict
 
 
 def _handle_clip_marker_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     start_marker = _non_negative_float("start_marker", args.get("start_marker"))
     end_marker = _non_negative_float("end_marker", args.get("end_marker"))
@@ -179,13 +180,13 @@ def _handle_clip_marker_set(backend: CommandBackend, args: dict[str, Any]) -> di
 
 
 def _handle_clip_warp_get(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.clip_warp_get(track, clip)
 
 
 def _handle_clip_warp_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     enabled = _as_bool("enabled", args.get("enabled"))
     mode = args.get("mode")
@@ -194,13 +195,13 @@ def _handle_clip_warp_set(backend: CommandBackend, args: dict[str, Any]) -> dict
 
 
 def _handle_clip_warp_marker_list(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.clip_warp_marker_list(track, clip)
 
 
 def _handle_clip_warp_marker_add(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     beat_time = _non_negative_float("beat_time", args.get("beat_time"))
     raw_sample_time = args.get("sample_time")
@@ -211,7 +212,7 @@ def _handle_clip_warp_marker_add(backend: CommandBackend, args: dict[str, Any]) 
 
 
 def _handle_clip_warp_marker_move(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     beat_time = _non_negative_float("beat_time", args.get("beat_time"))
     distance = _as_float("distance", args.get("distance"))
@@ -221,28 +222,28 @@ def _handle_clip_warp_marker_move(backend: CommandBackend, args: dict[str, Any])
 def _handle_clip_warp_marker_remove(
     backend: CommandBackend, args: dict[str, Any]
 ) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     beat_time = _non_negative_float("beat_time", args.get("beat_time"))
     return backend.clip_warp_marker_remove(track, clip, beat_time)
 
 
 def _handle_clip_gain_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     db = float(args.get("db"))
     return backend.clip_gain_set(track, clip, db)
 
 
 def _handle_clip_transpose_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     semitones = _as_int("semitones", args.get("semitones"))
     return backend.clip_transpose_set(track, clip, semitones)
 
 
 def _handle_clip_file_replace(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     audio_path = _absolute_path_or_none("audio_path", args.get("audio_path"))
     if audio_path is None:
@@ -253,32 +254,32 @@ def _handle_clip_file_replace(backend: CommandBackend, args: dict[str, Any]) -> 
 
 
 def _handle_set_clip_name(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     name = _non_empty_string("name", args.get("name"))
     return backend.set_clip_name(track, clip, name)
 
 
 def _handle_fire_clip(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.fire_clip(track, clip)
 
 
 def _handle_stop_clip(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.stop_clip(track, clip)
 
 
 def _handle_clip_delete(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.clip_delete(track, clip)
 
 
 def _handle_clip_duplicate(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     src_clip = _track_index("src_clip", args.get("src_clip"))
     dst_clip_raw = args.get("dst_clip")
     dst_clips_raw = args.get("dst_clips")
@@ -326,13 +327,13 @@ def _handle_clip_duplicate(backend: CommandBackend, args: dict[str, Any]) -> dic
 
 
 def _handle_clip_active_get(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.clip_active_get(track, clip)
 
 
 def _handle_clip_active_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     value = _as_bool("value", args.get("value"))
     return backend.clip_active_set(track, clip, value)
@@ -369,7 +370,7 @@ def _handle_stop_all_clips(backend: CommandBackend, _args: dict[str, Any]) -> di
 
 
 def _handle_tracks_delete(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     return backend.tracks_delete(track)
 
 

@@ -63,9 +63,8 @@ def _render_method(spec: ClientMethodSpec) -> str:
     signature = ", ".join(signature_parts)
 
     if spec.params:
-        payload = (
-            "{" + ", ".join(f'"{param.payload_key}": {param.name}' for param in spec.params) + "}"
-        )
+        items = (f'"{param.payload_key}": {param.payload_value}' for param in spec.params)
+        payload = "{" + ", ".join(items) + "}"
         body = f'return self._call("{spec.remote_command}", {payload})'
     else:
         body = f'return self._call("{spec.remote_command}")'

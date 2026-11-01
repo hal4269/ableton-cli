@@ -13,6 +13,7 @@ from .command_backend_validators import (
     _non_empty_string,
     _non_negative_float,
     _non_negative_int,
+    _resolved_track,
     _track_index,
     _track_ref,
 )
@@ -81,14 +82,14 @@ def _handle_track_color_set(backend: CommandBackend, args: dict[str, Any]) -> di
 
 
 def _handle_clip_color_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     color_index = _int_in_range("color_index", args.get("color_index"), _COLOR_INDEX_MAX)
     return backend.clip_color_set(track, clip, color_index)
 
 
 def _handle_clip_launch_get(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     return backend.clip_launch_get(track, clip)
 
@@ -133,14 +134,14 @@ def _unit_float(name: str, value: Any) -> float:
 
 
 def _handle_clip_launch_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     clip = _track_index("clip", args.get("clip"))
     settings = _launch_settings(args.get("settings"))
     return backend.clip_launch_set(track, clip, settings)
 
 
 def _handle_tracks_duplicate(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track = _track_index("track", args.get("track"))
+    track = _resolved_track(backend, args)
     raw_name = args.get("name")
     name = None if raw_name is None else _non_empty_string("name", raw_name)
     return backend.tracks_duplicate(track, name)
@@ -194,20 +195,20 @@ def _handle_transport_signature_set(
     return backend.transport_signature_set(*_time_signature(args))
 
 
-def _track_and_clip(args: dict[str, Any]) -> tuple[int, int]:
-    return _track_index("track", args.get("track")), _track_index("clip", args.get("clip"))
+def _track_and_clip(backend: CommandBackend, args: dict[str, Any]) -> tuple[int, int]:
+    return _resolved_track(backend, args), _track_index("clip", args.get("clip"))
 
 
 def _handle_clip_crop(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    return backend.clip_crop(*_track_and_clip(args))
+    return backend.clip_crop(*_track_and_clip(backend, args))
 
 
 def _handle_clip_duplicate_loop(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    return backend.clip_duplicate_loop(*_track_and_clip(args))
+    return backend.clip_duplicate_loop(*_track_and_clip(backend, args))
 
 
 def _handle_clip_signature_set(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    track, clip = _track_and_clip(args)
+    track, clip = _track_and_clip(backend, args)
     return backend.clip_signature_set(track, clip, *_time_signature(args))
 
 

@@ -48,7 +48,9 @@ def test_clip_crop_keeps_only_the_loop() -> None:
     clip.loop_end = 6.0
     backend = _backend_with_clip(clip)
 
-    result = dispatch_command(backend, "clip_crop", {"track": 0, "clip": 0})
+    result = dispatch_command(
+        backend, "clip_crop", {"track_ref": {"mode": "index", "index": 0}, "clip": 0}
+    )
 
     assert result["length"] == 4.0
     assert (result["loop_start"], result["loop_end"]) == (0.0, 4.0)
@@ -57,7 +59,9 @@ def test_clip_crop_keeps_only_the_loop() -> None:
 def test_clip_duplicate_loop_doubles_the_loop() -> None:
     backend = _backend_with_clip(_EditableClip(4.0))
 
-    result = dispatch_command(backend, "clip_duplicate_loop", {"track": 0, "clip": 0})
+    result = dispatch_command(
+        backend, "clip_duplicate_loop", {"track_ref": {"mode": "index", "index": 0}, "clip": 0}
+    )
 
     assert (result["loop_start"], result["loop_end"], result["length"]) == (0.0, 8.0, 8.0)
 
@@ -66,7 +70,9 @@ def test_clip_duplicate_loop_requires_a_midi_clip() -> None:
     backend = _backend_with_clip(_EditableClip(4.0, is_midi_clip=False))
 
     with pytest.raises(CommandError) as exc_info:
-        dispatch_command(backend, "clip_duplicate_loop", {"track": 0, "clip": 0})
+        dispatch_command(
+            backend, "clip_duplicate_loop", {"track_ref": {"mode": "index", "index": 0}, "clip": 0}
+        )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
     assert "MIDI" in exc_info.value.message
@@ -77,7 +83,7 @@ def test_clip_edit_fails_explicitly_when_live_lacks_the_method(command: str) -> 
     backend = _backend_with_clip(_Clip(length=4.0))
 
     with pytest.raises(CommandError) as exc_info:
-        dispatch_command(backend, command, {"track": 0, "clip": 0})
+        dispatch_command(backend, command, {"track_ref": {"mode": "index", "index": 0}, "clip": 0})
 
     assert exc_info.value.details == {"reason": "not_supported_by_live_api"}
 
@@ -87,7 +93,7 @@ def test_clip_edit_requires_a_clip(command: str) -> None:
     backend = LiveBackend(_SurfaceStub())
 
     with pytest.raises(CommandError) as exc_info:
-        dispatch_command(backend, command, {"track": 0, "clip": 0})
+        dispatch_command(backend, command, {"track_ref": {"mode": "index", "index": 0}, "clip": 0})
 
     assert exc_info.value.code == "INVALID_ARGUMENT"
 
@@ -98,11 +104,13 @@ def test_clip_signature_set_and_props_show_it() -> None:
     result = dispatch_command(
         backend,
         "clip_signature_set",
-        {"track": 0, "clip": 0, "numerator": 7, "denominator": 8},
+        {"track_ref": {"mode": "index", "index": 0}, "clip": 0, "numerator": 7, "denominator": 8},
     )
 
     assert (result["signature_numerator"], result["signature_denominator"]) == (7, 8)
-    props = dispatch_command(backend, "clip_props_get", {"track": 0, "clip": 0})
+    props = dispatch_command(
+        backend, "clip_props_get", {"track_ref": {"mode": "index", "index": 0}, "clip": 0}
+    )
     assert (props["signature_numerator"], props["signature_denominator"]) == (7, 8)
 
 
@@ -114,7 +122,12 @@ def test_clip_signature_set_rejects_invalid_signatures(numerator: int, denominat
         dispatch_command(
             backend,
             "clip_signature_set",
-            {"track": 0, "clip": 0, "numerator": numerator, "denominator": denominator},
+            {
+                "track_ref": {"mode": "index", "index": 0},
+                "clip": 0,
+                "numerator": numerator,
+                "denominator": denominator,
+            },
         )
 
     assert exc_info.value.code == "INVALID_ARGUMENT"

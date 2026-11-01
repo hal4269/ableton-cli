@@ -29,7 +29,11 @@ class _AbletonClientGeneratedMixin:
     ) -> dict[str, Any]:
         return self._call(
             "arrangement_clip_file_replace",
-            {"track": track, "index": index, "audio_path": audio_path},
+            {
+                "track_ref": {"mode": "index", "index": track},
+                "index": index,
+                "audio_path": audio_path,
+            },
         )
 
     def arrangement_clip_from_session(
@@ -37,18 +41,31 @@ class _AbletonClientGeneratedMixin:
     ) -> dict[str, Any]:
         return self._call(
             "arrangement_clip_from_session",
-            {"track": track, "slot": slot, "start_time": start_time},
+            {
+                "track_ref": {"mode": "index", "index": track},
+                "slot": slot,
+                "start_time": start_time,
+            },
         )
 
     def arrangement_clip_gain_set(self, track: int, index: int, db: float) -> dict[str, Any]:
-        return self._call("arrangement_clip_gain_set", {"track": track, "index": index, "db": db})
+        return self._call(
+            "arrangement_clip_gain_set",
+            {"track_ref": {"mode": "index", "index": track}, "index": index, "db": db},
+        )
 
     def arrangement_clip_loop_set(
         self, track: int, index: int, start: float, end: float, enabled: bool
     ) -> dict[str, Any]:
         return self._call(
             "arrangement_clip_loop_set",
-            {"track": track, "index": index, "start": start, "end": end, "enabled": enabled},
+            {
+                "track_ref": {"mode": "index", "index": track},
+                "index": index,
+                "start": start,
+                "end": end,
+                "enabled": enabled,
+            },
         )
 
     def arrangement_clip_marker_set(
@@ -57,7 +74,7 @@ class _AbletonClientGeneratedMixin:
         return self._call(
             "arrangement_clip_marker_set",
             {
-                "track": track,
+                "track_ref": {"mode": "index", "index": track},
                 "index": index,
                 "start_marker": start_marker,
                 "end_marker": end_marker,
@@ -65,18 +82,28 @@ class _AbletonClientGeneratedMixin:
         )
 
     def arrangement_clip_props_get(self, track: int, index: int) -> dict[str, Any]:
-        return self._call("arrangement_clip_props_get", {"track": track, "index": index})
+        return self._call(
+            "arrangement_clip_props_get",
+            {"track_ref": {"mode": "index", "index": track}, "index": index},
+        )
 
     def arrangement_clip_transpose_set(
         self, track: int, index: int, semitones: int
     ) -> dict[str, Any]:
         return self._call(
             "arrangement_clip_transpose_set",
-            {"track": track, "index": index, "semitones": semitones},
+            {
+                "track_ref": {"mode": "index", "index": track},
+                "index": index,
+                "semitones": semitones,
+            },
         )
 
     def arrangement_clip_warp_get(self, track: int, index: int) -> dict[str, Any]:
-        return self._call("arrangement_clip_warp_get", {"track": track, "index": index})
+        return self._call(
+            "arrangement_clip_warp_get",
+            {"track_ref": {"mode": "index", "index": track}, "index": index},
+        )
 
     def arrangement_from_session(self, scenes: list[dict[str, float]]) -> dict[str, Any]:
         return self._call("arrangement_from_session", {"scenes": scenes})
@@ -91,60 +118,107 @@ class _AbletonClientGeneratedMixin:
         return self._call("back_to_arranger")
 
     def clip_active_get(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("clip_active_get", {"track": track, "clip": clip})
+        return self._call(
+            "clip_active_get", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def clip_active_set(self, track: int, clip: int, value: bool) -> dict[str, Any]:
-        return self._call("clip_active_set", {"track": track, "clip": clip, "value": value})
+        return self._call(
+            "clip_active_set",
+            {"track_ref": {"mode": "index", "index": track}, "clip": clip, "value": value},
+        )
 
     def clip_color_set(self, track: int, clip: int, color_index: int) -> dict[str, Any]:
         return self._call(
-            "clip_color_set", {"track": track, "clip": clip, "color_index": color_index}
+            "clip_color_set",
+            {
+                "track_ref": {"mode": "index", "index": track},
+                "clip": clip,
+                "color_index": color_index,
+            },
         )
 
     def clip_crop(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("clip_crop", {"track": track, "clip": clip})
+        return self._call(
+            "clip_crop", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def clip_delete(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("clip_delete", {"track": track, "clip": clip})
+        return self._call(
+            "clip_delete", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def clip_duplicate_loop(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("clip_duplicate_loop", {"track": track, "clip": clip})
+        return self._call(
+            "clip_duplicate_loop", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def clip_file_path_get(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("clip_file_path_get", {"track": track, "clip": clip})
+        return self._call(
+            "clip_file_path_get", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def clip_file_replace(self, track: int, clip: int, audio_path: str) -> dict[str, Any]:
         return self._call(
-            "clip_file_replace", {"track": track, "clip": clip, "audio_path": audio_path}
+            "clip_file_replace",
+            {
+                "track_ref": {"mode": "index", "index": track},
+                "clip": clip,
+                "audio_path": audio_path,
+            },
         )
 
     def clip_gain_set(self, track: int, clip: int, db: float) -> dict[str, Any]:
-        return self._call("clip_gain_set", {"track": track, "clip": clip, "db": db})
+        return self._call(
+            "clip_gain_set",
+            {"track_ref": {"mode": "index", "index": track}, "clip": clip, "db": db},
+        )
 
     def clip_groove_amount_set(self, track: int, clip: int, value: float) -> dict[str, Any]:
-        return self._call("clip_groove_amount_set", {"track": track, "clip": clip, "value": value})
+        return self._call(
+            "clip_groove_amount_set",
+            {"track_ref": {"mode": "index", "index": track}, "clip": clip, "value": value},
+        )
 
     def clip_groove_clear(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("clip_groove_clear", {"track": track, "clip": clip})
+        return self._call(
+            "clip_groove_clear", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def clip_groove_get(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("clip_groove_get", {"track": track, "clip": clip})
+        return self._call(
+            "clip_groove_get", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def clip_groove_set(self, track: int, clip: int, target: str) -> dict[str, Any]:
-        return self._call("clip_groove_set", {"track": track, "clip": clip, "target": target})
+        return self._call(
+            "clip_groove_set",
+            {"track_ref": {"mode": "index", "index": track}, "clip": clip, "target": target},
+        )
 
     def clip_launch_get(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("clip_launch_get", {"track": track, "clip": clip})
+        return self._call(
+            "clip_launch_get", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def clip_launch_set(self, track: int, clip: int, settings: dict[str, Any]) -> dict[str, Any]:
-        return self._call("clip_launch_set", {"track": track, "clip": clip, "settings": settings})
+        return self._call(
+            "clip_launch_set",
+            {"track_ref": {"mode": "index", "index": track}, "clip": clip, "settings": settings},
+        )
 
     def clip_loop_set(
         self, track: int, clip: int, start: float, end: float, enabled: bool
     ) -> dict[str, Any]:
         return self._call(
             "clip_loop_set",
-            {"track": track, "clip": clip, "start": start, "end": end, "enabled": enabled},
+            {
+                "track_ref": {"mode": "index", "index": track},
+                "clip": clip,
+                "start": start,
+                "end": end,
+                "enabled": enabled,
+            },
         )
 
     def clip_marker_set(
@@ -152,49 +226,75 @@ class _AbletonClientGeneratedMixin:
     ) -> dict[str, Any]:
         return self._call(
             "clip_marker_set",
-            {"track": track, "clip": clip, "start_marker": start_marker, "end_marker": end_marker},
+            {
+                "track_ref": {"mode": "index", "index": track},
+                "clip": clip,
+                "start_marker": start_marker,
+                "end_marker": end_marker,
+            },
         )
 
     def clip_props_get(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("clip_props_get", {"track": track, "clip": clip})
+        return self._call(
+            "clip_props_get", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def clip_signature_set(
         self, track: int, clip: int, numerator: int, denominator: int
     ) -> dict[str, Any]:
         return self._call(
             "clip_signature_set",
-            {"track": track, "clip": clip, "numerator": numerator, "denominator": denominator},
+            {
+                "track_ref": {"mode": "index", "index": track},
+                "clip": clip,
+                "numerator": numerator,
+                "denominator": denominator,
+            },
         )
 
     def clip_transpose_set(self, track: int, clip: int, semitones: int) -> dict[str, Any]:
         return self._call(
-            "clip_transpose_set", {"track": track, "clip": clip, "semitones": semitones}
+            "clip_transpose_set",
+            {"track_ref": {"mode": "index", "index": track}, "clip": clip, "semitones": semitones},
         )
 
     def clip_warp_get(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("clip_warp_get", {"track": track, "clip": clip})
+        return self._call(
+            "clip_warp_get", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def clip_warp_marker_list(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("clip_warp_marker_list", {"track": track, "clip": clip})
+        return self._call(
+            "clip_warp_marker_list", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def clip_warp_marker_move(
         self, track: int, clip: int, beat_time: float, distance: float
     ) -> dict[str, Any]:
         return self._call(
             "clip_warp_marker_move",
-            {"track": track, "clip": clip, "beat_time": beat_time, "distance": distance},
+            {
+                "track_ref": {"mode": "index", "index": track},
+                "clip": clip,
+                "beat_time": beat_time,
+                "distance": distance,
+            },
         )
 
     def clip_warp_marker_remove(self, track: int, clip: int, beat_time: float) -> dict[str, Any]:
         return self._call(
-            "clip_warp_marker_remove", {"track": track, "clip": clip, "beat_time": beat_time}
+            "clip_warp_marker_remove",
+            {"track_ref": {"mode": "index", "index": track}, "clip": clip, "beat_time": beat_time},
         )
 
     def create_audio_track(self, index: int = -1) -> dict[str, Any]:
         return self._call("create_audio_track", {"index": index})
 
     def create_clip(self, track: int, clip: int, length: float) -> dict[str, Any]:
-        return self._call("create_clip", {"track": track, "clip": clip, "length": length})
+        return self._call(
+            "create_clip",
+            {"track_ref": {"mode": "index", "index": track}, "clip": clip, "length": length},
+        )
 
     def create_midi_track(self, index: int = -1) -> dict[str, Any]:
         return self._call("create_midi_track", {"index": index})
@@ -311,7 +411,9 @@ class _AbletonClientGeneratedMixin:
         return self._call("execute_batch", {"steps": steps})
 
     def fire_clip(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("fire_clip", {"track": track, "clip": clip})
+        return self._call(
+            "fire_clip", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def fire_scene(self, scene: int) -> dict[str, Any]:
         return self._call("fire_scene", {"scene": scene})
@@ -575,7 +677,10 @@ class _AbletonClientGeneratedMixin:
         return self._call("scenes_move", {"from": from_index, "to": to_index})
 
     def set_clip_name(self, track: int, clip: int, name: str) -> dict[str, Any]:
-        return self._call("set_clip_name", {"track": track, "clip": clip, "name": name})
+        return self._call(
+            "set_clip_name",
+            {"track_ref": {"mode": "index", "index": track}, "clip": clip, "name": name},
+        )
 
     def set_device_parameter_display(
         self, track_ref: RefPayload, device_ref: RefPayload, parameter_ref: RefPayload, display: str
@@ -642,7 +747,9 @@ class _AbletonClientGeneratedMixin:
         return self._call("stop_all_clips")
 
     def stop_clip(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("stop_clip", {"track": track, "clip": clip})
+        return self._call(
+            "stop_clip", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def stop_playback(self) -> dict[str, object]:
         return self._call("stop_playback")
@@ -726,10 +833,12 @@ class _AbletonClientGeneratedMixin:
         return self._call("track_volume_set", {"track_ref": track_ref, "value": value})
 
     def tracks_delete(self, track: int) -> dict[str, Any]:
-        return self._call("tracks_delete", {"track": track})
+        return self._call("tracks_delete", {"track_ref": {"mode": "index", "index": track}})
 
     def tracks_duplicate(self, track: int, name: str | None) -> dict[str, Any]:
-        return self._call("tracks_duplicate", {"track": track, "name": name})
+        return self._call(
+            "tracks_duplicate", {"track_ref": {"mode": "index", "index": track}, "name": name}
+        )
 
     def tracks_list(self) -> dict[str, Any]:
         return self._call("tracks_list")
@@ -764,13 +873,15 @@ class _AbletonClientGeneratedMixin:
         return self._call("transport_toggle")
 
     def view_select_clip(self, track: int, clip: int) -> dict[str, Any]:
-        return self._call("view_select_clip", {"track": track, "clip": clip})
+        return self._call(
+            "view_select_clip", {"track_ref": {"mode": "index", "index": track}, "clip": clip}
+        )
 
     def view_select_scene(self, scene: int) -> dict[str, Any]:
         return self._call("view_select_scene", {"scene": scene})
 
     def view_select_track(self, track: int) -> dict[str, Any]:
-        return self._call("view_select_track", {"track": track})
+        return self._call("view_select_track", {"track_ref": {"mode": "index", "index": track}})
 
     def view_show(self, view: str) -> dict[str, Any]:
         return self._call("view_show", {"view": view})

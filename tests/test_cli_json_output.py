@@ -166,7 +166,7 @@ def test_ping_includes_capabilities_when_remote_reports_them(runner, cli_app, mo
     class _ClientStub:
         def ping(self):  # noqa: ANN201
             return {
-                "protocol_version": 3,
+                "protocol_version": 4,
                 "remote_script_version": "0.2.0",
                 "supported_commands": ["ping", "song_info"],
                 "command_set_hash": "abc123",
@@ -420,9 +420,9 @@ def test_ping_supports_replay_option_without_network(runner, cli_app, tmp_path: 
                 "response": {
                     "ok": True,
                     "request_id": "recorded-request-id",
-                    "protocol_version": 3,
+                    "protocol_version": 4,
                     "result": {
-                        "protocol_version": 3,
+                        "protocol_version": 4,
                         "remote_script_version": "9.9.9",
                         "supported_commands": ["ping"],
                         "command_set_hash": "hash",
@@ -488,7 +488,7 @@ def test_read_only_allows_read_commands(runner, cli_app, tmp_path: Path) -> None
                 "response": {
                     "ok": True,
                     "request_id": "recorded-request-id",
-                    "protocol_version": 3,
+                    "protocol_version": 4,
                     "result": {"tempo": 120.0},
                     "error": None,
                 },
@@ -556,7 +556,7 @@ def test_read_only_batch_rejects_write_steps(runner, cli_app, tmp_path: Path) ->
                 "response": {
                     "ok": True,
                     "request_id": "recorded-request-id",
-                    "protocol_version": 3,
+                    "protocol_version": 4,
                     "result": {"tracks": []},
                     "error": None,
                 },

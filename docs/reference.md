@@ -59,14 +59,14 @@ Commands are strictly request/response, so anything a user does in Live itself c
 only be noticed by polling. A connection can instead send one `"type": "subscribe"` request and become an event stream:
 
 ```json
-{"type":"subscribe","name":"events","args":{"events":["tempo","is_playing"]},"meta":{},"request_id":"...","protocol_version":3}
+{"type":"subscribe","name":"events","args":{"events":["tempo","is_playing"]},"meta":{},"request_id":"...","protocol_version":4}
 ```
 
 The remote answers with the usual response envelope (`result.subscribed` lists the
 accepted names, `result.stream` is `true`) and then pushes one line per event:
 
 ```json
-{"type":"event","protocol_version":3,"event":"tempo","ts":1730000000.0,"data":{"tempo":174.0},"dropped":0}
+{"type":"event","protocol_version":4,"event":"tempo","ts":1730000000.0,"data":{"tempo":174.0},"dropped":0}
 ```
 
 - A subscribing connection stops accepting commands, so pushed events can never
@@ -94,7 +94,7 @@ accepted names, `result.stream` is `true`) and then pushes one line per event:
     "idempotency_key": "0f1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e"
   },
   "request_id": "8c9f9b0c1a9d4dc2abdf2d53f3a19be9",
-  "protocol_version": 3
+  "protocol_version": 4
 }
 ```
 
@@ -121,7 +121,7 @@ ableton-cli install-remote-script --yes
 {
   "ok": true,
   "request_id": "8c9f9b0c1a9d4dc2abdf2d53f3a19be9",
-  "protocol_version": 3,
+  "protocol_version": 4,
   "result": {
     "tempo": 120.0
   },
@@ -135,7 +135,7 @@ ableton-cli install-remote-script --yes
 {
   "ok": false,
   "request_id": "8c9f9b0c1a9d4dc2abdf2d53f3a19be9",
-  "protocol_version": 3,
+  "protocol_version": 4,
   "result": null,
   "error": {
     "code": "INVALID_ARGUMENT",
@@ -158,6 +158,10 @@ cat <<'JSONL' | ableton-cli batch stream
 {"id":"a2","steps":[{"name":"track_volume_get","args":{"track_ref":{"mode":"index","index":0}}}]}
 JSONL
 ```
+
+Every remote command that acts on a song track takes it as `track_ref` (an object with `mode`
+`index`, `name`, `selected`, `query` or `stable_ref`), never as a bare index. Return tracks and
+the master track keep their own index arguments.
 
 Compatibility checks:
 

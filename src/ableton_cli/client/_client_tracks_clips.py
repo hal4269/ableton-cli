@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from ..refs import RefPayload
+from ..refs import RefPayload, track_index_ref
 
 
 class _AbletonClientTracksClipsMixin:
@@ -142,7 +142,12 @@ class _AbletonClientTracksClipsMixin:
     ) -> dict[str, Any]:
         """Target a device parameter (device_ref + parameter_ref) or the track
         mixer (mixer = volume | panning | send, send_index for sends)."""
-        args: dict[str, Any] = {"track": track, "clip": clip, "points": points, "mode": mode}
+        args: dict[str, Any] = {
+            "track_ref": track_index_ref(track),
+            "clip": clip,
+            "points": points,
+            "mode": mode,
+        }
         self._add_envelope_target(
             args,
             device_ref=device_ref,
@@ -162,7 +167,11 @@ class _AbletonClientTracksClipsMixin:
         mixer: str | None = None,
         send_index: int | None = None,
     ) -> dict[str, Any]:
-        args: dict[str, Any] = {"track": track, "clip": clip, "clear_all": clear_all}
+        args: dict[str, Any] = {
+            "track_ref": track_index_ref(track),
+            "clip": clip,
+            "clear_all": clear_all,
+        }
         self._add_envelope_target(
             args,
             device_ref=device_ref,
@@ -258,7 +267,11 @@ class _AbletonClientTracksClipsMixin:
         enabled: bool,
         mode: str | None,
     ) -> dict[str, Any]:
-        args: dict[str, Any] = {"track": track, "clip": clip, "enabled": enabled}
+        args: dict[str, Any] = {
+            "track_ref": track_index_ref(track),
+            "clip": clip,
+            "enabled": enabled,
+        }
         self._add_if_not_none(args, "mode", mode)
         return self._call("clip_warp_set", args)
 
@@ -269,7 +282,11 @@ class _AbletonClientTracksClipsMixin:
         beat_time: float,
         sample_time: float | None = None,
     ) -> dict[str, Any]:
-        args: dict[str, Any] = {"track": track, "clip": clip, "beat_time": beat_time}
+        args: dict[str, Any] = {
+            "track_ref": track_index_ref(track),
+            "clip": clip,
+            "beat_time": beat_time,
+        }
         self._add_if_not_none(args, "sample_time", sample_time)
         return self._call("clip_warp_marker_add", args)
 
@@ -280,7 +297,7 @@ class _AbletonClientTracksClipsMixin:
         dst_clip: int | None = None,
         dst_clips: list[int] | None = None,
     ) -> dict[str, Any]:
-        args: dict[str, Any] = {"track": track, "src_clip": src_clip}
+        args: dict[str, Any] = {"track_ref": track_index_ref(track), "src_clip": src_clip}
         self._add_if_not_none(args, "dst_clip", dst_clip)
         self._add_if_not_none(args, "dst_clips", dst_clips)
         return self._call("clip_duplicate", args)
