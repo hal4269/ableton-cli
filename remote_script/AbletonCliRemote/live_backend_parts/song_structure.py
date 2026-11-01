@@ -21,10 +21,12 @@ class LiveBackendSongStructureMixin:
             )
         return function
 
-    def tracks_duplicate(self, track: int) -> dict[str, Any]:
+    def tracks_duplicate(self, track: int, name: str | None) -> dict[str, Any]:
         self._ctx._track_at(track)
         self._song_function("duplicate_track")(track)
         duplicate = self._ctx._track_at(track + 1)
+        if name is not None:
+            duplicate.name = name
         return {
             "track": track,
             "new_track": track + 1,

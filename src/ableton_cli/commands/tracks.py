@@ -9,7 +9,11 @@ from ..runtime import execute_command, get_client
 from ._client_command_runner import CommandSpec
 from ._client_command_runner import run_client_command as run_client_command_shared
 from ._client_command_runner import run_client_command_spec as run_client_command_spec_shared
-from ._validation import require_minus_one_or_non_negative, require_non_negative
+from ._validation import (
+    require_minus_one_or_non_negative,
+    require_non_empty_string,
+    require_non_negative,
+)
 
 tracks_app = typer.Typer(help="Track collection commands", no_args_is_help=True)
 create_app = typer.Typer(help="Track creation commands", no_args_is_help=True)
@@ -162,17 +166,26 @@ def delete_track(
 def duplicate_track(
     ctx: typer.Context,
     track: Annotated[int, typer.Argument(help="Track index (0-based)")],
+    name: Annotated[
+        str | None,
+        typer.Option("--name", help="Name for the copy (otherwise Live's default name)"),
+    ] = None,
 ) -> None:
     """Duplicate a track (devices, clips, settings); the copy lands right after it."""
 
     def _method_kwargs() -> dict[str, object]:
         require_non_negative("track", track, hint="Use a valid track index from 'tracks list'.")
-        return {"track": track}
+        copy_name = (
+            None
+            if name is None
+            else require_non_empty_string("name", name, hint="Pass a non-empty name for the copy.")
+        )
+        return {"track": track, "name": copy_name}
 
     run_client_command_spec(
         ctx,
         spec=TRACKS_DUPLICATE_SPEC,
-        args={"track": track},
+        args={"track": track, "name": name},
         method_kwargs=_method_kwargs,
     )
 

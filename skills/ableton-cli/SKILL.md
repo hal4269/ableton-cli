@@ -83,7 +83,7 @@ ableton-cli tracks create midi --index 1
 ableton-cli tracks create audio
 ableton-cli tracks create audio --index 1
 ableton-cli tracks delete 2
-ableton-cli tracks duplicate 1
+ableton-cli tracks duplicate 1 --name "Bass Copy"
 ```
 
 ### Transport

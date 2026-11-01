@@ -772,7 +772,7 @@ CLIENT_METHOD_SPECS: tuple[ClientMethodSpec, ...] = (
     _m("track_volume_get", (_p("track_ref", "RefPayload"),)),
     _m("track_volume_set", (_p("track_ref", "RefPayload"), _p("value", "float"))),
     _m("tracks_delete", (_p("track", "int"),)),
-    _m("tracks_duplicate", (_p("track", "int"),)),
+    _m("tracks_duplicate", (_p("track", "int"), _p("name", "str | None"))),
     _m("tracks_list", ()),
     _m("transport_play", (), returns="dict[str, object]"),
     _m("transport_position_get", (), returns="dict[str, object]"),

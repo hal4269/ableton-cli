@@ -140,7 +140,10 @@ def _handle_clip_launch_set(backend: CommandBackend, args: dict[str, Any]) -> di
 
 
 def _handle_tracks_duplicate(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:
-    return backend.tracks_duplicate(_track_index("track", args.get("track")))
+    track = _track_index("track", args.get("track"))
+    raw_name = args.get("name")
+    name = None if raw_name is None else _non_empty_string("name", raw_name)
+    return backend.tracks_duplicate(track, name)
 
 
 def _handle_scenes_duplicate(backend: CommandBackend, args: dict[str, Any]) -> dict[str, Any]:

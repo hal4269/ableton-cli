@@ -728,8 +728,8 @@ class _AbletonClientGeneratedMixin:
     def tracks_delete(self, track: int) -> dict[str, Any]:
         return self._call("tracks_delete", {"track": track})
 
-    def tracks_duplicate(self, track: int) -> dict[str, Any]:
-        return self._call("tracks_duplicate", {"track": track})
+    def tracks_duplicate(self, track: int, name: str | None) -> dict[str, Any]:
+        return self._call("tracks_duplicate", {"track": track, "name": name})
 
     def tracks_list(self) -> dict[str, Any]:
         return self._call("tracks_list")
