@@ -288,6 +288,25 @@ def test_tracks_duplicate_and_scene_duplicate_delete() -> None:
     assert len(song.scenes) == 2
 
 
+def test_tracks_duplicate_renames_the_copy() -> None:
+    backend, song = _backend()
+
+    duplicated = dispatch_command(backend, "tracks_duplicate", {"track": 1, "name": "Bass Copy"})
+
+    assert duplicated == {"track": 1, "new_track": 2, "name": "Bass Copy", "track_count": 3}
+    assert [track.name for track in song.tracks][1:] == ["Bass", "Bass Copy"]
+
+
+def test_tracks_duplicate_rejects_an_empty_name_before_duplicating() -> None:
+    backend, song = _backend()
+
+    with pytest.raises(CommandError) as exc_info:
+        dispatch_command(backend, "tracks_duplicate", {"track": 1, "name": "  "})
+
+    assert exc_info.value.code == "INVALID_ARGUMENT"
+    assert len(song.tracks) == 2
+
+
 def test_return_tracks_create_and_delete() -> None:
     backend, song = _backend()
 

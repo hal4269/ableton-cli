@@ -154,7 +154,12 @@ _DEVICE_SELECTORS = ["--track-index", "0", "--device-index", "1"]
             "clip_launch_set",
             (0, 3, {"legato": False, "velocity_amount": 0.5}),
         ),
-        (["tracks", "duplicate", "2"], "tracks_duplicate", {"track": 2}),
+        (["tracks", "duplicate", "2"], "tracks_duplicate", {"track": 2, "name": None}),
+        (
+            ["tracks", "duplicate", "2", "--name", "Chime Arp"],
+            "tracks_duplicate",
+            {"track": 2, "name": "Chime Arp"},
+        ),
         (["scenes", "duplicate", "1"], "scenes_duplicate", (1,)),
         (["scenes", "delete", "1"], "scenes_delete", (1,)),
         (["return-tracks", "create"], "return_tracks_create", {}),
